@@ -1,0 +1,52 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.sources.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+
+rule "Maven_Warn_NoFileEncoding"
+	when
+		$build : MvnBuild(  )
+		ExecStatus( activity == $build, containsString("[WARNING] File encoding has not been set") )
+	then
+		insert( new MvnWarn_NoFileEncoding($build) );
+end
+
+rule "Maven_Err_UnmappableCharacter"
+	when
+		$build : MvnBuild()
+		ExecStatus( activity == $build,
+                    $errLine : getSingleLine("error: unmappable character for encoding"), 
+                    $errLine != null )
+	then
+		insert( new MvnErr_UnmappableCharacter($build, $errLine) );
+end
+
+rule "Maven_Fix_Err_UnmappableCharacter"
+	when
+		$e : MvnErr_UnmappableCharacter()
+		//not DetectEncodingAction()  equal objects is OK
+		not SrcEncoding()
+	then
+		insert( new DetectEncodingAction() );
+		insert( new BuildKnowHowToFix($e) );
+end
+
+rule "Maven_Rm_Err_UnmappableCharacter"
+	when
+		$e : MvnErr_UnmappableCharacter()
+		BuildKnowHowToFix(error == $e)
+		exists SrcEncoding()
+	then
+		insert(new BuildErrorFixed($e));
+end
+
+
+rule "Maven_Option_SrcEncoding" when
+		$build : MvnBuild()
+		not ExecStatus( activity == $build )
+		$srcEnc : SrcEncoding( )
+	then
+		insert( new MvnOption_SrcEncoding($build, $srcEnc.getSrcEncoding()) );
+end

@@ -1,0 +1,37 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+
+rule "GuessSourceLanguage_Java"
+	when
+		$fc : FolderArtifact(id == R.id.OriginalArtifact && getFileNamesForPattern("**/*.java").length > 0)
+		not SourceLanguage(sourceLanguage == SourceLanguage.SOURCE_LANGUAGES.JAVA)
+	then
+		insert( new SourceLanguage(SourceLanguage.SOURCE_LANGUAGES.JAVA) );
+end
+
+rule "GuessSourceLanguage_Python"
+	when
+		$fc : FolderArtifact(id == R.id.OriginalArtifact && getFileNamesForPattern("**/*.py").length > 0)
+		not SourceLanguage(sourceLanguage == SourceLanguage.SOURCE_LANGUAGES.PYTHON)
+	then
+		insert( new SourceLanguage(SourceLanguage.SOURCE_LANGUAGES.PYTHON) );
+end
+
+rule "GuessSourceLanguage_C_CPP"
+	when
+		$fc : FolderArtifact(id == R.id.OriginalArtifact && getFileNamesForPattern("**/*.c","**/*.cpp","**/*.h","**/*.hxx").length > 0)
+		not SourceLanguage(sourceLanguage == SourceLanguage.SOURCE_LANGUAGES.C_CPP)
+	then
+		insert( new SourceLanguage(SourceLanguage.SOURCE_LANGUAGES.C_CPP) );
+end
+
+
+rule "GuessSourceLanguage_Other"
+		salience -100
+	when
+		$fc : FolderArtifact(id == R.id.OriginalArtifact)
+		not SourceLanguage()
+	then
+		insert( new SourceLanguage(SourceLanguage.SOURCE_LANGUAGES.OTHER) );
+end

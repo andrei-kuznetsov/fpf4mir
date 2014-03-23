@@ -1,0 +1,13 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+
+/*rule "Maven_Warn_NoFileEncoding"
+
+java -Djava.awt.headless=true -verbose:class -jar ./chordest.jar '/media/andrei/WORK/phd/oma/files.list' '/media/andrei/WORK/phd/nglazyrin/chordest/scratch' '/media/andrei/WORK/phd/nglazyrin/chordest/result'  | grep "java.awt.HeadlessException"
+
+end*/
+
+

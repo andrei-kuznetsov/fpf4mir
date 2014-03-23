@@ -1,0 +1,45 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.*;
+
+rule "DownloadArtifact"
+	when 
+		$artifact : ArtifactRef()
+		not Artifact(id == $artifact.id)
+	then
+		insert( new DownloadAction($artifact.getId(), $artifact.getRef()) );
+end
+
+rule "ExtractArtifact"
+	when 
+		$artifact : Artifact(!isDirectory(), fileName.endsWith(".zip"))
+		not FolderArtifact(id == $artifact.id)
+	then
+		insert( new ExtractAction($artifact.getId(), $artifact.getFile()) );
+end
+
+rule "ProcessArtifactDirectory"
+	when 
+		$artifact : Artifact(isDirectory())
+		not FolderArtifact(id == $artifact.id)
+	then
+		retract($artifact);
+		insert( new FolderArtifact($artifact.getId(), $artifact.getFile()) );
+end
+
+rule "DefaultScratchDir"
+	when
+		not DefaultScratchDir()
+		$dd : DataDirRoot(  )
+	then
+		insert(new DefaultScratchDir($dd));
+end
+
+rule "DefaultTmpDir"
+	when
+		not TmpDirRoot( )
+		$dd : DataDirRoot(  )
+	then
+		java.io.File f = new java.io.File($dd.getFile(), "tmp_" + java.util.UUID.randomUUID().toString());
+		insert(new TmpDirRoot(f)); 
+end

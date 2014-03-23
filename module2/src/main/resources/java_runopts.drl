@@ -1,0 +1,24 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.java.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mirex.*;
+
+
+rule "JavaRun_JavaArgs_Jar"
+	when
+		$exec : JavaRunExecutableArtifact(workingDir  != null, file != null)
+	then
+		insertLogical( new JavaRunOption_Jar($exec.getFile()) );
+		insertLogical( new JavaRunOption_VerboseCL() );
+end
+
+rule "JavaRun_JavaArgs_XOrg"
+	when
+		not X11Available()
+	then
+		insertLogical( new JavaRunOption_Headless() );
+end

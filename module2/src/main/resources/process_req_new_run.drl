@@ -1,0 +1,11 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+rule "InsertDefaultScratch"
+	when
+		$dd : DataDirRoot(  )
+		not DefaultScratchDir(  )
+	then
+		insert( new DefaultScratchDir($dd) );
+end

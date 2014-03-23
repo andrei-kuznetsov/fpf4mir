@@ -1,0 +1,44 @@
+package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build;
+
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityErrorFixed;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Build;
+
+public class BuildErrorFixed extends ActivityErrorFixed {
+	
+	public BuildErrorFixed(BuildError buildError) {
+		super(buildError.getBuild(), buildError);
+	}
+
+	public BuildError getBuildError() {
+		return (BuildError) super.getError();
+	}
+
+	public void setBuildError(BuildError buildError) {
+		super.setError(buildError);
+	}
+
+	public Build getBuild() {
+		return (Build) super.getActivity();
+	}
+	
+	public void setBuild(Build build) {
+		super.setActivity(build);
+	}
+	
+	@Override
+	public String toString() {
+		return "BuildErrorFixed [buildError=" + getBuildError() + ", getBuild()="
+				+ getBuild() + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return (obj instanceof BuildErrorFixed) && super.equals(obj);
+	}
+
+}

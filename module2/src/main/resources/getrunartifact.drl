@@ -1,0 +1,18 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mirex.*;
+
+declare ReadyForTestRun end
+
+/// TODO:
+rule "GetRunArtifact"
+	when
+		not RunExecutableArtifact(workingDir  != null, file != null)
+		$build : Build(  )
+		$status : ExecStatus( activity == $build, succeeded == true )
+	then
+		insert ( new RunCommandRequestAction($status) );	
+end

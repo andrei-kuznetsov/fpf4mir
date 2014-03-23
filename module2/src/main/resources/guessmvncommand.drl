@@ -1,0 +1,50 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.sources.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+rule "Maven_RootPom" when
+		$fc : FileArtifactList(id == R.id.PomFiles)
+		not MvnRootPom(  )
+	then
+		FileArtifact rootPom = $fc.get(0);
+		for (FileArtifact i : $fc){
+			if (i.getAbsolutePath().length() < rootPom.getAbsolutePath().length()) rootPom = i;
+		}
+		
+		insert( new MvnRootPom(rootPom) );
+end
+
+rule "Maven_Targets" when
+		$b : MvnBuild(  )
+		not ExecStatus( activity == $b )
+		$tgt : MvnBuildTarget()
+	then
+		insert($tgt.createMvnOption($b));
+end
+
+rule "Maven_DefaultTargets" when
+		exists BuildSystem( buildSystem == BuildSystem.BUILD_SYSTEMS.MAVEN )
+		$targets : java.util.LinkedList( size == 0 ) from collect ( MvnBuildTarget(  ) )
+	then
+		insert(new MvnBuildTarget_Clean());
+		insert(new MvnBuildTarget_Package());
+end
+
+rule "Maven_DfltOption_PomFile" when
+		$pom : MvnRootPom()
+		$b : MvnBuild(  )
+		not ExecStatus( activity == $b )
+	then
+		insert( new MvnOption_PomFile($b, $pom) );
+end
+
+rule "Maven_BuildCommand" when
+		$b : MvnBuild(  )
+		not ExecStatus( activity == $b )
+		$pom : MvnRootPom()
+		$options : java.util.LinkedList( size > 0 ) from collect ( MvnOption( activity == $b ) )
+	then
+		insertLogical( new MvnBuildCommand($b, $pom.getFile().getParentFile(), $options) );
+end
