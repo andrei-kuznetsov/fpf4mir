@@ -1,5 +1,6 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityError;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Build;
 
@@ -59,5 +60,10 @@ public class BuildError extends BuildFact implements ActivityError{
 
 	public void setErrorId(BuildErrorIds errorId) {
 		this.errorId = errorId;
+	}
+
+	@Override
+	public Activity getActivity() {
+		return getBuild();
 	}
 }

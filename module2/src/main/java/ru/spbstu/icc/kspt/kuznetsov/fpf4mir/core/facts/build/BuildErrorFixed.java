@@ -6,7 +6,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Build;
 public class BuildErrorFixed extends ActivityErrorFixed {
 	
 	public BuildErrorFixed(BuildError buildError) {
-		super(buildError.getBuild(), buildError);
+		super(buildError);
 	}
 
 	public BuildError getBuildError() {
@@ -19,10 +19,6 @@ public class BuildErrorFixed extends ActivityErrorFixed {
 
 	public Build getBuild() {
 		return (Build) super.getActivity();
-	}
-	
-	public void setBuild(Build build) {
-		super.setActivity(build);
 	}
 	
 	@Override

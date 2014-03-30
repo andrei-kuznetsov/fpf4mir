@@ -1,19 +1,14 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts;
 
 public class ActivityErrorFixed {
-	private Activity activity;
 	private ActivityError error;
 
-	public ActivityErrorFixed(Activity activity, ActivityError error) {
-		this.activity = activity;
+	public ActivityErrorFixed(ActivityError error) {
+		this.error = error;
 	}
 
 	public Activity getActivity() {
-		return activity;
-	}
-
-	public void setActivity(Activity activity) {
-		this.activity = activity;
+		return error.getActivity();
 	}
 
 	public ActivityError getError() {
@@ -26,8 +21,7 @@ public class ActivityErrorFixed {
 
 	@Override
 	public String toString() {
-		return "ActivityErrorFixed [activity=" + activity + ", error=" + error
-				+ "]";
+		return "ActivityErrorFixed [error=" + error + "]";
 	}
 
 }

@@ -6,15 +6,11 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Run;
 public class RunErrorFixed extends ActivityErrorFixed {
 
 	public RunErrorFixed(RunError error) {
-		super(error.getRun(), error);
+		super(error);
 	}
 
 	public Run getRun(){
 		return (Run) getActivity();
-	}
-
-	public void setRun(Run run){
-		setActivity(run);
 	}
 
 	public RunError getRunError(){

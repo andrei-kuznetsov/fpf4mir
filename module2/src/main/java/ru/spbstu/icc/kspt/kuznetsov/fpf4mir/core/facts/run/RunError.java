@@ -1,5 +1,6 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityError;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Run;
 
@@ -59,5 +60,10 @@ public class RunError extends RunFactImpl implements ActivityError{
 
 	public void setErrorId(RunErrorIds errorId) {
 		this.errorId = errorId;
+	}
+
+	@Override
+	public Activity getActivity() {
+		return getRun();
 	}
 }
