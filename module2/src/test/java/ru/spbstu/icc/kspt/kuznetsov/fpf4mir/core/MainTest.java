@@ -28,7 +28,7 @@ public class MainTest {
 			Main.main(new String[]{PathUtils.getTestResourceFile("/c2/file").getAbsolutePath(), dataset.getAbsolutePath()});
 			fail("Must throw exeption for invalid 'dataset' path");
 		} catch (RuntimeException t){
-			assertEquals("Folder '" + dataset.getAbsolutePath() + "' does not exist!", t.getMessage());
+			assertEquals("Dataset '" + dataset.getAbsolutePath() + "' does not exist!", t.getMessage());
 		}
 	}
 }

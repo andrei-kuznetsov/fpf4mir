@@ -12,14 +12,6 @@ rule "Process original ortifact request at ReqNewOriginalArtifact_handler.drl"
 		insert( new RequestStatus($r, "Original artifact asserted") );
 end
 
-rule "Process original ortifact request at ReqNewOriginalArtifact_handler.drl"
-	when
-		$r : ReqNewOriginalArtifact()
-	then
-		insert( $r.getOriginalArtifact() );
-		insert( new RequestStatus($r, "Original artifact asserted") );
-end
-
 rule "Propose build command at ReqNewOriginalArtifact_handler.drl"
 	when
 		$r : ReqNewOriginalArtifact()

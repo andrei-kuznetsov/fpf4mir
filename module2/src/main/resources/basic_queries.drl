@@ -11,4 +11,5 @@ end
 query "RequestStatus for request refId"  (long reqRefId)
 	$r : RequestFact(refId == reqRefId)
     status : RequestStatus(request == $r)
+    substatus : RequestSubstatus(mainStatus == status)
 end

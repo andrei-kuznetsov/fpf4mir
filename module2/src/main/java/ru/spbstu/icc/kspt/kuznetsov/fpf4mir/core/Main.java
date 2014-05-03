@@ -25,6 +25,15 @@ public class Main {
 		log.debug("Original artifact is '" + args[0] + "'");
 		
 		File oa = new File(args[0]);
+		
+		if (!oa.exists()){
+			throw new RuntimeException("Original artifact: file '" + args[0] + "' doesn't exist!");
+		}
+		
+		if (!(new File(args[1]).exists())){
+			throw new RuntimeException("Dataset '" + args[1] + "' does not exist!");
+		}
+		
 		DeploymentSession m = new DeploymentSession(/*oa, args[1]*/);
 		m.init();
 		m.assertFact(oa);
