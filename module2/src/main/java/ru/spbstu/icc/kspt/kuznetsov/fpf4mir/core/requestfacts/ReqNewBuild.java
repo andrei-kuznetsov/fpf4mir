@@ -3,7 +3,7 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Build;
 
-public class ReqNewBuild implements ReqNewActivity{
+public class ReqNewBuild extends RequestFactBase implements ReqNewActivity{
 	@Override
 	public boolean equals(Object obj) {
 		return (obj instanceof ReqNewBuild) && super.equals(obj);

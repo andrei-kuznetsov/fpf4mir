@@ -2,12 +2,11 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir;
 
 import java.io.File;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.DataDirRoot;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Run;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.RunFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.DataDirRoot;
 
-public class ResultDir4Run extends FolderArtifact implements RunFact{
+public class ResultDir4Run extends FolderArtifact {
 	private Run run;
 
 	public ResultDir4Run(Run run, DataDirRoot dataDir) {

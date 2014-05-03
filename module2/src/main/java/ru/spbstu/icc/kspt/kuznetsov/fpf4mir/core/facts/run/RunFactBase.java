@@ -1,15 +1,20 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Run;
 
-public class RunFactImpl implements RunFact{
+public class RunFactBase {
 	private Run run;
 
-	public RunFactImpl(Run build) {
+	public RunFactBase(Run build) {
 		this.run = build;
 	}
 
 	public Run getRun() {
+		return run;
+	}
+	
+	public Activity getActivity(){
 		return run;
 	}
 

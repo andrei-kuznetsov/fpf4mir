@@ -1,23 +1,23 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.sources;
 
-public class SrcEncoding {
-	private String srcEncoding;
+public class SrcEncoding extends SrcFactBase{
+	private String encoding;
 
 	public SrcEncoding(String srcEncoding) {
-		this.srcEncoding = srcEncoding;
+		this.encoding = srcEncoding;
 	}
 
-	public String getSrcEncoding() {
-		return srcEncoding;
+	public String getEncoding() {
+		return encoding;
 	}
 
-	public void setSrcEncoding(String srcEncoding) {
-		this.srcEncoding = srcEncoding;
+	public void setEncoding(String srcEncoding) {
+		this.encoding = srcEncoding;
 	}
 
 	@Override
 	public String toString() {
-		return "SrcEncoding [srcEncoding=" + srcEncoding + "]";
+		return "SrcEncoding [srcEncoding=" + encoding + "]";
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class SrcEncoding {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((srcEncoding == null) ? 0 : srcEncoding.hashCode());
+				+ ((encoding == null) ? 0 : encoding.hashCode());
 		return result;
 	}
 
@@ -38,10 +38,10 @@ public class SrcEncoding {
 		if (!(obj instanceof SrcEncoding))
 			return false;
 		SrcEncoding other = (SrcEncoding) obj;
-		if (srcEncoding == null) {
-			if (other.srcEncoding != null)
+		if (encoding == null) {
+			if (other.encoding != null)
 				return false;
-		} else if (!srcEncoding.equals(other.srcEncoding))
+		} else if (!encoding.equals(other.encoding))
 			return false;
 		return true;
 	}

@@ -18,7 +18,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.BuildSystem.BUILD_SYSTEMS
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.BuildErrorFixed;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.MvnBuild;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.MvnErr_UnmappableCharacter;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.JavacErr_UnmappableCharacter;
 import utils.AgendaListener;
 import utils.DrlObjectsUtils;
 
@@ -59,7 +59,7 @@ public class DrlBuildTest {
         assertEquals(1, omap.get(MvnBuild.class).size());
         
         // Now fix the build
-        BuildErrorFixed fix = new BuildErrorFixed(new MvnErr_UnmappableCharacter(b, ""));
+        BuildErrorFixed fix = new BuildErrorFixed(new JavacErr_UnmappableCharacter(b, ""));
         ksession.insert(fix);
         ksession.fireAllRules();
         System.out.println(Arrays.deepToString(al.getFiredRules().toArray()));

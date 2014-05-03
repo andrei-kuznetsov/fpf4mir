@@ -1,0 +1,30 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+rule "Process original ortifact request at ReqNewOriginalArtifact_handler.drl"
+	when
+		$r : ReqNewOriginalArtifact()
+	then
+		insert( $r.getOriginalArtifact() );
+		insert( new RequestStatus($r, "Original artifact asserted") );
+end
+
+rule "Process original ortifact request at ReqNewOriginalArtifact_handler.drl"
+	when
+		$r : ReqNewOriginalArtifact()
+	then
+		insert( $r.getOriginalArtifact() );
+		insert( new RequestStatus($r, "Original artifact asserted") );
+end
+
+rule "Propose build command at ReqNewOriginalArtifact_handler.drl"
+	when
+		$r : ReqNewOriginalArtifact()
+		$buildCommands : java.util.LinkedList( size > 1 ) from collect ( BuildCommand() )
+		not RunExecutableArtifact()
+	then
+		insertLogical( new RequestSubstatusBuildProposal($buildCommands) );
+end

@@ -2,7 +2,7 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts;
 
 import java.io.File;
 
-public class RunExecutableArtifact extends Artifact{
+public class RunExecutableArtifact extends FileArtifact{
 	private File workingDir;
 	
 	public RunExecutableArtifact() {

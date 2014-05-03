@@ -19,8 +19,6 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunSystem;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunSystem.RUN_SYSTEMS;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.RunError;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.RunErrorFixed;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.RunErrorIds;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.RunKnowHowToFix;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.java.JavaRun;
 import utils.AgendaListener;
 import utils.DrlObjectsUtils;
@@ -63,7 +61,7 @@ public class DrlTestRunTest {
         assertEquals(1, omap.get(JavaRun.class).size());
         
         // Now fix the run
-        RunErrorFixed fix = new RunErrorFixed(new RunError(null, b, "message"));
+        RunErrorFixed fix = new RunErrorFixed(new RunError(b, "message"));
         ksession.insert(fix);
         ksession.fireAllRules();
         System.out.println(Arrays.deepToString(al.getFiredRules().toArray()));

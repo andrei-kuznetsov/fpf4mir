@@ -1,11 +1,12 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Build;
 
-public class BuildFact {
+public class BuildFactBase {
 	private Build build;
 
-	public BuildFact(Build build) {
+	public BuildFactBase(Build build) {
 		this.build = build;
 	}
 
@@ -13,6 +14,10 @@ public class BuildFact {
 		return build;
 	}
 
+	public Activity getActivity(){
+		return build;
+	}
+	
 	public void setBuild(Build build) {
 		this.build = build;
 	}
@@ -36,9 +41,9 @@ public class BuildFact {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof BuildFact))
+		if (!(obj instanceof BuildFactBase))
 			return false;
-		BuildFact other = (BuildFact) obj;
+		BuildFactBase other = (BuildFactBase) obj;
 		if (build == null) {
 			if (other.build != null)
 				return false;

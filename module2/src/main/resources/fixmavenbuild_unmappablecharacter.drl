@@ -13,40 +13,55 @@ rule "Maven_Warn_NoFileEncoding"
 		insert( new MvnWarn_NoFileEncoding($build) );
 end
 
-rule "Maven_Err_UnmappableCharacter"
+rule "Javac_Err_UnmappableCharacter"
 	when
 		$build : MvnBuild()
 		ExecStatus( activity == $build,
                     $errLine : getSingleLine("error: unmappable character for encoding"), 
                     $errLine != null )
 	then
-		insert( new MvnErr_UnmappableCharacter($build, $errLine) );
+		insert( new JavacErr_UnmappableCharacter($build, $errLine) );
 end
 
-rule "Maven_Fix_Err_UnmappableCharacter"
+rule "Fix_JavacErr_UnmappableCharacter_1"
 	when
-		$e : MvnErr_UnmappableCharacter()
-		//not DetectEncodingAction()  equal objects is OK
+		$e : JavacErr_UnmappableCharacter()
+		//not DetectEncodingAction()  equal objects is OK as they are treated 
+		//                            as the same object and not inserted twice
 		not SrcEncoding()
 	then
 		insert( new DetectEncodingAction() );
-		insert( new BuildKnowHowToFix($e) );
 end
 
-rule "Maven_Rm_Err_UnmappableCharacter"
+rule "SrcEncoding added"
 	when
-		$e : MvnErr_UnmappableCharacter()
-		BuildKnowHowToFix(error == $e)
-		exists SrcEncoding()
+		$e : JavacErr_UnmappableCharacter()
+		not BuildSrcEncoding(activity == $e.activity)
+		exists SrcEncoding(  )
 	then
 		insert(new BuildErrorFixed($e));
 end
 
+rule "SrcEncoding changed"
+	when
+		$e : JavacErr_UnmappableCharacter()
+	   	$be : BuildSrcEncoding(activity == $e.activity)
+	   	not SrcEncoding(this == $be.srcEncoding)
+	then
+		insert(new BuildErrorFixed($e));
+end
+
+rule "Set build src encoding" when
+		$se : SrcEncoding()
+		$build : Build(  )
+		not ExecStatus( activity == $build )
+	then
+		insert ( new BuildSrcEncoding( $build, $se ) );
+end
 
 rule "Maven_Option_SrcEncoding" when
 		$build : MvnBuild()
-		not ExecStatus( activity == $build )
-		$srcEnc : SrcEncoding( )
+		$be : BuildSrcEncoding( activity == $build )
 	then
-		insert( new MvnOption_SrcEncoding($build, $srcEnc.getSrcEncoding()) );
+		insertLogical( new MvnOption_SrcEncoding($build, $be) );
 end

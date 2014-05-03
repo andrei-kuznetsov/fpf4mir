@@ -4,7 +4,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.R;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Run;
 
-public class ReqNewRun implements ReqNewActivity {
+public class ReqNewRun extends RequestFactBase implements ReqNewActivity {
 	
 	private String id;
 

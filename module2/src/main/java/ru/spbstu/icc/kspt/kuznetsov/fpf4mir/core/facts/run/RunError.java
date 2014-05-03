@@ -4,14 +4,12 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityError;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Run;
 
-public class RunError extends RunFactImpl implements ActivityError{
+public class RunError extends RunFactBase implements ActivityError{
 	private String message;
-	private RunErrorIds errorId;
 	
-	public RunError(RunErrorIds errorId, Run run, String message) {
+	public RunError(Run run, String message) {
 		super(run);
 		this.message = message;
-		this.errorId = errorId;
 	}
 	
 	public String getMessage() {
@@ -23,14 +21,13 @@ public class RunError extends RunFactImpl implements ActivityError{
 
 	@Override
 	public String toString() {
-		return "BuildError [message=" + message + ", errorId=" + errorId + "]";
+		return "RunError [message=" + message + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((errorId == null) ? 0 : errorId.hashCode());
+		int result = 1;
 		result = prime * result + ((message == null) ? 0 : message.hashCode());
 		return result;
 	}
@@ -39,27 +36,17 @@ public class RunError extends RunFactImpl implements ActivityError{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
-		if (!(obj instanceof RunError))
+		if (getClass() != obj.getClass())
 			return false;
 		RunError other = (RunError) obj;
-		if (errorId != other.errorId)
-			return false;
 		if (message == null) {
 			if (other.message != null)
 				return false;
 		} else if (!message.equals(other.message))
 			return false;
 		return true;
-	}
-
-	public RunErrorIds getErrorId() {
-		return errorId;
-	}
-
-	public void setErrorId(RunErrorIds errorId) {
-		this.errorId = errorId;
 	}
 
 	@Override

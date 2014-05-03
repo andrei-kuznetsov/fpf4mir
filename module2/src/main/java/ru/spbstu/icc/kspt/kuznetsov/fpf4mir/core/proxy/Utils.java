@@ -1,0 +1,84 @@
+package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.proxy;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+public class Utils {
+	private static final int maxFileSize = 50 * 1024 * 1024;
+	private static final int maxMemSize = 4 * 1024 * 1024;
+	
+	static List<File> doUploadOriginalArtifact(HttpServletRequest request) throws IOException {
+		boolean isMultipart;
+		String filePath = "/home/andrei/OpenShift/datadir/jetty/";
+		String tmpPath = "/home/andrei/OpenShift/datadir/jetty/";
+		File base = null;
+		List<File> uploadedFiles = new LinkedList<File>();
+
+		File file;
+
+		// Check that we have a file upload request
+		isMultipart = ServletFileUpload.isMultipartContent(request);
+
+		if (!isMultipart) {
+			return uploadedFiles;
+		}
+
+		base = new File(filePath, /* UUID.randomUUID().toString() */
+		String.valueOf(new Date().getTime()));
+		base.mkdirs();
+
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		// maximum size that will be stored in memory
+		factory.setSizeThreshold(maxMemSize);
+		// Location to save data that is larger than maxMemSize.
+		factory.setRepository(new File(tmpPath));
+
+		// Create a new file upload handler
+		ServletFileUpload upload = new ServletFileUpload(factory);
+		// maximum file size to be uploaded.
+		upload.setSizeMax(maxFileSize);
+
+		try {
+			// Parse the request to get file items.
+			List<FileItem> fileItems = upload.parseRequest(request);
+
+			// Process the uploaded file items
+			Iterator<FileItem> i = fileItems.iterator();
+
+			while (i.hasNext()) {
+				FileItem fi = (FileItem) i.next();
+				if (!fi.isFormField()) {
+					// Get the uploaded file parameters
+//					String fieldName = fi.getFieldName();
+					String fileName = fi.getName();
+//					String contentType = fi.getContentType();
+//					boolean isInMemory = fi.isInMemory();
+//					long sizeInBytes = fi.getSize();
+					// Write the file
+					if (fileName.lastIndexOf("\\") >= 0) {
+						file = new File(base, fileName.substring(fileName
+								.lastIndexOf("\\")));
+					} else {
+						file = new File(base, fileName.substring(fileName
+								.lastIndexOf("\\") + 1));
+					}
+					fi.write(file);
+					uploadedFiles.add(file);
+				}
+			}
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
+		return uploadedFiles;
+	}
+}

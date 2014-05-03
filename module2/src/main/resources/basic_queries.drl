@@ -1,0 +1,14 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+query "RequestStatus for request"  (RequestFact r)
+    status : RequestStatus(request == r)
+end
+
+query "RequestStatus for request refId"  (long reqRefId)
+	$r : RequestFact(refId == reqRefId)
+    status : RequestStatus(request == $r)
+end
