@@ -11,7 +11,7 @@ declare ReadyForTestRun end
 rule "GetRunArtifact"
 	when
 		not RunExecutableArtifact(workingDir  != null, file != null)
-		$build : Build(  )
+		$build : BuildActivity(  )
 		$status : ExecStatus( activity == $build, succeeded == true )
 	then
 		insert ( new RunCommandRequestAction($status) );	

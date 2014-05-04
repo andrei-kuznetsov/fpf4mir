@@ -12,4 +12,8 @@ public class OriginalArtifact extends Artifact {
 		super(R.id.OriginalArtifact, file);
 	}
 
+	public OriginalArtifact(Artifact other) {
+		super(other);
+		setId(R.id.OriginalArtifact);
+	}
 }

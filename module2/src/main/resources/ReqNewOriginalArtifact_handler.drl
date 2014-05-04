@@ -4,17 +4,32 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 
+
+rule "Unwrap original artifact at ReqNewOriginalArtifact_handler.drl"
+	when
+		$r : ReqNewDeployment(  )
+		$da : DeployActivity( request == $r )
+	then
+		if ($r.getFile() != null)
+			insert( new FileArtifact($da, $r.getFile()) );
+
+		if ($r.getFolder() != null)
+			insert( new FolderArtifact($da, $r.getFolder()) );
+
+		if ($r.getArtifactRef() != null)
+			insert( new ArtifactRef($da, $r.getArtifactRef()) );
+end
+
 rule "Process original ortifact request at ReqNewOriginalArtifact_handler.drl"
 	when
-		$r : ReqNewOriginalArtifact()
+		$r : ReqNewDeployment()
 	then
-		insert( $r.getOriginalArtifact() );
 		insert( new RequestStatus($r, "Original artifact asserted") );
 end
 
 rule "Propose build command at ReqNewOriginalArtifact_handler.drl"
 	when
-		$r : ReqNewOriginalArtifact()
+		ReqNewDeploymentginalArtifact()
 		$buildCommands : java.util.LinkedList( size > 1 ) from collect ( BuildCommand() )
 		not RunExecutableArtifact()
 	then

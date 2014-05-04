@@ -2,16 +2,21 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts;
 
 import java.net.URI;
 
-public class DownloadAction implements ActionFact {
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
+
+public class DownloadAction extends ActionFactBase implements ActionFact {
 	private URI uri;
 	private String id;
 	
-	public DownloadAction(String id, URI uri) {
+	public DownloadAction(Activity activity, String id, URI uri) {
+		super(activity);
 		this.id = id;
 		this.uri = uri;
 	}
 
-	public DownloadAction() {
+	public DownloadAction(Activity activity) {
+		super(activity);
 	}
 
 	public URI getUri() {

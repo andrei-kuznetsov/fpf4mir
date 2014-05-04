@@ -1,7 +1,7 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityErrorFixed;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Build;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.BuildActivity;
 
 public class BuildErrorFixed extends ActivityErrorFixed {
 	
@@ -17,8 +17,8 @@ public class BuildErrorFixed extends ActivityErrorFixed {
 		super.setError(buildError);
 	}
 
-	public Build getBuild() {
-		return (Build) super.getActivity();
+	public BuildActivity getBuild() {
+		return (BuildActivity) super.getActivity();
 	}
 	
 	@Override

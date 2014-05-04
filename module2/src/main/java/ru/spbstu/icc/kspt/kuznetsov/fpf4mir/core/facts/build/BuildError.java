@@ -2,12 +2,12 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityError;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Build;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.BuildActivity;
 
 public class BuildError extends BuildFactBase implements ActivityError{
 	private String message;
 	
-	public BuildError(Build build, String message) {
+	public BuildError(BuildActivity build, String message) {
 		super(build);
 		this.message = message;
 	}

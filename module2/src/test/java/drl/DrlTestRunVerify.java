@@ -15,7 +15,7 @@ import org.junit.Test;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.R;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Run;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunActivity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.Dataset;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.Dataset_FileArtifactList;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.Dataset_FileArtifactList4Run;
@@ -111,7 +111,7 @@ public class DrlTestRunVerify {
 		Dataset dataset = new Dataset("test", PathUtils.getTestResourceDir(srcDir));
 		Dataset_FileArtifactList dsal = new Dataset_FileArtifactList(dataset, "*.wav", null);
         RunDatasetIn src = new RunDatasetIn(rr, dataset.getDatasetId());
-        Run testRun = new Run(R.id.TestActivity, 1, new Date(), rr);
+        RunActivity testRun = new RunActivity(R.id.TestActivity, 1, new Date(), rr);
         ExecStatus status = new ExecStatus(testRun, null, 0, null, null);
         ResultDir4Run res = new ResultDir4Run(testRun, PathUtils.getTestResourceDir(resDir));
 

@@ -10,12 +10,12 @@ public class RunExecutableArtifact extends FileArtifact{
 	}
 
 	public RunExecutableArtifact(File file, File workingDir) {
-		super(R.id.RunArtifact, file);
+		super(null, file);
 		this.workingDir = workingDir;
 	}
 
 	public RunExecutableArtifact(File file) {
-		super(R.id.RunArtifact, file);
+		super(null, file);
 		this.workingDir = file.getParentFile();
 	}
 	

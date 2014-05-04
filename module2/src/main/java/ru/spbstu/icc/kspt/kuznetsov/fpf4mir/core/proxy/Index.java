@@ -18,8 +18,10 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.DeploymentSession;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqNewOriginalArtifact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.R;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqNewDeployment;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestStatus;
 
 @Path("/")
@@ -45,18 +47,18 @@ public class Index {
 			throws Exception {
 
 		List<File> files = Utils.doUploadOriginalArtifact(httpreq);
-		File oa;
+
+		ReqNewDeployment req = new ReqNewDeployment();
+		req.setRefId(reqRefId++);
 
 		if (files.size() == 1) {
-			oa = files.get(0);
+			req.setFile(new FileArtifact(null, files.get(0)));
 		} else {
-			oa = files.get(0).getParentFile();
+			req.setFolder(new FolderArtifact(null, files.get(0).getParentFile()));
 		}
 
 		try {
 			session.reset(); // recreate new session
-			RequestFact req = new ReqNewOriginalArtifact(oa);
-			req.setRefId(reqRefId++);
 			session.assertFactAndRun(req);
 			return Response.seeOther(new URI(PATH_STATUS + "/" + req.getRefId())).build();
 		} catch (Exception e) {
@@ -69,7 +71,7 @@ public class Index {
 	@Path(PATH_STATUS + "/{reqId}")
 	public void getStatus(@Context HttpServletResponse response,
 			@Context HttpServletRequest request, @PathParam("reqId") long reqId) throws IOException {
-		RequestStatus status = session.getRequestStatus(reqRefId);
+		RequestStatus status = session.getRequestStatus(reqId);
 		
 		PrintWriter out = response.getWriter();
 		HTMLProducer.produceHTMLPage(status, response, "Status");

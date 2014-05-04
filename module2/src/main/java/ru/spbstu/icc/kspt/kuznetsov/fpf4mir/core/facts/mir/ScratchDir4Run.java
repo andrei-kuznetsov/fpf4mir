@@ -1,12 +1,12 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Run;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunActivity;
 
 public class ScratchDir4Run {
 	private ScratchDir scratcDir;
-	private Run run;
+	private RunActivity run;
 	
-	public ScratchDir4Run(Run run, ScratchDir scratcDir) {
+	public ScratchDir4Run(RunActivity run, ScratchDir scratcDir) {
 		this.scratcDir = scratcDir;
 		this.run = run;
 	}
@@ -19,11 +19,11 @@ public class ScratchDir4Run {
 		this.scratcDir = scratcDir;
 	}
 	
-	public Run getRun() {
+	public RunActivity getRun() {
 		return run;
 	}
 	
-	public void setRun(Run run) {
+	public void setRun(RunActivity run) {
 		this.run = run;
 	}
 	

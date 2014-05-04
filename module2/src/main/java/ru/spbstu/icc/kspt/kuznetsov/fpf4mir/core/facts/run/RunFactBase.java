@@ -1,16 +1,16 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Run;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunActivity;
 
 public class RunFactBase {
-	private Run run;
+	private RunActivity run;
 
-	public RunFactBase(Run build) {
+	public RunFactBase(RunActivity build) {
 		this.run = build;
 	}
 
-	public Run getRun() {
+	public RunActivity getRun() {
 		return run;
 	}
 	
@@ -18,7 +18,7 @@ public class RunFactBase {
 		return run;
 	}
 
-	public void setRun(Run run) {
+	public void setRun(RunActivity run) {
 		this.run = run;
 	}
 

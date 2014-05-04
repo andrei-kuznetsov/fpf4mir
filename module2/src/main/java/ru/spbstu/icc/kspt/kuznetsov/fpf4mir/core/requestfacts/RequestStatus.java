@@ -25,5 +25,10 @@ public class RequestStatus {
 	public void setStatusString(String statusString) {
 		this.statusString = statusString;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "RequestStatus [request=" + request + ", statusString="
+				+ statusString + "]";
+	}
 }

@@ -5,24 +5,27 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.*;
 
 rule "DownloadArtifact"
 	when 
-		$artifact : ArtifactRef()
-		not Artifact(id == $artifact.id)
+		$da : DeployActivity(  )
+		$artifact : ArtifactRef(activity == $da)
+		not Artifact(activity == $da)
 	then
-		insert( new DownloadAction($artifact.getId(), $artifact.getRef()) );
+		insert( new DownloadAction($da, $artifact) );
 end
 
 rule "ExtractArtifact"
 	when 
-		$artifact : Artifact(!isDirectory(), fileName.endsWith(".zip"))
-		not FolderArtifact(id == $artifact.id)
+	    $da : DeployActivity(  )
+		$artifact : Artifact(activity == $da, isFile(), fileName.endsWith(".zip"))
+		not FolderArtifact(activity == $da)
 	then
-		insert( new ExtractAction($artifact.getId(), $artifact.getFile()) );
+		insert( new ExtractAction($da, $artifact) );
 end
 
 rule "ProcessArtifactDirectory"
 	when 
-		$artifact : Artifact(isDirectory())
-		not FolderArtifact(id == $artifact.id)
+	    $da : DeployActivity(  )
+		$artifact : Artifact(activity == $da, isDirectory())
+		not FolderArtifact(this == $artifact)
 	then
 		retract($artifact);
 		insert( new FolderArtifact($artifact.getId(), $artifact.getFile()) );

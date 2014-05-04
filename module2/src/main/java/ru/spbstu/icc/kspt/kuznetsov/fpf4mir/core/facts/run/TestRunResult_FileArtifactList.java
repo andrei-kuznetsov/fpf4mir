@@ -2,22 +2,22 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifactList;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.R;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Run;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunActivity;
 
 public class TestRunResult_FileArtifactList extends FileArtifactList {
 	private static final long serialVersionUID = 1L;
-	private Run run;
+	private RunActivity run;
 
-	public TestRunResult_FileArtifactList(Run run, FileArtifactList list) {
+	public TestRunResult_FileArtifactList(RunActivity run, FileArtifactList list) {
 		super(R.id.TestRunResult_FileList, list);
 		this.run = run;
 	}
 
-	public Run getRun() {
+	public RunActivity getRun() {
 		return run;
 	}
 
-	public void setRun(Run run) {
+	public void setRun(RunActivity run) {
 		this.run = run;
 	}
 

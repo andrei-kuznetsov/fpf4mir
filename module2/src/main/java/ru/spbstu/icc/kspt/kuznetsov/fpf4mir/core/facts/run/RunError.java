@@ -2,12 +2,12 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityError;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Run;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunActivity;
 
 public class RunError extends RunFactBase implements ActivityError{
 	private String message;
 	
-	public RunError(Run run, String message) {
+	public RunError(RunActivity run, String message) {
 		super(run);
 		this.message = message;
 	}

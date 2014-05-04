@@ -53,7 +53,7 @@ end
 
 rule "Set build src encoding" when
 		$se : SrcEncoding()
-		$build : Build(  )
+		$build : BuildActivity(  )
 		not ExecStatus( activity == $build )
 	then
 		insert ( new BuildSrcEncoding( $build, $se ) );

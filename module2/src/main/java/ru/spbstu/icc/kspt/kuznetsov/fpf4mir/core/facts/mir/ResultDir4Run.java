@@ -3,26 +3,26 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir;
 import java.io.File;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Run;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunActivity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.DataDirRoot;
 
 public class ResultDir4Run extends FolderArtifact {
-	private Run run;
+	private RunActivity run;
 
-	public ResultDir4Run(Run run, DataDirRoot dataDir) {
+	public ResultDir4Run(RunActivity run, DataDirRoot dataDir) {
 		this(run, dataDir.newFolder("result_"));
 	}
 
-	public ResultDir4Run(Run run, File resDir) {
+	public ResultDir4Run(RunActivity run, File resDir) {
 		super(null, resDir);
 		this.run = run;
 	}
 	
-	public Run getRun() {
+	public RunActivity getRun() {
 		return run;
 	}
 
-	public void setRun(Run run) {
+	public void setRun(RunActivity run) {
 		this.run = run;
 	}
 

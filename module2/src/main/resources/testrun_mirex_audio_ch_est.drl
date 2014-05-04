@@ -11,7 +11,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mirex.*;
 
 rule "Mir_ScratchDir4Run"
 	when
-		$run : Run( $rr : request )
+		$run : RunActivity( $rr : request )
 		$sdi : ScratchDirIn( request == $rr )
 		$sdir : ScratchDir( datasetId == $sdi.datasetId )
 	then
@@ -20,7 +20,7 @@ end
 
 rule "Mir_Dataset4Run"
 	when
-		$run : Run( $rr : request )
+		$run : RunActivity( $rr : request )
 		$rdi : RunDatasetIn( request == $rr )
 		$dataset : Dataset( datasetId == $rdi.datasetId )
 	then
@@ -29,7 +29,7 @@ end
 
 rule "Mir_Dataset_FileArtifactList4Run"
 	when
-		$run : Run( $rr : request )
+		$run : RunActivity( $rr : request )
 		$rdi : RunDatasetIn( request == $rr )
 		$dataset : Dataset( datasetId == $rdi.datasetId )
 		$datalist : Dataset_FileArtifactList( dataset == $dataset )
@@ -39,7 +39,7 @@ end
 
 rule "Mirex_AudioChordEstimation_RunOptions"
 	when
-		$run : Run( $rr : request )
+		$run : RunActivity( $rr : request )
 		
 		Dataset_FileArtifactList4Run( run == $run, $datalist : list )
 		ScratchDir4Run( run == $run, $sdir : scratchDir)

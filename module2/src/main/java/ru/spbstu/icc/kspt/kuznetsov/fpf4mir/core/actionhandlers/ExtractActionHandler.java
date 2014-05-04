@@ -18,7 +18,7 @@ public class ExtractActionHandler implements ActionHandler {
 		File targetDir = new File(srcFile.getParentFile(), targetFileName);
 		
 		ZipUnzip.unzip(srcFile, targetDir.getAbsolutePath());
-		FolderArtifact fc = new FolderArtifact(action.getId(), targetDir);
+		FolderArtifact fc = new FolderArtifact(action.getActivity(), targetDir);
 		
 		ksession.retract(ksession.getFactHandle(action));
 		ksession.insert(fc);

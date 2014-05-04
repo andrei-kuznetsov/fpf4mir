@@ -14,7 +14,7 @@ rule "TestRun_ResultDir"
 	when
 		ReqCreateNewRunResultDir()
 		$dd : DataDirRoot( )
-		$run : Run(  )
+		$run : RunActivity(  )
 		not ResultDir4Run( run == $run )
 	then
 		insert( new ResultDir4Run($run, $dd) );
@@ -35,7 +35,7 @@ end
 
 rule "NewRun_Java"
 	when
-		$run : Run(  )
+		$run : RunActivity(  )
 		not JavaRun( this == $run )
 		RunSystem(runSystem == RunSystem.RUN_SYSTEMS.JAVA)
 	then
@@ -45,7 +45,7 @@ end
 
 rule "TestRunStatus"
 	when
-		$run : Run( id == R.id.TestActivity )
+		$run : RunActivity( id == R.id.TestActivity )
 		ExecStatus( activity == $run, succeeded == true )
 	then
 		insertLogical( new RunSucceeded($run));

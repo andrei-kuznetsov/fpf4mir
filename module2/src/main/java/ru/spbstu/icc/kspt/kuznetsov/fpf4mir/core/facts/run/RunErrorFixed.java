@@ -1,7 +1,7 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityErrorFixed;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Run;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunActivity;
 
 public class RunErrorFixed extends ActivityErrorFixed {
 
@@ -9,8 +9,8 @@ public class RunErrorFixed extends ActivityErrorFixed {
 		super(error);
 	}
 
-	public Run getRun(){
-		return (Run) getActivity();
+	public RunActivity getRun(){
+		return (RunActivity) getActivity();
 	}
 
 	public RunError getRunError(){

@@ -42,7 +42,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.RunDatasetIn;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.RunSucceeded;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.TestRunVerificationSucceeded;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqNewBuild;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqNewOriginalArtifact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqNewDeployment;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqNewRun;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestStatus;
@@ -177,7 +177,13 @@ public class DeploymentSession {
 		for (String resFileName : Classpath.getClasspathFileNamesWithExtension(".drl")){
 			if (resFileName.indexOf('/') == -1){
 				System.out.println("[+] Found classpath resource: " + resFileName);
-				kbuilder.add(ResourceFactory.newClassPathResource(resFileName), ResourceType.DRL);
+				
+				try{
+					kbuilder.add(ResourceFactory.newClassPathResource(resFileName), ResourceType.DRL);
+				} catch (Throwable e){
+					e.printStackTrace();
+					throw new RuntimeException("error", e);
+				}
 				if (kbuilder.hasErrors()){
 					for (KnowledgeBuilderError i : kbuilder.getErrors()){
 						System.out.println(i);

@@ -1,7 +1,7 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Build;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.BuildActivity;
 
 public class ReqNewBuild extends RequestFactBase implements ReqNewActivity{
 	@Override
@@ -12,7 +12,7 @@ public class ReqNewBuild extends RequestFactBase implements ReqNewActivity{
 	@Override
 	public Activity newActivityInstance() {
 		java.util.Date date = new java.util.Date();
-		return new Build((int)date.getTime(), date, this);
+		return new BuildActivity((int)date.getTime(), date, this);
 	}
 
 	@Override

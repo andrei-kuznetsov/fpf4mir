@@ -1,11 +1,13 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecStatus;
 
-public class RunCommandRequestAction implements ActionFact {
+public class RunCommandRequestAction extends ActionFactBase implements ActionFact {
 	private ExecStatus status;
 
-	public RunCommandRequestAction(ExecStatus status) {
+	public RunCommandRequestAction(Activity activity, ExecStatus status) {
+		super(activity);
 		this.status = status;
 	}
 

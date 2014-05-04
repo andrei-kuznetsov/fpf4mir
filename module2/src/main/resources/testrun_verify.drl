@@ -11,7 +11,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mirex.*;
 rule "TestRun_Verify_ResultList__CallFormat_MIREX_AudioChordEstimation"
 	when 
 		CallFormat_MIREX_AudioChordEstimation()
-		$run : Run( id == R.id.TestActivity )
+		$run : RunActivity( id == R.id.TestActivity )
 		ExecStatus( activity == $run, succeeded == true )
 		$res : ResultDir4Run( run == $run )
 	then
@@ -22,7 +22,7 @@ rule "TestRun_Verify_ResultsFNames__CallFormat_MIREX_AudioChordEstimation"
 	when
 		CallFormat_MIREX_AudioChordEstimation()
 		
-		$run : Run( id == R.id.TestActivity )
+		$run : RunActivity( id == R.id.TestActivity )
 		
 		Dataset_FileArtifactList4Run( run == $run, $src : list )
 		$res : TestRunResult_FileArtifactList( run == $run )
@@ -40,7 +40,7 @@ end
 rule "TestRun_Diag1"
 	when
 		CallFormat_MIREX_AudioChordEstimation()
-		$run : Run( id == R.id.TestActivity )
+		$run : RunActivity( id == R.id.TestActivity )
 		ExecStatus( activity == $run, succeeded == true )
 		not ResultDir4Run( run == $run )
 	then
@@ -50,7 +50,7 @@ end
 rule "TestRun_Diag2"
 	when
 		CallFormat_MIREX_AudioChordEstimation()
-		$run : Run( id == R.id.TestActivity )
+		$run : RunActivity( id == R.id.TestActivity )
 		ExecStatus( activity == $run, succeeded == true )
 		not Dataset_FileArtifactList4Run( run == $run )
 	then
@@ -61,7 +61,7 @@ rule "TestRun_Diagnose_ResultsFNames__CallFormat_MIREX_AudioChordEstimation"
 	when
 		CallFormat_MIREX_AudioChordEstimation()
 		
-		$run : Run( id == R.id.TestActivity )
+		$run : RunActivity( id == R.id.TestActivity )
 		
 		Dataset_FileArtifactList4Run( run == $run, $src : list )
 		$res : TestRunResult_FileArtifactList( run == $run )
@@ -83,7 +83,7 @@ end
 rule "TestRun_Verify_ResultsFormat__CallFormat_MIREX_AudioChordEstimation"
 	when
 		CallFormat_MIREX_AudioChordEstimation()
-		$run : Run( id == R.id.TestActivity )
+		$run : RunActivity( id == R.id.TestActivity )
 		ExecStatus( activity == $run, succeeded == true )
 		$res : TestRunResult_FileArtifactList()
 		forall( TextFileArtifact( lineFormatPattern( "^\\d+\\.\\d+\\s+\\d+\\.\\d+\\s+[a-hA-HN][#]?(:min)?$" ) == true ) from $res )

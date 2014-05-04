@@ -2,12 +2,12 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.java;
 
 import java.util.Date;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Run;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunActivity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqNewActivity;
 
-public class JavaRun extends Run {
+public class JavaRun extends RunActivity {
 
-	public JavaRun(Run run){
+	public JavaRun(RunActivity run){
 		super(run);
 	}
 	public JavaRun(int number, Date date, ReqNewActivity request) {

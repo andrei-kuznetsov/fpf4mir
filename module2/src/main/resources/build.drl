@@ -7,7 +7,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
 rule "NewBuild_Mvn"
 	when
 		BuildSystem(buildSystem == BuildSystem.BUILD_SYSTEMS.MAVEN)
-		$b : Build()
+		$b : BuildActivity()
 		not MvnBuild( this == $b )
 	then
 		retract($b);
@@ -16,7 +16,7 @@ end
 
 rule "BuildStatus"
 	when
-		$build : Build( )
+		$build : BuildActivity( )
 		ExecStatus( activity == $build, succeeded == true )
 	then
 		insertLogical( new BuildSucceeded($build));

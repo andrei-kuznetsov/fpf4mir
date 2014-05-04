@@ -1,16 +1,16 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Build;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.BuildActivity;
 
 public class BuildFactBase {
-	private Build build;
+	private BuildActivity build;
 
-	public BuildFactBase(Build build) {
+	public BuildFactBase(BuildActivity build) {
 		this.build = build;
 	}
 
-	public Build getBuild() {
+	public BuildActivity getBuild() {
 		return build;
 	}
 
@@ -18,7 +18,7 @@ public class BuildFactBase {
 		return build;
 	}
 	
-	public void setBuild(Build build) {
+	public void setBuild(BuildActivity build) {
 		this.build = build;
 	}
 

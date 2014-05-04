@@ -1,21 +1,21 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Run;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunActivity;
 
 public class Dataset4Run {
-	private Run run;
+	private RunActivity run;
 	private Dataset dataset;
 	
-	public Dataset4Run(Run run, Dataset dataset) {
+	public Dataset4Run(RunActivity run, Dataset dataset) {
 		this.run = run;
 		this.dataset = dataset;
 	}
 
-	public Run getRun() {
+	public RunActivity getRun() {
 		return run;
 	}
 
-	public void setRun(Run run) {
+	public void setRun(RunActivity run) {
 		this.run = run;
 	}
 

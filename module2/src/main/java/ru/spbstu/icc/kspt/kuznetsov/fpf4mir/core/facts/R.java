@@ -11,6 +11,7 @@ public class R {
 
 		public static final String BuildActivity = "BuildActivity";
 		public static final String TestRunActivity = "TestRunActivity";
+		public static final String DeployActivity = "DeployActivity";
 		
 		public static final String ExecBuild = "ExecBuild";
 		public static final String ExecTestRun = "ExecTestRun";

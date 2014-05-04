@@ -12,12 +12,12 @@ public class FolderArtifact extends Artifact {
 		super();
 	}
 
-	public FolderArtifact(String id, File file) {
-		this(id, file, false);
+	public FolderArtifact(Activity activity, File file) {
+		this(activity, file, false);
 	}
 	
-	public FolderArtifact(String id, File file, boolean exists) {
-		super(id, file);
+	public FolderArtifact(Activity activity, File file, boolean exists) {
+		super(activity, file);
 		if (exists) {
 			if (file != null && file.exists()){
 				setFile(file);

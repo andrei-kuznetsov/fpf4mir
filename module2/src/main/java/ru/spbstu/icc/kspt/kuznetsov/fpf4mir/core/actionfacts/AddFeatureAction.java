@@ -1,5 +1,11 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts;
 
-public class AddFeatureAction implements ActionFact{
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
+
+public class AddFeatureAction extends ActionFactBase implements ActionFact{
+
+	public AddFeatureAction(Activity activity) {
+		super(activity);
+	}
 
 }

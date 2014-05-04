@@ -71,7 +71,7 @@ public class Activity {
 
 	@Override
 	public String toString() {
-		return "Activity [id=" + id + ", number=" + number + ", date=" + date
+		return getClass().getSimpleName() +  " [id=" + id + ", number=" + number + ", date=" + date
 				+ ", request=" + request + "]";
 	}
 	

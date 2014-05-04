@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.UUID;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.R;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.R.id;
 
 public class DataDirRoot extends FolderArtifact {
 
@@ -14,7 +12,7 @@ public class DataDirRoot extends FolderArtifact {
 	}
 
 	public DataDirRoot(File file) {
-		super(R.id.DataDirRoot, file);
+		super(null, file);
 	}
 
 	public File newFolder(String preffix) {

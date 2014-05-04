@@ -2,14 +2,14 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts;
 
 import java.io.File;
 
-public class ExtractAction implements ActionFact {
-	private File file;
-	private String id;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 
-	public ExtractAction(String id, File file) {
-		super();
+public class ExtractAction extends ActionFactBase implements ActionFact {
+	private File file;
+
+	public ExtractAction(Activity activity, File file) {
+		super(activity);
 		this.file = file;
-		this.id = id;
 	}
 
 	public File getFile() {
@@ -20,20 +20,11 @@ public class ExtractAction implements ActionFact {
 		this.file = file;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((file == null) ? 0 : file.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -51,17 +42,12 @@ public class ExtractAction implements ActionFact {
 				return false;
 		} else if (!file.equals(other.file))
 			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "ExtractAction [id=" + id + ", file=" + file + "]";
+		return "ExtractAction [file=" + file + "]";
 	}
 	
 }

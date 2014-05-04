@@ -1,9 +1,9 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Run;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunActivity;
 
 public class TestRunVerification_FileFormatOk extends TestRunFact {
-	public TestRunVerification_FileFormatOk(Run run) {
+	public TestRunVerification_FileFormatOk(RunActivity run) {
 		super(run);
 	}
 

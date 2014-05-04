@@ -1,16 +1,16 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Build;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.BuildActivity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.sources.SrcEncoding;
 
 public class BuildSrcEncoding extends BuildFactBase {
 	private SrcEncoding srcEncoding;
 
-	public BuildSrcEncoding(Build build) {
+	public BuildSrcEncoding(BuildActivity build) {
 		super(build);
 	}
 	
-	public BuildSrcEncoding(Build build, SrcEncoding srcEncoding) {
+	public BuildSrcEncoding(BuildActivity build, SrcEncoding srcEncoding) {
 		super(build);
 		this.srcEncoding = srcEncoding;
 	}
