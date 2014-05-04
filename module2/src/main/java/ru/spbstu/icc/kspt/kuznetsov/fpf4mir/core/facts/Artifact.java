@@ -6,31 +6,23 @@ public class Artifact {
 	private File file;
 	private Activity activity;
 	
-	@Deprecated
-	private String id;
-	
 	protected Artifact(Activity activity, File file) {
 		this.activity = activity;
 		this.file = file;
 	}
 
 	protected Artifact(){
-		this((Activity)null, null);
+		this(null, null);
 	}
 	
-	protected Artifact(String id) {
-		this(id, null);
+	protected Artifact(Activity activity) {
+		this(activity, null);
 	}
 	
-	@Deprecated
-	protected Artifact(String id, File file) {
-		this.id = id;
-		this.file = file;
-	}
 	
 	protected Artifact(Artifact other){
 		this.file = other.file;
-		this.id = other.id;
+		this.activity = other.activity;
 	}
 
 	public boolean isDirectory() {
@@ -57,16 +49,6 @@ public class Artifact {
 		this.file = file;
 	}
 
-	@Deprecated
-	public String getId() {
-		return id;
-	}
-
-	@Deprecated
-	public void setId(String id) {
-		this.id = id;
-	}
-
 	public Activity getActivity() {
 		return activity;
 	}
@@ -77,7 +59,6 @@ public class Artifact {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [file=" + file + ", activity=" + activity + ", id="
-				+ id + "]";
+		return getClass().getSimpleName() + " [file=" + file + ", activity=" + activity + "]";
 	}
 }

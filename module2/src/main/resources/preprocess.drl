@@ -2,6 +2,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
 
 rule "DownloadArtifact"
 	when 
@@ -9,26 +10,49 @@ rule "DownloadArtifact"
 		$artifact : ArtifactRef(activity == $da)
 		not Artifact(activity == $da)
 	then
-		insert( new DownloadAction($da, $artifact) );
+		insert( new ReqDownloadHttp($artifact) );
+end
+
+rule "Assert Downloaded Artifact"
+	when 
+		$da : DeployActivity(  )
+		$ds : DownloadStatus(activity == $da, succeeded==true, $artifact : downloadedArtifact)
+		not Artifact(activity == $da)
+	then
+		insert( $artifact );
+end
+
+rule "Assert Download Failed Artifact"
+	when 
+		$da : DeployActivity(  )
+		$ds : DownloadStatus(activity == $da, succeeded==false)
+	then
+		insert( new DeployError($da, "Can't download artifact") );
 end
 
 rule "ExtractArtifact"
 	when 
 	    $da : DeployActivity(  )
-		$artifact : Artifact(activity == $da, isFile(), fileName.endsWith(".zip"))
+		$artifact : FileArtifact(activity == $da, fileName.endsWith(".zip"))
 		not FolderArtifact(activity == $da)
 	then
-		insert( new ExtractAction($da, $artifact) );
+		insert( new ReqExtract($artifact) );
 end
 
-rule "ProcessArtifactDirectory"
+rule "Assert DeployFolder"
 	when 
 	    $da : DeployActivity(  )
-		$artifact : Artifact(activity == $da, isDirectory())
-		not FolderArtifact(this == $artifact)
+		$artifact : FolderArtifact( activity == $da )
 	then
-		retract($artifact);
-		insert( new FolderArtifact($artifact.getId(), $artifact.getFile()) );
+		insertLogical( new DeployFolder($artifact) );
+end
+
+rule "DeployStatus"
+	when 
+	    $da : DeployActivity(  )
+		$artifact : DeployFolder( activity == $da )
+	then
+		insertLogical( new DeploySucceeded( $da ) );
 end
 
 rule "DefaultScratchDir"

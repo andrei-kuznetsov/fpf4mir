@@ -1,20 +1,29 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven;
 
-import java.io.File;
-
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.R;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifactAlias;
 
-public class MvnRootPom extends FileArtifact{
-	public MvnRootPom() {
-		this((File)null);
-	}
-
-	protected MvnRootPom(File file) {
-		super(R.id.MvnRootPom, file);
-	}
+public class MvnRootPom implements FileArtifactAlias {
+	private FileArtifact file;
 	
 	public MvnRootPom(FileArtifact artifact) {
-		super(R.id.MvnRootPom, artifact.getFile());
+		this.file = artifact; 
 	}
+
+	/* (non-Javadoc)
+	 * @see ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.FileArtifactAlias#getFile()
+	 */
+	@Override
+	public FileArtifact getFile() {
+		return file;
+	}
+
+	/* (non-Javadoc)
+	 * @see ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.FileArtifactAlias#setFile(ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact)
+	 */
+	@Override
+	public void setFile(FileArtifact file) {
+		this.file = file;
+	}
+	
 }

@@ -14,6 +14,7 @@ import org.drools.runtime.rule.FactHandle;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActionStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunSystem;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunSystem.RUN_SYSTEMS;
@@ -50,7 +51,7 @@ public class DrlTestRunTest {
         // Set status (false) and Fire yet another time
         JavaRun b = (JavaRun) omap.get(JavaRun.class).get(0);
         FactHandle hb = ksession.getFactHandle(b);
-        ExecStatus status = new ExecStatus(b, null, 1, null, null);
+        ActionStatus status = new ExecStatus(b, null, 1, null, null);
         ksession.insert(status);
         
         // Should not see new run because we didn't fix previous build yet

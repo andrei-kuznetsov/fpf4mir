@@ -11,13 +11,13 @@ public class FileArtifact extends Artifact {
 		super();
 	}
 
-	public FileArtifact(String id, File file) {
-		super(id, file);
+	public FileArtifact(Activity activity, File file) {
+		super(activity, file);
 		setFile(file);
 	}
 
-	public FileArtifact(String id) {
-		super(id);
+	public FileArtifact(Activity activity) {
+		super(activity);
 	}
 
 	@Override

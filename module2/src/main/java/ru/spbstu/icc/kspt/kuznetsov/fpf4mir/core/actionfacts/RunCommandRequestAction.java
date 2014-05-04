@@ -13,32 +13,8 @@ public class RunCommandRequestAction extends ActionFactBase implements ActionFac
 
 	@Override
 	public String toString() {
-		return "RunCommandRequestAction [build=" + status + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof RunCommandRequestAction))
-			return false;
-		RunCommandRequestAction other = (RunCommandRequestAction) obj;
-		if (status == null) {
-			if (other.status != null)
-				return false;
-		} else if (!status.equals(other.status))
-			return false;
-		return true;
+		return "RunCommandRequestAction [status=" + status + ", getActivity()="
+				+ getActivity() + "]";
 	}
 
 	public ExecStatus getStatus() {

@@ -4,8 +4,8 @@ import java.net.URI;
 
 public class TestRunDataRef extends ArtifactRef {
 
-	public TestRunDataRef(URI ref) {
-		super(R.id.RunArtifact, ref);
+	public TestRunDataRef(Activity activity, URI ref) {
+		super(activity, ref);
 	}
 
 }

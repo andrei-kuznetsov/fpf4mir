@@ -4,10 +4,10 @@ import java.net.URI;
 
 public class ArtifactRef {
 	private URI ref;
-	private String id;
+	private Activity activity;
 	
-	public ArtifactRef(String id, URI ref) {
-		this.id = id;
+	public ArtifactRef(Activity activity, URI ref) {
+		this.activity = activity;
 		this.ref = ref;
 	}
 
@@ -19,12 +19,12 @@ public class ArtifactRef {
 		this.ref = ref;
 	}
 
-	public String getId() {
-		return id;
+	public Activity getActivity() {
+		return activity;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setActivity(Activity activity) {
+		this.activity = activity;
 	}
 	
 }

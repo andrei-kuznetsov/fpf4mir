@@ -29,8 +29,8 @@ public class FolderArtifact extends Artifact {
 		}
 	}
 
-	public FolderArtifact(String id) {
-		super(id);
+	public FolderArtifact(Activity activity) {
+		super(activity);
 	}
 
 	@Override

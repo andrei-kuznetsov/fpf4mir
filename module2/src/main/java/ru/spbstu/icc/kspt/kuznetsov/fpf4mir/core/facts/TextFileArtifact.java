@@ -17,12 +17,12 @@ public class TextFileArtifact extends FileArtifact {
 		super();
 	}
 
-	public TextFileArtifact(String id, File file) {
-		super(id, file);
+	public TextFileArtifact(Activity activity, File file) {
+		super(activity, file);
 	}
 
-	public TextFileArtifact(String id) {
-		super(id);
+	public TextFileArtifact(Activity activity) {
+		super(activity);
 	}
 
 	public boolean lineFormatPattern(String pattern){

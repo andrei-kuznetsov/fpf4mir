@@ -1,6 +1,5 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityError;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.BuildActivity;
 
@@ -47,11 +46,5 @@ public class BuildError extends BuildFactBase implements ActivityError{
 		} else if (!message.equals(other.message))
 			return false;
 		return true;
-	}
-
-
-	@Override
-	public Activity getActivity() {
-		return getBuild();
 	}
 }

@@ -13,6 +13,7 @@ import org.drools.runtime.StatefulKnowledgeSession;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActionStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.BuildSystem;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.BuildSystem.BUILD_SYSTEMS;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecStatus;
@@ -48,7 +49,7 @@ public class DrlBuildTest {
         
         // Set status (false) and Fire yet another time
         MvnBuild b = (MvnBuild) omap.get(MvnBuild.class).get(0);
-        ExecStatus status = new ExecStatus(b, null, 1, null, null);
+        ActionStatus status = new ExecStatus(b, null, 1, null, null);
         ksession.insert(status);
         
         // Should not see new build because we didn't fix previous build yet

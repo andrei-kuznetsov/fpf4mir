@@ -13,6 +13,7 @@ import java.util.Map;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.junit.Test;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActionStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.R;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunActivity;
@@ -112,7 +113,7 @@ public class DrlTestRunVerify {
 		Dataset_FileArtifactList dsal = new Dataset_FileArtifactList(dataset, "*.wav", null);
         RunDatasetIn src = new RunDatasetIn(rr, dataset.getDatasetId());
         RunActivity testRun = new RunActivity(R.id.TestActivity, 1, new Date(), rr);
-        ExecStatus status = new ExecStatus(testRun, null, 0, null, null);
+        ActionStatus status = new ExecStatus(testRun, null, 0, null, null);
         ResultDir4Run res = new ResultDir4Run(testRun, PathUtils.getTestResourceDir(resDir));
 
         ksession.insert(testRun);
