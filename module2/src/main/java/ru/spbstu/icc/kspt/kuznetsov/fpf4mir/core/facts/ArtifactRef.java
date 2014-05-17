@@ -11,6 +11,10 @@ public class ArtifactRef {
 		this.ref = ref;
 	}
 
+	public ArtifactRef(Activity activity, ArtifactRef ref) {
+		this(activity, ref.getRef());
+	}
+
 	public URI getRef() {
 		return ref;
 	}

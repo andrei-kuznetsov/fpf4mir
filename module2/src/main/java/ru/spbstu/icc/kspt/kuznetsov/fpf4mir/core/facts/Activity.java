@@ -2,9 +2,12 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts;
 
 import java.util.Date;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericActivity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqNewActivity;
 
 public class Activity {
+	public static final Activity USER = new GenericActivity(R.id.UserActivity, 0, new Date(), null);
+	
 	private String id;
 	private int number;
 	private Date date;

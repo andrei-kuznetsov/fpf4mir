@@ -16,5 +16,5 @@ rule "TestRun_MirexFmt_AudioChordEst"
 		not Dataset_FileArtifactList( dataset == $dataset)
 		$tmpdir : TmpDirRoot(  )
 	then
-		insert( new Dataset_FileArtifactList($dataset, "*.wav", $tmpdir) );
+		insert( new Dataset_FileArtifactList(null, $dataset, "*.wav", $tmpdir) );
 end

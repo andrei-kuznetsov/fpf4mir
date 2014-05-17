@@ -10,27 +10,27 @@ import org.drools.RuntimeDroolsException;
 
 public class FileArtifactList extends ArrayList<FileArtifact>{
 	private static final long serialVersionUID = 1L;
-	
-	private String id;
 
-	public FileArtifactList(String id, File baseDir, String fileNames[]) {
-		this(id, baseDir, fileNames, FileArtifact.class);
+	private Activity activity;
+	
+	public FileArtifactList(Activity activity, File baseDir, String fileNames[]) {
+		this(activity, baseDir, fileNames, FileArtifact.class);
 	}
 	
-	protected FileArtifactList(String id, FileArtifactList list) {
+	protected FileArtifactList(Activity activity, FileArtifactList list) {
 		super(list);
-		this.id = id;
+		this.activity = activity;
 	}
 
-	public FileArtifactList(String id, File baseDir, String[] fileNames, Class<? extends FileArtifact> c) {
-		this.id = id;
+	public FileArtifactList(Activity activity, File baseDir, String[] fileNames, Class<? extends FileArtifact> c) {
+		this.activity = activity;
 		
 		Constructor<? extends FileArtifact> ctr;
 		
 		try {
-			ctr = c.getConstructor(String.class, File.class);
+			ctr = c.getConstructor(Activity.class, File.class);
 			for (String i : fileNames){
-				this.add(ctr.newInstance(null, new File(baseDir, i)));
+				this.add(ctr.newInstance(activity, new File(baseDir, i)));
 			}
 		} catch (NoSuchMethodException e) {
 			throw new RuntimeDroolsException("Can't create FileArtifactList with parametrized class " + c.toString(), e);
@@ -45,14 +45,6 @@ public class FileArtifactList extends ArrayList<FileArtifact>{
 		} catch (InvocationTargetException e) {
 			throw new RuntimeDroolsException("Can't create FileArtifactList with parametrized class " + c.toString(), e);
 		}
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 	
 	protected File materialize(File tmpDir){
@@ -71,4 +63,13 @@ public class FileArtifactList extends ArrayList<FileArtifact>{
 		
 		return list;
 	}
+
+	public Activity getActivity() {
+		return activity;
+	}
+
+	public void setActivity(Activity activity) {
+		this.activity = activity;
+	}
+	
 }

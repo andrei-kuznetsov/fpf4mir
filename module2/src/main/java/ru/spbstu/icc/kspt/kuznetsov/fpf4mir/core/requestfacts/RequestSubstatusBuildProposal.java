@@ -7,8 +7,8 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.BuildCommand;
 public class RequestSubstatusBuildProposal extends RequestSubstatusBase implements RequestSubstatus{
 	private List<BuildCommand> buildCommands;
 
-	public RequestSubstatusBuildProposal(List<BuildCommand> buildCommands) {
-		super();
+	public RequestSubstatusBuildProposal(RequestFact mainStatus, List<BuildCommand> buildCommands) {
+		super(mainStatus);
 		this.buildCommands = buildCommands;
 	}
 

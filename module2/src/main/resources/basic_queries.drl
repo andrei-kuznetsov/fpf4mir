@@ -5,8 +5,20 @@ query "RequestStatus for request"  (RequestFact r)
     status : RequestStatus(request == r)
 end
 
+query "RequestSubstatus for request"  (RequestFact r)
+    status : RequestStatus(request == r)
+end
+
 query "RequestStatus for request refId"  (long reqRefId)
-	//$r : RequestFact(refId == reqRefId)
-    status : RequestStatus(request.refId == reqRefId)
-    substatus : java.util.LinkedList(  ) from collect ( RequestSubstatus(mainStatus == status) )
+	req : RequestFact(refId == reqRefId)
+    status : RequestStatus(request == req)
+    substatus : java.util.LinkedList(  ) from collect ( RequestSubstatus(request == req) )
+    activities : java.util.LinkedList(  ) from collect ( Activity( request == req) )
+end
+
+query "Trace request activities"  (RequestFact r)
+    activity : Activity( request == r )
+    activitySuccess : ActivitySucceeded( activity == activity )
+    activityError : ActivityError( activity == activity )
+    activityErrorFixed : ActivityErrorFixed( activity == activity )
 end

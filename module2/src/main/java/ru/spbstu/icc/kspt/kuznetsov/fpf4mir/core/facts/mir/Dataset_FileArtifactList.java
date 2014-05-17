@@ -2,6 +2,7 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir;
 
 import java.io.File;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifactList;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.R;
@@ -11,12 +12,12 @@ public class Dataset_FileArtifactList extends FileArtifactList {
 	private Dataset dataset;
 	private File materializedFile;
 
-	public Dataset_FileArtifactList(Dataset dataset, String pattern, FolderArtifact tmpDir) {
-		super(R.id.RunData_FileList, dataset.getFileArtifactListForPattern(pattern));
+	public Dataset_FileArtifactList(Activity activity, Dataset dataset, String pattern, FolderArtifact tmpDir) {
+		super(activity, dataset.getFileArtifactListForPattern(pattern));
 		this.dataset = dataset;
 		
 		if (tmpDir != null){
-			materializedFile = materialize(tmpDir.getDir());
+			materializedFile = materialize(tmpDir.getFolder());
 		} else {
 			materializedFile = null;
 		}

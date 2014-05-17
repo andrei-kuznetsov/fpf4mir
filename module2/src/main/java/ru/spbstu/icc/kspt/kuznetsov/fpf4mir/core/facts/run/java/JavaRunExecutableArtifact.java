@@ -2,9 +2,9 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.java;
 
 import java.io.File;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunExecutableArtifact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecutableFileArtifact;
 
-public class JavaRunExecutableArtifact extends RunExecutableArtifact {
+public class JavaRunExecutableArtifact extends ExecutableFileArtifact {
 
 	public JavaRunExecutableArtifact(File file, File workingDir) {
 		super(file, workingDir);

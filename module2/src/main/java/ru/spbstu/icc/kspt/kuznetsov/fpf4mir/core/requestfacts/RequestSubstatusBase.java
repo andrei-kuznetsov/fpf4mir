@@ -1,22 +1,21 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts;
 
 public class RequestSubstatusBase implements RequestSubstatus {
-	private RequestStatus mainStatus;
+	private RequestFact request;
 
-	/* (non-Javadoc)
-	 * @see ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestSubstatus#getMainStatus()
-	 */
-	@Override
-	public RequestStatus getMainStatus() {
-		return mainStatus;
+	public RequestSubstatusBase(RequestFact request) {
+		super();
+		this.request = request;
 	}
 
-	/* (non-Javadoc)
-	 * @see ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestSubstatus#setMainStatus(ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestStatus)
-	 */
 	@Override
-	public void setMainStatus(RequestStatus mainStatus) {
-		this.mainStatus = mainStatus;
+	public RequestFact getRequest() {
+		return request;
 	}
-	
+
+	@Override
+	public void setRequest(RequestFact request) {
+		this.request = request;
+	}
+
 }

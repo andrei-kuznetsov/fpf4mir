@@ -1,4 +1,5 @@
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.activities.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
@@ -6,13 +7,20 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mirex.*;
 
 declare ReadyForTestRun end
-
+/*
+rule "Get run artifact"
+	when 
+	    $d : DeployFolder( request == $r )
+	then
+		insert( new ReqNewGuessRunExecutable($d) );
+end
+*/
 /// TODO:
 rule "GetRunArtifact"
 	when
-		not RunExecutableArtifact(workingDir  != null, file != null)
+		not ExecutableFileArtifact(workingDir  != null, file != null)
 		$build : BuildActivity(  )
 		$status : ExecStatus( activity == $build, succeeded == true )
 	then
-		insert ( new RunCommandRequestAction($status) );	
+		insert ( new RunCommandRequestAction($build, $status) );	
 end

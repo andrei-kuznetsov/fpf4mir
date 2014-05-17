@@ -30,7 +30,7 @@ rule "Fix_JavacErr_UnmappableCharacter_1"
 		//                            as the same object and not inserted twice
 		not SrcEncoding()
 	then
-		insert( new DetectEncodingAction() );
+		insert( new DetectEncodingAction($e.getActivity()) );
 end
 
 rule "SrcEncoding added"

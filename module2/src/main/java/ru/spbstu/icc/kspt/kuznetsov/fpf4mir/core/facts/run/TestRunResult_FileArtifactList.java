@@ -9,7 +9,7 @@ public class TestRunResult_FileArtifactList extends FileArtifactList {
 	private RunActivity run;
 
 	public TestRunResult_FileArtifactList(RunActivity run, FileArtifactList list) {
-		super(R.id.TestRunResult_FileList, list);
+		super(run, list);
 		this.run = run;
 	}
 

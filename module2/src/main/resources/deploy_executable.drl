@@ -1,0 +1,59 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+// TODO: populate
+rule "Deploy executable from file artifact"
+	when
+		$r : ReqDeployExecutable(  )
+		$a : DeployExecutableActivity( request == $r )
+		$file : FileArtifactAlias( request == $r )
+	then
+		ReqDeployFolder rdf = new ReqDeployFolder($a);
+		FileArtifactAlias f = new GenericFileArtifactAlias($file, rdf);
+		insert( f );
+		insert( rdf );
+end
+
+/*
+use deployed folder as is when FolderArtifactAlias( request == $r )
+*/
+
+rule "Deploy executable from URL"
+	when
+		$r : ReqDeployExecutable(  )
+		$a : DeployExecutableActivity( request == $r )
+		$ref : ArtifactRefAlias( request == $r )
+	then
+		ReqDeployFolder rdf = new ReqDeployFolder($a);
+		ArtifactRefAlias f = new GenericArtifactRefAlias(rdf, $ref);
+		insert( f );
+		insert( rdf );
+end
+
+rule "Propagate deploy folder"
+	when
+		$r : ReqDeployExecutable(  )
+		$a : DeployExecutableActivity( request == $r )
+		$rdf : ReqDeployFolder( activity == $a )
+		$rdf_stat : RequestStatus( request == $rdf, succeeded == true )
+		$folder : FolderArtifactAlias( request == $rdf )
+	then
+		insertLogical( new GenericFolderArtifactAlias($r, $folder) );
+end
+
+rule "Evaluate run command"
+	when
+		$r : ReqDeployExecutable(  )
+		$a : DeployExecutableActivity( request == $r )
+		$folder : FolderArtifactAlias( request == $r )
+	then
+		ReqNewActivity rgrc = new GenericReqNewActivity(R.activity.GuessRunCommand, $a);
+		FolderArtifactAlias f = new GenericFolderArtifactAlias(rgrc, $folder);
+		insert( f );
+		insert( rgrc );
+end

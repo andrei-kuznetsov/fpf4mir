@@ -16,6 +16,14 @@ public class FileArtifact extends Artifact {
 		setFile(file);
 	}
 
+	public FileArtifact(Activity activity, Artifact file) {
+		this(activity, file.getFile());
+	}
+
+	public FileArtifact(Artifact artifact) {
+		this(artifact.getActivity(), artifact.getFile());
+	}
+	
 	public FileArtifact(Activity activity) {
 		super(activity);
 	}

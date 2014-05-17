@@ -52,6 +52,8 @@ rule "Mirex_AudioChordEstimation_RunOptions"
 		insertLogical( new RunOrdinal($run, 3, $res.getAbsolutePath()) );	
 end
 
+/*
+// TODO:
 rule "Mirex_AudioChordEstimation_Req_FileArtifactList"
 	when 
 		CallFormat_MIREX_AudioChordEstimation()
@@ -59,3 +61,4 @@ rule "Mirex_AudioChordEstimation_Req_FileArtifactList"
 		insertLogical(new ReqDataset2FileArtifactList());
 		insertLogical(new ReqCreateNewRunResultDir());
 end
+*/

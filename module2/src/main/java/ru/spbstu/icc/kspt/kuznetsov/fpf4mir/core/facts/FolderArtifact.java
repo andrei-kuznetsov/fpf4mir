@@ -15,6 +15,18 @@ public class FolderArtifact extends Artifact {
 	public FolderArtifact(Activity activity, File file) {
 		this(activity, file, false);
 	}
+
+	public FolderArtifact(Activity activity, Artifact folder) {
+		this(activity, folder.getFile(), false);
+	}
+
+	public FolderArtifact(Activity activity, FolderArtifactAlias folder) {
+		this(activity, folder.getFolder().getFolder(), false);
+	}
+	
+	public FolderArtifact(Artifact folder) {
+		this(folder.getActivity(), folder.getFile(), false);
+	}
 	
 	public FolderArtifact(Activity activity, File file, boolean exists) {
 		super(activity, file);
@@ -42,7 +54,7 @@ public class FolderArtifact extends Artifact {
 		this.setFile(dir);
 	}
 	
-	public File getDir() {
+	public File getFolder() {
 		return this.getFile();
 	}
 
@@ -50,6 +62,10 @@ public class FolderArtifact extends Artifact {
 		scanner.setIncludes(patterns);
 		scanner.scan();
 		return scanner.getIncludedFiles();
+	}
+
+	public String[] getFileNamesForPattern2(String[] patterns){
+		return getFileNamesForPattern(patterns);
 	}
 	
 	public String[] getDirNamesForPattern(String pattern){
@@ -64,7 +80,7 @@ public class FolderArtifact extends Artifact {
 	
 	public FileArtifactList getFileArtifactListForPattern(String pattern, Class<? extends FileArtifact> c){
 		String fileNames[] = getFileNamesForPattern(pattern);
-		return new FileArtifactList(null, getDir(), fileNames, c);
+		return new FileArtifactList(null, getFolder(), fileNames, c);
 	}
 	
 	@Override
@@ -84,7 +100,7 @@ public class FolderArtifact extends Artifact {
 
 	@Override
 	public String toString() {
-		return "FolderArtifact [getAbsolutePath()=" + getAbsolutePath()
+		return getClass().getSimpleName() + " [getAbsolutePath()=" + getAbsolutePath()
 				+ ", getClass()=" + getClass() + "]";
 	}
 }

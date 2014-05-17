@@ -23,9 +23,9 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.DownloadAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.ExtractAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actions.ZipUnzipTest;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Artifact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ArtifactRef;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.OriginalArtifactRef;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.R;
 import utils.DrlObjectsUtils;
 import utils.PathUtils;
@@ -39,7 +39,7 @@ public class DrlPreprocessTest {
         StatefulKnowledgeSession ksession = DrlObjectsUtils.prepareStatefullSession(DRL_FILENAME);
         
         URI url = ZipUnzipTest.class.getClassLoader().getResource("c1.zip").toURI();
-        OriginalArtifactRef oa = new OriginalArtifactRef(url);
+        ArtifactRef oa = new ArtifactRef(null, url);
         
         ksession.insert(oa);
         ksession.fireAllRules();
@@ -49,7 +49,7 @@ public class DrlPreprocessTest {
         Map<Class, List> omap = DrlObjectsUtils.convertToMap(objects);
 
         assertTrue(omap.containsKey(DownloadAction.class));
-        assertTrue(omap.containsKey(OriginalArtifactRef.class));
+        assertTrue(omap.containsKey(ArtifactRef.class));
 
         DownloadAction ea = (DownloadAction) omap.get(DownloadAction.class).get(0);
         assertEquals(R.id.OriginalArtifact, ea.getId());
@@ -68,7 +68,7 @@ public class DrlPreprocessTest {
         URL url = ZipUnzipTest.class.getClassLoader().getResource("c1.zip");
 		File f = new File(url.toURI());
 		assertTrue(f.isFile());
-        Artifact oa = new FileArtifact(R.id.OriginalArtifact, f);
+        Artifact oa = new FileArtifact(null, f);
         
         ksession.insert(oa);
         ksession.fireAllRules();
@@ -81,7 +81,7 @@ public class DrlPreprocessTest {
         assertTrue(omap.containsKey(FileArtifact.class));
 
         ExtractAction ea = (ExtractAction) omap.get(ExtractAction.class).get(0);
-        assertEquals(R.id.OriginalArtifact, ea.getId());
+        //assertEquals(R.id.OriginalArtifact, ea.getId());
         assertEquals(f, ea.getFile());
 	}
 }

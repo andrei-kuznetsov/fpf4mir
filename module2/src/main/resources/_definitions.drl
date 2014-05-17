@@ -1,0 +1,8 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+
+declare RunExecutableArtifactAlias
+    artifact : RunExecutableArtifact
+    deployFolder : DeployFolder
+end 

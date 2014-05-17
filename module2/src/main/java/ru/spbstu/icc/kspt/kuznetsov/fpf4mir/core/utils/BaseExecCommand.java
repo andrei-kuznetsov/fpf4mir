@@ -50,8 +50,8 @@ public abstract class BaseExecCommand implements ExecCommand{
 
 	@Override
 	public String toString() {
-		return "BaseExecCommand [command=" + command + ", workingDir="
-				+ workingDir + ", activity=" + activity + "]";
+		return getClass().getSimpleName() + " [command=" + command + ", workingDir="
+				+ workingDir + ", activity=" + activity + ", args=" + getArgsList() + "]";
 	}
 
 	@Override

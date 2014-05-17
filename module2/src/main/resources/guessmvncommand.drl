@@ -46,5 +46,5 @@ rule "Maven_BuildCommand" when
 		$pom : MvnRootPom()
 		$options : java.util.LinkedList( size > 0 ) from collect ( MvnOption( activity == $b ) )
 	then
-		insertLogical( new MvnBuildCommand($b, $pom.getFile().getParentFile(), $options) );
+		insertLogical( new MvnBuildCommand($b, $pom.getFile().getFile().getParentFile(), $options) );
 end

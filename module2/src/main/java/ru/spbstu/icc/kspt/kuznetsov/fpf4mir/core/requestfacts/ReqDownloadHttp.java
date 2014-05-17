@@ -1,12 +1,13 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ArtifactRef;
 
 public class ReqDownloadHttp extends RequestFactBase implements RequestFact {
 	private ArtifactRef artifactRef;
 
-	public ReqDownloadHttp(ArtifactRef artifactRef) {
-		super(artifactRef.getActivity());
+	public ReqDownloadHttp(Activity activity, ArtifactRef artifactRef) {
+		super(activity);
 		this.artifactRef = artifactRef;
 	}
 

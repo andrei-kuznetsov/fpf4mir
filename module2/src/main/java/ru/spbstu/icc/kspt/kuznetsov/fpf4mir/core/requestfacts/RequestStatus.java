@@ -3,11 +3,13 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts;
 public class RequestStatus {
 	private RequestFact request;
 	private String statusString = "No status available.";
-
-	public RequestStatus(RequestFact request, String statusString) {
+	private boolean succeeded;
+	
+	public RequestStatus(RequestFact request, String statusString, boolean succeeded) {
 		super();
 		this.request = request;
 		this.statusString = statusString;
+		this.succeeded = succeeded;
 	}
 
 	public RequestFact getRequest() {
@@ -26,9 +28,17 @@ public class RequestStatus {
 		this.statusString = statusString;
 	}
 
+	public boolean isSucceeded() {
+		return succeeded;
+	}
+
+	public void setSucceeded(boolean succeeded) {
+		this.succeeded = succeeded;
+	}
+
 	@Override
 	public String toString() {
 		return "RequestStatus [request=" + request + ", statusString="
-				+ statusString + "]";
+				+ statusString + ", succeeded=" + succeeded + "]";
 	}
 }

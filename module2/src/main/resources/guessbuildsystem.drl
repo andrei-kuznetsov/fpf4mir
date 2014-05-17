@@ -3,16 +3,18 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 
 rule "GuessBuildSystem_Maven"
 	when
-		$fc : FolderArtifact(id == R.id.OriginalArtifact, $poms : getFileNamesForPattern("**/pom.xml"), $poms.length > 0)
+	    $da : Activity(id == R.id.GuessBuildSystemActivity)
+		$fc : FolderArtifact(activity == $da, $poms : getFileNamesForPattern("**/pom.xml"), $poms.length > 0)
 		not BuildSystem(buildSystem == BuildSystem.BUILD_SYSTEMS.MAVEN)
 	then
 		insert( new BuildSystem(BuildSystem.BUILD_SYSTEMS.MAVEN) );
-		insert( new FileArtifactList(R.id.PomFiles, $fc.getDir(), $poms) );
+		insert( new FileArtifactList($da, $fc.getDir(), $poms) );
 end
 
 rule "GuessBuildSystem_Ant"
 	when
-		$fc : FolderArtifact(id == R.id.OriginalArtifact && getFileNamesForPattern("**/build.xml").length > 0)
+	    $da : Activity(id == R.id.GuessBuildSystemActivity)
+		$fc : FolderArtifact(activity == $da, getFileNamesForPattern("**/build.xml").length > 0)
 		not BuildSystem(buildSystem == BuildSystem.BUILD_SYSTEMS.ANT)
 	then
 		insert( new BuildSystem(BuildSystem.BUILD_SYSTEMS.ANT) );
@@ -20,7 +22,8 @@ end
 
 rule "GuessBuildSystem_Make"
 	when
-		$fc : FolderArtifact(id == R.id.OriginalArtifact && getFileNamesForPattern("**/makefile").length > 0)
+	    $da : Activity(id == R.id.GuessBuildSystemActivity)
+		$fc : FolderArtifact(activity == $da, getFileNamesForPattern("**/makefile").length > 0)
 		not BuildSystem(buildSystem == BuildSystem.BUILD_SYSTEMS.MAKE)
 	then
 		insert( new BuildSystem(BuildSystem.BUILD_SYSTEMS.MAKE) );
@@ -29,7 +32,8 @@ end
 rule "GuessBuildSystem_Other"
 		salience -100
 	when
-		$fc : FolderArtifact(id == R.id.OriginalArtifact)
+	    $da : Activity(id == R.id.GuessBuildCommandActivity)
+		$fc : FolderArtifact(activity == $da)
 		not BuildSystem()
 	then
 		insert( new BuildSystem(BuildSystem.BUILD_SYSTEMS.OTHER)	);

@@ -18,16 +18,21 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.DeploymentSession;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.DeploymentSession.QResult;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Artifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.R;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqNewDeployment;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestStatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericFileArtifactAlias;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericFolderArtifactAlias;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqNewDeployExecutable;
 
 @Path("/")
 public class Index {
 
 	private static final String PATH_STATUS = "/status";
+	private static final String PATH_REQUEST_STATUS = PATH_STATUS + "/request";
 
 	private DeploymentSession session = new DeploymentSession();
 	private static volatile long reqRefId = 1;
@@ -48,19 +53,26 @@ public class Index {
 
 		List<File> files = Utils.doUploadOriginalArtifact(httpreq);
 
-		ReqNewDeployment req = new ReqNewDeployment();
+		ReqNewDeployExecutable req = new ReqNewDeployExecutable(Activity.USER);
 		req.setRefId(reqRefId++);
+		req.setDeploymentName(R.id.MainDeployment);
 
+		Artifact userArtifact;
+		Object artifactAlias;
+		
 		if (files.size() == 1) {
-			req.setFile(new FileArtifact(null, files.get(0)));
+			userArtifact = new FileArtifact(Activity.USER, files.get(0));
+			artifactAlias = new GenericFileArtifactAlias(req, R.artifact.main , (FileArtifact)userArtifact);
 		} else {
-			req.setFolder(new FolderArtifact(null, files.get(0).getParentFile()));
+			userArtifact = new FolderArtifact(Activity.USER, files.get(0).getParentFile());
+			artifactAlias = new GenericFolderArtifactAlias(req, R.artifact.main, (FolderArtifact) userArtifact);
 		}
 
 		try {
 			session.reset(); // recreate new session
-			session.assertFactAndRun(req);
-			return Response.seeOther(new URI(PATH_STATUS + "/" + req.getRefId())).build();
+			session.assertFactAndRun(req, userArtifact, artifactAlias);
+			
+			return Response.seeOther(new URI(PATH_REQUEST_STATUS + "/" + req.getRefId())).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ServletException("Can't init deployment session", e);
@@ -68,10 +80,10 @@ public class Index {
 	}
 
 	@GET
-	@Path(PATH_STATUS + "/{reqId}")
+	@Path(PATH_REQUEST_STATUS + "/{reqId}")
 	public void getStatus(@Context HttpServletResponse response,
 			@Context HttpServletRequest request, @PathParam("reqId") long reqId) throws IOException {
-		RequestStatus status = session.getRequestStatus(reqId);
+		List<QResult> status = session.getRequestStatus(reqId);
 		
 		PrintWriter out = response.getWriter();
 		HTMLProducer.produceHTMLPage(status, response, "Status");

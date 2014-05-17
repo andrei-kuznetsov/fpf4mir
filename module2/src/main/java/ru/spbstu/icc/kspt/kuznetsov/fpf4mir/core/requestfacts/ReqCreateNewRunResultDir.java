@@ -1,7 +1,17 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
+
 
 public class ReqCreateNewRunResultDir extends RequestFactBase implements RequestFact {
+
+	public ReqCreateNewRunResultDir(Activity parentActivity) {
+		super(parentActivity);
+	}
+
+	public ReqCreateNewRunResultDir(long refId, Activity parentActivity) {
+		super(refId, parentActivity);
+	}
 
 	@Override
 	public String toString() {

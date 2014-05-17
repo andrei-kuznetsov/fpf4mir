@@ -10,17 +10,17 @@ public class OrdinalArgument implements CmdLineArgument, Comparable<OrdinalArgum
 	private String value;
 	private Activity activity;
 	
-	protected OrdinalArgument(Activity activity) {
+	public OrdinalArgument(Activity activity) {
 		this(activity, "");
 	}
 
-	protected OrdinalArgument(Activity activity, int order, String value) {
+	public OrdinalArgument(Activity activity, int order, String value) {
 		this.order = order;
 		this.value = value;
 		this.activity = activity;
 	}
 
-	protected OrdinalArgument(Activity activity, String value) {
+	public OrdinalArgument(Activity activity, String value) {
 		this(activity, 0, value);
 	}
 	

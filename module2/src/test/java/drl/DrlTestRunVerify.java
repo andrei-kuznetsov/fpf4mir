@@ -108,11 +108,11 @@ public class DrlTestRunVerify {
 			throws URISyntaxException {
 		StatefulKnowledgeSession ksession = DrlObjectsUtils.prepareStatefullSession(DRL_FILENAME);
         
-		ReqNewRun rr = new ReqNewRun(true);
+		ReqNewRun rr = new ReqNewRun(true, null);
 		Dataset dataset = new Dataset("test", PathUtils.getTestResourceDir(srcDir));
-		Dataset_FileArtifactList dsal = new Dataset_FileArtifactList(dataset, "*.wav", null);
         RunDatasetIn src = new RunDatasetIn(rr, dataset.getDatasetId());
         RunActivity testRun = new RunActivity(R.id.TestActivity, 1, new Date(), rr);
+		Dataset_FileArtifactList dsal = new Dataset_FileArtifactList(testRun, dataset, "*.wav", null);
         ActionStatus status = new ExecStatus(testRun, null, 0, null, null);
         ResultDir4Run res = new ResultDir4Run(testRun, PathUtils.getTestResourceDir(resDir));
 

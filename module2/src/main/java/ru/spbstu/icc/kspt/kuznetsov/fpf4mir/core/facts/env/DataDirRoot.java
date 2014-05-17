@@ -17,7 +17,7 @@ public class DataDirRoot extends FolderArtifact {
 
 	public File newFolder(String preffix) {
 		String fn = preffix + UUID.randomUUID().toString();
-		File f = new File(getDir(), fn);
+		File f = new File(getFolder(), fn);
 		return f;
 	}
 	

@@ -30,5 +30,29 @@ public class R {
 		
 		public static final String RegularActivity = "RegularActivity";
 		public static final String TestActivity = "TestActivity";
+		
+		public static final String MainDeployment = "MainDeployment";
+		public static final String ExtractActivity = "ExtractActivity";
+		public static final String UserActivity = "UserActivity";
+
+		public static final String AnalyzeDeployFolderActivity = "AnalyzeDeployFolderActivity";
+		
+		public static final String GuessRunExecutableActivity = "GuessRunExecutableActivity";
+		public static final String GuessRunCommandActivity = "GuessRunCommandActivity";
+		
+		public static final String GuessBuildSystemActivity = "GuessBuildSystemActivity";
+		public static final String GuessBuildCommandActivity = "GuessBuildCommandActivity";
+		public static final String DeployExecutableActivity = "DeployExecutableActivity";
+	}
+
+	public static class activity {
+		public static final String GuessRunCommand = "GuessRunCommandActivity";
+		public static final String GuessRunExecutable = "GuessRunExecutableActivity";
+	}
+	
+	public static class artifact {
+
+		public static final String main = "main";
+		
 	}
 }

@@ -4,64 +4,23 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
 
-rule "DownloadArtifact"
-	when 
-		$da : DeployActivity(  )
-		$artifact : ArtifactRef(activity == $da)
-		not Artifact(activity == $da)
+
+rule "Propose build command at ReqNewOriginalArtifact_handler.drl"
+	when
+		$r : ReqNewDeployment(  )
+		$buildCommands : java.util.LinkedList( size > 1 ) from collect ( BuildCommand() )
+		not ExecutableFileArtifact()
 	then
-		insert( new ReqDownloadHttp($artifact) );
+		insertLogical( new RequestSubstatusBuildProposal($r, $buildCommands) );
 end
 
-rule "Assert Downloaded Artifact"
-	when 
-		$da : DeployActivity(  )
-		$ds : DownloadStatus(activity == $da, succeeded==true, $artifact : downloadedArtifact)
-		not Artifact(activity == $da)
-	then
-		insert( $artifact );
-end
-
-rule "Assert Download Failed Artifact"
-	when 
-		$da : DeployActivity(  )
-		$ds : DownloadStatus(activity == $da, succeeded==false)
-	then
-		insert( new DeployError($da, "Can't download artifact") );
-end
-
-rule "ExtractArtifact"
-	when 
-	    $da : DeployActivity(  )
-		$artifact : FileArtifact(activity == $da, fileName.endsWith(".zip"))
-		not FolderArtifact(activity == $da)
-	then
-		insert( new ReqExtract($artifact) );
-end
-
-rule "Assert DeployFolder"
-	when 
-	    $da : DeployActivity(  )
-		$artifact : FolderArtifact( activity == $da )
-	then
-		insertLogical( new DeployFolder($artifact) );
-end
-
-rule "DeployStatus"
-	when 
-	    $da : DeployActivity(  )
-		$artifact : DeployFolder( activity == $da )
-	then
-		insertLogical( new DeploySucceeded( $da ) );
-end
-
-rule "DefaultScratchDir"
+/* rule "DefaultScratchDir"
 	when
 		not DefaultScratchDir()
 		$dd : DataDirRoot(  )
 	then
 		insert(new DefaultScratchDir($dd));
-end
+end */
 
 rule "DefaultTmpDir"
 	when

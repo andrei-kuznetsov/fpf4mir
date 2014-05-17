@@ -5,18 +5,22 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.R;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunActivity;
 
 public class ReqNewRun extends RequestFactBase implements ReqNewActivity {
-	
 	private String id;
-
-	public ReqNewRun() {
-		this(false);
+	
+	public ReqNewRun(long refId, Activity parentActivity) {
+		super(refId, parentActivity);
 	}
 
-	public ReqNewRun(boolean isTest) {
-		this(isTest?R.id.TestActivity:R.id.RegularActivity);
+	public ReqNewRun(Activity parentActivity) {
+		this(false, parentActivity);
+	}
+
+	public ReqNewRun(boolean isTest, Activity parentActivity) {
+		this(isTest?R.id.TestActivity:R.id.RegularActivity, parentActivity);
 	}
 	
-	public ReqNewRun(String id) {
+	public ReqNewRun(String id, Activity parentActivity) {
+		super(parentActivity);
 		this.id = id;
 	}
 	
@@ -37,6 +41,12 @@ public class ReqNewRun extends RequestFactBase implements ReqNewActivity {
 	public Activity newActivityInstance() {
 		java.util.Date date = new java.util.Date();
 		return new RunActivity(id, (int)date.getTime(), date, this);
+	}
+
+	@Override
+	public String getActivityName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
