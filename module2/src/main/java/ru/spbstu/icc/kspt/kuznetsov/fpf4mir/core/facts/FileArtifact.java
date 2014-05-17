@@ -20,6 +20,10 @@ public class FileArtifact extends Artifact {
 		this(activity, file.getFile());
 	}
 
+	public FileArtifact(Activity activity, FileArtifactAlias file) {
+		this(activity, file.getFile());
+	}
+	
 	public FileArtifact(Artifact artifact) {
 		this(artifact.getActivity(), artifact.getFile());
 	}

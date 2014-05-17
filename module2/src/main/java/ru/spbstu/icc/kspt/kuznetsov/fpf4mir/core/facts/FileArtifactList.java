@@ -12,18 +12,20 @@ public class FileArtifactList extends ArrayList<FileArtifact>{
 	private static final long serialVersionUID = 1L;
 
 	private Activity activity;
+	private String listName;
 	
-	public FileArtifactList(Activity activity, File baseDir, String fileNames[]) {
-		this(activity, baseDir, fileNames, FileArtifact.class);
+	public FileArtifactList(Activity activity, String listName, File baseDir, String fileNames[]) {
+		this(activity, listName, baseDir, fileNames, FileArtifact.class);
 	}
 	
 	protected FileArtifactList(Activity activity, FileArtifactList list) {
 		super(list);
 		this.activity = activity;
 	}
-
-	public FileArtifactList(Activity activity, File baseDir, String[] fileNames, Class<? extends FileArtifact> c) {
+	
+	public FileArtifactList(Activity activity, String listName, File baseDir, String[] fileNames, Class<? extends FileArtifact> c) {
 		this.activity = activity;
+		this.listName = listName;
 		
 		Constructor<? extends FileArtifact> ctr;
 		
@@ -70,6 +72,14 @@ public class FileArtifactList extends ArrayList<FileArtifact>{
 
 	public void setActivity(Activity activity) {
 		this.activity = activity;
+	}
+
+	public String getListName() {
+		return listName;
+	}
+
+	public void setListName(String listName) {
+		this.listName = listName;
 	}
 	
 }

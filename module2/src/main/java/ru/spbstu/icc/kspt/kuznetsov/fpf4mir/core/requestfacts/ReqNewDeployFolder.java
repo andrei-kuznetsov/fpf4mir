@@ -1,7 +1,6 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.DeployActivity;
 
 public class ReqNewDeployFolder extends RequestFactBase implements ReqNewActivity {
 	private String deploymentName;
@@ -31,8 +30,7 @@ public class ReqNewDeployFolder extends RequestFactBase implements ReqNewActivit
 
 	@Override
 	public Activity newActivityInstance() {
-		java.util.Date date = new java.util.Date();
-		return new DeployActivity(deploymentName, (int)date.getTime(), date, this);
+		return null;
 	}
 
 	@Override

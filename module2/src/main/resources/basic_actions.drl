@@ -11,7 +11,7 @@ rule "CommandExecutor"
 	then
 		insertLogical( new ExecAction($cmd) );
 end
-
+/* 
 rule "Activity_New"
 	when
 		$rr : ReqNewActivity(  )
@@ -21,3 +21,21 @@ rule "Activity_New"
 	then
 		insert( $rr.newActivityInstance() );
 end
+/* */
+/* */
+rule "Activity_New"
+	when
+		$rr : ReqNewActivity(  )
+		forall ( $b : Activity( request == $rr )
+	             ExecStatus( activity == $b, succeeded == false ) 
+ 		         ActivityErrorFixed( activity == $b ) )
+	then
+		String pkg = $rr.getClass().getPackage().toString();
+		String type = $rr.getClass().getSimpleName();
+		type = type.replaceAll("ReqNew", "") + "Activity";
+		
+		org.drools.definition.type.FactType factType = drools.getKnowledgeRuntime().getKnowledgeBase().getFactType(pkg, type);
+		
+		insert( factType.newInstance() );
+end
+/* */

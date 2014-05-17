@@ -55,4 +55,11 @@ public class R {
 		public static final String main = "main";
 		
 	}
+
+	public static class error {
+
+		public static final String NoExecutableFound = "No executable found";
+		public static final String TooManyExecutables = "Too many executables found";
+		
+	}
 }

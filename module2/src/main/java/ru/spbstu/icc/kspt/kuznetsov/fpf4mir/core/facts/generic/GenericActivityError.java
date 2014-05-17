@@ -1,20 +1,31 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityError;
 
 public class GenericActivityError implements ActivityError{
-	private GenericActivity activity;
+	private Activity activity;
+	private String message;
 
-	public GenericActivityError(GenericActivity activity) {
+	public GenericActivityError(Activity activity, String message) {
 		super();
 		this.activity = activity;
 	}
 
-	public GenericActivity getActivity() {
+	public Activity getActivity() {
 		return activity;
 	}
 
-	public void setActivity(GenericActivity activity) {
+	public void setActivity(Activity activity) {
 		this.activity = activity;
 	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
 }

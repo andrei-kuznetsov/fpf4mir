@@ -1,7 +1,5 @@
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
 
@@ -57,7 +55,7 @@ rule "Assert Download Failed Artifact"
 		$dlReq : ReqDownloadHttp(parentActivity == $da)
 		$ds : RequestStatus( request == $dlReq, succeeded == false )
 	then
-		insert( new DeployError($da, "Can't download artifact") );
+		insert( new GenericActivityError($da, "Can't download artifact") );
 end
 
 rule "ExtractArtifact"
@@ -78,13 +76,15 @@ rule "Process exctracted artifact"
 		insert( new FolderArtifact($da, $folder) );
 end
 
+// TODO: activity succeeded -> request succeeded
 rule "Assert DeployFolder"
 	when 
-	    $da : DeployActivity(  )
+	    $da : DeployActivity( $r : request )
+		$req : ReqNewDeployFolder( this == $r, $dname : deploymentName  )
 		$artifact : FolderArtifact( activity == $da )
 	then
-		insertLogical( new DeployFolder($da.getRequest(), $artifact) );
-		insertLogical( new DeploySucceeded($da) );
+		insertLogical( new DeployFolder($artifact, $dname, $req) );
+		insertLogical( new GenericActivitySucceeded($da) );
 end
 
 rule "DeployRequestStatus"

@@ -46,14 +46,25 @@ rule "Propagate deploy folder"
 		insertLogical( new GenericFolderArtifactAlias($r, $folder) );
 end
 
-rule "Evaluate run command"
+rule "Evaluate run executable"
 	when
 		$r : ReqDeployExecutable(  )
 		$a : DeployExecutableActivity( request == $r )
 		$folder : FolderArtifactAlias( request == $r )
 	then
-		ReqNewActivity rgrc = new GenericReqNewActivity(R.activity.GuessRunCommand, $a);
-		FolderArtifactAlias f = new GenericFolderArtifactAlias(rgrc, $folder);
+		ReqNewActivity r = new GenericReqNewActivity(R.activity.GuessRunExecutable, $a);
+		FolderArtifactAlias f = new GenericFolderArtifactAlias(r, $folder);
 		insert( f );
-		insert( rgrc );
+		insert( r );
+end
+
+rule "Propagate run executable"
+	when
+		$r : ReqDeployExecutable(  )
+		$a : DeployExecutableActivity( request == $r )
+		$rna : ReqNewActivity( activityName == R.activity.GuessRunExecutable, activity == $a )
+		$rna_stat : RequestStatus( request == $rna, succeeded == true )
+		$exec : ExecutableFileArtifactAlias( request == $rna )
+	then
+		insertLogical( new ExecutableFileArtifactAlias($exec) );
 end

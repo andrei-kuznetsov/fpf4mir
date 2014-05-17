@@ -80,7 +80,7 @@ public class FolderArtifact extends Artifact {
 	
 	public FileArtifactList getFileArtifactListForPattern(String pattern, Class<? extends FileArtifact> c){
 		String fileNames[] = getFileNamesForPattern(pattern);
-		return new FileArtifactList(null, getFolder(), fileNames, c);
+		return new FileArtifactList(getActivity(), pattern, getFolder(), fileNames, c);
 	}
 	
 	@Override

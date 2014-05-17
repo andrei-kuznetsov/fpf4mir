@@ -1,0 +1,22 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactAliasBase
+	/* java */
+end
+
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact
+	/* java */
+end
+
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity
+	/* java */
+end
+
+declare DeployFolder extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactAliasBase
+	
+end
+
+declare DeployActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity
+end
