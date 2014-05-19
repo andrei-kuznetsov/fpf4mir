@@ -6,6 +6,11 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 
 public class GenericFolderArtifactAlias extends FolderArtifactAliasBase implements FolderArtifactAlias{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4110010390458915773L;
+
 	public GenericFolderArtifactAlias(RequestFact request, String name,
 			FolderArtifact folder) {
 		super(request, name, folder);

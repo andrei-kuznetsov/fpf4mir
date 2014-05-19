@@ -1,26 +1,34 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic;
 
+import java.io.Serializable;
+
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ArtifactAlias;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ArtifactRef;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ArtifactRefAlias;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 
-public class GenericArtifactRefAlias implements ArtifactRefAlias {
-	private RequestFact request;
-	private ArtifactRef artifactRef;
-	private String name;
+public class GenericArtifactRefAlias extends ArtifactAliasBase implements ArtifactRefAlias, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2799751610601964675L;
 	
-	public GenericArtifactRefAlias(ArtifactRef artifactRef, RequestFact request) {
-		super();
-		this.request = request;
+	private ArtifactRef artifactRef;
+
+	public GenericArtifactRefAlias(RequestFact request, String name, ArtifactRef artifactRef) {
+		super(request, name);
 		this.artifactRef = artifactRef;
 	}
 
-	public RequestFact getRequest() {
-		return request;
+	public GenericArtifactRefAlias(RequestFact request, ArtifactRef artifactRef) {
+		super(request, artifactRef.getName());
+		this.artifactRef = artifactRef;
 	}
-
-	public void setRequest(RequestFact request) {
-		this.request = request;
+	
+	public GenericArtifactRefAlias(RequestFact request, ArtifactAlias artifactAlias, ArtifactRef artifactRef) {
+		super(request, artifactAlias);
+		this.artifactRef = artifactRef;
 	}
 
 	public ArtifactRef getArtifactRef() {
@@ -30,12 +38,17 @@ public class GenericArtifactRefAlias implements ArtifactRefAlias {
 	public void setArtifactRef(ArtifactRef artifactRef) {
 		this.artifactRef = artifactRef;
 	}
-
-	public String getName() {
-		return name;
+	
+	public ArtifactRef cloneArtifact(Activity newActivity) {
+		ArtifactRef copy = org.apache.commons.lang3.SerializationUtils.clone(this.getArtifactRef());
+		copy.setActivity(newActivity);
+		return copy;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public ArtifactRef cloneArtifact(Activity newActivity, String newName) {
+		ArtifactRef copy = org.apache.commons.lang3.SerializationUtils.clone(this.getArtifactRef());
+		copy.setActivity(newActivity);
+		copy.setName(newName);
+		return copy;
 	}
 }

@@ -1,0 +1,117 @@
+expander dsl.dsl
+
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
+
+// #################################### Input parameters #######################################
+rule "Populate input parameters for DeployFolderActivity from ReqNewDeployFolder"
+	when
+		request 'ReqNewDeployFolder'
+		activity 'DeployFolderActivity' for request
+		request inputs (
+		    input 'FileArtifactAlias'
+		    input 'FolderArtifactAlias'
+		    input 'ArtifactRefAlias'
+>		)
+	then
+		add activity fact from request input
+end
+
+// ----------------------------------- Output parameters ---------------------------------------
+
+rule "DeployArtifact Request Status"
+	when
+		request 'ReqNewDeployFolder'
+		activity 'DeployFolderActivity' for request
+		activity succeeded
+>		$artifact : FolderArtifact(activity == $activity)
+	then
+		set request status succeeded
+		add request status parameter $artifact as DeployFolder
+end
+
+// #############################################################################################
+
+rule "DownloadArtifact"
+	when 
+		activity 'DeployFolderActivity'
+>		$ref : ArtifactRef(activity == $activity)
+>		not Artifact(activity == $activity)
+	then
+		add subrequest 'ReqDownloadHttp'
+		add subrequest parameter '$ref' as 'GenericArtifactRefAlias'
+end
+
+
+rule "Assert Downloaded Artifact"
+	when 
+	    activity 'DeployFolderActivity'
+		subrequest 'ReqDownloadHttp'
+		subrequest succeeded
+		subrequest outputs (
+			subrequest output 'FileArtifactAlias'
+>		)
+	then
+		add activity fact from request output
+end
+
+
+rule "Assert Download Failed Artifact"
+	when 
+	    activity 'DeployFolderActivity'
+		subrequest 'ReqDownloadHttp'
+		subrequest failed
+	then
+		set activity failed with status "Can't download artifact"
+end
+
+rule "ExtractArtifact"
+	when 
+		activity 'DeployFolderActivity'
+>		$artifact : FileArtifact(activity == $activity, fileName.endsWith(".zip"))
+>		not FolderArtifact(activity == $activity)
+	then
+		add subrequest 'ReqExtract'
+		add subrequest parameter '$artifact' as 'GenericFileArtifactAlias'
+end
+
+rule "Process exctracted artifact"
+	when 
+	 	activity 'DeployFolderActivity'
+		subrequest 'ReqExtract'
+		subrequest succeeded
+		subrequest outputs (
+			subrequest output 'FolderArtifactAlias'
+>		)
+	then
+		add activity fact from request output
+end
+
+rule "Process exctracted artifact failed"
+	when
+		activity 'DeployFolderActivity'
+		subrequest 'ReqExtract'
+		subrequest failed
+	then
+		set activity failed with status "Can't extract artifact"
+end
+
+rule "Assert DeployFolder"
+	when
+		activity 'DeployFolderActivity'
+>		$artifact : FolderArtifact( activity == $activity )
+	then
+		activity succeeded
+end
+
+/*
+rule "DeployRequestStatus in progress"
+	when 
+>	    $r : ReqNewDeployFolder()
+>	    not RequestStatus( request == $r, succeeded == true )
+	then
+>		insertLogical( new RequestStatus( $r, "in progress...", false) );
+end
+*/

@@ -1,0 +1,120 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+// #################################### Input parameters #######################################
+rule "Populate input parameters for DeployExecutableActivity from ReqNewDeployFolder"
+	when
+		request 'ReqDeployExecutable'
+		activity 'DeployExecutableActivity' for request
+		request inputs (
+		    input 'FileArtifactAlias'
+		    input 'FolderArtifactAlias'
+		    input 'ArtifactRefAlias'
+>		)
+	then
+		add activity fact from request input
+end
+
+// ----------------------------------- Output parameters ---------------------------------------
+
+rule "DeployExecutable Request Status"
+	when
+		request 'ReqDeployExecutable'
+		activity 'DeployExecutableActivity' for request
+		activity succeeded
+>		$artifact : ExecutableFileArtifact(activity == $activity)
+	then
+		set request status succeeded
+		add request status parameter $artifact as ExecutableFileArtifactAlias
+end
+
+// #############################################################################################
+
+rule "Deploy executable from file artifact"
+	when
+		activity 'DeployExecutableActivity'
+>		$file : FileArtifact( activity == $activity )
+>		not FolderArtifact( activity == $activity )
+	then
+		add subrequest 'ReqNewDeployFolder'
+		add subrequest parameter '$file' as 'GenericFileArtifactAlias'
+end
+
+/*
+use deployed folder as is when FolderArtifactAlias( request == $r )
+*/
+
+rule "Deploy executable from URL"
+	when
+		activity 'DeployExecutableActivity'
+>		$ref : ArtifactRef(activity == $activity)
+>		not FolderArtifact( activity == $activity )
+	then
+		add subrequest 'ReqNewDeployFolder'
+		add subrequest parameter '$ref' as 'GenericArtifactRefAlias'
+end
+
+rule "Assert DeployFolder Artifact"
+	when 
+	    activity 'DeployExecutableActivity'
+		subrequest 'ReqNewDeployFolder'
+		subrequest succeeded
+		subrequest outputs (
+			subrequest output 'DeployFolder'
+>		)
+	then
+		add activity fact from request output
+end
+
+rule "Process DeployFolder Artifact request faled"
+	when 
+	    activity 'DeployExecutableActivity'
+		subrequest 'ReqNewDeployFolder'
+		subrequest failed
+	then
+		set activity failed with status "Can't deploy artifact locally"
+end
+
+rule "Evaluate run executable"
+	when
+		activity 'DeployExecutableActivity'
+>		$folder : FolderArtifact( activity == $activity )
+>		not ExecutableFileArtifact(activity == $activity)
+	then
+		add subrequest 'ReqNewGuessRunExecutable'
+		add subrequest parameter '$folder' as 'GenericFolderArtifactAlias'
+end
+
+rule "Process ReqNewGuessRunExecutable result"
+	when 
+	 	activity 'DeployFolderActivity'
+		subrequest 'ReqNewGuessRunExecutable'
+		subrequest succeeded
+		subrequest outputs (
+			subrequest output 'ExecutableFileArtifact'
+>		)
+	then
+		add activity fact from request output
+end
+
+rule "Process ReqNewGuessRunExecutable result failed"
+	when 
+	 	activity 'DeployFolderActivity'
+		subrequest 'ReqNewGuessRunExecutable'
+		subrequest failed
+	then
+		set activity failed with status "Can't guess executable"
+end
+
+rule "Eval DeployExecutableActivity succeeded"
+	when
+		activity 'DeployExecutableActivity'
+>		$artifact : ExecutableFileArtifact( activity == $activity )
+	then
+		activity succeeded
+end
