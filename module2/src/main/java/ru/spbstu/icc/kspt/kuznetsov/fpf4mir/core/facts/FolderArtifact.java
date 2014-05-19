@@ -6,6 +6,11 @@ import org.apache.tools.ant.DirectoryScanner;
 import org.drools.RuntimeDroolsException;
 
 public class FolderArtifact extends Artifact {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8835493644023653506L;
+	
 	private DirectoryScanner scanner = new DirectoryScanner();;
 
 	public FolderArtifact() {

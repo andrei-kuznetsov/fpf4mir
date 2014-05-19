@@ -1,18 +1,31 @@
 package dslr;
 
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 import junit.framework.TestCase;
 
 import org.apache.commons.io.IOUtils;
 import org.drools.compiler.DrlParser;
+import org.drools.compiler.DroolsParserException;
 
 public class DrlParserTest extends TestCase {
 
-    public void testExpandDRL() throws Exception {
-    	String drl = IOUtils.toString(getClass().getResourceAsStream("/deploy_artifact.dslr"));
+    public void testExpandDRL_deploy_artifact() throws Exception {
+    	String dslr = "/deploy_artifact.dslr";
+		printExpandedRule(dslr);
+    }
+
+    public void testExpandDRL_deploy_executable_artifact() throws Exception {
+    	String dslr = "/deploy_executable.dslr";
+		printExpandedRule(dslr);
+    }
+    
+	private void printExpandedRule(String dslr) throws IOException,
+			DroolsParserException {
+		String drl = IOUtils.toString(getClass().getResourceAsStream(dslr));
         DrlParser parser = new DrlParser();
         String result = parser.getExpandedDRL( drl , new InputStreamReader(getClass().getResourceAsStream("/dsl.dsl")));
         System.out.println(result);
-    }
+	}
 }

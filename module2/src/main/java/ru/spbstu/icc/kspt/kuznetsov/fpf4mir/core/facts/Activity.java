@@ -1,27 +1,34 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericActivity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqNewActivity;
 
-public class Activity {
-	public static final Activity USER = new GenericActivity(R.id.UserActivity, 0, new Date(), null);
+public class Activity implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3159569789692737767L;
+
+	public static final Activity USER = new GenericActivity().reset(R.id.UserActivity, 0, new Date(), null);
 	
 	private String id;
 	private int number;
 	private Date date;
 	private ReqNewActivity request;
 	
-	public Activity(String id, int number, Date date, ReqNewActivity request) {
+	public Activity reset(String id, int number, Date date, ReqNewActivity request) {
 		this.id = id;
 		this.number = number;
 		this.date = date;
 		this.request = request;
+		return this;
 	}
 
-	public Activity(Activity activity) {
-		this(activity.id, activity.number, activity.date, activity.request);
+	public Activity reset(Activity activity) {
+		return this.reset(activity.id, activity.number, activity.date, activity.request);
 	}
 
 	@Override

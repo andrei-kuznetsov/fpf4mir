@@ -8,19 +8,19 @@ public class GenericReqNewActivity implements ReqNewActivity{
 	private long refId;
 	private Activity parentActivity;
 
-	public GenericReqNewActivity(String activityName, long refId, Activity parentActivity) {
-		super();
+	public GenericReqNewActivity reset(String activityName, long refId, Activity parentActivity) {
 		this.activityName = activityName;
 		this.refId = refId;
 		this.parentActivity = parentActivity;
+		return this;
 	}
 
-	public GenericReqNewActivity(String activityName, Activity parentActivity) {
-		this(activityName, 0, parentActivity);
+	public GenericReqNewActivity reset(String activityName, Activity parentActivity) {
+		return this.reset(activityName, 0, parentActivity);
 	}
 
-	public GenericReqNewActivity(String activityName) {
-		this(activityName, 0, null);
+	public GenericReqNewActivity reset(String activityName) {
+		return this.reset(activityName, 0, null);
 	}
 
 	public long getRefId() {
@@ -47,11 +47,5 @@ public class GenericReqNewActivity implements ReqNewActivity{
 
 	public void setActivityName(String activityName) {
 		this.activityName = activityName;
-	}
-
-	@Override
-	public Activity newActivityInstance() {
-		java.util.Date date = new java.util.Date();
-		return new GenericActivity(activityName, (int)date.getTime(), date, this);
 	}
 }

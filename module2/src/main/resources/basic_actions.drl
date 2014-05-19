@@ -27,15 +27,21 @@ rule "Activity_New"
 	when
 		$rr : ReqNewActivity(  )
 		forall ( $b : Activity( request == $rr )
-	             ExecStatus( activity == $b, succeeded == false ) 
+	             ActivityError( activity == $b ) 
  		         ActivityErrorFixed( activity == $b ) )
 	then
 		String pkg = $rr.getClass().getPackage().toString();
 		String type = $rr.getClass().getSimpleName();
-		type = type.replaceAll("ReqNew", "") + "Activity";
+		type = type.replaceAll("ReqNew","").replaceAll("Req", "") + "Activity";
+		
+		// TODO: package name?
+		pkg = "defaultpkg";
+		System.out.println("## pkg: " + pkg);
+		System.out.println("## type: " + type);
 		
 		org.drools.definition.type.FactType factType = drools.getKnowledgeRuntime().getKnowledgeBase().getFactType(pkg, type);
-		
-		insert( factType.newInstance() );
+		Object fact = factType.newInstance();
+		factType.set(fact, "request", $rr);
+		insert( fact );
 end
 /* */

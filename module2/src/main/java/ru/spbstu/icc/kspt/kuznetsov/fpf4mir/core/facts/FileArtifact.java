@@ -5,7 +5,12 @@ import java.io.IOException;
 
 import org.drools.RuntimeDroolsException;
 
-public class FileArtifact extends Artifact {
+public class FileArtifact extends Artifact implements Cloneable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -795125536330647930L;
 
 	public FileArtifact() {
 		super();
@@ -56,5 +61,10 @@ public class FileArtifact extends Artifact {
 	@Override
 	public String toString() {
 		return "FileArtifact [toString()=" + super.toString() + "]";
+	}
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 }

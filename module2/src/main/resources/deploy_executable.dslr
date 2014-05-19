@@ -7,7 +7,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 
 // #################################### Input parameters #######################################
-rule "Populate input parameters for DeployExecutableActivity from ReqNewDeployFolder"
+rule "Populate input parameters for DeployExecutableActivity from ReqDeployFolder"
 	when
 		request 'ReqDeployExecutable'
 		activity 'DeployExecutableActivity' for request
@@ -30,7 +30,7 @@ rule "DeployExecutable Request Status"
 >		$artifact : ExecutableFileArtifact(activity == $activity)
 	then
 		set request status succeeded
-		add request status parameter $artifact as ExecutableFileArtifactAlias
+		add request status parameter $artifact as GenericExecutableFileArtifactAlias
 end
 
 // #############################################################################################
@@ -41,7 +41,7 @@ rule "Deploy executable from file artifact"
 >		$file : FileArtifact( activity == $activity )
 >		not FolderArtifact( activity == $activity )
 	then
-		add subrequest 'ReqNewDeployFolder'
+		add subrequest 'ReqDeployFolder'
 		add subrequest parameter '$file' as 'GenericFileArtifactAlias'
 end
 
@@ -55,14 +55,14 @@ rule "Deploy executable from URL"
 >		$ref : ArtifactRef(activity == $activity)
 >		not FolderArtifact( activity == $activity )
 	then
-		add subrequest 'ReqNewDeployFolder'
+		add subrequest 'ReqDeployFolder'
 		add subrequest parameter '$ref' as 'GenericArtifactRefAlias'
 end
 
 rule "Assert DeployFolder Artifact"
 	when 
 	    activity 'DeployExecutableActivity'
-		subrequest 'ReqNewDeployFolder'
+		subrequest 'ReqDeployFolder'
 		subrequest succeeded
 		subrequest outputs (
 			subrequest output 'DeployFolder'
@@ -74,7 +74,7 @@ end
 rule "Process DeployFolder Artifact request faled"
 	when 
 	    activity 'DeployExecutableActivity'
-		subrequest 'ReqNewDeployFolder'
+		subrequest 'ReqDeployFolder'
 		subrequest failed
 	then
 		set activity failed with status "Can't deploy artifact locally"
@@ -96,7 +96,7 @@ rule "Process ReqNewGuessRunExecutable result"
 		subrequest 'ReqNewGuessRunExecutable'
 		subrequest succeeded
 		subrequest outputs (
-			subrequest output 'ExecutableFileArtifact'
+			subrequest output 'ExecutableFileArtifactAlias'
 >		)
 	then
 		add activity fact from request output

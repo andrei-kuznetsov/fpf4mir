@@ -8,7 +8,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ArtifactRef;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ArtifactRefAlias;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 
-public class GenericArtifactRefAlias extends ArtifactAliasBase implements ArtifactRefAlias, Serializable {
+public final class GenericArtifactRefAlias extends ArtifactAliasBase implements ArtifactRefAlias, Serializable {
 	/**
 	 * 
 	 */
@@ -16,18 +16,17 @@ public class GenericArtifactRefAlias extends ArtifactAliasBase implements Artifa
 	
 	private ArtifactRef artifactRef;
 
-	public GenericArtifactRefAlias(RequestFact request, String name, ArtifactRef artifactRef) {
-		super(request, name);
+	public void reset(RequestFact request, String name, ArtifactRef artifactRef) {
+		super.reset(request, name);
 		this.artifactRef = artifactRef;
 	}
 
-	public GenericArtifactRefAlias(RequestFact request, ArtifactRef artifactRef) {
-		super(request, artifactRef.getName());
-		this.artifactRef = artifactRef;
+	public void reset(RequestFact request, ArtifactRef artifactRef) {
+		this.reset(request, artifactRef.getName(), artifactRef);
 	}
 	
-	public GenericArtifactRefAlias(RequestFact request, ArtifactAlias artifactAlias, ArtifactRef artifactRef) {
-		super(request, artifactAlias);
+	public void reset(RequestFact request, ArtifactAlias artifactAlias, ArtifactRef artifactRef) {
+		super.reset(request, artifactAlias);
 		this.artifactRef = artifactRef;
 	}
 

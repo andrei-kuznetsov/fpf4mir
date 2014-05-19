@@ -1,8 +1,15 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts;
 
+import java.io.Serializable;
+
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 
-public class RequestFactBase implements RequestFact {
+public class RequestFactBase implements RequestFact, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1571771513334573701L;
+	
 	private long refId;
 	private Activity parentActivity;
 

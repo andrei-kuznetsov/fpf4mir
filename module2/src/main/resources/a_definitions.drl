@@ -14,45 +14,24 @@ declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity
 	/* java */
 end
 
-declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericReqNewActivity
-	/* java */
-end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericReqNewActivity /* java */ end
 
-declare DeployFolder extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactAliasBase
-	
-end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqDeployExecutable /* java */ end
 
-declare DeployActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity
-end
+declare DeployFolder extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactAliasBase end
 
-declare DeployFolderActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity
-end
+declare DeployExecutableActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity end
+declare DeployFolderActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity end
 
-declare ReqDownloadHttp extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericReqNewActivity
-end
+declare ReqDownloadHttp extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericReqNewActivity end
+declare DownloadHttpActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity end
 
-declare ReqExtract extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericReqNewActivity
-end
 
-/*
-function void insertRequestArgument(RequestFact r, ArtifactRef f) {
-    insert( new GenericArtifactRefAlias(r, f) );
-}
+declare ReqExtract extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericReqNewActivity end
+declare ExtractActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity end
 
-function void insertRequestArgument(RequestFact r, FileArtifact f) {
-    insert( new GenericFileArtifactAlias(r, f) );
-}
 
-function void insertRequestArgument(RequestFact r, FolderArtifact f) {
-    insert( new GenericFolderArtifactAlias(r, f) );
-}
+declare ReqDeployFolder extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericReqNewActivity end
 
-function RequestFact insertRequest(RequestFact r) {
-    insert( r );
-    return r;
-}
+declare ReqNewGuessRunExecutable extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericReqNewActivity end
 
-function RequestFact insertSubrequestResult(Activity a, FileArtifactAlias f) {
-    insert( new FileArtifact(a, f.getFile()) );
-}
-*/

@@ -10,23 +10,9 @@
 
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts;
 
-import java.util.Date;
-
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqNewActivity;
 
 public class RunActivity extends Activity {
 
-	public RunActivity(String id, int number, Date date, ReqNewActivity request) {
-		super(id, number, date, request);
-	}
 
-	public RunActivity(RunActivity run) {
-		super(run);
-	}
-
-	@Override
-	public String toString() {
-		return "Run [toString()=" + super.toString() + "]";
-	}
 
 }

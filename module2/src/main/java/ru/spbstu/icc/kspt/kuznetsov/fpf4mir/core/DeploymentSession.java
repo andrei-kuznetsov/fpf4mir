@@ -196,6 +196,8 @@ public class DeploymentSession {
 		// for (String resFileName : drlFiles) addClassPathEntry(kbuilder,
 		// resFileName, ResourceType.DRL);
 		addClassPathEntry(kbuilder, "a_definitions.drl", ResourceType.DRL);
+		addClassPathEntry(kbuilder, "basic_actions.drl", ResourceType.DRL);
+		
 		KnowledgeBase kbase = kbuilder.newKnowledgeBase();
 		debugTactType(kbase, "defaultpkg", "DeployFolder");
 		debugTactType(kbase, "defaultpkg", "ReqDownloadHttp");
@@ -265,16 +267,12 @@ public class DeploymentSession {
 		this.init();
 	}
 
-	public void assertFactAndRun(Object... f) {
+	public void assertFactAndRun(Object... f) throws Exception {
 		for (Object i : f) {
 			ksession.insert(i);
 		}
-		try {
-			this.run();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		this.run();
 	}
 
 	public void assertFact(Object f) {

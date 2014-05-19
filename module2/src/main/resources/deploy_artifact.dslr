@@ -6,9 +6,9 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
 
 // #################################### Input parameters #######################################
-rule "Populate input parameters for DeployFolderActivity from ReqNewDeployFolder"
+rule "Populate input parameters for DeployFolderActivity from ReqDeployFolder"
 	when
-		request 'ReqNewDeployFolder'
+		request 'ReqDeployFolder'
 		activity 'DeployFolderActivity' for request
 		request inputs (
 		    input 'FileArtifactAlias'
@@ -23,7 +23,7 @@ end
 
 rule "DeployArtifact Request Status"
 	when
-		request 'ReqNewDeployFolder'
+		request 'ReqDeployFolder'
 		activity 'DeployFolderActivity' for request
 		activity succeeded
 >		$artifact : FolderArtifact(activity == $activity)
@@ -109,7 +109,7 @@ end
 /*
 rule "DeployRequestStatus in progress"
 	when 
->	    $r : ReqNewDeployFolder()
+>	    $r : ReqDeployFolder()
 >	    not RequestStatus( request == $r, succeeded == true )
 	then
 >		insertLogical( new RequestStatus( $r, "in progress...", false) );

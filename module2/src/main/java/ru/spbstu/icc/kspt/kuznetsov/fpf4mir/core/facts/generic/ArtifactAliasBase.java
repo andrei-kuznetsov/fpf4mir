@@ -16,28 +16,27 @@ public abstract class ArtifactAliasBase implements ArtifactAlias, Serializable{
 	private RequestStatus rstatus;
 	private String name;
 	
-	public ArtifactAliasBase(RequestFact request, String name) {
-		super();
-		this.request = request;
-		this.name = name;
-	}
 
-	public ArtifactAliasBase(RequestStatus rstatus, String name) {
-		super();
+	public void reset(RequestFact request, RequestStatus rstatus, String name) {
+		this.request = request;
 		this.rstatus = rstatus;
 		this.name = name;
 	}
-
-	public ArtifactAliasBase(RequestFact request, ArtifactAlias artifactAlias) {
-		super();
-		this.request = request;
-		this.name = artifactAlias.getName();
+	
+	public void reset(RequestFact request, String name) {
+		this.reset(request, null, name);
 	}
 
-	public ArtifactAliasBase(RequestStatus rstatus, ArtifactAlias artifactAlias) {
-		super();
-		this.rstatus = rstatus;
-		this.name = artifactAlias.getName();
+	public void reset(RequestStatus rstatus, String name) {
+		this.reset(null, rstatus, name);
+	}
+
+	public void reset(RequestFact request, ArtifactAlias artifactAlias) {
+		this.reset(request, artifactAlias.getName());
+	}
+
+	public void reset(RequestStatus rstatus, ArtifactAlias artifactAlias) {
+		this.reset(rstatus, artifactAlias.getName());
 	}
 	
 	public RequestFact getRequest() {

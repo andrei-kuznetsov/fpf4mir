@@ -26,7 +26,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.R;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericFileArtifactAlias;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericFolderArtifactAlias;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqNewDeployExecutable;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqDeployExecutable;
 
 @Path("/")
 public class Index {
@@ -53,7 +53,7 @@ public class Index {
 
 		List<File> files = Utils.doUploadOriginalArtifact(httpreq);
 
-		ReqNewDeployExecutable req = new ReqNewDeployExecutable(Activity.USER);
+		ReqDeployExecutable req = new ReqDeployExecutable(Activity.USER);
 		req.setRefId(reqRefId++);
 		req.setDeploymentName(R.id.MainDeployment);
 
@@ -62,10 +62,12 @@ public class Index {
 		
 		if (files.size() == 1) {
 			userArtifact = new FileArtifact(Activity.USER, files.get(0));
-			artifactAlias = new GenericFileArtifactAlias(req, R.artifact.main , (FileArtifact)userArtifact);
+			artifactAlias = new GenericFileArtifactAlias();
+			((GenericFileArtifactAlias)artifactAlias).reset(req, R.artifact.main , (FileArtifact)userArtifact);
 		} else {
 			userArtifact = new FolderArtifact(Activity.USER, files.get(0).getParentFile());
-			artifactAlias = new GenericFolderArtifactAlias(req, R.artifact.main, (FolderArtifact) userArtifact);
+			artifactAlias = new GenericFolderArtifactAlias();
+			((GenericFolderArtifactAlias)artifactAlias).reset(req, R.artifact.main, (FolderArtifact) userArtifact);
 		}
 
 		try {

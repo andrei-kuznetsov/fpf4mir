@@ -4,6 +4,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifactAlias;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestStatus;
 
 public class FolderArtifactAliasBase extends ArtifactAliasBase implements FolderArtifactAlias{
 	/**
@@ -13,15 +14,29 @@ public class FolderArtifactAliasBase extends ArtifactAliasBase implements Folder
 	
 	private FolderArtifact folder;
 	
-	public FolderArtifactAliasBase(RequestFact request, String name,
-			FolderArtifact folder) {
-		super(request, name);
+	public void reset(RequestFact request, RequestStatus rstatus, String name, FolderArtifact folder) {
+		super.reset(request, rstatus, name);
 		this.folder = folder;
 	}
 
-	public FolderArtifactAliasBase(RequestFact request, FolderArtifactAlias folder) {
-		super(request, folder);
-		this.folder = folder.getFolder();
+	public void reset(RequestFact request, String name, FolderArtifact folder) {
+		this.reset(request, null, name, folder);
+	}
+
+	public void reset(RequestStatus rstatus, String name, FolderArtifact folder) {
+		this.reset(null, rstatus, name, folder);
+	}
+	
+	public void reset(RequestFact request, FolderArtifactAlias folder) {
+		this.reset(request, folder.getName(), folder.getFolder());
+	}
+
+	public void reset(RequestFact request, FolderArtifact folder) {
+		this.reset(request, folder.getName(), folder);
+	}
+
+	public void reset(RequestStatus rstatus, FolderArtifact folder) {
+		this.reset(rstatus, folder.getName(), folder);
 	}
 	
 	public FolderArtifact getFolder() {
