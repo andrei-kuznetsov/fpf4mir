@@ -8,8 +8,8 @@
 [when]input '{type}'=$input : {type}( request == $request ) 
 
 [when]subrequest '{subrequest}'=$subrequest : {subrequest}(parentActivity == $activity)
-[when]subrequest succeeded=$subrequestStatus : RequestStatus( request == $subrequest, succeeded == true )
-[when]subrequest failed=$subrequestStatus : RequestStatus( request == $subrequest, succeeded == false )
+[when]subrequest succeeded=$subrequestStatus : RequestSucceeded( request == $subrequest )
+[when]subrequest failed=$subrequestStatus : RequestSucceeded( request == $subrequest )
 [when]subrequest outputs \(=(or
 [when]subrequest output '{type}'=$output : {type}( request == $subrequest ) 
 
@@ -20,6 +20,6 @@
 [then]add activity fact from request output=insert( $output.cloneArtifact($activity) );
 
 [then]activity succeeded=insertLogical( new GenericActivitySucceeded($activity) );
-[then]set request status succeeded=RequestStatus requestStatus = new RequestStatus($request, "ok", true); insert(requestStatus);
+[then]set request status succeeded=RequestStatus requestStatus = new RequestSucceeded($request, "ok"); insert(requestStatus);
 [then]set activity failed with status \"{status}\"=insert( new GenericActivityError($activity, "{status}") );
 [then]add request status parameter {param} as {type}=\{{type} o = new {type}(); o.reset(requestStatus, {param}); insert(o);\};

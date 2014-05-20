@@ -11,23 +11,12 @@ rule "CommandExecutor"
 	then
 		insertLogical( new ExecAction($cmd) );
 end
-/* 
+
 rule "Activity_New"
 	when
 		$rr : ReqNewActivity(  )
 		forall ( $b : Activity( request == $rr )
-	             ExecStatus( activity == $b, succeeded == false ) 
- 		         ActivityErrorFixed( activity == $b ) )
-	then
-		insert( $rr.newActivityInstance() );
-end
-/* */
-/* */
-rule "Activity_New"
-	when
-		$rr : ReqNewActivity(  )
-		forall ( $b : Activity( request == $rr )
-	             ActivityError( activity == $b ) 
+	             ActivityFailed( activity == $b ) 
  		         ActivityErrorFixed( activity == $b ) )
 	then
 		String pkg = $rr.getClass().getPackage().toString();
@@ -44,4 +33,13 @@ rule "Activity_New"
 		factType.set(fact, "request", $rr);
 		insert( fact );
 end
-/* */
+
+rule "Activity Request Status"
+	when
+		$request : ReqNewActivity( )
+		$activity : Activity( request == $request )
+		exists ActivitySucceeded( activity == $activity )
+	then
+		insertLogical(new RequestSucceeded($request));
+end
+		
