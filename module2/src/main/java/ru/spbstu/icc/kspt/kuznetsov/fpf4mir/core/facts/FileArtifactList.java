@@ -82,4 +82,9 @@ public class FileArtifactList extends ArrayList<FileArtifact>{
 		this.listName = listName;
 	}
 	
+	@Override
+	public String toString() {
+		String s = super.toString();
+		return s.replace(", FileArtifact", "\n FileArtifact");
+	}
 }

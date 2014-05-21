@@ -39,10 +39,15 @@ rule "Eval full list of files"
 		activity 'GuessRunExecutableActivity'
 		'FolderArtifact' for activity
 	then
->		insert( $artifact.getFileArtifactListForPattern("**/*") );
->		insert( $artifact.getFileArtifactListForPattern("**/*.exe") );
->		insert( $artifact.getFileArtifactListForPattern("**/*.sh") );
->		insert( $artifact.getFileArtifactListForPattern("**/*.py") );
+>		System.out.println("==========================================================");
+>		insert( $artifact.getFileArtifactListForPattern("**\\*") );
+>		System.out.println("1");
+>		insert( $artifact.getFileArtifactListForPattern("**\\*.exe") );
+>		System.out.println("2");
+>		insert( $artifact.getFileArtifactListForPattern("**\\*.sh") );
+>		System.out.println("3");
+>		insert( $artifact.getFileArtifactListForPattern("**\\*.py") );
+>		System.out.println("==========================================================");
 end
 
 rule "No candidates"
