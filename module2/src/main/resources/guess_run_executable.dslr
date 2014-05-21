@@ -56,27 +56,17 @@ end
 rule "Ok candidates"
 	when
 		activity 'GuessRunExecutableActivity'
-		$candidates : java.util.LinkedList( size == 1 ) from collect( FileArtifactList(activity == $activity, size == 1) )
-		not FileArtifactList(activity == $a, size >= 1)
+>		$candidates : java.util.LinkedList( size == 1 ) from collect( FileArtifactList(activity == $activity, size == 1) )
+>		not FileArtifactList(activity == $a, size >= 1)
 	then
-		insert( new GenericActivitySuccess($a) );
-		insert( new ExecutableFileArtifact($candidates.get(0).get(0)) );
+		activity succeeded
+>		insert( new ExecutableFileArtifact($candidates.get(0).get(0)) );
 end
 
 rule "Too many candidates"
 	when
 		activity 'GuessRunExecutableActivity'
-		$candidates : java.util.LinkedList( size > 1 ) from collect( FileArtifactList(activity == $activity, size >= 1) )
+>		$candidates : java.util.LinkedList( size > 1 ) from collect( FileArtifactList(activity == $activity, size >= 1) )
 	then
 		activity failed with status "Too many candidates for executable"
-end
-
-rule "Set run executable"
-	when
-		$r : ReqNewActivity( activityName == R.activity.GuessRunExecutable )
-		$a : Activity( request == $r )
-		exists ActivitySucceeded( activity == $a )
-		$exec : ExecutableFileArtifact( activity == $a ) )
-	then
-		insertLogical ( new ExecutableFileArtifactAlias( $r, $exec ) );
 end
