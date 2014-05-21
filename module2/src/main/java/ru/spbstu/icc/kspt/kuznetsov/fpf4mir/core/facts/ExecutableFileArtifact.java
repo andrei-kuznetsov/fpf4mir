@@ -15,20 +15,19 @@ public class ExecutableFileArtifact extends FileArtifact{
 		this(parentActivity, artifactAlias.getExecutableFile());
 	}
 
-	public ExecutableFileArtifact(File file, File workingDir) {
-		super(null, file);
-		this.workingDir = workingDir;
-	}
-
-	public ExecutableFileArtifact(File file) {
-		super(null, file);
-		this.workingDir = file.getParentFile();
+	public ExecutableFileArtifact(Activity parentActivity, FileArtifact file) {
+		super(parentActivity, file);
+		workingDir = file.getFile().getParentFile();
 	}
 	
-	public ExecutableFileArtifact(Activity parentActivity,
-			ExecutableFileArtifact file) {
+	public ExecutableFileArtifact(Activity parentActivity, ExecutableFileArtifact file) {
 		super(parentActivity, file);
 		workingDir = file.getWorkingDir();
+	}
+
+	public ExecutableFileArtifact(Activity activity, File file) {
+		super(activity, file);
+		workingDir = file.getParentFile();
 	}
 
 	public File getWorkingDir() {

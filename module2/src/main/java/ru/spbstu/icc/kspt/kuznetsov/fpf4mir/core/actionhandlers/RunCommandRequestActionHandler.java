@@ -18,7 +18,7 @@ public class RunCommandRequestActionHandler implements ActionHandler {
 		File jar = new File(build_wd, "target/dist/chordest.jar");
 		
 		ksession.retract(ksession.getFactHandle(action));
-		ksession.insert(new JavaRunExecutableArtifact(jar));
+		ksession.insert(new JavaRunExecutableArtifact(action.getActivity(), jar));
 		ksession.insert(new RunSystem(RUN_SYSTEMS.JAVA));
 	}
 }

@@ -1,8 +1,6 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +14,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.ExecAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecStatus;
 
 public class ExecActionHandler implements ActionHandler{
+	@SuppressWarnings("unused")
 	private static final Logger logger = Logger.getLogger(ActionHandler.class);
 
 	@Override

@@ -29,7 +29,7 @@ rule "GuessRunExecutable Request Status"
 		'ExecutableFileArtifact' for activity
 	then
 		set request status succeeded
-		add request status parameter $artifact as ExecutableFileArtifactAlias
+		add request status parameter $artifact as GenericExecutableFileArtifactAlias
 end
 
 // #############################################################################################
@@ -57,10 +57,10 @@ rule "Ok candidates"
 	when
 		activity 'GuessRunExecutableActivity'
 >		$candidates : java.util.LinkedList( size == 1 ) from collect( FileArtifactList(activity == $activity, size == 1) )
->		not FileArtifactList(activity == $a, size >= 1)
+>		not FileArtifactList(activity == $activity, size >= 1)
 	then
 		activity succeeded
->		insert( new ExecutableFileArtifact($candidates.get(0).get(0)) );
+>		insert( new ExecutableFileArtifact($activity, ((FileArtifactList)$candidates.get(0)).get(0)) );
 end
 
 rule "Too many candidates"
