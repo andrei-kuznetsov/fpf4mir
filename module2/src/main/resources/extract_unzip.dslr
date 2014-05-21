@@ -1,0 +1,80 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
+
+
+// #################################### Input parameters #######################################
+rule "Populate input parameters for ExtractActivity"
+	when
+		request 'ReqExtract'
+		activity for request
+		request inputs (
+		    input 'FileArtifactAlias'
+>		)
+	then
+		add activity fact from request input
+end
+
+// ----------------------------------- Output parameters ---------------------------------------
+
+rule "ExtractActivity Request Status"
+	when
+		request 'ReqExtract'
+		activity for request
+		activity succeeded
+		'FolderArtifact' for activity
+	then
+		set request status succeeded
+		add FolderArtifact as request status
+end
+
+// #############################################################################################
+
+rule "Prepare output dir"
+	when 
+	    activity 'ExtractActivity'
+>	    $tmp : TmpDirRoot( )
+	then
+>		insert( $tmp.newTempFolder( $activity ) );
+end
+
+
+rule "Need TmpDir"
+	when 
+	    activity 'ExtractActivity'
+>	    not TmpDirRoot( )
+	then
+		activity failed with status "No TmpDir provided"
+end
+
+rule "Unzip with jar"
+	when 
+	    activity 'ExtractActivity'
+>		$file : FileArtifact(activity == $activity)
+	then
+		add ordinal 1 "xf"
+		add ordinal 2 $file.getAbsolutePath()
+end
+
+rule "Unzip with jar command"
+	when 
+	    activity 'ExtractActivity'
+	    cmd options for activity
+>	    $target : FolderArtifact( activity == $activity )
+	then
+		execute command "jar" in working dir $target
+end
+
+rule "Evaluate activity result"
+	when 
+	    activity 'ExtractActivity'
+	    exec command succeeded
+	then 
+		activity succeeded
+end

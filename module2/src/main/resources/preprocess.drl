@@ -4,7 +4,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
 
-
+/*
 rule "Propose build command at ReqNewOriginalArtifact_handler.drl"
 	when
 		$r : ReqNewDeployment(  )
@@ -13,6 +13,7 @@ rule "Propose build command at ReqNewOriginalArtifact_handler.drl"
 	then
 		insertLogical( new RequestSubstatusBuildProposal($r, $buildCommands) );
 end
+*/
 
 /* rule "DefaultScratchDir"
 	when

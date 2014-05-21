@@ -77,7 +77,7 @@ rule "Process DeployFolder Artifact request faled"
 		subrequest 'ReqDeployFolder'
 		subrequest failed
 	then
-		set activity failed with status "Can't deploy artifact locally"
+		activity failed with status "Can't deploy artifact locally. Reason: " + $subrequestStatus.getMessage()
 end
 
 rule "Evaluate run executable"
@@ -108,7 +108,7 @@ rule "Process ReqNewGuessRunExecutable result failed"
 		subrequest 'ReqNewGuessRunExecutable'
 		subrequest failed
 	then
-		set activity failed with status "Can't guess executable"
+		activity failed with status "Can't guess executable"
 end
 
 rule "Eval DeployExecutableActivity succeeded"

@@ -2,12 +2,12 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts;
 
 public class RequestStatus {
 	private RequestFact request;
-	private String statusString = "No status available.";
+	private String message = "No status available.";
 	
 	protected RequestStatus(RequestFact request, String statusString) {
 		super();
 		this.request = request;
-		this.statusString = statusString;
+		this.message = statusString;
 	}
 
 	public RequestFact getRequest() {
@@ -18,18 +18,19 @@ public class RequestStatus {
 		this.request = request;
 	}
 
-	public String getStatusString() {
-		return statusString;
+	
+
+	public String getMessage() {
+		return message;
 	}
 
-	public void setStatusString(String statusString) {
-		this.statusString = statusString;
+	public void setMessage(String message) {
+		this.message = message;
 	}
-
 
 	@Override
 	public String toString() {
-		return "RequestStatus [request=" + request + ", statusString="
-				+ statusString + "]";
+		return getClass().getSimpleName() + " [request=" + request + ", statusString="
+				+ message + "]";
 	}
 }

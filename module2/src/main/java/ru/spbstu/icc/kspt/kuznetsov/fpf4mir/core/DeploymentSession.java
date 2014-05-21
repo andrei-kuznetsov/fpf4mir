@@ -197,6 +197,7 @@ public class DeploymentSession {
 		// resFileName, ResourceType.DRL);
 		addClassPathEntry(kbuilder, "a_definitions.drl", ResourceType.DRL);
 		addClassPathEntry(kbuilder, "basic_actions.drl", ResourceType.DRL);
+		addClassPathEntry(kbuilder, "preprocess.drl", ResourceType.DRL);
 		
 		KnowledgeBase kbase = kbuilder.newKnowledgeBase();
 		debugTactType(kbase, "defaultpkg", "DeployFolder");

@@ -36,7 +36,7 @@ public class HTMLProducer {
 //		Class<? extends RequestStatus> klass = status.getClass();
 //		if (klass.equals(???))
 		
-		out.println("<p>" + status.mainStatus.getStatusString() + "</p>");
+		out.println("<p>" + status.mainStatus.getMessage() + "</p>");
 		out.println("<p>" + status.mainStatus.toString() + "</p>");
 		for (RequestSubstatus i : status.substatuses){
 			if (i instanceof RequestSubstatusActivityLog){

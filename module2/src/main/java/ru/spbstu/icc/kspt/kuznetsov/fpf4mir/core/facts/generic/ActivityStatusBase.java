@@ -22,5 +22,10 @@ public class ActivityStatusBase implements ActivityStatus{
 	public void setActivity(Activity activity) {
 		this.activity = activity;
 	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[activity=" + activity + "]";
+	}
 	
 }

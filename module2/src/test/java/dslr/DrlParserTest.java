@@ -21,6 +21,11 @@ public class DrlParserTest extends TestCase {
 		printExpandedRule(dslr);
     }
     
+    public void testExpandDRL_extract_unzip() throws Exception {
+    	String dslr = "/extract_unzip.dslr";
+		printExpandedRule(dslr);
+    }
+    
 	private void printExpandedRule(String dslr) throws IOException,
 			DroolsParserException {
 		String drl = IOUtils.toString(getClass().getResourceAsStream(dslr));

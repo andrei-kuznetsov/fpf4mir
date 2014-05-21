@@ -26,7 +26,7 @@ rule "DeployArtifact Request Status"
 		request 'ReqDeployFolder'
 		activity 'DeployFolderActivity' for request
 		activity succeeded
->		$artifact : FolderArtifact(activity == $activity)
+		'FolderArtifact' for activity
 	then
 		set request status succeeded
 		add request status parameter $artifact as DeployFolder
@@ -64,7 +64,7 @@ rule "Assert Download Failed Artifact"
 		subrequest 'ReqDownloadHttp'
 		subrequest failed
 	then
-		set activity failed with status "Can't download artifact"
+		activity failed with status "Can't download artifact"
 end
 
 rule "ExtractArtifact"
@@ -95,7 +95,7 @@ rule "Process exctracted artifact failed"
 		subrequest 'ReqExtract'
 		subrequest failed
 	then
-		set activity failed with status "Can't extract artifact"
+		activity failed with status "Can't extract artifact. Reason: " + $subrequestStatus.getMessage()
 end
 
 rule "Assert DeployFolder"
