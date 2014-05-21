@@ -12,7 +12,7 @@
 [when]subrequest succeeded=$subrequestStatus : RequestSucceeded( request == $subrequest )
 [when]subrequest failed=$subrequestStatus : RequestFailed( request == $subrequest )
 [when]subrequest outputs \(=(or
-[when]subrequest output '{type}'=$output : {type}( request == $subrequest ) 
+[when]subrequest output '{type}'=$output : {type}( rstatus == $subrequestStatus ) 
 
 [when]cmd options for activity=$options : java.util.LinkedList() from collect ( OrdinalArgument( activity == $activity ) )
 [when]exec command succeeded=ExecStatus( activity == $activity, succeeded == true )

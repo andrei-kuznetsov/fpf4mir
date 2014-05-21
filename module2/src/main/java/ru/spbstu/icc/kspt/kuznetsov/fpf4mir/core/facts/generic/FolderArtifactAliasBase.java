@@ -48,7 +48,13 @@ public class FolderArtifactAliasBase extends ArtifactAliasBase implements Folder
 	}
 
 	public FolderArtifact cloneArtifact(Activity newActivity) {
-		FolderArtifact copy = org.apache.commons.lang3.SerializationUtils.clone(this.getFolder());
+		FolderArtifact copy;
+		try {
+			copy = (FolderArtifact) this.getFolder().clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
 		copy.setActivity(newActivity);
 		return copy;
 	}

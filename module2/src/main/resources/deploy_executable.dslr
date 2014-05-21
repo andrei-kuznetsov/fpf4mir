@@ -86,14 +86,14 @@ rule "Evaluate run executable"
 >		$folder : FolderArtifact( activity == $activity )
 >		not ExecutableFileArtifact(activity == $activity)
 	then
-		add subrequest 'ReqNewGuessRunExecutable'
+		add subrequest 'ReqGuessRunExecutable'
 		add subrequest parameter '$folder' as 'GenericFolderArtifactAlias'
 end
 
-rule "Process ReqNewGuessRunExecutable result"
+rule "Process ReqGuessRunExecutable result"
 	when 
 	 	activity 'DeployFolderActivity'
-		subrequest 'ReqNewGuessRunExecutable'
+		subrequest 'ReqGuessRunExecutable'
 		subrequest succeeded
 		subrequest outputs (
 			subrequest output 'ExecutableFileArtifactAlias'
@@ -102,10 +102,10 @@ rule "Process ReqNewGuessRunExecutable result"
 		add activity fact from request output
 end
 
-rule "Process ReqNewGuessRunExecutable result failed"
+rule "Process ReqGuessRunExecutable result failed"
 	when 
 	 	activity 'DeployFolderActivity'
-		subrequest 'ReqNewGuessRunExecutable'
+		subrequest 'ReqGuessRunExecutable'
 		subrequest failed
 	then
 		activity failed with status "Can't guess executable"

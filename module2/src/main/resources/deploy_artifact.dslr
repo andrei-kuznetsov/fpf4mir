@@ -101,17 +101,8 @@ end
 rule "Assert DeployFolder"
 	when
 		activity 'DeployFolderActivity'
->		$artifact : FolderArtifact( activity == $activity )
+		'FolderArtifact' for activity
 	then
 		activity succeeded
 end
 
-/*
-rule "DeployRequestStatus in progress"
-	when 
->	    $r : ReqDeployFolder()
->	    not RequestStatus( request == $r, succeeded == true )
-	then
->		insertLogical( new RequestStatus( $r, "in progress...", false) );
-end
-*/

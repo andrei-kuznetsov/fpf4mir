@@ -33,7 +33,7 @@ rule "Activity_New"
 		factType.set(fact, "request", $rr);
 		insert( fact );
 end
-
+/*
 rule "Activity Request Success Status"
 	when
 		$request : ReqNewActivity( )
@@ -42,9 +42,9 @@ rule "Activity Request Success Status"
 	then
 		insertLogical(new RequestSucceeded($request));
 end
-
+*/
 rule "Activity Request Failure Status"
-	salience -1000 // salience shall be less than for rule "Activity Request Success Status"
+	salience -1000 // salience shall be less than for rule "Activity_New"
 	when
 		$request : ReqNewActivity( )
 		$activity : Activity( request == $request )

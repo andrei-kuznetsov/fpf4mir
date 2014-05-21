@@ -1,0 +1,82 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+
+// #################################### Input parameters #######################################
+rule "Populate input parameters for GuessRunExecutableActivity from ReqGuessRunExecutable"
+	when
+		request 'ReqGuessRunExecutable'
+		activity for request
+		request inputs (
+		    input 'FolderArtifactAlias'
+>		)
+	then
+		add activity fact from request input
+end
+
+// ----------------------------------- Output parameters ---------------------------------------
+
+rule "GuessRunExecutable Request Status"
+	when
+		request 'ReqGuessRunExecutable'
+		activity for request
+		activity succeeded
+		'ExecutableFileArtifact' for activity
+	then
+		set request status succeeded
+		add request status parameter $artifact as ExecutableFileArtifactAlias
+end
+
+// #############################################################################################
+
+rule "Eval full list of files"
+	when
+		activity 'GuessRunExecutableActivity'
+		'FolderArtifact' for activity
+	then
+>		insert( $artifact.getFileArtifactListForPattern("**/*") );
+>		insert( $artifact.getFileArtifactListForPattern("**/*.exe") );
+>		insert( $artifact.getFileArtifactListForPattern("**/*.sh") );
+>		insert( $artifact.getFileArtifactListForPattern("**/*.py") );
+end
+
+rule "No candidates"
+	when
+		activity 'GuessRunExecutableActivity'
+>		$candidates : java.util.LinkedList( size == 0 ) from collect( FileArtifactList(activity == $activity, size >= 1) )
+	then
+		activity failed with status "No executables found"
+end
+
+rule "Ok candidates"
+	when
+		activity 'GuessRunExecutableActivity'
+		$candidates : java.util.LinkedList( size == 1 ) from collect( FileArtifactList(activity == $activity, size == 1) )
+		not FileArtifactList(activity == $a, size >= 1)
+	then
+		insert( new GenericActivitySuccess($a) );
+		insert( new ExecutableFileArtifact($candidates.get(0).get(0)) );
+end
+
+rule "Too many candidates"
+	when
+		activity 'GuessRunExecutableActivity'
+		$candidates : java.util.LinkedList( size > 1 ) from collect( FileArtifactList(activity == $activity, size >= 1) )
+	then
+		activity failed with status "Too many candidates for executable"
+end
+
+rule "Set run executable"
+	when
+		$r : ReqNewActivity( activityName == R.activity.GuessRunExecutable )
+		$a : Activity( request == $r )
+		exists ActivitySucceeded( activity == $a )
+		$exec : ExecutableFileArtifact( activity == $a ) )
+	then
+		insertLogical ( new ExecutableFileArtifactAlias( $r, $exec ) );
+end

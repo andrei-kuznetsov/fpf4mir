@@ -3,7 +3,7 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts;
 import java.io.File;
 import java.io.Serializable;
 
-public class Artifact implements Serializable {
+public class Artifact implements Serializable, Cloneable {
 	/**
 	 * 
 	 */
@@ -75,5 +75,10 @@ public class Artifact implements Serializable {
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + " [file=" + file + ", activity=" + activity + "]";
+	}
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 }
