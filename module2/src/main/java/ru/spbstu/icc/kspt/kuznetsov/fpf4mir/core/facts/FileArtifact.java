@@ -5,7 +5,9 @@ import java.io.IOException;
 
 import org.drools.RuntimeDroolsException;
 
-public class FileArtifact extends Artifact implements Cloneable {
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FPFCloneable;
+
+public class FileArtifact extends Artifact implements FPFCloneable{
 
 	/**
 	 * 
@@ -26,7 +28,7 @@ public class FileArtifact extends Artifact implements Cloneable {
 	}
 
 	public FileArtifact(Activity activity, FileArtifactAlias file) {
-		this(activity, file.getFile());
+		this(activity, file.getRefObject());
 	}
 	
 	public FileArtifact(Artifact artifact) {
@@ -58,11 +60,6 @@ public class FileArtifact extends Artifact implements Cloneable {
 		super.setFile(file);
 	}
 
-	@Override
-	public String toString() {
-		return "FileArtifact [toString()=" + super.toString() + "]";
-	}
-	
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();

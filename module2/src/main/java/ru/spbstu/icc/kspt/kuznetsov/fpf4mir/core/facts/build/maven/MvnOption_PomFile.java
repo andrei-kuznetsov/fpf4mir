@@ -7,6 +7,6 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.KeyValueArgument;
 public class MvnOption_PomFile extends KeyValueArgument implements MvnOption {
 
 	public MvnOption_PomFile(BuildActivity build, FileArtifactAlias pom) {
-		super(build, "-f", pom.getFile().getAbsolutePath());
+		super(build, "-f", pom.getRefObject().getAbsolutePath());
 	}
 }

@@ -3,10 +3,13 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts;
 import java.io.Serializable;
 import java.net.URI;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityRelatedFactWithName;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.CloneUtils;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FPFCloneable;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithName;
 
-public class ArtifactRef implements ActivityRelatedFactWithName, Serializable{
+public class ArtifactRef implements ActivityRelatedFact, FactWithName, FPFCloneable {
 	/**
 	 * 
 	 */
@@ -26,7 +29,7 @@ public class ArtifactRef implements ActivityRelatedFactWithName, Serializable{
 	}
 	
 	public ArtifactRef(Activity activity, ArtifactRefAlias ref) {
-		this(activity, ref.getArtifactRef());
+		this(activity, ref.getRefObject());
 	}
 
 	public URI getRef() {
@@ -53,12 +56,8 @@ public class ArtifactRef implements ActivityRelatedFactWithName, Serializable{
 		this.name = name;
 	}
 	
-	public ArtifactRef clone(Activity newActivity) {
-		return CloneUtils.cloneActivityRelatedFact(this, newActivity);
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
-
-	public ArtifactRef clone(Activity newActivity, String newName) {
-		return CloneUtils.cloneActivityRelatedFactWithName(this, newActivity, newName);
-	}
-	
 }

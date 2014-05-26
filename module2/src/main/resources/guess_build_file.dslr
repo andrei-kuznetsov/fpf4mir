@@ -1,0 +1,64 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+
+// #################################### Input parameters #######################################
+rule "Populate input parameters for GuessBuildFileActivity from ReqGuessBuildFile"
+	when
+		request 'ReqGuessBuildFile'
+		activity for request
+		request inputs (
+		    input 'FolderArtifactAlias'
+>		)
+	then
+		add activity fact from request input
+end
+
+// ----------------------------------- Output parameters ---------------------------------------
+
+rule "GuessBuildFile Request Status - FileArtifactList"
+	when
+		request 'ReqGuessBuildFile'
+		activity for request
+		activity succeeded
+		$list : BuildFileArtifactList for activity
+	then
+		set request status succeeded
+		add request status parameter $list as GenericFileArtifactListAlias
+end
+
+// #############################################################################################
+
+rule "Analyze well known build files"
+	when
+		activity 'GuessBuildFileActivity'
+>		FolderArtifact( activity == $activity,
+>			$mvnlist : getFileArtifactListForPattern("**\\pom.xml"),
+>			$antlist : getFileArtifactListForPattern("**\\build.xml"),
+>			$mklist  : getFileArtifactListForPattern("**\\makefile")
+>)
+	then
+>		if ($mvnlist.size() > 0)
+			insert artifact 'getTopmost($mvnlist)' as 'BuildFileCandidate'
+			
+>		if ($antlist.size() > 0)
+			insert artifact 'getTopmost($antlist)' as 'BuildFileCandidate'
+			
+>		if ($mklist.size() > 0)
+			insert artifact 'getTopmost($mklist)' as 'BuildFileCandidate'
+end
+
+rule "List BuildFile candidates"
+	salience -1 // shall be less than the salience of rules about BuildArtifactCandidate
+	when
+		activity 'GuessBuildFileActivity'
+>		$candidates : java.util.LinkedList(  ) from collect( BuildFileCandidate(activity == $activity) )
+	then
+		insert artifact '$candidates' as 'BuildFileArtifactList'
+		activity succeeded
+end

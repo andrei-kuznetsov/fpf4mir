@@ -6,6 +6,13 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 
+declare DeployExecOption_BuildAndRun extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
+declare DeployExecOption_RunOnly extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
+declare DeployExecOption_Autodetect	extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
+
+declare ReqDeployExecOption_BuildAndRun extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.AliasBase2 end
+declare ReqDeployExecOption_RunOnly extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.AliasBase2 end
+
 // #################################### Input parameters #######################################
 rule "Populate input parameters for DeployExecutableActivity from ReqDeployFolder"
 	when
@@ -27,7 +34,7 @@ rule "DeployExecutable Request Status"
 		request 'ReqDeployExecutable'
 		activity 'DeployExecutableActivity' for request
 		activity succeeded
->		$artifact : ExecutableFileArtifact(activity == $activity)
+		$artifact : ExecutableFileArtifact for activity
 	then
 		set request status succeeded
 		add request status parameter $artifact as GenericExecutableFileArtifactAlias
@@ -35,11 +42,20 @@ end
 
 // #############################################################################################
 
+rule "Autodetect rule"
+	when
+		activity 'DeployExecutableActivity'
+		not DeployExecOption_BuildAndRun for activity
+		not DeployExecOption_RunOnly for activity
+	then
+>		insertLogical(new DeployExecOption_Autodetect($activity))
+end
+		
 rule "Deploy executable from file artifact"
 	when
 		activity 'DeployExecutableActivity'
->		$file : FileArtifact( activity == $activity )
->		not FolderArtifact( activity == $activity )
+		$file : FileArtifact for activity
+		not FolderArtifact for activity
 	then
 		add subrequest 'ReqDeployFolder'
 		add subrequest parameter '$file' as 'GenericFileArtifactAlias'
@@ -52,8 +68,8 @@ use deployed folder as is when FolderArtifactAlias( request == $r )
 rule "Deploy executable from URL"
 	when
 		activity 'DeployExecutableActivity'
->		$ref : ArtifactRef(activity == $activity)
->		not FolderArtifact( activity == $activity )
+		$ref : ArtifactRef for activity
+		not FolderArtifact for activity
 	then
 		add subrequest 'ReqDeployFolder'
 		add subrequest parameter '$ref' as 'GenericArtifactRefAlias'
@@ -83,11 +99,22 @@ end
 rule "Evaluate run executable"
 	when
 		activity 'DeployExecutableActivity'
->		$folder : FolderArtifact( activity == $activity )
->		not ExecutableFileArtifact(activity == $activity)
+		$artifact : FolderArtifact for activity
+		not ExecutableFileArtifact for activity
+		DeployExecOption_Autodetect for activity
 	then
 		add subrequest 'ReqGuessRunExecutable'
-		add subrequest parameter '$folder' as 'GenericFolderArtifactAlias'
+		add subrequest parameter '$artifact' as 'GenericFolderArtifactAlias'
+end
+
+rule "Evaluate build file"
+	when
+		activity 'DeployExecutableActivity'
+		$artifact : FolderArtifact for activity
+		not ExecutableFileArtifact for activity
+	then
+		add subrequest 'ReqGuessBuildFile'
+		add subrequest parameter '$artifact' as 'GenericFolderArtifactAlias'
 end
 
 rule "Process ReqGuessRunExecutable result"
@@ -96,7 +123,7 @@ rule "Process ReqGuessRunExecutable result"
 		subrequest 'ReqGuessRunExecutable'
 		subrequest succeeded
 		subrequest outputs (
-			subrequest output 'ExecutableFileArtifactAlias'
+			subrequest output 'ExecFileArtifactListAlias'
 >		)
 	then
 		add activity fact from request output
@@ -111,10 +138,68 @@ rule "Process ReqGuessRunExecutable result failed"
 		activity failed with status "Can't guess executable"
 end
 
+rule "Process ReqGuessBuildFile result"
+	when 
+	 	activity 'DeployFolderActivity'
+		subrequest 'ReqGuessBuildFile'
+		subrequest succeeded
+		subrequest outputs (
+			subrequest output 'BuildFileArtifactListAlias'
+>		)
+	then
+		add activity fact from request output
+end
+
+rule "Process ReqGuessBuildFile result failed"
+	when 
+	 	activity 'DeployFolderActivity'
+		subrequest 'ReqGuessBuildFile'
+		subrequest failed
+	then
+		activity failed with status "Can't guess build file"
+end
+
+rule "Exec artifact found"
+	when
+	 	activity 'DeployFolderActivity'
+>		$exec : ExecFileArtifactList(size == 1, activity == $activity)
+>		BuildFileArtifactList(size == 0, activity == $activity)
+	then
+		insert artifact '(ExecutableFileArtifact)$exec.get(0)' as 'ExecutableFileArtifact'
+end
+
+rule "Build file found"
+	when
+	 	activity 'DeployFolderActivity'
+>		ExecFileArtifactList(size == 0, activity == $activity)
+>		$build : BuildFileArtifactList(size == 1, activity == $activity)
+	then
+		insert artifact '(BuildFile)$exec.get(0)' as 'BuildFile'
+end
+
+rule "Can build or run (choose build or run)"
+	when
+	 	activity 'DeployFolderActivity'
+>		$exec : ExecFileArtifactList(size > 0, activity == $activity)
+>		$build : BuildFileArtifactList(size > 0, activity == $activity)
+	then
+		// user action to choose the correct exec or build file
+		
+end
+
+rule "Can't build or run (no alternatives)"
+	when
+	 	activity 'DeployFolderActivity'
+>		$exec : ExecFileArtifactList(size == 0, activity == $activity)
+>		$build : BuildFileArtifactList(size == 0, activity == $activity)
+	then
+		activity failed with type FR_NO_BUILD_OR_EXEC_FILES_FOUND and message "no build or executable files found"
+end
+
 rule "Eval DeployExecutableActivity succeeded"
 	when
 		activity 'DeployExecutableActivity'
->		$artifact : ExecutableFileArtifact( activity == $activity )
+		ExecutableFileArtifact for activity
 	then
 		activity succeeded
 end

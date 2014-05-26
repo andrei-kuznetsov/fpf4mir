@@ -9,5 +9,5 @@ public class MvnRootPom extends FileArtifactAliasBase implements FileArtifactAli
 	 * 
 	 */
 	private static final long serialVersionUID = 141670357950993524L;
-	
+
 }

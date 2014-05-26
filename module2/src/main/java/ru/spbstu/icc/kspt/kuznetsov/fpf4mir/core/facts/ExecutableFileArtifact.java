@@ -10,9 +10,12 @@ public class ExecutableFileArtifact extends FileArtifact{
 	
 	private File workingDir;
 	
+	public ExecutableFileArtifact() {
+
+	}
 
 	public ExecutableFileArtifact(Activity parentActivity, ExecutableFileArtifactAlias artifactAlias) {
-		this(parentActivity, artifactAlias.getExecutableFile());
+		this(parentActivity, artifactAlias.getRefObject());
 	}
 
 	public ExecutableFileArtifact(Activity parentActivity, FileArtifact file) {
@@ -38,6 +41,13 @@ public class ExecutableFileArtifact extends FileArtifact{
 		this.workingDir = workingDir;
 	}
 
+	@Override
+	public void setFile(File file) {
+		super.setFile(file);
+		if (workingDir == null){
+			setWorkingDir(file.getParentFile());
+		}
+	}
 	@Override
 	public String toString() {
 		return "RunExecutable [workingDir=" + workingDir + ", getFile()="

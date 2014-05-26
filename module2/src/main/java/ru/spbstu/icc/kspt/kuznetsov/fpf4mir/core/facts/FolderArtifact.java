@@ -26,7 +26,7 @@ public class FolderArtifact extends Artifact {
 	}
 
 	public FolderArtifact(Activity activity, FolderArtifactAlias folder) {
-		this(activity, folder.getFolder().getFolder(), false);
+		this(activity, folder.getRefObject().getFolder(), false);
 	}
 	
 	public FolderArtifact(Artifact folder) {
@@ -80,12 +80,16 @@ public class FolderArtifact extends Artifact {
 	}
 	
 	public FileArtifactList getFileArtifactListForPattern(String pattern){
-		return getFileArtifactListForPattern(pattern, FileArtifact.class);
+		return getFileArtifactListForPattern(FileArtifact.class, pattern);
+	}
+
+	public FileArtifactList getFileArtifactListForPattern(String... patterns){
+		return getFileArtifactListForPattern(FileArtifact.class, patterns);
 	}
 	
-	public FileArtifactList getFileArtifactListForPattern(String pattern, Class<? extends FileArtifact> c){
-		String fileNames[] = getFileNamesForPattern(pattern);
-		return new FileArtifactList(getActivity(), pattern, getFolder(), fileNames, c);
+	public FileArtifactList getFileArtifactListForPattern(Class<? extends FileArtifact> c, String... patterns){
+		String fileNames[] = getFileNamesForPattern(patterns);
+		return new FileArtifactList(getActivity(), patterns.toString(), getFolder(), fileNames, c);
 	}
 	
 	@Override

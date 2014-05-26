@@ -1,0 +1,19 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// TODO: UUIDs?
+// FR=Failure Reason
+global String FR_NO_BUILD_OR_EXEC_FILES_FOUND // = "FR_NO_BUILD_OR_EXEC_FILES_FOUND"
+global String FR_MANY_BUILD_OR_EXEC_FILES_FOUND // = "FR_MANY_BUILD_OR_EXEC_FILES_FOUND"
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+function FileArtifact getTopmost(FileArtifactList list){
+	FileArtifact topmost = list.get(0);
+	for (FileArtifact i : list){
+		if (i.getAbsolutePath().length() < topmost.getAbsolutePath().length()) topmost = i;
+	}
+	
+	return topmost;
+}

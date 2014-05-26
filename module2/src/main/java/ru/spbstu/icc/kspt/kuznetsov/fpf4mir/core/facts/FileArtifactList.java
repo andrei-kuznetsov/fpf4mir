@@ -8,11 +8,17 @@ import java.util.ArrayList;
 
 import org.drools.RuntimeDroolsException;
 
-public class FileArtifactList extends ArrayList<FileArtifact>{
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FPFCloneable;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithName;
+
+public class FileArtifactList extends ArrayList<FileArtifact> implements FPFCloneable, FactWithName {
 	private static final long serialVersionUID = 1L;
 
 	private Activity activity;
-	private String listName;
+	private String name;
+	
+	public FileArtifactList() {
+	}
 	
 	public FileArtifactList(Activity activity, String listName, File baseDir, String fileNames[]) {
 		this(activity, listName, baseDir, fileNames, FileArtifact.class);
@@ -25,7 +31,7 @@ public class FileArtifactList extends ArrayList<FileArtifact>{
 	
 	public FileArtifactList(Activity activity, String listName, File baseDir, String[] fileNames, Class<? extends FileArtifact> c) {
 		this.activity = activity;
-		this.listName = listName;
+		this.name = listName;
 		
 		Constructor<? extends FileArtifact> ctr;
 		
@@ -73,15 +79,15 @@ public class FileArtifactList extends ArrayList<FileArtifact>{
 	public void setActivity(Activity activity) {
 		this.activity = activity;
 	}
-
-	public String getListName() {
-		return listName;
-	}
-
-	public void setListName(String listName) {
-		this.listName = listName;
-	}
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	@Override
 	public String toString() {
 		String s = super.toString();

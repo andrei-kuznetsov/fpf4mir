@@ -21,57 +21,43 @@ end
 
 // ----------------------------------- Output parameters ---------------------------------------
 
-rule "GuessRunExecutable Request Status"
+rule "GuessRunExecutable Request Status - FileArtifactList"
 	when
 		request 'ReqGuessRunExecutable'
 		activity for request
 		activity succeeded
-		'ExecutableFileArtifact' for activity
+		$list : ExecFileArtifactList for activity
 	then
 		set request status succeeded
-		add request status parameter $artifact as GenericExecutableFileArtifactAlias
+		add request status parameter $list as GenericFileArtifactListAlias
 end
 
 // #############################################################################################
 
-rule "Eval full list of files"
+rule "Single file is always considered as executable"
 	when
 		activity 'GuessRunExecutableActivity'
-		'FolderArtifact' for activity
+>		FolderArtifact( activity == $activity, $flist: getFileArtifactListForPattern("**\\*"), $flist.size == 1) 
 	then
->		System.out.println("==========================================================");
->		insert( $artifact.getFileArtifactListForPattern("**\\*") );
->		System.out.println("1");
->		insert( $artifact.getFileArtifactListForPattern("**\\*.exe") );
->		System.out.println("2");
->		insert( $artifact.getFileArtifactListForPattern("**\\*.sh") );
->		System.out.println("3");
->		insert( $artifact.getFileArtifactListForPattern("**\\*.py") );
->		System.out.println("==========================================================");
+		insert artifact '$flist.get(0)' as 'ExecArtifactCandidate'
 end
 
-rule "No candidates"
+rule "sh,exe,jar,py files are executable"
 	when
 		activity 'GuessRunExecutableActivity'
->		$candidates : java.util.LinkedList( size == 0 ) from collect( FileArtifactList(activity == $activity, size >= 1) )
+>		FolderArtifact( activity == $activity, $flist:getFileArtifactListForPattern(
+>			"**\\*.sh","**\\*.exe","**\\*.jar","**\\*.py") )
 	then
-		activity failed with status "No executables found"
+>		for (FileArtifact i : $flist)
+			insert artifact 'i' as 'ExecArtifactCandidate'
 end
 
-rule "Ok candidates"
+rule "List ExecArtifact candidates"
+	salience -1 // shall be less than the salience of rules about ExecArtifactCandidate
 	when
 		activity 'GuessRunExecutableActivity'
->		$candidates : java.util.LinkedList( size == 1 ) from collect( FileArtifactList(activity == $activity, size == 1) )
->		not FileArtifactList(activity == $activity, size >= 1)
+>		$candidates : java.util.LinkedList( size > 1 ) from collect( ExecArtifactCandidate(activity == $activity) )
 	then
+		insert artifact '$candidates' as 'ExecFileArtifactList'
 		activity succeeded
->		insert( new ExecutableFileArtifact($activity, ((FileArtifactList)$candidates.get(0)).get(0)) );
-end
-
-rule "Too many candidates"
-	when
-		activity 'GuessRunExecutableActivity'
->		$candidates : java.util.LinkedList( size > 1 ) from collect( FileArtifactList(activity == $activity, size >= 1) )
-	then
-		activity failed with status "Too many candidates for executable"
 end

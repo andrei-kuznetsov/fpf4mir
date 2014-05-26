@@ -18,19 +18,24 @@
 [when]exec command succeeded=ExecStatus( activity == $activity, succeeded == true )
 
 [when]'{type}' for activity=$artifact : {type}(activity == $activity)
+[when]{type:\w+} for activity={type}(activity == $activity)
+[when]{type:\w+} for request={type}(request == $request)
 
 [then]add subrequest '{type}'={type} r = new {type}(); r.setParentActivity($activity); insert(r);
 [then]add subrequest parameter '{param}' as '{type}'=\{{type} o = new {type}(); o.reset(r, {param}); insert(o);\}
 
-[then]add activity fact from request input=insert( $input.cloneArtifact($activity) );
-[then]add activity fact from request output=insert( $output.cloneArtifact($activity) );
+[then]add activity fact from request input=insert( $input.cloneRefObject($activity) );
+[then]add activity fact from request output=insert( $output.cloneRefObject($activity) );
 
 [then]add ordinal {order} {value}=insertLogical( new OrdinalArgument( $activity, {order}, {value}) );
 [then]execute command "{cmd}" in working dir {wd}=insertLogical( new ListExecCommand($activity, "{cmd}", {wd}, $options) );
 
 [then]activity succeeded=insertLogical( new GenericActivitySucceeded($activity) );
 [then]activity failed with status {status}=insertLogical( new GenericActivityFailed($activity, {status}) );
+[then]activity failed with type {type:\w+} and message {message}=insertLogical( new GenericActivityFailed($activity, {type}, {message}) );
 [then]set request status succeeded=RequestStatus requestStatus = new RequestSucceeded($request, "ok"); insert(requestStatus);
 
 [then]add {type} as request status=add request status parameter $artifact as Generic{type}Alias
 [then]add request status parameter {param} as {type}=\{{type} o = new {type}(); o.reset(requestStatus, {param}); insert(o);\};
+
+[then]insert artifact '{value}' as '{type}'=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};

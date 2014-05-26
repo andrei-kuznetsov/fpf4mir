@@ -3,7 +3,9 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts;
 import java.io.File;
 import java.io.Serializable;
 
-public class Artifact implements Serializable, Cloneable {
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FPFCloneable;
+
+public class Artifact implements Serializable, FPFCloneable {
 	/**
 	 * 
 	 */
@@ -36,7 +38,7 @@ public class Artifact implements Serializable, Cloneable {
 		return file.isDirectory();
 	}
 	
-	public final boolean isFile(){
+	public final boolean isAFile(){
 		return !isDirectory();
 	}
 	
@@ -80,5 +82,11 @@ public class Artifact implements Serializable, Cloneable {
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
+	}
+	
+	public void reset(Activity activity, Artifact artifact){
+		setActivity(activity);
+		setFile(artifact.getFile());
+		setName(artifact.getName());
 	}
 }

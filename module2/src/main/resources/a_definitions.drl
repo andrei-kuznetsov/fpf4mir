@@ -2,6 +2,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
 
+///////////////////////////// java /////////////////////////////////////
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactAliasBase
 	/* java */
 end
@@ -14,9 +15,19 @@ declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity
 	/* java */
 end
 
-declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericReqNewActivity /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase /* java */ end
 
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityFailedBase /* java */ end
+
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FileArtifactBase /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FileArtifactListBase /* java */ end
+
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericReqNewActivity /* java */ end
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqDeployExecutable /* java */ end
+
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.AliasBase2 /* java */ end
+
+///////////////////////////// non-java /////////////////////////////////////
 
 declare DeployFolder extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactAliasBase end
 
@@ -35,4 +46,19 @@ declare ReqDeployFolder extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.
 
 declare ReqGuessRunExecutable extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericReqNewActivity end
 declare GuessRunExecutableActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity end
+declare ExecArtifactCandidate extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FileArtifactBase end
+declare ExecFileArtifactList extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FileArtifactListBase end
+declare ExecFileArtifactListAlias extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.AliasBase2 end
 
+declare ReqGuessBuildFile extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericReqNewActivity end
+declare GuessBuildFileActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity end
+
+
+declare BuildFileCandidate extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FileArtifactBase end
+declare BuildFileArtifactList extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FileArtifactListBase end
+declare BuildFileArtifactListAlias extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.AliasBase2 end
+
+declare BuildFile extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FileArtifactBase end
+declare BuildFileMvn extends BuildFile end
+declare BuildFileAnt extends BuildFile end
+declare BuildFileMake extends BuildFile end

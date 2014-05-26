@@ -196,6 +196,7 @@ public class DeploymentSession {
 		// for (String resFileName : drlFiles) addClassPathEntry(kbuilder,
 		// resFileName, ResourceType.DRL);
 		addClassPathEntry(kbuilder, "a_definitions.drl", ResourceType.DRL);
+		addClassPathEntry(kbuilder, "a_functions.drl", ResourceType.DRL);
 		addClassPathEntry(kbuilder, "basic_actions.drl", ResourceType.DRL);
 		addClassPathEntry(kbuilder, "preprocess.drl", ResourceType.DRL);
 		
