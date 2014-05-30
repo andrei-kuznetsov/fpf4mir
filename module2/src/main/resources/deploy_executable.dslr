@@ -51,7 +51,7 @@ rule "Autodetect rule"
 		not ReqDeployExecOption_Build for request
 		not ReqDeployExecOption_Run for request
 	then
->		insertLogical(new DeployExecOption_Autodetect($activity))
+>		insertLogical(new DeployExecOption_Autodetect($activity));
 end
 		
 rule "Deploy executable from file artifact"
@@ -175,7 +175,7 @@ end
 rule "Build file found"
 	when
 	 	activity 'DeployFolderActivity'
->		ExecFileArtifactList(size == 0, activity == $activity)
+>		$exec : ExecFileArtifactList(size == 0, activity == $activity)
 >		$build : BuildFileArtifactList(size == 1, activity == $activity)
 	then
 		insert artifact '(BuildFile)$exec.get(0)' as 'BuildFile'

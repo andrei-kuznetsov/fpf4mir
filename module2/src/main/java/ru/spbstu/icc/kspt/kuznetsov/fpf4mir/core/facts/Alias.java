@@ -23,8 +23,11 @@ public interface Alias<U> {
 	public U cloneRefObject(Activity newActivity);
 	public U cloneRefObject(Activity newActivity, String newName);
 	
-	public void reset(RequestStatus rstatus, U object);
+	public void reset(RequestStatus rstatus, U object);;
+	public void reset(RequestFact request, U object);
+	
 	public void reset(RequestStatus rstatus, String name, U object);
 	public void reset(RequestFact request, String name, U object);
+	
 	public void reset(RequestFact request, RequestStatus rstatus, String name, U object);
 }

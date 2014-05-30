@@ -19,6 +19,8 @@ import org.drools.builder.KnowledgeBuilder;
 import org.drools.builder.KnowledgeBuilderError;
 import org.drools.builder.KnowledgeBuilderFactory;
 import org.drools.builder.ResourceType;
+import org.drools.definition.KnowledgePackage;
+import org.drools.definition.rule.Global;
 import org.drools.definition.type.FactType;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.ObjectFilter;
@@ -162,21 +164,6 @@ public class DeploymentSession {
 		}
 	}
 
-	private void initSession(File originalArtifact, String dataset) {
-		// ReqNewRun rr = new ReqNewRun(true);
-
-		// ksession.insert(new ReqNewBuild());
-
-		// ksession.insert(new FileArtifact(R.id.OriginalArtifact,
-		// originalArtifact));
-		// ksession.insert(new DataDirRoot(originalArtifact.getParentFile()));
-		// ksession.insert(new CallFormat_MIREX_AudioChordEstimation());
-		// ksession.insert(rr);
-		// ksession.insert(new Dataset("test", new File(dataset)));
-		// ksession.insert(new RunDatasetIn(rr, "test"));
-		// ksession.insert(new ScratchDirIn(null, rr));
-	}
-
 	private void initStatefulSession() throws ZipException, IOException {
 		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory
 				.newKnowledgeBuilder();
@@ -199,7 +186,7 @@ public class DeploymentSession {
 		addClassPathEntry(kbuilder, "a_functions.drl", ResourceType.DRL);
 		addClassPathEntry(kbuilder, "basic_actions.drl", ResourceType.DRL);
 		addClassPathEntry(kbuilder, "preprocess.drl", ResourceType.DRL);
-		
+
 		KnowledgeBase kbase = kbuilder.newKnowledgeBase();
 		debugTactType(kbase, "defaultpkg", "DeployFolder");
 		debugTactType(kbase, "defaultpkg", "ReqDownloadHttp");
@@ -220,6 +207,19 @@ public class DeploymentSession {
 		// ksession.addEventListener(new DebugAgendaEventListener());
 		// ksession.addEventListener(new DebugWorkingMemoryEventListener());
 		ksession.addEventListener(new AgendaDebugListener());
+		initGlobals(kbase, ksession);
+	}
+
+	private void initGlobals(KnowledgeBase kbase,
+			StatefulKnowledgeSession ksession2) {
+		for (KnowledgePackage pkg : kbase.getKnowledgePackages()) {
+			Collection<Global> globals = pkg.getGlobalVariables();
+			for (Global g : globals) {
+				if (g.getClass().isAssignableFrom(String.class)) {
+					ksession2.setGlobal(g.getName(), (String) g.getName());
+				}
+			}
+		}
 	}
 
 	private void debugTactType(KnowledgeBase kbase, String pkg, String name) {

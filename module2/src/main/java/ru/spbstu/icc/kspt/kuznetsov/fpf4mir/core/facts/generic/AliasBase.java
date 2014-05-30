@@ -103,10 +103,15 @@ public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneabl
 
 	@Override
 	public void reset(RequestFact request, String name, U object) {
-		// TODO Auto-generated method stub
-		
+		this.reset(request, null, name, object);
 	}
 
+	@Override
+	public void reset(RequestFact request, U object) {
+		final String name = ((FactWithName)object).getName();
+		this.reset(request, null, name, object);
+	}
+	
 	@Override
 	public void reset(RequestFact request, RequestStatus rstatus, String name,
 			U object) {

@@ -5,9 +5,7 @@ import java.io.IOException;
 
 import org.drools.RuntimeDroolsException;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FPFCloneable;
-
-public class FileArtifact extends Artifact implements FPFCloneable{
+public class FileArtifact extends Artifact {
 
 	/**
 	 * 

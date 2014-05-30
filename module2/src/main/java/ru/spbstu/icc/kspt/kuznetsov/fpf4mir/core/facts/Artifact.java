@@ -3,9 +3,11 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts;
 import java.io.File;
 import java.io.Serializable;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FPFCloneable;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithName;
 
-public class Artifact implements Serializable, FPFCloneable {
+public class Artifact implements Serializable, FPFCloneable, ActivityRelatedFact, FactWithName {
 	/**
 	 * 
 	 */
