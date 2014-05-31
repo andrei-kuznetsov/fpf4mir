@@ -85,11 +85,16 @@ public class Index {
 	@Path(PATH_REQUEST_STATUS + "/{reqId}")
 	public void getStatus(@Context HttpServletResponse response,
 			@Context HttpServletRequest request, @PathParam("reqId") long reqId) throws IOException {
-		List<QResult> status = session.getRequestStatus(reqId);
-		
-		PrintWriter out = response.getWriter();
-		HTMLProducer.produceHTMLPage(status, response, "Status");
-		out.close();
+		try{
+			List<QResult> status = session.getRequestStatus(reqId);
+			
+			PrintWriter out = response.getWriter();
+			HTMLProducer.produceHTMLPage(status, response, "Status");
+			out.close();
+		} catch (RuntimeException rt){
+			rt.printStackTrace();
+			throw rt;
+		}
 	}
 
 }

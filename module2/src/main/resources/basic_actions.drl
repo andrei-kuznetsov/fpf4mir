@@ -33,16 +33,7 @@ rule "Activity_New"
 		factType.set(fact, "request", $rr);
 		insert( fact );
 end
-/*
-rule "Activity Request Success Status"
-	when
-		$request : ReqNewActivity( )
-		$activity : Activity( request == $request )
-		exists ActivitySucceeded( activity == $activity )
-	then
-		insertLogical(new RequestSucceeded($request));
-end
-*/
+
 rule "Activity Request Failure Status"
 	salience -1000 // salience shall be less than for rule "Activity_New"
 	when
@@ -52,4 +43,51 @@ rule "Activity Request Failure Status"
 		not ActivityErrorFixed(activity == $activity)
 	then
 		insertLogical(new RequestFailed($request, $failure.getMessage()));
+end
+
+rule "Propagate UserActionAlias (rstatus)"
+	when
+		$request : ReqNewActivity( )
+		$rstatus : RequestStatus( request == $request )
+		$activity : Activity( request == $request )
+		$ua : UserActionAlias( activity == $activity)
+	then
+		insertLogical(new UserActionAlias($rstatus, $ua));
+end 
+
+rule "Propagate UserActionAlias (activity)"
+	when
+		$activity : Activity(  )
+		$request : ReqNewActivity( parentActivity == $activity )
+		$rstatus : RequestStatus( request == $request )
+		$ua : UserActionAlias( rstatus == $rstatus)
+	then
+		insertLogical(new UserActionAlias($activity, $ua));
+end 
+
+rule "Suspend activity for user action (propagation)"
+	when
+		$activity : Activity( )
+		$ua : UserAction( activity == $activity )
+	then
+		insertLogical(new GenericActivitySuspended($activity, "Activity suspended due to user action: " + $ua));
+		insertLogical(new UserActionAlias($activity, $ua));
+end
+
+rule "Suspend request for suspended activity (propagation)"
+	when
+		$request : ReqNewActivity( )
+		$activity : Activity( request == $request )
+		exists ActivitySuspended( activity == $activity )
+	then
+		insertLogical(new RequestSuspended($request, "Suspended because nested activity is suspended"));
+end
+
+rule "Suspend activity for suspended subrequest (propagation)"
+	when
+		$activity : Activity(  )
+		$request : ReqNewActivity( parentActivity == $activity )
+		exists RequestSuspended( request == $request )
+	then
+		insertLogical(new GenericActivitySuspended($activity, "Suspended because subrequest is suspended"));
 end

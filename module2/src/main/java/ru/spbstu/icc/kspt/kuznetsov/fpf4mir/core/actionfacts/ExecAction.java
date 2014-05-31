@@ -3,10 +3,13 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts;
 import java.io.File;
 import java.util.List;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecCommand;
 
 public class ExecAction extends ActionFactBase implements ActionFact {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3625795389816472639L;
 	private String id;
 	private ExecCommand execCommand;
 

@@ -123,7 +123,7 @@ end
 
 rule "Process ReqGuessRunExecutable result"
 	when 
-	 	activity 'DeployFolderActivity'
+	 	activity 'DeployExecutableActivity'
 		subrequest 'ReqGuessRunExecutable'
 		subrequest succeeded
 		subrequest outputs (
@@ -135,7 +135,7 @@ end
 
 rule "Process ReqGuessRunExecutable result failed"
 	when 
-	 	activity 'DeployFolderActivity'
+	 	activity 'DeployExecutableActivity'
 		subrequest 'ReqGuessRunExecutable'
 		subrequest failed
 	then
@@ -144,7 +144,7 @@ end
 
 rule "Process ReqGuessBuildFile result"
 	when 
-	 	activity 'DeployFolderActivity'
+	 	activity 'DeployExecutableActivity'
 		subrequest 'ReqGuessBuildFile'
 		subrequest succeeded
 		subrequest outputs (
@@ -156,7 +156,7 @@ end
 
 rule "Process ReqGuessBuildFile result failed"
 	when 
-	 	activity 'DeployFolderActivity'
+	 	activity 'DeployExecutableActivity'
 		subrequest 'ReqGuessBuildFile'
 		subrequest failed
 	then
@@ -165,7 +165,7 @@ end
 
 rule "Exec artifact found"
 	when
-	 	activity 'DeployFolderActivity'
+	 	activity 'DeployExecutableActivity'
 >		$exec : ExecFileArtifactList(size == 1, activity == $activity)
 >		BuildFileArtifactList(size == 0, activity == $activity)
 	then
@@ -174,7 +174,7 @@ end
 
 rule "Build file found"
 	when
-	 	activity 'DeployFolderActivity'
+	 	activity 'DeployExecutableActivity'
 >		$exec : ExecFileArtifactList(size == 0, activity == $activity)
 >		$build : BuildFileArtifactList(size == 1, activity == $activity)
 	then
@@ -183,17 +183,25 @@ end
 
 rule "Can build or run (choose build or run)"
 	when
-	 	activity 'DeployFolderActivity'
->		$exec : ExecFileArtifactList(size > 0, activity == $activity)
->		$build : BuildFileArtifactList(size > 0, activity == $activity)
+	 	activity 'DeployExecutableActivity'
+>		(
+>			($exec : ExecFileArtifactList(size > 0, activity == $activity) and $build : BuildFileArtifactList(size > 0, activity == $activity))
+>			or
+>			($exec : ExecFileArtifactList(size > 1, activity == $activity) and $build : BuildFileArtifactList(size == 0, activity == $activity))
+>			or
+>			($exec : ExecFileArtifactList(size == 0, activity == $activity)	and $build : BuildFileArtifactList(size > 1, activity == $activity))
+>		)			
 	then
 		// user action to choose the correct exec or build file
-		
+		def user action UserActionSelectBuildOrRun
+		add user action attr ExecArtifacts as $exec
+		add user action attr BuildArtifacts as $build
+		add user action
 end
 
 rule "Can't build or run (no alternatives)"
 	when
-	 	activity 'DeployFolderActivity'
+	 	activity 'DeployExecutableActivity'
 >		$exec : ExecFileArtifactList(size == 0, activity == $activity)
 >		$build : BuildFileArtifactList(size == 0, activity == $activity)
 	then

@@ -1,5 +1,6 @@
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
 
 query "RequestStatus for request"  (RequestFact r)
     status : RequestStatus(request == r)
@@ -11,9 +12,10 @@ end
 
 query "RequestStatus for request refId"  (long reqRefId)
 	req : RequestFact(refId == reqRefId)
-    status : RequestStatus(request == req)
+    $rstatus : RequestStatus(request == req)
     substatus : java.util.LinkedList(  ) from collect ( RequestSubstatus(request == req) )
     activities : java.util.LinkedList(  ) from collect ( Activity( request == req) )
+    extras : java.util.LinkedList(  ) from collect ( RequestStatusRelatedFact( rstatus == $rstatus ) )
 end
 
 query "Trace request activities"  (RequestFact r)

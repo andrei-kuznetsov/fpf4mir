@@ -27,6 +27,8 @@ declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqDeployExecutab
 
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.AliasBase2 /* java */ end
 
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction /* java */ end
+
 ///////////////////////////// non-java /////////////////////////////////////
 
 declare DeployFolder extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactAliasBase end
@@ -62,3 +64,8 @@ declare BuildFile extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generi
 declare BuildFileMvn extends BuildFile end
 declare BuildFileAnt extends BuildFile end
 declare BuildFileMake extends BuildFile end
+
+declare UserActionSelectBuildOrRun extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction
+	 execArtifacts : ExecFileArtifactList;
+	 buildArtifacts : BuildFileArtifactList
+end

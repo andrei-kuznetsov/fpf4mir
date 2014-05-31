@@ -18,8 +18,6 @@ public class RequestStatus {
 		this.request = request;
 	}
 
-	
-
 	public String getMessage() {
 		return message;
 	}

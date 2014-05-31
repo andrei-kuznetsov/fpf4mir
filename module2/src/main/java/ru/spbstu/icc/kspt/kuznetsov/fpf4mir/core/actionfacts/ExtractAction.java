@@ -5,6 +5,10 @@ import java.io.File;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 
 public class ExtractAction extends ActionFactBase implements ActionFact {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8889730655906841988L;
 	private File file;
 
 	public ExtractAction(Activity activity, File file) {

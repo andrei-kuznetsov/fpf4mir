@@ -1,19 +1,20 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase;
 
-public class ActionFactBase implements ActionFact{
-	private Activity activity;
-	
+public class ActionFactBase extends ActivityRelatedFactBase implements ActionFact{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2616511145672466780L;
+
+	public ActionFactBase() {
+		super();
+	}
+
 	public ActionFactBase(Activity activity) {
-		this.activity = activity;
+		super(activity);
 	}
-
-	public Activity getActivity() {
-		return activity;
-	}
-
-	public void setActivity(Activity activity) {
-		this.activity = activity;
-	}
+	
 }

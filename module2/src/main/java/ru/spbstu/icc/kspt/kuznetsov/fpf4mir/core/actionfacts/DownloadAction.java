@@ -3,9 +3,12 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts;
 import java.net.URI;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 
 public class DownloadAction extends ActionFactBase implements ActionFact {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7325427898452609169L;
 	private URI uri;
 	private String id;
 	

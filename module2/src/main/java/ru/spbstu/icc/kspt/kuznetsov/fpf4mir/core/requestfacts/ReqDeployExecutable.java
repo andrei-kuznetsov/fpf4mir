@@ -3,6 +3,11 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 
 public class ReqDeployExecutable extends RequestFactBase implements ReqNewActivity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1457321945538143431L;
+	
 	private String deploymentName;
 
 	
@@ -17,7 +22,7 @@ public class ReqDeployExecutable extends RequestFactBase implements ReqNewActivi
 	@Override
 	public String toString() {
 		return "ReqDeployExecutable [deploymentName=" + deploymentName
-				+ "]";
+				+ ", getRefId()=" + getRefId() + "]";
 	}
 
 	public String getDeploymentName() {

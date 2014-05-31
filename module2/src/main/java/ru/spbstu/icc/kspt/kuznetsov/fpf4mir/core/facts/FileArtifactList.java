@@ -8,10 +8,11 @@ import java.util.ArrayList;
 
 import org.drools.RuntimeDroolsException;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FPFCloneable;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithName;
 
-public class FileArtifactList extends ArrayList<FileArtifact> implements FPFCloneable, FactWithName {
+public class FileArtifactList extends ArrayList<FileArtifact> implements FPFCloneable, FactWithName, ActivityRelatedFact {
 	private static final long serialVersionUID = 1L;
 
 	private Activity activity;

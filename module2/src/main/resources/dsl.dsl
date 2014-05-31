@@ -21,6 +21,10 @@
 [when]{type:\w+} for activity={type}(activity == $activity)
 [when]{type:\w+} for request={type}(request == $request)
 
+[then]def user action {type:\w+}={type} useraction = new {type}(); useraction.setActivity($activity);
+[then]add user action attr {attr:\w+} as {value}=useraction.set{attr}({value});
+[then]add user action=insert(useraction);
+
 [then]add subrequest '{type}'={type} r = new {type}(); r.setParentActivity($activity); insert(r);
 [then]add subrequest parameter '{param}' as '{type}'=\{{type} o = new {type}(); o.reset(r, {param}); insert(o);\}
 

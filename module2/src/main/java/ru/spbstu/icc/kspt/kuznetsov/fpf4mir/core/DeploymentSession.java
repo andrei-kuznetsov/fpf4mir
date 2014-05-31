@@ -33,6 +33,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.DetectEncodingActio
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.ExecAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.ExtractAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.RunCommandRequestAction;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.DetectEncodingActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ExecActionHandler;
@@ -43,16 +44,22 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.DataDirRoot;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestSubstatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestStatusRelatedFact;
 
 public class DeploymentSession {
-	private static final String QKEY_STATUS = "status";
+	public static enum EXECUTION_STATE {RUNNING, DONE, WAITING_FOR_USER};
+	
+	private static final String QKEY_STATUS = "$rstatus";
 	private static final String QKEY_SUBSTATUS = "substatus";
 	private static final String QKEY_ACTIVITY = "activities";
+	private static final String QKEY_EXTRAS = "extras";
 
 	private StatefulKnowledgeSession ksession = null;
 	private static final Logger log = Logger.getLogger(DeploymentSession.class);
 	private static final Map<Class<? extends ActionFact>, ActionHandler> actionsMap = new HashMap<Class<? extends ActionFact>, ActionHandler>();
 
+	private EXECUTION_STATE state = EXECUTION_STATE.DONE;
+	
 	public void init() throws Exception {
 
 		log.setLevel(Level.ALL);
@@ -109,14 +116,23 @@ public class DeploymentSession {
 					return (object instanceof ActionFact);
 				}
 			});
-
-			if (actions.size() > 0) {
-				executeActions(actions);
+		
+			state = executeActions(actions);
+			
+			switch (state){
+			case RUNNING: 
 				doContinue = true;
 				log.debug("Continue execution...");
-			} else {
+				break;
+			case DONE:
 				doContinue = false;
+				log.debug("Done.");
+				break;
+			case WAITING_FOR_USER:
+				doContinue = false;
+				log.info("Waiting for user action...");
 			}
+
 
 		} while (doContinue);
 
@@ -139,7 +155,7 @@ public class DeploymentSession {
 		// }
 		// }
 
-		log.info("Execution completed with status: ");
+		log.info("Execution completed with status: " + state);
 		// log.info("     build status: "
 		// + (buildStatus.isEmpty() ? " FAILURE " : buildStatus));
 		// log.info("     test run execution: "
@@ -149,19 +165,37 @@ public class DeploymentSession {
 		// : testRunVerification));
 	}
 
-	private void executeActions(Collection<? extends ActionFact> actions)
+	private EXECUTION_STATE executeActions(Collection<? extends ActionFact> actions)
 			throws Exception {
+		
+		final EXECUTION_STATE ret;
+		
+		boolean hasUserAction = false;
+		boolean hasNonUserAction = false;
+		
 		for (ActionFact i : actions) {
-			ActionHandler h = actionsMap.get(i.getClass());
-
-			if (h == null) {
-				throw new RuntimeException("Can't find handler for action "
-						+ i.getClass());
+			if (i instanceof UserAction){
+				log.info("Waiting for user action: " + i);
+				hasUserAction = true;
+			} else {
+				ActionHandler h = actionsMap.get(i.getClass());
+	
+				if (h == null) {
+					throw new RuntimeException("Can't find handler for action "
+							+ i.getClass());
+				}
+	
+				log.debug("Processing action: " + i);
+				h.process(i, ksession);
+				hasNonUserAction = true;
 			}
-
-			log.debug("Processing action: " + i);
-			h.process(i, ksession);
 		}
+		
+		if (hasNonUserAction) ret = EXECUTION_STATE.RUNNING;
+		else if (hasUserAction) ret = EXECUTION_STATE.WAITING_FOR_USER;
+		else ret = EXECUTION_STATE.DONE;
+		
+		return ret;
 	}
 
 	private void initStatefulSession() throws ZipException, IOException {
@@ -185,6 +219,7 @@ public class DeploymentSession {
 		addClassPathEntry(kbuilder, "a_definitions.drl", ResourceType.DRL);
 		addClassPathEntry(kbuilder, "a_functions.drl", ResourceType.DRL);
 		addClassPathEntry(kbuilder, "basic_actions.drl", ResourceType.DRL);
+		addClassPathEntry(kbuilder, "basic_queries.drl", ResourceType.DRL);
 		addClassPathEntry(kbuilder, "preprocess.drl", ResourceType.DRL);
 
 		KnowledgeBase kbase = kbuilder.newKnowledgeBase();
@@ -285,13 +320,16 @@ public class DeploymentSession {
 		public RequestStatus mainStatus;
 		public List<RequestSubstatus> substatuses;
 		public List<Activity> activities;
+		public List<RequestStatusRelatedFact> extras;
 
 		public QResult(RequestStatus mainStatus,
-				List<RequestSubstatus> substatuses, List<Activity> activities) {
+				List<RequestSubstatus> substatuses, List<Activity> activities,
+				List<RequestStatusRelatedFact> extras) {
 			super();
 			this.mainStatus = mainStatus;
 			this.substatuses = substatuses;
 			this.activities = activities;
+			this.extras = extras;
 		}
 	}
 
@@ -313,7 +351,11 @@ public class DeploymentSession {
 						.get(QKEY_SUBSTATUS);
 				List<Activity> activities = (List<Activity>) row
 						.get(QKEY_ACTIVITY);
-				QResult r = new QResult(status, substatus, activities);
+
+				List<RequestStatusRelatedFact> extras = (List<RequestStatusRelatedFact>) row
+						.get(QKEY_EXTRAS);
+				
+				QResult r = new QResult(status, substatus, activities, extras);
 				parsedResults.add(r);
 			}
 

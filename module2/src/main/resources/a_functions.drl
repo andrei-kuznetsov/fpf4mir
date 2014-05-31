@@ -6,6 +6,11 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
 // FR=Failure Reason
 global String FR_NO_BUILD_OR_EXEC_FILES_FOUND
 global String FR_MANY_BUILD_OR_EXEC_FILES_FOUND
+
+// UA=User Action
+global String UA_SELECT_BUILD_OR_RUN
+global String UA_SELECT_BUILD
+global String UA_SELECT_RUN
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function FileArtifact getTopmost(FileArtifactList list){

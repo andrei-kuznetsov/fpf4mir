@@ -10,6 +10,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.DeploymentSession.QResult;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestSubstatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestSubstatusActivityLog;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestStatusRelatedFact;
 
 public class HTMLProducer {
 
@@ -46,6 +47,11 @@ public class HTMLProducer {
 			} else {
 				out.println("<p>" + i.toString() + "</p>");
 			}
+		}
+
+		out.println("<p> EXTRAS: </p>");
+		for (RequestStatusRelatedFact i : status.extras){
+			out.println("<p>" + i.toString() + "</p>");
 		}
 	}
 	

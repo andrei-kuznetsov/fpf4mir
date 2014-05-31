@@ -2,14 +2,16 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestStatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestRelatedFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestStatusRelatedFact;
 
-public interface Alias<U> {
+public interface Alias<U> extends RequestRelatedFact, RequestStatusRelatedFact {
 
-	public RequestFact getRequest();
-	public void setRequest(RequestFact request);
-
-	public RequestStatus getRstatus();
-	public void setRstatus(RequestStatus request);
+	@Override public RequestFact getRequest();
+	@Override public void setRequest(RequestFact request);
+	
+	@Override public RequestStatus getRstatus();
+	@Override public void setRstatus(RequestStatus rstatus);
 	
 	public String getName();
 	public void setName(String name);

@@ -29,7 +29,7 @@ rule "GuessBuildFile Request Status - FileArtifactList"
 		$list : BuildFileArtifactList for activity
 	then
 		set request status succeeded
-		add request status parameter $list as GenericFileArtifactListAlias
+		add request status parameter $list as BuildFileArtifactListAlias
 end
 
 // #############################################################################################
