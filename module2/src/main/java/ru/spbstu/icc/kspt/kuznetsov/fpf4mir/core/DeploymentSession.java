@@ -14,6 +14,7 @@ import java.util.zip.ZipException;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.JsonNode;
 import org.drools.KnowledgeBase;
 import org.drools.builder.KnowledgeBuilder;
 import org.drools.builder.KnowledgeBuilderError;
@@ -31,14 +32,10 @@ import org.drools.runtime.rule.QueryResultsRow;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.ActionFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.DetectEncodingAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.ExecAction;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.ExtractAction;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.RunCommandRequestAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.DetectEncodingActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ExecActionHandler;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ExtractActionHandler;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.RunCommandRequestActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.DataDirRoot;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
@@ -47,8 +44,12 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestSubstatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestStatusRelatedFact;
 
 public class DeploymentSession {
-	public static enum EXECUTION_STATE {RUNNING, DONE, WAITING_FOR_USER};
-	
+	private static final String QKEY_ACTIVITY_OBJECT = "$object";
+
+	public static enum EXECUTION_STATE {
+		RUNNING, DONE, WAITING_FOR_USER
+	};
+
 	private static final String QKEY_STATUS = "$rstatus";
 	private static final String QKEY_SUBSTATUS = "substatus";
 	private static final String QKEY_ACTIVITY = "activities";
@@ -59,7 +60,7 @@ public class DeploymentSession {
 	private static final Map<Class<? extends ActionFact>, ActionHandler> actionsMap = new HashMap<Class<? extends ActionFact>, ActionHandler>();
 
 	private EXECUTION_STATE state = EXECUTION_STATE.DONE;
-	
+
 	public void init() throws Exception {
 
 		log.setLevel(Level.ALL);
@@ -93,16 +94,13 @@ public class DeploymentSession {
 		File f = new File(dataDir);
 		f.mkdirs();
 		log.info("Data dir: " + f.getAbsolutePath());
-		ksession.insert(new DataDirRoot(f));
+		ksession.insert(new DataDirRoot(Activity.USER, f.getAbsolutePath(), ""));
 	}
 
 	private static void initActions() {
-		actionsMap.put(ExtractAction.class, new ExtractActionHandler());
 		actionsMap.put(ExecAction.class, new ExecActionHandler());
 		actionsMap.put(DetectEncodingAction.class,
 				new DetectEncodingActionHandler());
-		actionsMap.put(RunCommandRequestAction.class,
-				new RunCommandRequestActionHandler());
 
 	}
 
@@ -116,11 +114,11 @@ public class DeploymentSession {
 					return (object instanceof ActionFact);
 				}
 			});
-		
+
 			state = executeActions(actions);
-			
-			switch (state){
-			case RUNNING: 
+
+			switch (state) {
+			case RUNNING:
 				doContinue = true;
 				log.debug("Continue execution...");
 				break;
@@ -132,7 +130,6 @@ public class DeploymentSession {
 				doContinue = false;
 				log.info("Waiting for user action...");
 			}
-
 
 		} while (doContinue);
 
@@ -165,36 +162,39 @@ public class DeploymentSession {
 		// : testRunVerification));
 	}
 
-	private EXECUTION_STATE executeActions(Collection<? extends ActionFact> actions)
-			throws Exception {
-		
+	private EXECUTION_STATE executeActions(
+			Collection<? extends ActionFact> actions) throws Exception {
+
 		final EXECUTION_STATE ret;
-		
+
 		boolean hasUserAction = false;
 		boolean hasNonUserAction = false;
-		
+
 		for (ActionFact i : actions) {
-			if (i instanceof UserAction){
+			if (i instanceof UserAction) {
 				log.info("Waiting for user action: " + i);
 				hasUserAction = true;
 			} else {
 				ActionHandler h = actionsMap.get(i.getClass());
-	
+
 				if (h == null) {
 					throw new RuntimeException("Can't find handler for action "
 							+ i.getClass());
 				}
-	
+
 				log.debug("Processing action: " + i);
 				h.process(i, ksession);
 				hasNonUserAction = true;
 			}
 		}
-		
-		if (hasNonUserAction) ret = EXECUTION_STATE.RUNNING;
-		else if (hasUserAction) ret = EXECUTION_STATE.WAITING_FOR_USER;
-		else ret = EXECUTION_STATE.DONE;
-		
+
+		if (hasNonUserAction)
+			ret = EXECUTION_STATE.RUNNING;
+		else if (hasUserAction)
+			ret = EXECUTION_STATE.WAITING_FOR_USER;
+		else
+			ret = EXECUTION_STATE.DONE;
+
 		return ret;
 	}
 
@@ -331,6 +331,23 @@ public class DeploymentSession {
 			this.activities = activities;
 			this.extras = extras;
 		}
+
+		public RequestStatus getMainStatus() {
+			return mainStatus;
+		}
+
+		public List<RequestSubstatus> getSubstatuses() {
+			return substatuses;
+		}
+
+		public List<Activity> getActivities() {
+			return activities;
+		}
+
+		public List<RequestStatusRelatedFact> getExtras() {
+			return extras;
+		}
+
 	}
 
 	public List<QResult> getRequestStatus(long reqRefId) {
@@ -354,7 +371,7 @@ public class DeploymentSession {
 
 				List<RequestStatusRelatedFact> extras = (List<RequestStatusRelatedFact>) row
 						.get(QKEY_EXTRAS);
-				
+
 				QResult r = new QResult(status, substatus, activities, extras);
 				parsedResults.add(r);
 			}
@@ -370,5 +387,60 @@ public class DeploymentSession {
 		QueryResults results = ksession.getQueryResults(
 				"RequestStatus for request", req);
 		return parseQResults(results);
+	}
+
+	private <T> T getTypedObjectById(long id, Class<T> klass) {
+		final String simpleName = klass.getSimpleName();
+
+		QueryResults results = ksession.getQueryResults(simpleName
+				+ " for refId", id);
+		Iterator<QueryResultsRow> it = results.iterator();
+		if (it.hasNext()) {
+			QueryResultsRow r = it.next();
+			if (it.hasNext())
+				log.warn("More than one " + simpleName + " found for refId="
+						+ id);
+
+			T ua = (T) r.get(QKEY_ACTIVITY_OBJECT);
+			return ua;
+		} else {
+			return null;
+		}
+	}
+
+	public UserAction getUserAction(long id) {
+		return getTypedObjectById(id, UserAction.class);
+	}
+
+	public Activity getActivity(long id) {
+		return getTypedObjectById(id, Activity.class);
+	}
+
+	public Object newFact(JsonNode fact) throws InstantiationException, IllegalAccessException {
+		final String className = fact.get("class").asText();
+		final String pkg = className.substring(0, className.lastIndexOf('.') - 1);
+		final String cn = className.substring(className.lastIndexOf('.') + 1);
+		FactType ftype = ksession.getKnowledgeBase().getFactType(pkg, cn);
+		Object o = ftype.newInstance();
+		
+		Iterator<String> it = fact.getFieldNames();
+		
+		while (it.hasNext()){
+			String fname = it.next();
+			if (fname.equals("class")) continue;
+			
+			Class<?> fclass = ftype.getField(fname).getType();
+			if (fclass.isAssignableFrom(String.class)){
+				ftype.set(o, fname, fact.get(fname).asText());
+			} else if (fclass.isAssignableFrom(Integer.class)) {
+				ftype.set(o, fname, fact.get(fname).asInt());
+			} else if (fclass.isAssignableFrom(Long.class)) {
+				ftype.set(o, fname, fact.get(fname).asLong());
+			} else if (fclass.isAssignableFrom(Boolean.class)) {
+				ftype.set(o, fname, fact.get(fname).asBoolean());
+			}
+		}
+		
+		return o;
 	}
 }

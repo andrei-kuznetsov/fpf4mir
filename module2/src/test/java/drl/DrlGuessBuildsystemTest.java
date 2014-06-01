@@ -59,7 +59,7 @@ public class DrlGuessBuildsystemTest {
 		StatefulKnowledgeSession ksession = DrlObjectsUtils.prepareStatefullSession("guessbuildsystem.drl");
 		
 		File f = PathUtils.getTestResourceDir(filePath);
-		FolderArtifact fc = new FolderArtifact(null, f);
+		FolderArtifact fc = new FolderArtifact(null, f.getAbsolutePath(), "");
         
         ksession.insert(fc);
         ksession.fireAllRules();

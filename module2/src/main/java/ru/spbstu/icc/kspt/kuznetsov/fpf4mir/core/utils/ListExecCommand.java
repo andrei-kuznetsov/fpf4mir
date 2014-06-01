@@ -22,7 +22,7 @@ public class ListExecCommand extends BaseExecCommand{
 
 	public ListExecCommand(Activity activity, String command, FolderArtifact workingDir,
 			List<OrdinalArgument> arguments) {
-		super(activity, command, workingDir.getFile());
+		super(activity, command, workingDir._getFile());
 		
 		Collections.sort(arguments);
 		for (OrdinalArgument i : arguments){

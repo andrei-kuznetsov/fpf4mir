@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.5" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.OriginalArtifact" 
-    project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/OriginalArtifact.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="208" x="41" y="128"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
-      <operations public="false" package="false" protected="false" private="false" static="false"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.TextFileArtifact" 
+  <class id="1" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.TextFileArtifact" 
     project="fpf4mir-core" 
     file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/TextFileArtifact.java" 
     binary="false" corner="BOTTOM_RIGHT">    
@@ -23,7 +12,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact" 
+  <class id="2" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact" 
     project="fpf4mir-core" 
     file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/FileArtifact.java" binary="false" 
     corner="BOTTOM_RIGHT">    
@@ -34,7 +23,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.TmpDirRoot" 
+  <class id="3" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.TmpDirRoot" 
     project="fpf4mir-core" 
     file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/env/TmpDirRoot.java" 
     binary="false" corner="BOTTOM_RIGHT">    
@@ -45,7 +34,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact" 
+  <class id="4" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact" 
     project="fpf4mir-core" 
     file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/FolderArtifact.java" 
     binary="false" corner="BOTTOM_RIGHT">    
@@ -56,7 +45,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.DataDirRoot" 
+  <class id="5" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.DataDirRoot" 
     project="fpf4mir-core" 
     file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/env/DataDirRoot.java" 
     binary="false" corner="BOTTOM_RIGHT">    
@@ -67,7 +56,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Artifact" project="fpf4mir-core" 
+  <class id="6" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Artifact" project="fpf4mir-core" 
     file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/Artifact.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="51" width="208" x="289" y="37"/>    
@@ -77,44 +66,25 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunExecutableArtifact" 
-    project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/RunExecutableArtifact.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="208" x="41" y="219"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
-      <operations public="false" package="false" protected="false" private="false" static="false"/>    
-    </display>  
-  </class>  
+  <generalization id="7">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="8">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
   <generalization id="9">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="5"/>  
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
   </generalization>  
   <generalization id="10">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="7"/>  
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="6"/>  
   </generalization>  
   <generalization id="11">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <generalization id="12">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <generalization id="13">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="7"/>  
-  </generalization>  
-  <generalization id="14">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="5"/>  
-  </generalization>  
-  <generalization id="15">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="7"/>  
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="4"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     accessors="true" visibility="true">    

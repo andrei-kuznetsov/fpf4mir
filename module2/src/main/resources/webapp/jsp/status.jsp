@@ -1,25 +1,61 @@
-  <html>
-  <head>
-    <title>Sample Application JSP Page</title>
-  </head>
+<%@page import="java.net.URL"%>
+<%@page import="java.util.List"%>
+<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction"%>
+<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestStatusRelatedFact"%>
+<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserActionAlias"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-  <body bgcolor=white>
+<html>
+<head>
+<title>Request status</title>
+</head>
 
-  <table border="0" cellpadding="10">
-    <tr>
-      <td align=center>
-        <img src="images/springsource.png">
-      </td>
-      <td>
-         <h1>Sample Application JSP Page</h1>
-      </td>
-    </tr>
-  </table>
+<body bgcolor=white>
 
-  <br />
-  <p>This is the output of a JSP page that is part of the HelloWorld application.</p>
+	<c:forEach items="${status}" var="s">
+		<h1>${s.mainStatus.getMessage()}</h1>
+	</c:forEach>
 
-  <%= new String("Hello!") %>
-
-  </body>
-</html> 
+	<br />
+	
+	<h1>Available actions:</h1>
+	<table border ="1">
+	
+	<%
+		List<RequestStatusRelatedFact> extras = (List<RequestStatusRelatedFact>)request.getAttribute("extras");
+		for (RequestStatusRelatedFact i : extras) {
+			if (i instanceof UserActionAlias){
+				UserAction ua = ((UserActionAlias)i).getRefObject();
+				String url = null;
+				String description = null;
+				switch (ua.getClass().getCanonicalName()){
+				case "defaultpkg.UserActionSelectBuildOrRun":
+					url = "/rest/useraction/UserActionSelectBuildOrRun/" + ua.getRefId();
+					description = "Select build script or executable file";
+					break;
+				default:
+					url = null;
+				}
+				
+				if (url != null){
+					%>
+					<tr>
+						<td><%=ua.getClass().getCanonicalName()%></td>
+						<td><a href="<%=url%>"><%=description%></a></td>
+					</tr>
+					<%
+				} else {
+					%>
+					<tr>
+						<td><%=ua.getClass().getCanonicalName()%></td>
+						<td><%=ua.toString()%></td>
+					</tr>
+					<%
+				}
+			}
+		}
+	%>
+	
+	</table>
+</body>
+</html>

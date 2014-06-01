@@ -37,9 +37,10 @@ public class FileArtifactList extends ArrayList<FileArtifact> implements FPFClon
 		Constructor<? extends FileArtifact> ctr;
 		
 		try {
-			ctr = c.getConstructor(Activity.class, File.class);
+			ctr = c.getConstructor(Activity.class, String.class, String.class);
+			final String baseDirName = baseDir.getAbsolutePath();
 			for (String i : fileNames){
-				this.add(ctr.newInstance(activity, new File(baseDir, i)));
+				this.add(ctr.newInstance(activity, baseDirName, i));
 			}
 		} catch (NoSuchMethodException e) {
 			throw new RuntimeDroolsException("Can't create FileArtifactList with parametrized class " + c.toString(), e);

@@ -14,25 +14,6 @@ public class ExecutableFileArtifact extends FileArtifact{
 
 	}
 
-	public ExecutableFileArtifact(Activity parentActivity, ExecutableFileArtifactAlias artifactAlias) {
-		this(parentActivity, artifactAlias.getRefObject());
-	}
-
-	public ExecutableFileArtifact(Activity parentActivity, FileArtifact file) {
-		super(parentActivity, file);
-		workingDir = file.getFile().getParentFile();
-	}
-	
-	public ExecutableFileArtifact(Activity parentActivity, ExecutableFileArtifact file) {
-		super(parentActivity, file);
-		workingDir = file.getWorkingDir();
-	}
-
-	public ExecutableFileArtifact(Activity activity, File file) {
-		super(activity, file);
-		workingDir = file.getParentFile();
-	}
-
 	public File getWorkingDir() {
 		return workingDir;
 	}
@@ -42,16 +23,17 @@ public class ExecutableFileArtifact extends FileArtifact{
 	}
 
 	@Override
-	public void setFile(File file) {
-		super.setFile(file);
+	public void setFileName(String fileName) {
+		super.setFileName(fileName);
 		if (workingDir == null){
-			setWorkingDir(file.getParentFile());
+			setWorkingDir(_getFile().getParentFile());
 		}
 	}
+	
 	@Override
 	public String toString() {
-		return "RunExecutable [workingDir=" + workingDir + ", getFile()="
-				+ getFile() + "]";
+		return getClass().getSimpleName() + " [workingDir=" + workingDir + ", getFile()="
+				+ _getFile() + "]";
 	}
 
 }

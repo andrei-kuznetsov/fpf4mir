@@ -1,6 +1,5 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env;
 
-import java.io.File;
 import java.util.UUID;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
@@ -8,15 +7,16 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
 
 public class TmpDirRoot extends FolderArtifact {
 
-	public TmpDirRoot() {
-		this(null);
-	}
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4897688847520902792L;
 
-	public TmpDirRoot(File file) {
-		super(null, file);
+	public TmpDirRoot(Activity activity, String baseDir, String fileName) {
+		super(activity, baseDir, fileName);
 	}
 
 	public FolderArtifact newTempFolder(Activity activity){
-		return new FolderArtifact(activity, new File(getFile(), UUID.randomUUID().toString()), false);
+		return new FolderArtifact(activity, getAbsolutePath(), UUID.randomUUID().toString());
 	}
 }

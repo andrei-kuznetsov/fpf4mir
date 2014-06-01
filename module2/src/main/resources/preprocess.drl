@@ -28,6 +28,5 @@ rule "DefaultTmpDir"
 		not TmpDirRoot( )
 		$dd : DataDirRoot(  )
 	then
-		java.io.File f = new java.io.File($dd.getFile(), "tmp_" + java.util.UUID.randomUUID().toString());
-		insert(new TmpDirRoot(f)); 
+		insert(new TmpDirRoot(Activity.USER, $dd.getAbsolutePath(), "tmp_" + java.util.UUID.randomUUID().toString())); 
 end

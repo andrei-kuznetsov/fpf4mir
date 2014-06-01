@@ -3,6 +3,8 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts;
 import java.io.File;
 import java.io.Serializable;
 
+import org.drools.RuntimeDroolsException;
+
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FPFCloneable;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithName;
@@ -13,11 +15,15 @@ public class Artifact implements Serializable, FPFCloneable, ActivityRelatedFact
 	 */
 	private static final long serialVersionUID = -5672946567969136742L;
 	
-	private File file;
+	private String fileName;
+	private String baseDir;
+	
 	private Activity activity;
 	private String name;
 	
-	protected Artifact(Activity activity, File file) {
+	private File _fileCache = null;
+	
+	/*protected Artifact(Activity activity, File file) {
 		this.activity = activity;
 		this.file = file;
 	}
@@ -28,36 +34,65 @@ public class Artifact implements Serializable, FPFCloneable, ActivityRelatedFact
 	
 	protected Artifact(Activity activity) {
 		this(activity, null);
+	}*/
+	
+
+	protected Artifact(){
 	}
 	
-	
+	public Artifact(Activity activity, String baseDir, String fileName) {
+		this.activity = activity;
+		this.baseDir = baseDir;
+		this.fileName = fileName;
+	}
+
 	protected Artifact(Artifact other){
-		this.file = other.file;
+		this.fileName = other.fileName;
+		this.baseDir = other.baseDir;
 		this.activity = other.activity;
 	}
 
 	public boolean isDirectory() {
-		return file.isDirectory();
+		return _getFile().isDirectory();
 	}
-	
+	/*
 	public final boolean isAFile(){
 		return !isDirectory();
-	}
+	}*/
 	
 	public String getFileName() {
-		return file.getName();
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+		_fileCache = null;
+		this.validate(_getFile());
+	}
+
+	public String getBaseDir() {
+		return baseDir;
+	}
+
+	public void setBaseDir(String baseDir) {
+		this.baseDir = baseDir;
+		_fileCache = null;
+		//this.validate(_getFile());
+	}
+
+	protected void validate(File _getFile) throws RuntimeDroolsException{
+		// ok
 	}
 
 	public String getAbsolutePath() {
-		return file.getAbsolutePath();
+		return _getFile().getAbsolutePath();
 	}
 	
-	public File getFile() {
-		return file;
-	}
-
-	public void setFile(File file) {
-		this.file = file;
+	public final File _getFile() {
+		if (_fileCache == null){
+			_fileCache = new File(baseDir, fileName);
+		}
+		return _fileCache;
 	}
 
 	public Activity getActivity() {
@@ -78,7 +113,7 @@ public class Artifact implements Serializable, FPFCloneable, ActivityRelatedFact
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [file=" + file + ", activity=" + activity + "]";
+		return getClass().getSimpleName() + " [fileName=" + fileName + ", activity=" + activity + "]";
 	}
 	
 	@Override
@@ -87,8 +122,14 @@ public class Artifact implements Serializable, FPFCloneable, ActivityRelatedFact
 	}
 	
 	public void reset(Activity activity, Artifact artifact){
-		setActivity(activity);
-		setFile(artifact.getFile());
-		setName(artifact.getName());
+		this.reset(activity, artifact.baseDir, artifact.fileName);
 	}
+
+	public void reset(Activity activity, String baseDir, String fileName) {
+		this.activity = activity;
+		this.baseDir = baseDir;
+		this.fileName = fileName;
+		validate(_getFile());
+	}
+	
 }

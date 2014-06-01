@@ -109,12 +109,15 @@ public class DrlTestRunVerify {
 		StatefulKnowledgeSession ksession = DrlObjectsUtils.prepareStatefullSession(DRL_FILENAME);
         
 		ReqNewRun rr = new ReqNewRun(true, null);
-		Dataset dataset = new Dataset("test", PathUtils.getTestResourceDir(srcDir));
-        RunDatasetIn src = new RunDatasetIn(rr, dataset.getDatasetId());
-        RunActivity testRun = (RunActivity) new RunActivity().reset(R.id.TestActivity, 1, new Date(), rr);
+		Dataset dataset = new Dataset(null, PathUtils.getTestResourceDir(srcDir).getAbsolutePath(), "");
+		dataset.setName("test");
+		
+        RunDatasetIn src = new RunDatasetIn(rr, dataset.getName());
+        RunActivity testRun = (RunActivity) new RunActivity().reset(R.id.TestActivity, new Date(), rr);
 		Dataset_FileArtifactList dsal = new Dataset_FileArtifactList(testRun, dataset, "*.wav", null);
         ActionStatus status = new ExecStatus(testRun, null, 0, null, null);
-        ResultDir4Run res = new ResultDir4Run(testRun, PathUtils.getTestResourceDir(resDir));
+        ResultDir4Run res = new ResultDir4Run();
+        res.reset(testRun, PathUtils.getTestResourceDir(resDir).getAbsolutePath(), "");
 
         ksession.insert(testRun);
         ksession.insert(src);

@@ -1,6 +1,7 @@
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 
 query "RequestStatus for request"  (RequestFact r)
     status : RequestStatus(request == r)
@@ -23,4 +24,12 @@ query "Trace request activities"  (RequestFact r)
     activitySuccess : ActivitySucceeded( activity == activity )
     activityError : ActivityError( activity == activity )
     activityErrorFixed : ActivityErrorFixed( activity == activity )
+end
+
+query "UserAction for refId"  (long refId)
+	$object : UserAction( refId == refId )
+end
+
+query "Activity for refId"  (long refId)
+	$object : Activity( refId == refId )
 end

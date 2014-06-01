@@ -1,31 +1,20 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir;
 
-import java.io.File;
-
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
 
 public class Dataset extends FolderArtifact {
-	private String datasetId;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8836980620067197908L;
 	
-	public Dataset(String datasetId, File file) {
-		super(null, file, true);
-		this.datasetId = datasetId;
+	public Dataset() {
+		super();
 	}
 
-	public String getDatasetId() {
-		return datasetId;
-	}
-
-	public void setDatasetId(String datasetId) {
-		this.datasetId = datasetId;
-	}
-	
-	
-
-	@Override
-	public String toString() {
-		return "Dataset [datasetId=" + datasetId + ", getAbsolutePath()="
-				+ getAbsolutePath() + "]";
+	public Dataset(Activity activity, String baseDir, String fileName) {
+		super(activity, baseDir, fileName);
 	}
 
 }

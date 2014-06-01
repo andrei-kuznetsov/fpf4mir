@@ -16,25 +16,9 @@ public class FileArtifact extends Artifact {
 		super();
 	}
 
-	public FileArtifact(Activity activity, File file) {
-		super(activity, file);
-		setFile(file);
-	}
-
-	public FileArtifact(Activity activity, Artifact file) {
-		this(activity, file.getFile());
-	}
-
-	public FileArtifact(Activity activity, FileArtifactAlias file) {
-		this(activity, file.getRefObject());
-	}
-	
-	public FileArtifact(Artifact artifact) {
-		this(artifact.getActivity(), artifact.getFile());
-	}
-	
-	public FileArtifact(Activity activity) {
-		super(activity);
+	public FileArtifact(Activity activity, String baseDir, String fileName) {
+		super(activity, baseDir, fileName);
+		validate(_getFile());
 	}
 
 	@Override
@@ -43,7 +27,7 @@ public class FileArtifact extends Artifact {
 	}
 	
 	@Override
-	public void setFile(File file) {
+	public final void validate(File file) {
 		if (file != null){
 			if (!file.exists()){
 				try {
@@ -55,7 +39,6 @@ public class FileArtifact extends Artifact {
 				throw new RuntimeDroolsException("Artifact must be a file!");
 			}
 		}
-		super.setFile(file);
 	}
 
 	@Override

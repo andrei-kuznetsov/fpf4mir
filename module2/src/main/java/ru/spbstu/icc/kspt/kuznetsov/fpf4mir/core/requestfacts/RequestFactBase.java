@@ -3,8 +3,9 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts;
 import java.io.Serializable;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithRefId;
 
-public class RequestFactBase implements RequestFact, Serializable {
+public class RequestFactBase implements RequestFact, Serializable, FactWithRefId {
 	/**
 	 * 
 	 */
@@ -31,10 +32,12 @@ public class RequestFactBase implements RequestFact, Serializable {
 		this.parentActivity = parentActivity;
 	}
 
+	@Override
 	public long getRefId() {
 		return refId;
 	}
 
+	@Override
 	public void setRefId(long refId) {
 		this.refId = refId;
 	}

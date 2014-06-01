@@ -17,7 +17,7 @@ public class Dataset_FileArtifactList extends FileArtifactList {
 		this.dataset = dataset;
 		
 		if (tmpDir != null){
-			materializedFile = materialize(tmpDir.getFolder());
+			materializedFile = materialize(tmpDir._getFile());
 		} else {
 			materializedFile = null;
 		}

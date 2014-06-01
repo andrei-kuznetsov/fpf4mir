@@ -14,7 +14,7 @@ public class TestRunVerification_FileNamesOkTest {
 
 	@Test
 	public void test() {
-		RunActivity run = (RunActivity) new RunActivity().reset(R.id.TestActivity, 0, new Date(), null);
+		RunActivity run = (RunActivity) new RunActivity().reset(R.id.TestActivity, new Date(), null);
 		TestRunVerification_FileFormatOk fmt = new TestRunVerification_FileFormatOk(run);
 		TestRunVerification_FileNamesOk fn = new TestRunVerification_FileNamesOk(run);
 		

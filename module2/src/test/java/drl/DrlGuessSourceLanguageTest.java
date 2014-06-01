@@ -50,7 +50,7 @@ public class DrlGuessSourceLanguageTest {
 		StatefulKnowledgeSession ksession = DrlObjectsUtils.prepareStatefullSession(GUESSSOURCELANGUAGE_DRL);
 		
 		File f = PathUtils.getTestResourceDir("/guess_language/cpp_java_py");
-		FolderArtifact fc = new FolderArtifact(null, f);
+		FolderArtifact fc = new FolderArtifact(null, f.getAbsolutePath(), "");
         
         ksession.insert(fc);
         ksession.fireAllRules();
@@ -81,7 +81,7 @@ public class DrlGuessSourceLanguageTest {
         
         File f = PathUtils.getTestResourceDir(filePath);
         
-        FolderArtifact fc = new FolderArtifact(null, f);
+        FolderArtifact fc = new FolderArtifact(null, f.getAbsolutePath(), "");
         
         ksession.insert(fc);
         ksession.fireAllRules();
