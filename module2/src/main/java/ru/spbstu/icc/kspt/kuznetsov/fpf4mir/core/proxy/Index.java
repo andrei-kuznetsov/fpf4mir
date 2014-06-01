@@ -2,10 +2,10 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.proxy;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URI;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +13,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
@@ -28,23 +27,16 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericFileArtifa
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericFolderArtifactAlias;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqDeployExecutable;
 
-@Path("/")
+@Path("/rest")
 public class Index {
 
+	private static final String PATH_ROOT = "/rest";
 	private static final String PATH_STATUS = "/status";
 	private static final String PATH_REQUEST_STATUS = PATH_STATUS + "/request";
 
 	private DeploymentSession session = new DeploymentSession();
 	private static volatile long reqRefId = 1;
 
-	@GET
-	@Produces("text/html")
-	public Response index() {
-		return Response.ok(
-				getClass().getClassLoader().getResourceAsStream(
-						"webapp/index.html"), "text/html;charset=utf-8")
-				.build();
-	}
 
 	@POST
 	@Path("/original_artifact")
@@ -74,7 +66,7 @@ public class Index {
 			session.reset(); // recreate new session
 			session.assertFactAndRun(req, userArtifact, artifactAlias);
 			
-			return Response.seeOther(new URI(PATH_REQUEST_STATUS + "/" + req.getRefId())).build();
+			return Response.seeOther(new URI(PATH_ROOT + PATH_REQUEST_STATUS + "/" + req.getRefId())).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ServletException("Can't init deployment session", e);
@@ -84,13 +76,17 @@ public class Index {
 	@GET
 	@Path(PATH_REQUEST_STATUS + "/{reqId}")
 	public void getStatus(@Context HttpServletResponse response,
-			@Context HttpServletRequest request, @PathParam("reqId") long reqId) throws IOException {
+			@Context HttpServletRequest request, @PathParam("reqId") long reqId) throws IOException, ServletException {
 		try{
 			List<QResult> status = session.getRequestStatus(reqId);
 			
-			PrintWriter out = response.getWriter();
-			HTMLProducer.produceHTMLPage(status, response, "Status");
-			out.close();
+//			PrintWriter out = response.getWriter();
+//			HTMLProducer.produceHTMLPage(status, response, "Status");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/status.jsp");
+			request.s
+			dispatcher.forward(request, response);
+			
+//			out.close();
 		} catch (RuntimeException rt){
 			rt.printStackTrace();
 			throw rt;

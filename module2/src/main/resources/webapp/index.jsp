@@ -7,7 +7,7 @@
 <body>
 	<h1>Hello World!</h1>
 
-	<form id="file-form" action="original_artifact" method="POST" enctype="multipart/form-data">
+	<form id="file-form" action=" original_artifact" method="POST" enctype="multipart/form-data">
 		<input type="file" id="file-select" name="originalArtifact" />
 		<button type="submit" id="upload-button">Upload</button>
 	</form>
