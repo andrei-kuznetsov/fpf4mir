@@ -418,7 +418,7 @@ public class DeploymentSession {
 
 	public Object newFact(JsonNode fact) throws InstantiationException, IllegalAccessException {
 		final String className = fact.get("class").asText();
-		final String pkg = className.substring(0, className.lastIndexOf('.') - 1);
+		final String pkg = className.substring(0, className.lastIndexOf('.'));
 		final String cn = className.substring(className.lastIndexOf('.') + 1);
 		FactType ftype = ksession.getKnowledgeBase().getFactType(pkg, cn);
 		Object o = ftype.newInstance();

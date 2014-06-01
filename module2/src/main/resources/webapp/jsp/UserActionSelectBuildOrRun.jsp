@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 //javascript-код голосования из примера
-function vote() {
+function assertFact(factType, baseDir, fileName) {
 	var req = new XMLHttpRequest();
 	
 	req.onreadystatechange = function() {  
@@ -21,8 +21,8 @@ function vote() {
 		}
 	}
 
-	req.open('POST', '/rest/echo', true);  //assert/activity/${uaction.getActivity().getRefId()}
-	req.send('test-test');
+	req.open('POST', '/rest/assert/activity/${uaction.getActivity().getRefId()}', true);
+	req.send('{"class":"' + factType + '","baseDir":"' + baseDir + '","fileName":"' + fileName + '"}');
 }
 
 </script>
@@ -44,6 +44,6 @@ function vote() {
 		</c:forEach>
 	</ul>
 	<hr>
-	<a href="javascript:vote()">My link</a>
+	<a href="javascript:assertFact('defaultpkg.BuildFile', '/home/andrei/OpenShift/datadir/tmp_2fdf6d85-e99c-4ab5-93a4-4e3e429feab9/3aed16f3-32ea-4a59-af85-16fe6d05d183', 'chordest-master/chordest/pom.xml')">My link</a>
 </body>
 </html>

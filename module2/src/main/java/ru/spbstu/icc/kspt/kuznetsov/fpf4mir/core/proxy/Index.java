@@ -160,11 +160,14 @@ public class Index {
 			for (JsonNode i : root){
 				ActivityRelatedFact fact = (ActivityRelatedFact) session.newFact(i);
 				fact.setActivity(activity);
+				session.assertFact(fact);
 			}
 		} else {
 			ActivityRelatedFact fact = (ActivityRelatedFact) session.newFact(root);
 			fact.setActivity(activity);
+			session.assertFact(fact);
 		}
+		session.run();
 	}
 
 	@GET
