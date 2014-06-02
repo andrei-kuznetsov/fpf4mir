@@ -9,6 +9,7 @@
 [when]input '{type}'=$input : {type}( request == $request ) 
 
 [when]subrequest '{subrequest}'=$subrequest : {subrequest}(parentActivity == $activity)
+#[when]- has name=name != null
 [when]subrequest succeeded=$subrequestStatus : RequestSucceeded( request == $subrequest )
 [when]subrequest failed=$subrequestStatus : RequestFailed( request == $subrequest )
 [when]subrequest outputs \(=(or

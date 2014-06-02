@@ -30,6 +30,11 @@ public class DrlParserTest extends TestCase {
     	String dslr = "/guess_run_executable.dslr";
 		printExpandedRule(dslr);
     }
+
+    public void testExpandDRL_build() throws Exception {
+    	String dslr = "/build.dslr";
+		printExpandedRule(dslr);
+    }
     
 	private void printExpandedRule(String dslr) throws IOException,
 			DroolsParserException {

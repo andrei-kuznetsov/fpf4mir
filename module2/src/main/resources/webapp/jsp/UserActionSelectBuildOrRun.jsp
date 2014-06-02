@@ -21,7 +21,7 @@ function assertFact(factType, baseDir, fileName) {
 		}
 	}
 
-	req.open('POST', '/rest/assert/activity/${uaction.getActivity().getRefId()}', true);
+	req.open('POST', '/rest/useraction/${uaction.getClass().getSimpleName()}/${uaction.getActivity().getRefId()}/handled', true);
 	req.send('{"class":"' + factType + '","baseDir":"' + baseDir + '","fileName":"' + fileName + '"}');
 }
 
@@ -32,7 +32,9 @@ function assertFact(factType, baseDir, fileName) {
 	
 	<ul>
 		<c:forEach items="${uaction.buildArtifacts}" var="b">
-			<li> <a href="build">${b.getFileName()}</a><br>
+			<li>
+			<a href="javascript:assertFact('defaultpkg.BuildFile', '${b.getBaseDir().replace('\\','//')}', '${b.getFileName().replace('\\','//')}')">${b.fileName}</a> 
+			<br>
 		</c:forEach>
 	</ul>
 	
@@ -43,7 +45,5 @@ function assertFact(factType, baseDir, fileName) {
 			<li> <a href="run">${b.getFileName()}</a><br>
 		</c:forEach>
 	</ul>
-	<hr>
-	<a href="javascript:assertFact('defaultpkg.BuildFile', '/home/andrei/OpenShift/datadir/tmp_2fdf6d85-e99c-4ab5-93a4-4e3e429feab9/3aed16f3-32ea-4a59-af85-16fe6d05d183', 'chordest-master/chordest/pom.xml')">My link</a>
 </body>
 </html>

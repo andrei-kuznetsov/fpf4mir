@@ -78,27 +78,6 @@ rule "Deploy executable from URL"
 		add subrequest parameter '$ref' as 'GenericArtifactRefAlias'
 end
 
-rule "Assert DeployFolder Artifact"
-	when 
-	    activity 'DeployExecutableActivity'
-		subrequest 'ReqDeployFolder'
-		subrequest succeeded
-		subrequest outputs (
-			subrequest output 'DeployFolder'
->		)
-	then
-		add activity fact from request output
-end
-
-rule "Process DeployFolder Artifact request faled"
-	when 
-	    activity 'DeployExecutableActivity'
-		subrequest 'ReqDeployFolder'
-		subrequest failed
-	then
-		activity failed with status "Can't deploy artifact locally. Reason: " + $subrequestStatus.getMessage()
-end
-
 rule "Evaluate run executable"
 	when
 		activity 'DeployExecutableActivity'
@@ -119,48 +98,6 @@ rule "Evaluate build file"
 	then
 		add subrequest 'ReqGuessBuildFile'
 		add subrequest parameter '$artifact' as 'GenericFolderArtifactAlias'
-end
-
-rule "Process ReqGuessRunExecutable result"
-	when 
-	 	activity 'DeployExecutableActivity'
-		subrequest 'ReqGuessRunExecutable'
-		subrequest succeeded
-		subrequest outputs (
-			subrequest output 'ExecFileArtifactListAlias'
->		)
-	then
-		add activity fact from request output
-end
-
-rule "Process ReqGuessRunExecutable result failed"
-	when 
-	 	activity 'DeployExecutableActivity'
-		subrequest 'ReqGuessRunExecutable'
-		subrequest failed
-	then
-		activity failed with status "Can't guess executable"
-end
-
-rule "Process ReqGuessBuildFile result"
-	when 
-	 	activity 'DeployExecutableActivity'
-		subrequest 'ReqGuessBuildFile'
-		subrequest succeeded
-		subrequest outputs (
-			subrequest output 'BuildFileArtifactListAlias'
->		)
-	then
-		add activity fact from request output
-end
-
-rule "Process ReqGuessBuildFile result failed"
-	when 
-	 	activity 'DeployExecutableActivity'
-		subrequest 'ReqGuessBuildFile'
-		subrequest failed
-	then
-		activity failed with status "Can't guess build file"
 end
 
 rule "Exec artifact found"
@@ -184,13 +121,14 @@ end
 rule "Can build or run (choose build or run)"
 	when
 	 	activity 'DeployExecutableActivity'
+	 	not ExecutableFileArtifact for activity
 >		(
 >			($exec : ExecFileArtifactList(size > 0, activity == $activity) and $build : BuildFileArtifactList(size > 0, activity == $activity))
 >			or
 >			($exec : ExecFileArtifactList(size > 1, activity == $activity) and $build : BuildFileArtifactList(size == 0, activity == $activity))
 >			or
 >			($exec : ExecFileArtifactList(size == 0, activity == $activity)	and $build : BuildFileArtifactList(size > 1, activity == $activity))
->		)			
+>		)
 	then
 		// user action to choose the correct exec or build file
 		def user action UserActionSelectBuildOrRun
@@ -206,6 +144,16 @@ rule "Can't build or run (no alternatives)"
 >		$build : BuildFileArtifactList(size == 0, activity == $activity)
 	then
 		activity failed with type FR_NO_BUILD_OR_EXEC_FILES_FOUND and message "no build or executable files found"
+end
+
+rule "Do build"
+	when
+		activity 'DeployExecutableActivity'
+		$artifact : BuildFile for activity
+		not ExecutableFileArtifact for activity
+	then
+		add subrequest 'ReqBuild'
+		add subrequest parameter '$artifact' as 'GenericFileArtifactAlias'
 end
 
 rule "Eval DeployExecutableActivity succeeded"
