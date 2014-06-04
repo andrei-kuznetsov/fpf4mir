@@ -1,22 +1,18 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunActivity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase;
 
-public class Dataset_FileArtifactList4Run {
-	private RunActivity run;
+public class Dataset_FileArtifactList4Run extends ActivityRelatedFactBase{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4734458785715993173L;
 	private Dataset_FileArtifactList list;
 	
-	public Dataset_FileArtifactList4Run(RunActivity run, Dataset_FileArtifactList list) {
-		this.run = run;
+	public Dataset_FileArtifactList4Run(Activity run, Dataset_FileArtifactList list) {
+		super(run);
 		this.list = list;
-	}
-
-	public RunActivity getRun() {
-		return run;
-	}
-
-	public void setRun(RunActivity run) {
-		this.run = run;
 	}
 
 	public Dataset_FileArtifactList getList() {
@@ -29,7 +25,7 @@ public class Dataset_FileArtifactList4Run {
 
 	@Override
 	public String toString() {
-		return "Dataset_FileArtifactList4Run [run=" + run + ", list=" + list
+		return "Dataset_FileArtifactList4Run [run=" + getActivity() + ", list=" + list
 				+ "]";
 	}
 	

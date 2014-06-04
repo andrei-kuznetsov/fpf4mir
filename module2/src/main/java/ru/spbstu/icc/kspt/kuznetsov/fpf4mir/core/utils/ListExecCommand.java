@@ -39,32 +39,6 @@ public class ListExecCommand extends BaseExecCommand{
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result
-				+ ((arguments == null) ? 0 : arguments.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (!(obj instanceof ListExecCommand))
-			return false;
-		ListExecCommand other = (ListExecCommand) obj;
-		if (arguments == null) {
-			if (other.arguments != null)
-				return false;
-		} else if (!arguments.equals(other.arguments))
-			return false;
-		return true;
-	}
-
-	@Override
 	public void addKey(String key) {
 		arguments.add(key);
 	}

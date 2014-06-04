@@ -1,5 +1,6 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts;
 
-public interface ActivityStatus {
-	public Activity getActivity();
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityRelatedFact;
+
+public interface ActivityStatus extends ActivityRelatedFact{
 }

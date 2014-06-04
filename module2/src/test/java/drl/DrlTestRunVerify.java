@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -14,9 +13,8 @@ import org.drools.runtime.StatefulKnowledgeSession;
 import org.junit.Test;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActionStatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecStatus;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.R;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunActivity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.Dataset;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.Dataset_FileArtifactList;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.Dataset_FileArtifactList4Run;
@@ -26,7 +24,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.RunDatasetIn;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.TestRunVerificationSucceeded;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.TestRunVerification_FileFormatOk;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.TestRunVerification_FileNamesOk;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqNewRun;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqRun;
 import utils.AgendaListener;
 import utils.DrlObjectsUtils;
 import utils.PathUtils;
@@ -108,12 +106,12 @@ public class DrlTestRunVerify {
 			throws URISyntaxException {
 		StatefulKnowledgeSession ksession = DrlObjectsUtils.prepareStatefullSession(DRL_FILENAME);
         
-		ReqNewRun rr = new ReqNewRun(true, null);
+		ReqRun rr = new ReqRun();
 		Dataset dataset = new Dataset(null, PathUtils.getTestResourceDir(srcDir).getAbsolutePath(), "");
 		dataset.setName("test");
 		
         RunDatasetIn src = new RunDatasetIn(rr, dataset.getName());
-        RunActivity testRun = (RunActivity) new RunActivity().reset(R.id.TestActivity, new Date(), rr);
+        Activity testRun = null; //TODO: (RunActivity) new RunActivity().reset(R.id.TestActivity, new Date(), rr);
 		Dataset_FileArtifactList dsal = new Dataset_FileArtifactList(testRun, dataset, "*.wav", null);
         ActionStatus status = new ExecStatus(testRun, null, 0, null, null);
         ResultDir4Run res = new ResultDir4Run();

@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-//javascript-код голосования из примера
+
 function assertFact(factType, baseDir, fileName) {
 	var req = new XMLHttpRequest();
 	
@@ -16,12 +16,12 @@ function assertFact(factType, baseDir, fileName) {
             // complete
 
 			if(req.status == 200) { 
-				alert("response: "+req.responseText);
+				//alert("response: "+req.responseText);
 			}
 		}
 	}
 
-	req.open('POST', '/rest/useraction/${uaction.getClass().getSimpleName()}/${uaction.getActivity().getRefId()}/handled', true);
+	req.open('POST', '/rest/useraction/${uaction.getClass().getSimpleName()}/${uaction.getRefId()}/handled', true);
 	req.send('{"class":"' + factType + '","baseDir":"' + baseDir + '","fileName":"' + fileName + '"}');
 }
 

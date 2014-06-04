@@ -60,7 +60,7 @@ public class DrlBuildTest {
         assertEquals(1, omap.get(MvnBuild.class).size());
         
         // Now fix the build
-        BuildErrorFixed fix = new BuildErrorFixed(new JavacErr_UnmappableCharacter(b, ""));
+        BuildErrorFixed fix = null;//TODO: new BuildErrorFixed(new JavacErr_UnmappableCharacter(b, ""));
         ksession.insert(fix);
         ksession.fireAllRules();
         System.out.println(Arrays.deepToString(al.getFiredRules().toArray()));

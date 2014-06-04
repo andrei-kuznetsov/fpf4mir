@@ -1,0 +1,56 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+declare RequestOutputProcessed
+	activity : Activity
+	output : Alias
+end
+
+declare RequestInputProcessed
+	activity : Activity
+	input : Alias
+end
+
+rule "Activity facts from request"
+	when
+		request 'ReqNewActivity'
+		activity for request
+		request inputs (
+		    input 'Alias'
+>		)
+>		not RequestInputProcessed( activity == $activity, input == $input )
+	then
+		add activity fact from request input
+>		insert(new RequestOutputProcessed($activity, $input));
+end
+
+
+rule "Process any Request result successfull"
+	when 
+	 	activity 'Activity'
+		subrequest 'ReqNewActivity'
+		subrequest succeeded
+		subrequest outputs (
+			subrequest output 'Alias'
+>		)
+>		not RequestOutputProcessed( activity == $activity, output == $output )
+	then
+>		System.out.println("## Activity: " + $activity);
+>		System.out.println("## Subrequest: " + $subrequest);
+>		System.out.println("## Alias: " + $output);
+		add activity fact from request output
+>		insert(new RequestOutputProcessed($activity, $output));
+end
+
+
+rule "Process any Request result failed"
+	when 
+	 	activity 'Activity'
+		subrequest 'ReqNewActivity'
+		subrequest failed
+	then
+		activity failed with status "Subrequest failed: " + $subrequestStatus.getMessage()
+end

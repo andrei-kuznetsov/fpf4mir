@@ -8,17 +8,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 
 
 // #################################### Input parameters #######################################
-rule "Populate input parameters for GuessBuildFileActivity from ReqGuessBuildFile"
-	when
-		request 'ReqGuessBuildFile'
-		activity for request
-		request inputs (
-		    input 'FolderArtifactAlias'
->		)
-	then
-		add activity fact from request input
-end
-
+// automatic
 // ----------------------------------- Output parameters ---------------------------------------
 
 rule "GuessBuildFile Request Status - FileArtifactList"

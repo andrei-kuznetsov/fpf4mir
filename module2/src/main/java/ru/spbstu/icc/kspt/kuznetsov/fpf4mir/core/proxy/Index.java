@@ -3,6 +3,7 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.proxy;
 import java.io.IOException;
 import java.io.Reader;
 import java.net.URI;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,6 +35,8 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericFileArtifa
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericFolderArtifactAlias;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.proxy.Utils.UploadedFileDetails;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqDeployExecutable;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestStatusRelatedFact;
 
@@ -51,16 +54,56 @@ public class Index {
 	private static final Logger log = Logger.getLogger(Index.class);
 
 	private ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
+
+	@GET
+	@Path("/dbg")
+	public void dbgAll(@Context HttpServletRequest request,
+			@Context HttpServletResponse response) throws ServletException, IOException{
+		HashMap<Object, List<Object>> tree = new HashMap<>();
+		fillDbgTraceTree(tree, Activity.USER);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/dbg_tree.jsp");
+		request.setAttribute("tree", tree);
+		request.setAttribute("root", Activity.USER);
+		dispatcher.forward(request, response);
+	}
 	
+	
+	private void fillDbgTraceTree(HashMap<Object, List<Object>> tree,
+			Object key) {
+		
+		if (tree.containsKey(key)){
+			return;
+		} else {
+			List<Object> lst = null;
+			if (key instanceof Activity){
+				lst = session.getActivityRelatedFacts((Activity)key);
+			} else if (key instanceof RequestFact) {
+				lst = session.getRequestRelatedFacts((RequestFact)key);
+			} else if (key instanceof RequestStatus){
+				lst = session.getRequestStatusRelatedFacts((RequestStatus)key);
+			}
+			
+			tree.put(key, lst);
+			if (lst != null){
+				for (Object i : lst){
+					fillDbgTraceTree(tree, i);
+				}
+			}
+		}
+	}
+
+
 	@GET
 	@POST
 	@Path("/echo")
-	public void echo(@Context HttpServletRequest req, @Context HttpServletResponse resp) throws IOException{
+	public void echo(@Context HttpServletRequest req,
+			@Context HttpServletResponse resp) throws IOException {
 		IOUtils.copy(req.getInputStream(), resp.getOutputStream());
 		resp.getOutputStream().close();
 		req.getInputStream().close();
 	}
-	
+
 	@POST
 	@Path("/original_artifact")
 	public Response uploadProcess(@Context HttpServletRequest httpreq)
@@ -76,7 +119,8 @@ public class Index {
 		Object artifactAlias;
 
 		if (files.fileNames.size() == 1) {
-			userArtifact = new FileArtifact(Activity.USER, files.baseDir, files.fileNames.get(0));
+			userArtifact = new FileArtifact(Activity.USER, files.baseDir,
+					files.fileNames.get(0));
 			artifactAlias = new GenericFileArtifactAlias();
 			((GenericFileArtifactAlias) artifactAlias).reset(req,
 					R.artifact.main, (FileArtifact) userArtifact);
@@ -134,40 +178,42 @@ public class Index {
 			throws Exception {
 
 		UserAction uaction = session.getUserAction(id);
-		if (uaction != null
-				&& uaction.getClass().getSimpleName().equals(actionName)) {
+		if (uaction != null && uaction.getClass().getSimpleName().equals(actionName)) {
 
-			assertFactForActivityImpl(request.getReader(), id);
+			session.setFactHandled(uaction);
+			assertFactForActivityImpl(request.getReader(), uaction.getActivity());
 
-			return Response.seeOther(
-					new URI(PATH_ROOT + PATH_REQUEST_STATUS + "/"
-							+ uaction.getActivity().getRequest().getRefId()))
-					.build();
+			return Response.ok().build();
 		} else {
 			log.warn("No action '" + actionName + "' found with id=" + id);
 			return Response.status(404).build();
 		}
 	}
 
-	private void assertFactForActivityImpl(Reader r,
-			long id) throws Exception {
-		Activity activity = session.getActivity(id);
-		if (activity == null){
-			throw new Exception("Activity with id=" + id + " not found" );
-		}
+	private void assertFactForActivityImpl(Reader r, Activity activity) throws Exception {
 		JsonNode root = mapper.readTree(r);
-		if (root.isArray()){
-			for (JsonNode i : root){
-				ActivityRelatedFact fact = (ActivityRelatedFact) session.newFact(i);
+		if (root.isArray()) {
+			for (JsonNode i : root) {
+				ActivityRelatedFact fact = (ActivityRelatedFact) session
+						.newFact(i);
 				fact.setActivity(activity);
 				session.assertFact(fact);
 			}
 		} else {
-			ActivityRelatedFact fact = (ActivityRelatedFact) session.newFact(root);
+			ActivityRelatedFact fact = (ActivityRelatedFact) session
+					.newFact(root);
 			fact.setActivity(activity);
 			session.assertFact(fact);
 		}
 		session.run();
+	}
+
+	private void assertFactForActivityImpl(Reader r, long id) throws Exception {
+		Activity activity = session.getActivity(id);
+		if (activity == null) {
+			throw new Exception("Activity with id=" + id + " not found");
+		}
+		assertFactForActivityImpl(r, activity);
 	}
 
 	@GET

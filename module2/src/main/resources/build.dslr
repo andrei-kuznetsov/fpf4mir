@@ -1,4 +1,5 @@
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
@@ -6,18 +7,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
 
 
 // #################################### Input parameters #######################################
-rule "Populate input parameters for BuildActivity from ReqBuild"
-	when
-		request 'ReqBuild'
-		activity 'DeployFolderActivity' for request
-		request inputs (
-		    input 'FileArtifactAlias'
-		    input 'FolderArtifactAlias'
->		)
-	then
-		add activity fact from request input
-end
-
+// automatic
 // ----------------------------------- Output parameters ---------------------------------------
 
 rule "Build Request Status"
@@ -25,10 +15,10 @@ rule "Build Request Status"
 		request 'ReqBuild'
 		activity for request
 		activity succeeded
-		$artifact : 'ExecutableFileArtifact' for activity
+		$artifact : ExecutableFileArtifact for activity
 	then
 		set request status succeeded
-		add request status parameter $artifact as DeployFolder
+		add request status parameter $artifact as GenericFileArtifactAlias
 end
 
 // #############################################################################################
@@ -40,8 +30,7 @@ rule "NewBuild_Mvn"
 >		BuildFile( activity == $activity, getFileName().endsWith("pom.xml") )
 >		not MvnBuild( this == $activity )
 	then
->		retract( $activity );
->		insert( new MvnBuild( $activity ) );
+		cast activity '$activity' to 'MvnBuild'
 end
 
 rule "BuildStatus"
@@ -56,31 +45,9 @@ rule "Guess run executable after build"
 	when
 		activity 'BuildActivity'
 		activity succeeded
-		$folder : 'FolderArtifact' for activity
+		$folder : FolderArtifact for activity
 		not 'ExecutableFileArtifact' for activity
 	then
 		add subrequest 'ReqGuessRunExecutable'
 		add subrequest parameter '$folder' as 'GenericFolderArtifactAlias'
-end
-
-rule "Process any Request result successfull"
-	when 
-	 	activity 'Activity'
-		subrequest 'ReqNewActivity'
-		subrequest succeeded
-		subrequest outputs (
-			subrequest output 'Alias'
->		)
-	then
-		add activity fact from request output
-end
-
-
-rule "Process any Request result failed"
-	when 
-	 	activity 'Activity'
-		subrequest 'ReqNewActivity'
-		subrequest failed
-	then
-		activity failed with status "Subrequest failed: " + $subrequestStatus.getMessage()
 end

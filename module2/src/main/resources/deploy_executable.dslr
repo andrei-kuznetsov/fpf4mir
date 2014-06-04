@@ -10,25 +10,11 @@ declare DeployExecOption_Build extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core
 declare DeployExecOption_Run extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
 declare DeployExecOption_Autodetect extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
 
-declare ReqDeployExecOption_Build extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.AliasBase2 end
-declare ReqDeployExecOption_Run extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.AliasBase2 end
+declare ReqDeployExecOption_Build extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.AliasBase end
+declare ReqDeployExecOption_Run extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.AliasBase end
 
 // #################################### Input parameters #######################################
-rule "Populate input parameters for DeployExecutableActivity from ReqDeployFolder"
-	when
-		request 'ReqDeployExecutable'
-		activity 'DeployExecutableActivity' for request
-		request inputs (
-		    input 'FileArtifactAlias'
-		    input 'FolderArtifactAlias'
-		    input 'ArtifactRefAlias'
-		    input 'ReqDeployExecOption_Build'
-		    input 'ReqDeployExecOption_Run'
->		)
-	then
-		add activity fact from request input
-end
-
+// automatic
 // ----------------------------------- Output parameters ---------------------------------------
 
 rule "DeployExecutable Request Status"
@@ -78,22 +64,24 @@ rule "Deploy executable from URL"
 		add subrequest parameter '$ref' as 'GenericArtifactRefAlias'
 end
 
-rule "Evaluate run executable"
+rule "Evaluate run executable list"
 	when
 		activity 'DeployExecutableActivity'
 		$artifact : FolderArtifact for activity
 		not ExecutableFileArtifact for activity
+		not ExecFileArtifactList for activity
 		(DeployExecOption_Autodetect for activity or DeployExecOption_Run for activity)
 	then
 		add subrequest 'ReqGuessRunExecutable'
 		add subrequest parameter '$artifact' as 'GenericFolderArtifactAlias'
 end
 
-rule "Evaluate build file"
+rule "Evaluate build file list"
 	when
 		activity 'DeployExecutableActivity'
 		$artifact : FolderArtifact for activity
 		not ExecutableFileArtifact for activity
+		not BuildFileArtifactList for activity
 		(DeployExecOption_Autodetect for activity or DeployExecOption_Build for activity)
 	then
 		add subrequest 'ReqGuessBuildFile'
@@ -122,6 +110,7 @@ rule "Can build or run (choose build or run)"
 	when
 	 	activity 'DeployExecutableActivity'
 	 	not ExecutableFileArtifact for activity
+		not BuildFile for activity
 >		(
 >			($exec : ExecFileArtifactList(size > 0, activity == $activity) and $build : BuildFileArtifactList(size > 0, activity == $activity))
 >			or

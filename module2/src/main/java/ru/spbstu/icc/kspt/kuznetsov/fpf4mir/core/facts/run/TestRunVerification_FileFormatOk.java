@@ -1,19 +1,20 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunActivity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase;
 
-public class TestRunVerification_FileFormatOk extends TestRunFact {
-	public TestRunVerification_FileFormatOk(RunActivity run) {
+public class TestRunVerification_FileFormatOk extends ActivityRelatedFactBase {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5197600394069047575L;
+
+	public TestRunVerification_FileFormatOk(Activity run) {
 		super(run);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		return obj != null && obj instanceof TestRunVerification_FileFormatOk && super.equals(obj);
-	}
-
-	@Override
 	public String toString() {
-		return "TestRunVerification_FileFormatOk [getRun()=" + getRun() + "]";
+		return "TestRunVerification_FileFormatOk [getRun()=" + getActivity() + "]";
 	}
 }

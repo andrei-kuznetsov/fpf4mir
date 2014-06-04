@@ -54,42 +54,4 @@ public abstract class BaseExecCommand implements ExecCommand{
 				+ workingDir + ", activity=" + activity + ", args=" + getArgsList() + "]";
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((activity == null) ? 0 : activity.hashCode());
-		result = prime * result + ((command == null) ? 0 : command.hashCode());
-		result = prime * result
-				+ ((workingDir == null) ? 0 : workingDir.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof BaseExecCommand))
-			return false;
-		BaseExecCommand other = (BaseExecCommand) obj;
-		if (activity == null) {
-			if (other.activity != null)
-				return false;
-		} else if (!activity.equals(other.activity))
-			return false;
-		if (command == null) {
-			if (other.command != null)
-				return false;
-		} else if (!command.equals(other.command))
-			return false;
-		if (workingDir == null) {
-			if (other.workingDir != null)
-				return false;
-		} else if (!workingDir.equals(other.workingDir))
-			return false;
-		return true;
-	}
 }

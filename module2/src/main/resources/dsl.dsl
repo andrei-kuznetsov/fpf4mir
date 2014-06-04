@@ -2,7 +2,9 @@
 
 [when]activity '{activity}' for request=$activity:{activity}( request == $request )
 [when]activity for request=$activity:Activity( request == $request )
-[when]activity '{activity}'=$activity:{activity}(  )
+
+[when]activity '{activity}'=$activity:{activity}(  ) and not ActivityStatus( activity == $activity ) and /*block for subrequest*/ forall( $subreq : RequestFact(parentActivity==$activity) \n RequestStatus(request==$subreq))
+
 [when]activity succeeded=exists ActivitySucceeded( activity == $activity )
 [when]request '{request}'=$request:{request}(  )
 [when]request inputs \(=(or
@@ -35,12 +37,13 @@
 [then]add ordinal {order} {value}=insertLogical( new OrdinalArgument( $activity, {order}, {value}) );
 [then]execute command "{cmd}" in working dir {wd}=insertLogical( new ListExecCommand($activity, "{cmd}", {wd}, $options) );
 
-[then]activity succeeded=insertLogical( new GenericActivitySucceeded($activity) );
-[then]activity failed with status {status}=insertLogical( new GenericActivityFailed($activity, {status}) );
-[then]activity failed with type {type:\w+} and message {message}=insertLogical( new GenericActivityFailed($activity, {type}, {message}) );
+[then]activity succeeded=insert( new GenericActivitySucceeded($activity) );
+[then]activity failed with status {status}=insert( new GenericActivityFailed($activity, {status}) );
+[then]activity failed with type {type:\w+} and message {message}=insert( new GenericActivityFailed($activity, {type}, {message}) );
 [then]set request status succeeded=RequestStatus requestStatus = new RequestSucceeded($request, "ok"); insert(requestStatus);
 
 [then]add {type} as request status=add request status parameter $artifact as Generic{type}Alias
 [then]add request status parameter {param} as {type}=\{{type} o = new {type}(); o.reset(requestStatus, {param}); insert(o);\};
 
 [then]insert artifact '{value}' as '{type}'=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
+[then]cast activity '{value}' to '{type}'=\{retract({value}); {type} o = new {type}(); o.reset($activity); insert(o);\};

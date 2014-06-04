@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.BuildActivity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.BuildCommand;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.OrdinalArgument;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ListExecCommand;
@@ -34,7 +34,7 @@ public class MvnBuildCommand extends ListExecCommand implements BuildCommand {
 		
 	}
 	
-	public MvnBuildCommand(BuildActivity activity, File workingDir, List<MvnOption> options) {
+	public MvnBuildCommand(Activity activity, File workingDir, List<MvnOption> options) {
 		super(activity, COMMAND, workingDir);
 		
 		Collections.sort(options, new MvnOptionComparator());

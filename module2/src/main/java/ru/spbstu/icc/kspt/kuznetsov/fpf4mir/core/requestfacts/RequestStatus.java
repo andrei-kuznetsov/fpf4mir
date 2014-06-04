@@ -1,6 +1,8 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts;
 
-public class RequestStatus {
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestRelatedFact;
+
+public class RequestStatus implements RequestRelatedFact {
 	private RequestFact request;
 	private String message = "No status available.";
 	

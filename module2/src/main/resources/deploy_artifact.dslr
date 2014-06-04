@@ -6,19 +6,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
 
 // #################################### Input parameters #######################################
-rule "Populate input parameters for DeployFolderActivity from ReqDeployFolder"
-	when
-		request 'ReqDeployFolder'
-		activity 'DeployFolderActivity' for request
-		request inputs (
-		    input 'FileArtifactAlias'
-		    input 'FolderArtifactAlias'
-		    input 'ArtifactRefAlias'
->		)
-	then
-		add activity fact from request input
-end
-
+// automatic
 // ----------------------------------- Output parameters ---------------------------------------
 
 rule "DeployArtifact Request Status"

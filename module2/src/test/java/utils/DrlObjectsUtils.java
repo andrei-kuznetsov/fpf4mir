@@ -11,6 +11,7 @@ import org.drools.builder.KnowledgeBuilder;
 import org.drools.builder.KnowledgeBuilderError;
 import org.drools.builder.KnowledgeBuilderFactory;
 import org.drools.builder.ResourceType;
+import org.drools.definition.type.FactType;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 
@@ -37,17 +38,56 @@ public class DrlObjectsUtils {
 
 		for (String i : filenames){
 			kbuilder.add(ResourceFactory.newClassPathResource(i), ResourceType.DRL);
-			if (kbuilder.hasErrors()){
-				for (KnowledgeBuilderError err : kbuilder.getErrors()){
-					System.out.println(err);
-				}
-				throw new RuntimeException("Can't compile KB");
-			}
+			checkSessionForErrors(kbuilder);
 		}
 		
         KnowledgeBase kbase = kbuilder.newKnowledgeBase();
         StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
         
         return ksession;
+	}
+
+	public static StatefulKnowledgeSession prepareStatefullSessionDslr(
+			String ... dslrFilenames) {
+		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+
+		kbuilder.add(ResourceFactory.newClassPathResource("dsl.dsl"), ResourceType.DSL);
+		checkSessionForErrors(kbuilder);
+		kbuilder.add(ResourceFactory.newClassPathResource("a_definitions.drl"), ResourceType.DRL);
+		checkSessionForErrors(kbuilder);
+		kbuilder.add(ResourceFactory.newClassPathResource("a_functions.drl"), ResourceType.DRL);
+		checkSessionForErrors(kbuilder);
+		
+		for (String i : dslrFilenames){
+			kbuilder.add(ResourceFactory.newClassPathResource(i), ResourceType.DSLR);
+			checkSessionForErrors(kbuilder);
+		}
+		
+        KnowledgeBase kbase = kbuilder.newKnowledgeBase();
+        StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
+        
+        return ksession;
+	}
+
+	private static void checkSessionForErrors(KnowledgeBuilder kbuilder) {
+		if (kbuilder.hasErrors()){
+			for (KnowledgeBuilderError err : kbuilder.getErrors()){
+				System.out.println(err);
+			}
+			throw new RuntimeException("Can't compile KB");
+		}
+	}
+
+	public static Object createObject(StatefulKnowledgeSession ksession,
+			String pkg, String name) throws InstantiationException, IllegalAccessException {
+		FactType ftype = ksession.getKnowledgeBase().getFactType(pkg, name);
+		return ftype.newInstance();
+	}
+
+	public static void setField(StatefulKnowledgeSession ksession, Object bean, String field, Object value) {
+		String pkg = bean.getClass().getPackage().getName();
+		String name = bean.getClass().getSimpleName();
+		FactType ftype = ksession.getKnowledgeBase().getFactType(pkg, name);
+		ftype.set(bean, field, value);
 	}
 }

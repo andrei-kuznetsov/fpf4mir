@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -26,6 +29,7 @@ import org.drools.definition.type.FactType;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.ObjectFilter;
 import org.drools.runtime.StatefulKnowledgeSession;
+import org.drools.runtime.rule.FactHandle;
 import org.drools.runtime.rule.QueryResults;
 import org.drools.runtime.rule.QueryResultsRow;
 
@@ -41,6 +45,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.DataDirRoot;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestSubstatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestStatusRelatedFact;
 
 public class DeploymentSession {
@@ -107,7 +112,12 @@ public class DeploymentSession {
 	public void run() throws Exception {
 		boolean doContinue = false;
 		do {
-			ksession.fireAllRules();
+			try {
+				ksession.fireAllRules();
+			} catch (Exception e) {
+				log.error("KB run exception", e);
+				throw e;
+			}
 			Collection actions = ksession.getObjects(new ObjectFilter() {
 				@Override
 				public boolean accept(Object object) {
@@ -442,5 +452,42 @@ public class DeploymentSession {
 		}
 		
 		return o;
+	}
+
+	public void setFactHandled(UserAction uaction) {
+		FactHandle h = ksession.getFactHandle(uaction);
+		ksession.retract(h);
+	}
+
+	
+	public List<Object> getActivityRelatedFacts(Activity key) {
+		return simpleListRequest(key, "Get activity related facts");
+	}
+	
+	private List<Object> simpleListRequest(Object key, String qname){
+		QueryResults results = ksession.getQueryResults(qname, key);
+		Iterator<QueryResultsRow> it = results.iterator();
+		LinkedList<Object> ret = new LinkedList<>();
+		while (it.hasNext()){
+			ret.add(it.next().get("$object"));
+		}
+		return ret;
+	}
+
+	public List<Object> getRequestRelatedFacts(RequestFact key) {
+		List<Object> lst = simpleListRequest(key, "Get request related facts");
+//		Collections.sort(lst, new Comparator<Object>() {
+//			@Override
+//			public int compare(Object o1, Object o2) {
+//				final RequestRelatedFact r1 = (RequestRelatedFact) o1;
+//				final RequestRelatedFact r2 = (RequestRelatedFact) o2;
+//				return r1.get;
+//			}
+//		});
+		return lst;
+	}
+
+	public List<Object> getRequestStatusRelatedFacts(RequestStatus key) {
+		return simpleListRequest(key, "Get request status related facts");
 	}
 }

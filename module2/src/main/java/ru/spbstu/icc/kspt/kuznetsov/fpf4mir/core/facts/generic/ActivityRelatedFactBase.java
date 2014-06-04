@@ -34,4 +34,9 @@ public class ActivityRelatedFactBase implements ActivityRelatedFact,
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + " [activity=" + activity + "]";
+	}
 }

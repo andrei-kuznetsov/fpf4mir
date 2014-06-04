@@ -2,6 +2,8 @@ package utils;
 
 import java.util.LinkedList;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.drools.event.rule.ActivationCancelledEvent;
 import org.drools.event.rule.ActivationCreatedEvent;
 import org.drools.event.rule.AfterActivationFiredEvent;
@@ -14,66 +16,59 @@ import org.drools.event.rule.RuleFlowGroupDeactivatedEvent;
 
 public class AgendaListener implements AgendaEventListener{
 	private LinkedList<String> firedRules = new LinkedList<String>();
+	private static final Logger log = Logger.getLogger(AgendaListener.class);
 	
 	@Override
 	public void activationCreated(ActivationCreatedEvent event) {
-		// TODO Auto-generated method stub
-		
+		log.info("activationCreated: " + event);
 	}
 
 	@Override
 	public void activationCancelled(ActivationCancelledEvent event) {
-		// TODO Auto-generated method stub
-		
+		log.info("activationCancelled: " + event);
 	}
 
 	@Override
 	public void beforeActivationFired(BeforeActivationFiredEvent event) {
 		firedRules.add(event.getActivation().getRule().getName());
+		log.info("beforeActivationFired: " + event);
 	}
 
 	@Override
 	public void afterActivationFired(AfterActivationFiredEvent event) {
-		// TODO Auto-generated method stub
-		
+		log.info("afterActivationFired: " + event);
 	}
 
 	@Override
 	public void agendaGroupPopped(AgendaGroupPoppedEvent event) {
-		// TODO Auto-generated method stub
-		
+		log.info("agendaGroupPopped: " + event);
 	}
 
 	@Override
 	public void agendaGroupPushed(AgendaGroupPushedEvent event) {
-		// TODO Auto-generated method stub
-		
+		log.info("agendaGroupPushed: " + event);
 	}
 
 	@Override
 	public void beforeRuleFlowGroupActivated(RuleFlowGroupActivatedEvent event) {
-		// TODO Auto-generated method stub
-		
+		log.info("beforeRuleFlowGroupActivated: " + event);
 	}
 
 	@Override
 	public void afterRuleFlowGroupActivated(RuleFlowGroupActivatedEvent event) {
-		// TODO Auto-generated method stub
-		
+		log.info("afterRuleFlowGroupActivated: " + event);
 	}
 
 	@Override
 	public void beforeRuleFlowGroupDeactivated(
 			RuleFlowGroupDeactivatedEvent event) {
-		// TODO Auto-generated method stub
-		
+		log.info("beforeRuleFlowGroupDeactivated: " + event);
 	}
 
 	@Override
 	public void afterRuleFlowGroupDeactivated(
 			RuleFlowGroupDeactivatedEvent event) {
-		// TODO Auto-generated method stub
-		
+		log.info("afterRuleFlowGroupDeactivated: " + event);
 	}
 
 	public LinkedList<String> getFiredRules() {

@@ -1,22 +1,18 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunActivity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase;
 
-public class Dataset4Run {
-	private RunActivity run;
+public class Dataset4Run extends ActivityRelatedFactBase {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1186640503996445202L;
 	private Dataset dataset;
 	
-	public Dataset4Run(RunActivity run, Dataset dataset) {
-		this.run = run;
+	public Dataset4Run(Activity run, Dataset dataset) {
+		super(run);
 		this.dataset = dataset;
-	}
-
-	public RunActivity getRun() {
-		return run;
-	}
-
-	public void setRun(RunActivity run) {
-		this.run = run;
 	}
 
 	public Dataset getDataset() {
@@ -29,7 +25,7 @@ public class Dataset4Run {
 
 	@Override
 	public String toString() {
-		return "Dataset4Run [run=" + run + ", dataset=" + dataset + "]";
+		return "Dataset4Run [run=" + getActivity() + ", dataset=" + dataset + "]";
 	}
 	
 }

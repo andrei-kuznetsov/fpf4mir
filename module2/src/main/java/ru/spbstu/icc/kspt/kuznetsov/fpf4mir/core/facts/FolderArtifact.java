@@ -43,13 +43,13 @@ public class FolderArtifact extends Artifact {
 		scanner.scan();
 		return scanner.getIncludedDirectories();
 	}
-	
-	public FileArtifactList getFileArtifactListForPattern(String pattern){
-		return getFileArtifactListForPattern(FileArtifact.class, pattern);
-	}
 
 	public FileArtifactList getFileArtifactListForPattern(String... patterns){
 		return getFileArtifactListForPattern(FileArtifact.class, patterns);
+	}
+
+	public FileArtifactList getFileArtifactListForPattern2(String[] patterns){
+		return getFileArtifactListForPattern(patterns);
 	}
 	
 	public FileArtifactList getFileArtifactListForPattern(Class<? extends FileArtifact> c, String... patterns){

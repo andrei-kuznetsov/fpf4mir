@@ -1,6 +1,6 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.BuildActivity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.BuildSrcEncoding;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.OrdinalArgument;
 
@@ -9,7 +9,7 @@ public class MvnOption_SrcEncoding extends OrdinalArgument implements MvnOption 
 	
 	private BuildSrcEncoding buildSrcEncoding;
 	
-	public MvnOption_SrcEncoding(BuildActivity build, BuildSrcEncoding srcEncoding) {
+	public MvnOption_SrcEncoding(Activity build, BuildSrcEncoding srcEncoding) {
 		super(build);
 		setSrcEncoding(srcEncoding);
 	}

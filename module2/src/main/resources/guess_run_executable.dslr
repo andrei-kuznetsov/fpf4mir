@@ -8,17 +8,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 
 
 // #################################### Input parameters #######################################
-rule "Populate input parameters for GuessRunExecutableActivity from ReqGuessRunExecutable"
-	when
-		request 'ReqGuessRunExecutable'
-		activity for request
-		request inputs (
-		    input 'FolderArtifactAlias'
->		)
-	then
-		add activity fact from request input
-end
-
+// automatic
 // ----------------------------------- Output parameters ---------------------------------------
 
 rule "GuessRunExecutable Request Status - FileArtifactList"
@@ -45,8 +35,7 @@ end
 rule "sh,exe,jar,py files are executable"
 	when
 		activity 'GuessRunExecutableActivity'
->		FolderArtifact( activity == $activity, $flist:getFileArtifactListForPattern(
->			"**\\*.sh","**\\*.exe","**\\*.jar","**\\*.py") )
+>		FolderArtifact( activity == $activity, $flist : getFileArtifactListForPattern2(new String[]{"**\\*.sh","**\\*.exe","**\\*.jar","**\\*.py"}) )
 	then
 >		for (FileArtifact i : $flist)
 			insert artifact 'i' as 'ExecArtifactCandidate'
@@ -56,7 +45,7 @@ rule "List ExecArtifact candidates"
 	salience -1 // shall be less than the salience of rules about ExecArtifactCandidate
 	when
 		activity 'GuessRunExecutableActivity'
->		$candidates : java.util.LinkedList( size > 1 ) from collect( ExecArtifactCandidate(activity == $activity) )
+>		$candidates : java.util.LinkedList( ) from collect( ExecArtifactCandidate(activity == $activity) )
 	then
 		insert artifact '$candidates' as 'ExecFileArtifactList'
 		activity succeeded

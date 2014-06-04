@@ -36,6 +36,11 @@ public class DrlParserTest extends TestCase {
 		printExpandedRule(dslr);
     }
     
+    public void testExpandDRL_subrequests_support() throws Exception {
+    	String dslr = "/subrequests_support.dslr";
+		printExpandedRule(dslr);
+    }
+
 	private void printExpandedRule(String dslr) throws IOException,
 			DroolsParserException {
 		String drl = IOUtils.toString(getClass().getResourceAsStream(dslr));

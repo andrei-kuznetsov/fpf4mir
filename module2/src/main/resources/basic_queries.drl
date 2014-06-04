@@ -33,3 +33,15 @@ end
 query "Activity for refId"  (long refId)
 	$object : Activity( refId == refId )
 end
+
+query "Get activity related facts"  (Activity a)
+	$object : (ActivityRelatedFact( activity == a ) or RequestFact( parentActivity == a ))
+end
+
+query "Get request related facts"  (RequestFact req)
+	$object : RequestRelatedFact( request == req )
+end
+
+query "Get request status related facts"  (RequestStatus rstat)
+	$object : RequestStatusRelatedFact( rstatus == rstat )
+end
