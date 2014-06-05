@@ -19,6 +19,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -42,7 +43,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestStatusRelatedFact;
 
 @Path("/rest")
 public class Index {
-
+	
 	private static final String PATH_ROOT = "/rest";
 	private static final String PATH_STATUS = "/status";
 	private static final String PATH_USERACTION = "/useraction";

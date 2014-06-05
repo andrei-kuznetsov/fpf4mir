@@ -12,7 +12,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
 rule "DeployArtifact Request Status"
 	when
 		request 'ReqDeployFolder'
-		activity 'DeployFolderActivity' for request
+		activity for request
 		activity succeeded
 		'FolderArtifact' for activity
 	then
@@ -24,7 +24,7 @@ end
 
 rule "DownloadArtifact"
 	when 
-		activity 'DeployFolderActivity'
+		active activity 'DeployFolderActivity'
 >		$ref : ArtifactRef(activity == $activity)
 >		not Artifact(activity == $activity)
 	then
@@ -35,7 +35,7 @@ end
 
 rule "Assert Downloaded Artifact"
 	when 
-	    activity 'DeployFolderActivity'
+	    active activity 'DeployFolderActivity'
 		subrequest 'ReqDownloadHttp'
 		subrequest succeeded
 		subrequest outputs (
@@ -48,7 +48,7 @@ end
 
 rule "Assert Download Failed Artifact"
 	when 
-	    activity 'DeployFolderActivity'
+	    active activity 'DeployFolderActivity'
 		subrequest 'ReqDownloadHttp'
 		subrequest failed
 	then
@@ -57,7 +57,7 @@ end
 
 rule "ExtractArtifact"
 	when 
-		activity 'DeployFolderActivity'
+		active activity 'DeployFolderActivity'
 >		$artifact : FileArtifact(activity == $activity, fileName.endsWith(".zip"))
 >		not FolderArtifact(activity == $activity)
 	then
@@ -67,7 +67,7 @@ end
 
 rule "Process exctracted artifact"
 	when 
-	 	activity 'DeployFolderActivity'
+	 	active activity 'DeployFolderActivity'
 		subrequest 'ReqExtract'
 		subrequest succeeded
 		subrequest outputs (
@@ -79,7 +79,7 @@ end
 
 rule "Process exctracted artifact failed"
 	when
-		activity 'DeployFolderActivity'
+		active activity 'DeployFolderActivity'
 		subrequest 'ReqExtract'
 		subrequest failed
 	then
@@ -88,7 +88,7 @@ end
 
 rule "Assert DeployFolder"
 	when
-		activity 'DeployFolderActivity'
+		active activity 'DeployFolderActivity'
 		'FolderArtifact' for activity
 	then
 		activity succeeded

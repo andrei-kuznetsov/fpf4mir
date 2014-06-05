@@ -10,18 +10,23 @@ public class RequestFactBase implements RequestFact, Serializable, FactWithRefId
 	 * 
 	 */
 	private static final long serialVersionUID = 1571771513334573701L;
-	
-	private long refId;
+
+	private static volatile long refIdCounter = 1;
+	private long refId = refIdCounter++;
 	private Activity parentActivity;
+	
+	public RequestFactBase() {
+		this(null);
+	}
+	
+	public RequestFactBase(Activity parentActivity) {
+		this(0, parentActivity);
+	}
 
 	public RequestFactBase(long refId, Activity parentActivity) {
 		super();
 		this.refId = refId;
 		this.parentActivity = parentActivity;
-	}
-
-	public RequestFactBase(Activity parentActivity) {
-		this(0, parentActivity);
 	}
 
 	public Activity getParentActivity() {
@@ -40,5 +45,11 @@ public class RequestFactBase implements RequestFact, Serializable, FactWithRefId
 	@Override
 	public void setRefId(long refId) {
 		this.refId = refId;
+	}
+	
+	public RequestFactBase reset(long refId, Activity parentActivity){
+		this.refId = refId;
+		this.parentActivity = parentActivity;
+		return this;
 	}
 }

@@ -1,0 +1,18 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+
+rule "Activity activation"
+	when 
+>		$activity : Activity()
+	 	not ActivityStatus for activity // disable finished
+	 	InputProcessingCompleted for activity
+>	 	forall( $subreq : RequestFact(parentActivity==$activity) 
+>	 			SubrequestProcessingCompleted(request==$subreq))  // block for subrequest 
+	then
+>		insertLogical(new ActivityActive($activity));
+end
+

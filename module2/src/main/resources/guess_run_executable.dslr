@@ -26,7 +26,7 @@ end
 
 rule "Single file is always considered as executable"
 	when
-		activity 'GuessRunExecutableActivity'
+		active activity 'GuessRunExecutableActivity'
 >		FolderArtifact( activity == $activity, $flist: getFileArtifactListForPattern("**\\*"), $flist.size == 1) 
 	then
 		insert artifact '$flist.get(0)' as 'ExecArtifactCandidate'
@@ -34,7 +34,7 @@ end
 
 rule "sh,exe,jar,py files are executable"
 	when
-		activity 'GuessRunExecutableActivity'
+		active activity 'GuessRunExecutableActivity'
 >		FolderArtifact( activity == $activity, $flist : getFileArtifactListForPattern2(new String[]{"**\\*.sh","**\\*.exe","**\\*.jar","**\\*.py"}) )
 	then
 >		for (FileArtifact i : $flist)
@@ -44,7 +44,7 @@ end
 rule "List ExecArtifact candidates"
 	salience -1 // shall be less than the salience of rules about ExecArtifactCandidate
 	when
-		activity 'GuessRunExecutableActivity'
+		active activity 'GuessRunExecutableActivity'
 >		$candidates : java.util.LinkedList( ) from collect( ExecArtifactCandidate(activity == $activity) )
 	then
 		insert artifact '$candidates' as 'ExecFileArtifactList'

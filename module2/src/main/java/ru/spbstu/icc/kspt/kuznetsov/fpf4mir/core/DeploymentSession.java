@@ -114,33 +114,32 @@ public class DeploymentSession {
 		do {
 			try {
 				ksession.fireAllRules();
+				Collection actions = ksession.getObjects(new ObjectFilter() {
+					@Override
+					public boolean accept(Object object) {
+						return (object instanceof ActionFact);
+					}
+				});
+
+				state = executeActions(actions);
+
+				switch (state) {
+				case RUNNING:
+					doContinue = true;
+					log.debug("Continue execution...");
+					break;
+				case DONE:
+					doContinue = false;
+					log.debug("Done.");
+					break;
+				case WAITING_FOR_USER:
+					doContinue = false;
+					log.info("Waiting for user action...");
+				}
 			} catch (Exception e) {
 				log.error("KB run exception", e);
 				throw e;
 			}
-			Collection actions = ksession.getObjects(new ObjectFilter() {
-				@Override
-				public boolean accept(Object object) {
-					return (object instanceof ActionFact);
-				}
-			});
-
-			state = executeActions(actions);
-
-			switch (state) {
-			case RUNNING:
-				doContinue = true;
-				log.debug("Continue execution...");
-				break;
-			case DONE:
-				doContinue = false;
-				log.debug("Done.");
-				break;
-			case WAITING_FOR_USER:
-				doContinue = false;
-				log.info("Waiting for user action...");
-			}
-
 		} while (doContinue);
 
 		// Analyze results
@@ -426,21 +425,23 @@ public class DeploymentSession {
 		return getTypedObjectById(id, Activity.class);
 	}
 
-	public Object newFact(JsonNode fact) throws InstantiationException, IllegalAccessException {
+	public Object newFact(JsonNode fact) throws InstantiationException,
+			IllegalAccessException {
 		final String className = fact.get("class").asText();
 		final String pkg = className.substring(0, className.lastIndexOf('.'));
 		final String cn = className.substring(className.lastIndexOf('.') + 1);
 		FactType ftype = ksession.getKnowledgeBase().getFactType(pkg, cn);
 		Object o = ftype.newInstance();
-		
+
 		Iterator<String> it = fact.getFieldNames();
-		
-		while (it.hasNext()){
+
+		while (it.hasNext()) {
 			String fname = it.next();
-			if (fname.equals("class")) continue;
-			
+			if (fname.equals("class"))
+				continue;
+
 			Class<?> fclass = ftype.getField(fname).getType();
-			if (fclass.isAssignableFrom(String.class)){
+			if (fclass.isAssignableFrom(String.class)) {
 				ftype.set(o, fname, fact.get(fname).asText());
 			} else if (fclass.isAssignableFrom(Integer.class)) {
 				ftype.set(o, fname, fact.get(fname).asInt());
@@ -450,7 +451,7 @@ public class DeploymentSession {
 				ftype.set(o, fname, fact.get(fname).asBoolean());
 			}
 		}
-		
+
 		return o;
 	}
 
@@ -459,16 +460,15 @@ public class DeploymentSession {
 		ksession.retract(h);
 	}
 
-	
 	public List<Object> getActivityRelatedFacts(Activity key) {
 		return simpleListRequest(key, "Get activity related facts");
 	}
-	
-	private List<Object> simpleListRequest(Object key, String qname){
+
+	private List<Object> simpleListRequest(Object key, String qname) {
 		QueryResults results = ksession.getQueryResults(qname, key);
 		Iterator<QueryResultsRow> it = results.iterator();
 		LinkedList<Object> ret = new LinkedList<>();
-		while (it.hasNext()){
+		while (it.hasNext()) {
 			ret.add(it.next().get("$object"));
 		}
 		return ret;
@@ -476,14 +476,14 @@ public class DeploymentSession {
 
 	public List<Object> getRequestRelatedFacts(RequestFact key) {
 		List<Object> lst = simpleListRequest(key, "Get request related facts");
-//		Collections.sort(lst, new Comparator<Object>() {
-//			@Override
-//			public int compare(Object o1, Object o2) {
-//				final RequestRelatedFact r1 = (RequestRelatedFact) o1;
-//				final RequestRelatedFact r2 = (RequestRelatedFact) o2;
-//				return r1.get;
-//			}
-//		});
+		// Collections.sort(lst, new Comparator<Object>() {
+		// @Override
+		// public int compare(Object o1, Object o2) {
+		// final RequestRelatedFact r1 = (RequestRelatedFact) o1;
+		// final RequestRelatedFact r2 = (RequestRelatedFact) o2;
+		// return r1.get;
+		// }
+		// });
 		return lst;
 	}
 

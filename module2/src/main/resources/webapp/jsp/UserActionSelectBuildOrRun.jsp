@@ -15,8 +15,8 @@ function assertFact(factType, baseDir, fileName) {
 		if (req.readyState == 4) { 
             // complete
 
-			if(req.status == 200) { 
-				//alert("response: "+req.responseText);
+			if(req.status != 200) { 
+				alert(req.responseText);
 			}
 		}
 	}

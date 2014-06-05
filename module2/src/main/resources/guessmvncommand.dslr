@@ -1,0 +1,35 @@
+expander dsl.dsl
+
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.sources.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+rule "Maven_DefaultTargets"
+	when
+		active activity 'MvnBuildActivity'
+		activity active
+		not MvnBuildTarget for activity
+	then
+		insert MvnBuildTarget_Clean
+		insert MvnBuildTarget_Package
+end
+
+rule "Maven_DfltOption_PomFile"
+	when
+		active activity 'MvnBuildActivity'
+		$pom : BuildFile for activity
+		not MvnOption_PomFile for activity
+	then
+>		insert( new MvnOption_PomFile($activity, $pom) );
+end
+
+rule "Maven_BuildCommand"
+	when
+		active activity 'MvnBuildActivity'
+		$pom : BuildFile for activity
+>		$options : java.util.LinkedList( size > 0 ) from collect ( MvnOption( activity == $activity ) )
+	then
+>		insertLogical( new MvnBuildCommand($activity, $pom._getFile().getParentFile(), $options) );
+end

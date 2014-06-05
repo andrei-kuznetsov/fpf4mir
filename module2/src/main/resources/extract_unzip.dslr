@@ -28,7 +28,7 @@ end
 
 rule "Prepare output dir"
 	when 
-	    activity 'ExtractActivity'
+	    active activity 'ExtractActivity'
 >	    $tmp : TmpDirRoot( )
 	then
 >		insert( $tmp.newTempFolder( $activity ) );
@@ -36,7 +36,7 @@ end
 /*
 rule "Need TmpDir"
 	when 
-	    activity 'ExtractActivity'
+	    active activity 'ExtractActivity'
 >	    not TmpDirRoot( )
 	then
 		activity failed with status "No TmpDir provided"
@@ -44,7 +44,7 @@ end
 */
 rule "Unzip with jar"
 	when 
-	    activity 'ExtractActivity'
+	    active activity 'ExtractActivity'
 >		$file : FileArtifact(activity == $activity)
 	then
 		add ordinal 1 "xf"
@@ -53,7 +53,7 @@ end
 
 rule "Unzip with jar command"
 	when 
-	    activity 'ExtractActivity'
+	    active activity 'ExtractActivity'
 	    cmd options for activity
 >	    $target : FolderArtifact( activity == $activity )
 	then
@@ -62,7 +62,7 @@ end
 
 rule "Evaluate activity result"
 	when 
-	    activity 'ExtractActivity'
+	    active activity 'ExtractActivity'
 	    exec command succeeded
 	then 
 		activity succeeded

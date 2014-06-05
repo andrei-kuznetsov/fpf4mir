@@ -24,18 +24,16 @@ rule "Activity facts from request"
 >		not RequestInputProcessed( activity == $activity, input == $input )
 	then
 		add activity fact from request input
->		insert(new RequestOutputProcessed($activity, $input));
+>		insert(new RequestInputProcessed($activity, $input));
 end
 
 
 rule "Process any Request result successfull"
 	when 
-	 	activity 'Activity'
+	 	any activity
 		subrequest 'ReqNewActivity'
 		subrequest succeeded
-		subrequest outputs (
-			subrequest output 'Alias'
->		)
+>		$output : Alias( rstatus == $subrequestStatus )
 >		not RequestOutputProcessed( activity == $activity, output == $output )
 	then
 >		System.out.println("## Activity: " + $activity);
@@ -48,9 +46,35 @@ end
 
 rule "Process any Request result failed"
 	when 
-	 	activity 'Activity'
+	 	any activity
 		subrequest 'ReqNewActivity'
 		subrequest failed
 	then
 		activity failed with status "Subrequest failed: " + $subrequestStatus.getMessage()
+end
+
+
+rule "All inputs processed"
+	when
+		request 'ReqNewActivity'
+		activity for request
+>		forall ( $rrf : Alias(request == $request)
+>                RequestInputProcessed( activity == $activity, input == $rrf ))
+	then
+>		InputProcessingCompleted o = new InputProcessingCompleted();
+>		o.setActivity($activity);
+>		insertLogical(o);
+end
+
+rule "All outputs processed"
+	when
+	 	any activity
+		subrequest 'ReqNewActivity'
+		subrequest completed
+>		forall ( $rrf : Alias(rstatus == $subrequestStatus)
+>                RequestOutputProcessed( activity == $activity, output == $rrf ))
+	then
+>		SubrequestProcessingCompleted o = new SubrequestProcessingCompleted();
+>		o.setRequest($subrequest);
+>		insertLogical(o);
 end

@@ -32,10 +32,4 @@ public class ReqDeployExecutable extends RequestFactBase implements ReqNewActivi
 	public void setDeploymentName(String deploymentName) {
 		this.deploymentName = deploymentName;
 	}
-
-	@Override
-	public String getActivityName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

@@ -1,23 +1,14 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.RequestRelatedFactBase;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestRelatedFact;
 
-public class RequestStatus implements RequestRelatedFact {
-	private RequestFact request;
+public class RequestStatus extends RequestRelatedFactBase implements RequestRelatedFact {
 	private String message = "No status available.";
 	
 	protected RequestStatus(RequestFact request, String statusString) {
-		super();
-		this.request = request;
+		super(request);
 		this.message = statusString;
-	}
-
-	public RequestFact getRequest() {
-		return request;
-	}
-
-	public void setRequest(RequestFact request) {
-		this.request = request;
 	}
 
 	public String getMessage() {
@@ -30,7 +21,7 @@ public class RequestStatus implements RequestRelatedFact {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [request=" + request + ", statusString="
+		return getClass().getSimpleName() + " [request=" + getRequest() + ", statusString="
 				+ message + "]";
 	}
 }

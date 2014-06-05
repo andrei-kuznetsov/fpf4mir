@@ -1,11 +1,8 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts;
 
-import java.io.Serializable;
 import java.net.URI;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityRelatedFact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityRelatedFactWithName;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.CloneUtils;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FPFCloneable;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithName;
 

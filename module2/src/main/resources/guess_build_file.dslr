@@ -26,7 +26,7 @@ end
 
 rule "Analyze well known build files"
 	when
-		activity 'GuessBuildFileActivity'
+		active activity 'GuessBuildFileActivity'
 >		FolderArtifact( activity == $activity,
 >			$mvnlist : getFileArtifactListForPattern("**\\pom.xml"),
 >			$antlist : getFileArtifactListForPattern("**\\build.xml"),
@@ -46,7 +46,7 @@ end
 rule "List BuildFile candidates"
 	salience -1 // shall be less than the salience of rules about BuildArtifactCandidate
 	when
-		activity 'GuessBuildFileActivity'
+		active activity 'GuessBuildFileActivity'
 >		$candidates : java.util.LinkedList(  ) from collect( BuildFileCandidate(activity == $activity) )
 	then
 		insert artifact '$candidates' as 'BuildFileArtifactList'

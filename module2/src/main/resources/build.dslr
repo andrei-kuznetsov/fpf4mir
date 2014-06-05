@@ -26,16 +26,16 @@ end
 
 rule "NewBuild_Mvn"
 	when
-		activity 'BuildActivity'
->		BuildFile( activity == $activity, getFileName().endsWith("pom.xml") )
->		not MvnBuild( this == $activity )
+		active activity 'BuildActivity'
+>		$artifact : BuildFile( activity == $activity, getFileName().endsWith("pom.xml") )
 	then
-		cast activity '$activity' to 'MvnBuild'
+		add subrequest 'ReqMvnBuild'
+		add subrequest parameter '$artifact' as 'GenericFileArtifactAlias'
 end
 
 rule "BuildStatus"
 	when
-		activity 'BuildActivity'
+		active activity 'BuildActivity'
 >		exists ExecStatus( activity == $activity, succeeded == true )
 	then
 		activity succeeded
@@ -43,7 +43,7 @@ end
 
 rule "Guess run executable after build"
 	when
-		activity 'BuildActivity'
+		active activity 'BuildActivity'
 		activity succeeded
 		$folder : FolderArtifact for activity
 		not 'ExecutableFileArtifact' for activity
