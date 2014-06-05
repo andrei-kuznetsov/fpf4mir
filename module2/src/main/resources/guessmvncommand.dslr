@@ -6,30 +6,82 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 
+// #################################### Input parameters #######################################
+// automatic
+// ----------------------------------- Output parameters ---------------------------------------
+
+rule "Build maven request Status"
+	when
+		request 'ReqMvnBuild'
+		activity for request
+		activity succeeded
+		$target : MavenTargetDir for activity
+	then
+		set request status succeeded
+		add request status parameter $target as GenericFolderArtifactAlias
+end
+
+// #############################################################################################
 rule "Maven_DefaultTargets"
 	when
 		active activity 'MvnBuildActivity'
-		activity active
 		not MvnBuildTarget for activity
 	then
-		insert MvnBuildTarget_Clean
-		insert MvnBuildTarget_Package
+		add ordinal 100 "clean"
+		add ordinal 200 "package"
+end
+
+rule "Maven project dir"
+	when
+		active activity 'MvnBuildActivity'
+		$pom : BuildFile for activity
+		not MavenProjectDir for activity
+	then
+		insert artifact '$pom._getFile().getParent(), ""' as 'MavenProjectDir'
+end
+
+rule "Maven target dir"
+	when
+		active activity 'MvnBuildActivity'
+		$pd : MavenProjectDir for activity
+		not MavenTargetDir for activity
+	then
+		insert artifact '$pd.getAbsolutePath(), "target"' as 'MavenTargetDir'
 end
 
 rule "Maven_DfltOption_PomFile"
 	when
 		active activity 'MvnBuildActivity'
 		$pom : BuildFile for activity
-		not MvnOption_PomFile for activity
+		// not MvnRootPom
 	then
->		insert( new MvnOption_PomFile($activity, $pom) );
+//		add keyvalue 50 "-f" $pom.getAbsolutePath();
+		add ordinal 50 "-f"
+		add ordinal 51 $pom.getAbsolutePath()
 end
 
 rule "Maven_BuildCommand"
+	salience -1 // shall be less than for mvn targets insertion rule
+	when
+	    active activity 'MvnBuildActivity'
+	    cmd options for activity
+		$pd : MavenProjectDir for activity
+	then
+		execute command "mvn" in working dir $pd
+end
+
+rule "Maven execution status succeeded"
 	when
 		active activity 'MvnBuildActivity'
-		$pom : BuildFile for activity
->		$options : java.util.LinkedList( size > 0 ) from collect ( MvnOption( activity == $activity ) )
+>		$execstat : ExecStatus(activity==$activity, succeeded==true)
 	then
->		insertLogical( new MvnBuildCommand($activity, $pom._getFile().getParentFile(), $options) );
+		activity succeeded
+end
+
+rule "Maven execution status failed"
+	when
+		active activity 'MvnBuildActivity'
+>		$execstat : ExecStatus(activity==$activity, succeeded==false)
+	then
+		activity failed with message "Maven failed with status " + $execstat.getStatus()
 end

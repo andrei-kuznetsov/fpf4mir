@@ -6,6 +6,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactAliasBase /* java */ end
 
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactBase /* java */ end
 
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity /* java */ end
 
@@ -74,3 +75,6 @@ end
 declare InputProcessingCompleted extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
 declare SubrequestProcessingCompleted extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.RequestRelatedFactBase end
 
+
+declare MavenProjectDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactBase end
+declare MavenTargetDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactBase end

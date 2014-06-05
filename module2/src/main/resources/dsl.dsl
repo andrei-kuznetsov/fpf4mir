@@ -42,6 +42,7 @@
 
 [then]activity succeeded=insert( new GenericActivitySucceeded($activity) );
 [then]activity failed with status {status}=insert( new GenericActivityFailed($activity, {status}) );
+[then]activity failed with message {status}=insert( new GenericActivityFailed($activity, {status}) );
 [then]activity failed with type {type:\w+} and message {message}=insert( new GenericActivityFailed($activity, {type}, {message}) );
 [then]set request status succeeded=RequestStatus requestStatus = new RequestSucceeded($request, "ok"); insert(requestStatus);
 

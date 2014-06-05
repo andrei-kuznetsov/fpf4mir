@@ -94,7 +94,7 @@ public class Artifact implements Serializable, FPFCloneable, ActivityRelatedFact
 		}
 		return _fileCache;
 	}
-
+	
 	public Activity getActivity() {
 		return activity;
 	}
