@@ -26,6 +26,14 @@ public class ExecStatus extends ActionStatusBase implements ActionStatus {
 		this.fileErr = fileErr;
 	}
 
+	public FileArtifact getFileOut(){
+		return new FileArtifact(getActivity(), fileOut.getParent(), fileOut.getName());
+	}
+
+	public FileArtifact getFileErr(){
+		return new FileArtifact(getActivity(), fileErr.getParent(), fileErr.getName());
+	}
+	
 	public boolean isSucceeded(){
 		return status == 0;
 	}

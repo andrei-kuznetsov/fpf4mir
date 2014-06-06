@@ -67,7 +67,7 @@ rule "Maven_BuildCommand"
 	    cmd options for activity
 		$pd : MavenProjectDir for activity
 	then
-		execute command "mvn" in working dir $pd
+		execute command "mvn.bat" in working dir $pd
 end
 
 rule "Maven execution status succeeded"
@@ -83,5 +83,6 @@ rule "Maven execution status failed"
 		active activity 'MvnBuildActivity'
 >		$execstat : ExecStatus(activity==$activity, succeeded==false)
 	then
+		insert artifact '$execstat.getFileOut()' as 'GenericUserInfoFileArtifact'
 		activity failed with message "Maven failed with status " + $execstat.getStatus()
 end

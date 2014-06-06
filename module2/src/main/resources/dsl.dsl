@@ -27,6 +27,7 @@
 [when]{type:\w+} for activity={type}(activity == $activity)
 [when]{type:\w+} for request={type}(request == $request)
 
+[then]log {message}=System.out.println({message});
 [then]def user action {type:\w+}={type} useraction = new {type}(); useraction.setActivity($activity);
 [then]add user action attr {attr:\w+} as {value}=useraction.set{attr}({value});
 [then]add user action=insert(useraction);

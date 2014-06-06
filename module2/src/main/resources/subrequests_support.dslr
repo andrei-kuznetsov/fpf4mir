@@ -36,9 +36,9 @@ rule "Process any Request result successfull"
 >		$output : Alias( rstatus == $subrequestStatus )
 >		not RequestOutputProcessed( activity == $activity, output == $output )
 	then
->		System.out.println("## Activity: " + $activity);
->		System.out.println("## Subrequest: " + $subrequest);
->		System.out.println("## Alias: " + $output);
+		log "## Activity: " + $activity
+		log "## Subrequest: " + $subrequest
+		log "## Alias: " + $output
 		add activity fact from request output
 >		insert(new RequestOutputProcessed($activity, $output));
 end
