@@ -13,6 +13,7 @@ declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity /* java */ end
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase /* java */ end
 
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.RequestRelatedFactBase /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.RequestStatusRelatedFactBase /* java */ end
 
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityFailedBase /* java */ end
 
@@ -70,10 +71,6 @@ declare UserActionSelectBuildOrRun extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.
 	 execArtifacts : ExecFileArtifactList;
 	 buildArtifacts : BuildFileArtifactList
 end
-
-
-declare InputProcessingCompleted extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
-declare SubrequestProcessingCompleted extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.RequestRelatedFactBase end
 
 
 declare MavenProjectDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactBase end

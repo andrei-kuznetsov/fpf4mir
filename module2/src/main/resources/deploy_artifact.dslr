@@ -5,19 +5,15 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
 
-// #################################### Input parameters #######################################
-// automatic
 // ----------------------------------- Output parameters ---------------------------------------
 
-rule "DeployArtifact Request Status"
+rule "Assert DeployFolder"
 	when
-		request 'ReqDeployFolder'
-		activity for request
-		activity succeeded
-		'FolderArtifact' for activity
+		active activity 'DeployFolderActivity'
+		$folder : FolderArtifact for activity
 	then
-		set request status succeeded
-		add request status parameter $artifact as DeployFolder
+		activity succeeded
+		add activity status parameter $folder as DeployFolder
 end
 
 // #############################################################################################
@@ -36,7 +32,7 @@ end
 rule "Assert Downloaded Artifact"
 	when 
 	    active activity 'DeployFolderActivity'
-		subrequest 'ReqDownloadHttp'
+		subrequest 'ReqDownloadHttp' for activity
 		subrequest succeeded
 		subrequest outputs (
 			subrequest output 'FileArtifactAlias'
@@ -49,7 +45,7 @@ end
 rule "Assert Download Failed Artifact"
 	when 
 	    active activity 'DeployFolderActivity'
-		subrequest 'ReqDownloadHttp'
+		subrequest 'ReqDownloadHttp' for activity
 		subrequest failed
 	then
 		activity failed with status "Can't download artifact"
@@ -68,7 +64,7 @@ end
 rule "Process exctracted artifact"
 	when 
 	 	active activity 'DeployFolderActivity'
-		subrequest 'ReqExtract'
+		subrequest 'ReqExtract' for activity
 		subrequest succeeded
 		subrequest outputs (
 			subrequest output 'FolderArtifactAlias'
@@ -80,17 +76,9 @@ end
 rule "Process exctracted artifact failed"
 	when
 		active activity 'DeployFolderActivity'
-		subrequest 'ReqExtract'
+		subrequest 'ReqExtract' for activity
 		subrequest failed
 	then
 		activity failed with status "Can't extract artifact. Reason: " + $subrequestStatus.getMessage()
-end
-
-rule "Assert DeployFolder"
-	when
-		active activity 'DeployFolderActivity'
-		'FolderArtifact' for activity
-	then
-		activity succeeded
 end
 

@@ -9,19 +9,16 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
 
 
-// #################################### Input parameters #######################################
-// automatic
 // ----------------------------------- Output parameters ---------------------------------------
 
-rule "ExtractActivity Request Status"
-	when
-		request 'ReqExtract'
-		activity for request
+rule "Evaluate ExtractActivity result"
+	when 
+	    active activity 'ExtractActivity'
+	    exec command succeeded
+		$extracted : FolderArtifact for activity
+	then 
 		activity succeeded
-		'FolderArtifact' for activity
-	then
-		set request status succeeded
-		add FolderArtifact as request status
+		add activity status parameter $extracted as GenericFolderArtifactAlias
 end
 
 // #############################################################################################
@@ -58,12 +55,4 @@ rule "Unzip with jar command"
 >	    $target : FolderArtifact( activity == $activity )
 	then
 		execute command "jar" in working dir $target
-end
-
-rule "Evaluate activity result"
-	when 
-	    active activity 'ExtractActivity'
-	    exec command succeeded
-	then 
-		activity succeeded
 end

@@ -1,6 +1,9 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic;
 
+import java.io.Serializable;
+
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Alias;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestStatus;
@@ -8,10 +11,16 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FPFCloneable;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithName;
 
-public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneable{
+public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneable, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1936012869829532600L;
+	
 	private U refObject;
 	private RequestFact request;
 	private RequestStatus rstatus;
+	private ActivityStatus astatus;
 	private String name;
 	
 	public U getRefObject() {
@@ -38,6 +47,14 @@ public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneabl
 		this.rstatus = rstatus;
 	}
 	
+	public ActivityStatus getAstatus() {
+		return astatus;
+	}
+
+	public void setAstatus(ActivityStatus astatus) {
+		this.astatus = astatus;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -98,33 +115,54 @@ public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneabl
 
 	@Override
 	public void reset(RequestStatus rstatus, String name, U object) {
-		this.reset(null, rstatus, name, object);
+		this.reset(null, rstatus, null, name, object);
 	}
 
 	@Override
+	public void reset(ActivityStatus astatus, U object) {
+		this.reset(astatus, ((FactWithName)object).getName(), object);
+	}
+
+	@Override
+	public void reset(ActivityStatus astatus, String name, U object) {
+		this.reset(null, null, astatus, name, object);
+	}
+	
+	@Override
 	public void reset(RequestFact request, String name, U object) {
-		this.reset(request, null, name, object);
+		this.reset(request, null, null, name, object);
 	}
 
 	@Override
 	public void reset(RequestFact request, U object) {
 		final String name = ((FactWithName)object).getName();
-		this.reset(request, null, name, object);
+		this.reset(request, null, null, name, object);
 	}
 	
-	@Override
-	public void reset(RequestFact request, RequestStatus rstatus, String name,
+	public void reset(RequestFact request, RequestStatus rstatus, ActivityStatus astatus, String name,
 			U object) {
 		this.refObject = object;
 		this.rstatus = rstatus;
 		this.request = request;
+		this.astatus = astatus;
 		this.name = name;
+	}
+
+	public void reset(RequestStatus rstatus, Alias<U> alias) {
+		this.reset(rstatus, alias.getName(), alias.getRefObject());
 	}
 	
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [object=" + refObject + ", request=" + request
-				+ ", rstatus=" + rstatus + ", name=" + name + "]";
+		StringBuilder sb = new StringBuilder(getClass().getSimpleName() + " [object=" + refObject);
+		if (request != null) sb.append(", request=" + request);
+		if (rstatus != null) sb.append(", rstatus=" + rstatus);
+		if (astatus != null) sb.append(", astatus=" + astatus);
+		if (name != null) sb.append(", name=" + name);
+		
+		sb.append("]");
+		
+		return sb.toString();
 	}
 
 }

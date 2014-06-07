@@ -1,11 +1,16 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils;
 
 import java.io.File;
+import java.io.Serializable;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecCommand;
 
-public abstract class BaseExecCommand implements ExecCommand{
+public abstract class BaseExecCommand implements ExecCommand, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2021345598551212750L;
 	private String command;
 	private File workingDir;
 	private Activity activity;

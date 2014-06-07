@@ -1,7 +1,11 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.util.Collection;
@@ -27,6 +31,9 @@ import org.drools.definition.KnowledgePackage;
 import org.drools.definition.rule.Global;
 import org.drools.definition.type.FactType;
 import org.drools.io.ResourceFactory;
+import org.drools.marshalling.Marshaller;
+import org.drools.marshalling.MarshallerFactory;
+import org.drools.marshalling.ObjectMarshallingStrategy;
 import org.drools.runtime.ObjectFilter;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.runtime.rule.FactHandle;
@@ -41,10 +48,13 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.DetectEncodingActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ExecActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityStatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.UserInfo;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.DataDirRoot;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestSubstatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityStatusRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestStatusRelatedFact;
 
@@ -60,35 +70,44 @@ public class DeploymentSession {
 	private static final String QKEY_ACTIVITY = "activities";
 	private static final String QKEY_EXTRAS = "extras";
 
+	private KnowledgeBase kbase = null;
 	private StatefulKnowledgeSession ksession = null;
+	private Marshaller marshaller;
 	private static final Logger log = Logger.getLogger(DeploymentSession.class);
 	private static final Map<Class<? extends ActionFact>, ActionHandler> actionsMap = new HashMap<Class<? extends ActionFact>, ActionHandler>();
 
 	private EXECUTION_STATE state = EXECUTION_STATE.DONE;
 
 	public void init() throws Exception {
+		init(null);
+	}
+	
+	public void init(InputStream is) throws Exception {
 
 		log.setLevel(Level.ALL);
 
 		initActions();
 
-		initStatefulSession();
+		initKBase();
+		
+		if (is == null){
+			initStatefulSession();
+		} else {
+			unmarshallKSession(is);
+		}
 
 		// now insert environment facts
 		initExecEnvironment();
 
-		// log.debug("Original artifact is '" + originalArtifact + "'");
-		//
-		// if (originalArtifact.exists()){
-		// initSession(originalArtifact, testDataPath);
-		// } else {
-		// final String msg = "Original artifact: file '" +
-		// originalArtifact.getAbsolutePath() + "' doesn't exist!";
-		// log.error(msg);
-		// throw new RuntimeException(msg);
-		// }
-
 		log.info("Execution completed!");
+	}
+
+	public void storeKSession(OutputStream os) throws IOException{
+		marshaller.marshall(os, ksession);
+	}
+	
+	private void unmarshallKSession(InputStream is) throws ClassNotFoundException, IOException {
+		ksession = marshaller.unmarshall(is);
 	}
 
 	private void initExecEnvironment() {
@@ -208,6 +227,15 @@ public class DeploymentSession {
 	}
 
 	private void initStatefulSession() throws ZipException, IOException {
+		ksession = kbase.newStatefulKnowledgeSession();
+
+		// ksession.addEventListener(new DebugAgendaEventListener());
+		// ksession.addEventListener(new DebugWorkingMemoryEventListener());
+		ksession.addEventListener(new AgendaDebugListener());
+		initGlobals(kbase, ksession);
+	}
+
+	private void initKBase() throws ZipException, IOException {
 		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory
 				.newKnowledgeBuilder();
 
@@ -231,7 +259,7 @@ public class DeploymentSession {
 		addClassPathEntry(kbuilder, "basic_queries.drl", ResourceType.DRL);
 		addClassPathEntry(kbuilder, "preprocess.drl", ResourceType.DRL);
 
-		KnowledgeBase kbase = kbuilder.newKnowledgeBase();
+		kbase = kbuilder.newKnowledgeBase();
 		debugTactType(kbase, "defaultpkg", "DeployFolder");
 		debugTactType(kbase, "defaultpkg", "ReqDownloadHttp");
 
@@ -246,12 +274,7 @@ public class DeploymentSession {
 			addClassPathEntry(kbuilder, resFileName, ResourceType.DSLR);
 
 		kbase = kbuilder.newKnowledgeBase();
-		ksession = kbase.newStatefulKnowledgeSession();
-
-		// ksession.addEventListener(new DebugAgendaEventListener());
-		// ksession.addEventListener(new DebugWorkingMemoryEventListener());
-		ksession.addEventListener(new AgendaDebugListener());
-		initGlobals(kbase, ksession);
+		marshaller = MarshallerFactory.newMarshaller(kbase);
 	}
 
 	private void initGlobals(KnowledgeBase kbase,
@@ -308,9 +331,14 @@ public class DeploymentSession {
 		}
 	}
 
-	public void reset() throws Exception {
+
+	public void reset(FileInputStream fis) throws Exception {
 		this.dispose();
-		this.init();
+		this.init(fis);
+	}
+	
+	public void reset() throws Exception {
+		reset(null);
 	}
 
 	public void assertFactAndRun(Object... f) throws Exception {
@@ -464,12 +492,12 @@ public class DeploymentSession {
 		return simpleListRequest(key, "Get activity related facts");
 	}
 
-	private List<Object> simpleListRequest(Object key, String qname) {
+	private <U> List<U> simpleListRequest(Object key, String qname) {
 		QueryResults results = ksession.getQueryResults(qname, key);
 		Iterator<QueryResultsRow> it = results.iterator();
-		LinkedList<Object> ret = new LinkedList<>();
+		LinkedList<U> ret = new LinkedList<>();
 		while (it.hasNext()) {
-			ret.add(it.next().get("$object"));
+			ret.add((U)it.next().get("$object"));
 		}
 		return ret;
 	}
@@ -489,5 +517,13 @@ public class DeploymentSession {
 
 	public List<Object> getRequestStatusRelatedFacts(RequestStatus key) {
 		return simpleListRequest(key, "Get request status related facts");
+	}
+
+	public List<Object> getActivityStatusRelatedFacts(ActivityStatus key) {
+		return simpleListRequest(key, "Get activity status related facts");
+	}
+
+	public List<UserInfo> getUserInfoFacts(ActivityStatus key) {
+		return simpleListRequest(key, "Get userInfo facts for request");
 	}
 }

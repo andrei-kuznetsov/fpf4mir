@@ -11,7 +11,7 @@ public class FolderArtifact extends Artifact {
 	 */
 	private static final long serialVersionUID = 8835493644023653506L;
 	
-	private DirectoryScanner scanner = new DirectoryScanner();
+	transient private DirectoryScanner scanner;
 
 	public FolderArtifact() {
 		super();
@@ -27,11 +27,19 @@ public class FolderArtifact extends Artifact {
 	public boolean isDirectory() {
 		return true;
 	}
-
+	
 	public String[] getFileNamesForPattern(String... patterns){
-		scanner.setIncludes(patterns);
-		scanner.scan();
+		getScanner().setIncludes(patterns);
+		getScanner().scan();
 		return scanner.getIncludedFiles();
+	}
+
+	private DirectoryScanner getScanner() {
+		if (scanner == null){
+			scanner = new DirectoryScanner();
+			scanner.setCaseSensitive(false);
+		}
+		return scanner;
 	}
 
 	public String[] getFileNamesForPattern2(String[] patterns){
@@ -39,8 +47,8 @@ public class FolderArtifact extends Artifact {
 	}
 	
 	public String[] getDirNamesForPattern(String pattern){
-		scanner.setIncludes(new String[]{pattern});
-		scanner.scan();
+		getScanner().setIncludes(new String[]{pattern});
+		getScanner().scan();
 		return scanner.getIncludedDirectories();
 	}
 
@@ -67,8 +75,7 @@ public class FolderArtifact extends Artifact {
 			}
 		}
 
-		scanner.setCaseSensitive(false);
-		scanner.setBasedir(file);
+		getScanner().setBasedir(file);
 	}
 
 	@Override

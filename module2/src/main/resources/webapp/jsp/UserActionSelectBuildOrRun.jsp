@@ -15,7 +15,10 @@ function assertFact(factType, baseDir, fileName) {
 		if (req.readyState == 4) { 
             // complete
 
-			if(req.status != 200) { 
+			if (req.status == 304 /*see other*/){
+				//window.location.href = ""
+				alert("redirect");
+			} else if (req.status != 200) { 
 				alert(req.responseText);
 			}
 		}

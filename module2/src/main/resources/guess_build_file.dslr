@@ -11,15 +11,13 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 // automatic
 // ----------------------------------- Output parameters ---------------------------------------
 
-rule "GuessBuildFile Request Status - FileArtifactList"
+rule "GuessBuildFile activity status"
 	when
-		request 'ReqGuessBuildFile'
-		activity for request
-		activity succeeded
+		active activity 'GuessBuildFileActivity'
 		$list : BuildFileArtifactList for activity
 	then
-		set request status succeeded
-		add request status parameter $list as BuildFileArtifactListAlias
+		activity succeeded
+		add activity status parameter $list as GenericAlias
 end
 
 // #############################################################################################
@@ -50,5 +48,4 @@ rule "List BuildFile candidates"
 >		$candidates : java.util.LinkedList(  ) from collect( BuildFileCandidate(activity == $activity) )
 	then
 		insert artifact '$candidates' as 'BuildFileArtifactList'
-		activity succeeded
 end

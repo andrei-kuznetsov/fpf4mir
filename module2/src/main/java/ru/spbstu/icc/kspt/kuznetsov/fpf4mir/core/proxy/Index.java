@@ -1,8 +1,12 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.proxy;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Reader;
 import java.net.URI;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,11 +19,11 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -28,6 +32,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.DeploymentSession;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.DeploymentSession.QResult;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Artifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
@@ -43,7 +48,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestStatusRelatedFact;
 
 @Path("/rest")
 public class Index {
-	
+
 	private static final String PATH_ROOT = "/rest";
 	private static final String PATH_STATUS = "/status";
 	private static final String PATH_USERACTION = "/useraction";
@@ -54,46 +59,86 @@ public class Index {
 
 	private static final Logger log = Logger.getLogger(Index.class);
 
-	private ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
+	private ObjectMapper mapper = new ObjectMapper(); // can reuse, share
+														// globally
 
 	@GET
 	@Path("/dbg")
 	public void dbgAll(@Context HttpServletRequest request,
-			@Context HttpServletResponse response) throws ServletException, IOException{
+			@Context HttpServletResponse response) throws ServletException,
+			IOException {
 		HashMap<Object, List<Object>> tree = new HashMap<>();
 		fillDbgTraceTree(tree, Activity.USER);
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/dbg_tree.jsp");
+
+		RequestDispatcher dispatcher = request
+				.getRequestDispatcher("/jsp/dbg_tree.jsp");
 		request.setAttribute("tree", tree);
 		request.setAttribute("root", Activity.USER);
 		dispatcher.forward(request, response);
 	}
-	
-	
-	private void fillDbgTraceTree(HashMap<Object, List<Object>> tree,
-			Object key) {
-		
-		if (tree.containsKey(key)){
+
+	@GET
+	@Path("/dbg/store")
+	public String dbgStoreSession() throws ServletException, IOException {
+		if (session != null) {
+			File f = new File("./ksession");
+			log.info("Stroring ksession to file " + f.getAbsolutePath());
+			FileOutputStream fos = new FileOutputStream(f);
+			session.storeKSession(fos);
+			fos.close();
+			return new Date() + " : Successfully stored";
+		} else {
+			return new Date() + " : No sessions currently exists";
+		}
+	}
+
+	@GET
+	@Path("/dbg/restore")
+	public String dbgRestoreSession() throws Exception {
+		File f = new File("./ksession");
+		if (f.canRead()) {
+			log.info("Readig ksession from file " + f.getAbsolutePath());
+			FileInputStream fis = new FileInputStream(f);
+			session.reset(fis);
+			fis.close();
+			return new Date() + " : Successfully restored";
+		} else {
+			return new Date() + " : No previously stored sessions found";
+		}
+	}
+
+	@GET
+	@Path("/files")
+	public File dbgAll(@QueryParam("file") String fileName)
+			throws ServletException, IOException {
+		return new File(fileName);
+	}
+
+	private void fillDbgTraceTree(HashMap<Object, List<Object>> tree, Object key) {
+
+		if (tree.containsKey(key)) {
 			return;
 		} else {
 			List<Object> lst = null;
-			if (key instanceof Activity){
-				lst = session.getActivityRelatedFacts((Activity)key);
+			if (key instanceof Activity) {
+				lst = session.getActivityRelatedFacts((Activity) key);
 			} else if (key instanceof RequestFact) {
-				lst = session.getRequestRelatedFacts((RequestFact)key);
-			} else if (key instanceof RequestStatus){
-				lst = session.getRequestStatusRelatedFacts((RequestStatus)key);
+				lst = session.getRequestRelatedFacts((RequestFact) key);
+			} else if (key instanceof ActivityStatus) {
+				lst = session
+						.getActivityStatusRelatedFacts((ActivityStatus) key);
+			} else if (key instanceof RequestStatus) {
+				lst = session.getRequestStatusRelatedFacts((RequestStatus) key);
 			}
-			
+
 			tree.put(key, lst);
-			if (lst != null){
-				for (Object i : lst){
+			if (lst != null) {
+				for (Object i : lst) {
 					fillDbgTraceTree(tree, i);
 				}
 			}
 		}
 	}
-
 
 	@GET
 	@POST
@@ -179,19 +224,25 @@ public class Index {
 			throws Exception {
 
 		UserAction uaction = session.getUserAction(id);
-		if (uaction != null && uaction.getClass().getSimpleName().equals(actionName)) {
+		if (uaction != null
+				&& uaction.getClass().getSimpleName().equals(actionName)) {
 
 			session.setFactHandled(uaction);
-			assertFactForActivityImpl(request.getReader(), uaction.getActivity());
+			assertFactForActivityImpl(request.getReader(),
+					uaction.getActivity());
 
-			return Response.ok().build();
+			return Response.seeOther(
+					new URI(PATH_REQUEST_STATUS + "/"
+							+ uaction.getActivity().getRequest().getRefId()))
+					.build();
 		} else {
 			log.warn("No action '" + actionName + "' found with id=" + id);
 			return Response.status(404).build();
 		}
 	}
 
-	private void assertFactForActivityImpl(Reader r, Activity activity) throws Exception {
+	private void assertFactForActivityImpl(Reader r, Activity activity)
+			throws Exception {
 		JsonNode root = mapper.readTree(r);
 		if (root.isArray()) {
 			for (JsonNode i : root) {

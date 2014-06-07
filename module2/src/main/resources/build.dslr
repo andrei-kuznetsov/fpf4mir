@@ -6,19 +6,15 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
 
 
-// #################################### Input parameters #######################################
-// automatic
 // ----------------------------------- Output parameters ---------------------------------------
 
-rule "Build Request Status"
+rule "Build activity status"
 	when
-		request 'ReqBuild'
-		activity for request
-		activity succeeded
-		$artifact : ExecutableFileArtifact for activity
+		active activity 'BuildActivity'
+		$exec : ExecutableFileArtifact for activity
 	then
-		set request status succeeded
-		add request status parameter $artifact as GenericFileArtifactAlias
+		activity succeeded
+		add activity status parameter $exec as GenericAlias
 end
 
 // #############################################################################################
@@ -33,18 +29,10 @@ rule "NewBuild_Mvn"
 		add subrequest parameter '$artifact' as 'GenericFileArtifactAlias'
 end
 
-rule "BuildStatus"
-	when
-		active activity 'BuildActivity'
->		exists ExecStatus( activity == $activity, succeeded == true )
-	then
-		activity succeeded
-end
-
 rule "Guess run executable after build"
 	when
 		active activity 'BuildActivity'
-		activity succeeded
+>		exists ExecStatus( activity == $activity, succeeded == true )
 		$folder : FolderArtifact for activity
 		not 'ExecutableFileArtifact' for activity
 	then

@@ -6,20 +6,15 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 
-
-// #################################### Input parameters #######################################
-// automatic
 // ----------------------------------- Output parameters ---------------------------------------
 
 rule "GuessRunExecutable Request Status - FileArtifactList"
 	when
-		request 'ReqGuessRunExecutable'
-		activity for request
-		activity succeeded
+		active activity 'GuessRunExecutableActivity'
 		$list : ExecFileArtifactList for activity
 	then
-		set request status succeeded
-		add request status parameter $list as ExecFileArtifactListAlias
+		activity succeeded
+		add activity status parameter $list as GenericAlias
 end
 
 // #############################################################################################
@@ -48,5 +43,4 @@ rule "List ExecArtifact candidates"
 >		$candidates : java.util.LinkedList( ) from collect( ExecArtifactCandidate(activity == $activity) )
 	then
 		insert artifact '$candidates' as 'ExecFileArtifactList'
-		activity succeeded
 end

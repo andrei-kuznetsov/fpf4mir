@@ -10,6 +10,10 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.OrdinalArgument;
 
 public class ListExecCommand extends BaseExecCommand{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9143661806870839936L;
 	private List<String> arguments = new LinkedList<String>();
 	
 	public ListExecCommand() {

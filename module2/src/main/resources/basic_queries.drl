@@ -45,3 +45,11 @@ end
 query "Get request status related facts"  (RequestStatus rstat)
 	$object : RequestStatusRelatedFact( rstatus == rstat )
 end
+
+query "Get activity status related facts"  (ActivityStatus astat)
+	$object : ActivityStatusRelatedFact( astatus == astat )
+end
+
+query "Get userInfo facts for request"  (RequestFact request)
+	$object : UserInfo( request == request )
+end

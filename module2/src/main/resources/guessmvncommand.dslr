@@ -6,19 +6,16 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 
-// #################################### Input parameters #######################################
-// automatic
 // ----------------------------------- Output parameters ---------------------------------------
 
-rule "Build maven request Status"
+rule "Maven execution status succeeded"
 	when
-		request 'ReqMvnBuild'
-		activity for request
-		activity succeeded
+		active activity 'MvnBuildActivity'
+>		$execstat : ExecStatus(activity==$activity, succeeded==true)
 		$target : MavenTargetDir for activity
 	then
-		set request status succeeded
-		add request status parameter $target as GenericFolderArtifactAlias
+		activity succeeded
+		add activity status parameter $target as GenericAlias
 end
 
 // #############################################################################################
@@ -67,15 +64,7 @@ rule "Maven_BuildCommand"
 	    cmd options for activity
 		$pd : MavenProjectDir for activity
 	then
-		execute command "mvn.bat" in working dir $pd
-end
-
-rule "Maven execution status succeeded"
-	when
-		active activity 'MvnBuildActivity'
->		$execstat : ExecStatus(activity==$activity, succeeded==true)
-	then
-		activity succeeded
+		execute command "mvn" in working dir $pd
 end
 
 rule "Maven execution status failed"

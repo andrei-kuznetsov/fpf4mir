@@ -10,32 +10,25 @@ declare DeployExecOption_Build extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core
 declare DeployExecOption_Run extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
 declare DeployExecOption_Autodetect extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
 
-declare ReqDeployExecOption_Build extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.AliasBase end
-declare ReqDeployExecOption_Run extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.AliasBase end
 
-// #################################### Input parameters #######################################
-// automatic
 // ----------------------------------- Output parameters ---------------------------------------
 
-rule "DeployExecutable Request Status"
+rule "Eval DeployExecutableActivity succeeded"
 	when
-		request 'ReqDeployExecutable'
-		activity for request
-		activity succeeded
-		$artifact : ExecutableFileArtifact for activity
+		active activity 'DeployExecutableActivity'
+		$exec : ExecutableFileArtifact for activity
 	then
-		set request status succeeded
-		add request status parameter $artifact as GenericExecutableFileArtifactAlias
+		activity succeeded
+		add activity status parameter $exec as GenericFileArtifactAlias
 end
 
 // #############################################################################################
 
 rule "Autodetect rule"
 	when
-		request 'ReqDeployExecutable'
-		activity for request
-		not ReqDeployExecOption_Build for request
-		not ReqDeployExecOption_Run for request
+		active activity 'DeployExecutableActivity'
+		not DeployExecOption_Build for activity
+		not DeployExecOption_Run for activity
 	then
 >		insertLogical(new DeployExecOption_Autodetect($activity));
 end
@@ -143,12 +136,4 @@ rule "Do build"
 	then
 		add subrequest 'ReqBuild'
 		add subrequest parameter '$artifact' as 'GenericFileArtifactAlias'
-end
-
-rule "Eval DeployExecutableActivity succeeded"
-	when
-		active activity 'DeployExecutableActivity'
-		ExecutableFileArtifact for activity
-	then
-		activity succeeded
 end

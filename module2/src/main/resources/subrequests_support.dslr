@@ -4,77 +4,189 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 
-declare RequestOutputProcessed
+declare ActivityToActivityStatusFactProcessed
+	activity : Activity
+	value : UserInfo
+end
+
+declare RequestStatusToParentActivityFactProcessed /* from activity to request */
 	activity : Activity
 	output : Alias
 end
 
-declare RequestInputProcessed
+declare RequestToActivityFactProcessed /* from request to activity */
 	activity : Activity
 	input : Alias
 end
 
-rule "Activity facts from request"
+declare ActivityStatusToRequestStatusFactProcessed /* from activity status to request status */
+	activityStatus : ActivityStatus
+	output : Alias
+end
+
+declare AllActivityInputsReady extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
+declare AllActivityOutputsReady extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
+declare ActivityProcessingCompleted extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
+
+// all results of all subactivities copied to parent request
+declare SubactivitiesProcessingCompleted extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.RequestRelatedFactBase end
+// All request status facts copied to parent activity
+declare SubrequestProcessingCompleted extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.RequestRelatedFactBase end
+
+
+rule "Request to activity (single fact)"
 	when
-		request 'ReqNewActivity'
+		any activity request
 		activity for request
 		request inputs (
 		    input 'Alias'
 >		)
->		not RequestInputProcessed( activity == $activity, input == $input )
+>		not RequestToActivityFactProcessed( activity == $activity, input == $input )
 	then
 		add activity fact from request input
->		insert(new RequestInputProcessed($activity, $input));
+>		insert(new RequestToActivityFactProcessed($activity, $input));
 end
 
-
-rule "Process any Request result successfull"
-	when 
-	 	any activity
-		subrequest 'ReqNewActivity'
-		subrequest succeeded
->		$output : Alias( rstatus == $subrequestStatus )
->		not RequestOutputProcessed( activity == $activity, output == $output )
+rule "Activity to activity status (single fact)"
+	when
+		any activity
+		$astatus : ActivityStatus for activity
+		$value : UserInfo for activity 
+>		not ActivityToActivityStatusFactProcessed( activity == $activity, value == $value )
 	then
-		log "## Activity: " + $activity
-		log "## Subrequest: " + $subrequest
-		log "## Alias: " + $output
-		add activity fact from request output
->		insert(new RequestOutputProcessed($activity, $output));
+		add parameter '$value' to '$astatus';
+>		insert(new ActivityToActivityStatusFactProcessed($activity, $value));
 end
 
 
-rule "Process any Request result failed"
+rule "Request result to parent activity (single fact)"
 	when 
 	 	any activity
-		subrequest 'ReqNewActivity'
+		subrequest 'ReqNewActivity' for activity
+		subrequest completed
+>		$output : Alias( rstatus == $subrequestStatus )
+>		not RequestStatusToParentActivityFactProcessed( activity == $activity, output == $output )
+	then
+		add activity fact from request output
+>		insert(new RequestStatusToParentActivityFactProcessed($activity, $output));
+end
+
+
+rule "Activity result to request result (single fact)"
+	when 
+	 	any activity request
+	 	activity for request
+	 	$rstatus : RequestStatus for request
+	 	$astatus : ActivityStatus for activity
+>		$output : Alias( astatus == $astatus )
+>		not ActivityStatusToRequestStatusFactProcessed( activityStatus == $astatus, output == $output )
+	then
+		add parameter '$output' to '$rstatus';
+>		insert(new ActivityStatusToRequestStatusFactProcessed($astatus, $output));
+end
+
+rule "All activity status outputs copied from activity"
+	when
+		any activity
+	 	$astatus : ActivityStatus for activity
+>		forall ( $ui : UserInfo(activity == $activity)
+>                ActivityToActivityStatusFactProcessed( activity == $activity, value == $ui ))
+	then
+>		AllActivityOutputsReady o = new AllActivityOutputsReady();
+>		o.setActivity($activity);
+>		insertLogical(o);
+end
+
+rule "All activity inputs copied from parent request"
+	when
+		any activity request
+		activity for request
+>		forall ( $rrf : Alias(request == $request)
+>                RequestToActivityFactProcessed( activity == $activity, input == $rrf ))
+	then
+>		AllActivityInputsReady o = new AllActivityInputsReady();
+>		o.setActivity($activity);
+>		insertLogical(o);
+end
+
+rule "All request status outputs copied from activity status (single activity)"
+	when
+	 	any activity request
+	 	activity for request
+	 	AllActivityOutputsReady for activity
+	 	$rstatus : RequestStatus for request
+	 	$astatus : ActivityStatus for activity
+>		forall ( $rrf : Alias(astatus == $astatus)
+>                ActivityStatusToRequestStatusFactProcessed( activityStatus == $astatus, output == $rrf ))
+	then
+>		ActivityProcessingCompleted o = new ActivityProcessingCompleted();
+>		o.setActivity($activity);
+>		insertLogical(o);
+end
+
+rule "All request status outputs copied from activity status (all activities)"
+	when
+		any activity request
+>		forall ( $subactivity : Activity(request == $request)
+>                ActivityProcessingCompleted( activity == $subactivity))
+	then
+>		SubactivitiesProcessingCompleted o = new SubactivitiesProcessingCompleted();
+>		o.setRequest($request);
+>		insertLogical(o);
+end
+
+rule "All request outputs copied to parent activity"
+	when
+	 	any activity
+		subrequest 'ReqNewActivity' for activity
+		subrequest completed
+>		SubactivitiesProcessingCompleted(request == $subrequest)
+>		forall ( $rrf : Alias(rstatus == $subrequestStatus)
+>                RequestStatusToParentActivityFactProcessed( activity == $activity, output == $rrf ))
+	then
+>		SubrequestProcessingCompleted o = new SubrequestProcessingCompleted();
+>		o.setRequest($subrequest);
+>		insertLogical(o);
+end
+
+
+rule "Activity activation"
+	when 
+		any activity
+	 	not ActivityStatus for activity // disable finished
+	 	AllActivityInputsReady for activity //inputs are ready
+>	 	forall( $subreq : RequestFact(parentActivity==$activity) 
+>	 			SubrequestProcessingCompleted(request==$subreq))  // block for subrequest 
+	then
+>		insertLogical(new ActivityActive($activity));
+end
+
+
+rule "Request activation"
+	when 
+		any activity request
+	 	not RequestStatus for request // disable finished
+//	 	AllRerquestInputsReady for activity //inputs are ready
+>	 	forall( $subactivity : Activity(request==$request) 
+>	 			ActivityProcessingCompleted(activity==$subactivity))  // block for subactivity 
+	then
+>		insertLogical(new RequestActive($request));
+end
+
+rule "Propagate subrequest failure"
+	when 
+	 	any activity
+		subrequest 'ReqNewActivity' for activity
 		subrequest failed
 	then
 		activity failed with status "Subrequest failed: " + $subrequestStatus.getMessage()
 end
 
-
-rule "All inputs processed"
-	when
-		request 'ReqNewActivity'
-		activity for request
->		forall ( $rrf : Alias(request == $request)
->                RequestInputProcessed( activity == $activity, input == $rrf ))
+rule "Propagate subactivity success"
+	when 
+	 	any activity request
+	 	activity for request
+		activity succeeded
 	then
->		InputProcessingCompleted o = new InputProcessingCompleted();
->		o.setActivity($activity);
->		insertLogical(o);
-end
-
-rule "All outputs processed"
-	when
-	 	any activity
-		subrequest 'ReqNewActivity'
-		subrequest completed
->		forall ( $rrf : Alias(rstatus == $subrequestStatus)
->                RequestOutputProcessed( activity == $activity, output == $rrf ))
-	then
->		SubrequestProcessingCompleted o = new SubrequestProcessingCompleted();
->		o.setRequest($subrequest);
->		insertLogical(o);
+		request succeeded
 end

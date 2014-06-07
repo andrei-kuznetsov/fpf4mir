@@ -12,6 +12,10 @@ import java.util.regex.Pattern;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.ActionStatusBase;
 
 public class ExecStatus extends ActionStatusBase implements ActionStatus {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5739288970292691981L;
 	private ExecCommand execCommand;
 	private int status;
 	private File fileOut;
