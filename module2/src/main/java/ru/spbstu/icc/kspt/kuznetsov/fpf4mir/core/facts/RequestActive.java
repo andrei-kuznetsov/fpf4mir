@@ -5,6 +5,11 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 
 public class RequestActive extends RequestRelatedFactBase{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1884825272624319267L;
+
 	public RequestActive() {
 		super();
 	}

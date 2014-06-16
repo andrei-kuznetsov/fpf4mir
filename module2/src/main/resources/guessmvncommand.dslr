@@ -1,6 +1,7 @@
 expander dsl.dsl
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.sources.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
@@ -11,7 +12,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 rule "Maven execution status succeeded"
 	when
 		active activity 'MvnBuildActivity'
->		$execstat : ExecStatus(activity==$activity, succeeded==true)
+		$execstat : ExecStatus(succeeded==true) for activity
 		$target : MavenTargetDir for activity
 	then
 		activity succeeded
@@ -57,14 +58,44 @@ rule "Maven_DfltOption_PomFile"
 		add ordinal 51 $pom.getAbsolutePath()
 end
 
+rule "Select maven version"
+	when
+		active activity 'MvnBuildActivity'
+		not FeatureInUse(feature.name=="maven") for activity
+>		$mvn : MavenFeature()
+		not RSKIncompatibleFeatureVersion(feature==$mvn) for activity
+	then
+>		insert( new GenericFeatureInUse($activity, $mvn) );
+end
+
+rule "Request for maven"
+	when
+		active activity 'MvnBuildActivity'
+>		not MavenFeature()
+	then
+		add feature action 'maven';
+end
+
+rule "Detect maven version deadlock"
+	when
+		active activity 'MvnBuildActivity'
+>		exists MavenFeature()
+>		forall ($mvn : MavenFeature()
+>				RSKIncompatibleFeatureVersion(activity==$activity, feature==$mvn) )
+	then
+		activity failed with message "Can't select maven version: all available versions are incompatible"
+end
+
 rule "Maven_BuildCommand"
 	salience -1 // shall be less than for mvn targets insertion rule
 	when
 	    active activity 'MvnBuildActivity'
 	    cmd options for activity
 		$pd : MavenProjectDir for activity
+>		$mvn : MavenFeature()
+>		FeatureInUse(activity==$activity, feature==$mvn)
 	then
-		execute command "mvn" in working dir $pd
+		execute command $mvn.getCmdName() in working dir $pd
 end
 
 rule "Maven execution status failed"

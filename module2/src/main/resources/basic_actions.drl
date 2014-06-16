@@ -4,17 +4,11 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 
-rule "CommandExecutor"
-	when
-		$cmd : ExecCommand( )
-		not ExecStatus( execCommand == $cmd )
-	then
-		insertLogical( new ExecAction($cmd) );
-end
 
 rule "Activity_New"
 	when
 		$rr : ReqNewActivity(  )
+		$list : java.util.LinkedList(  ) from collect ( Activity( request == $rr ) )
 		forall ( $b : Activity( request == $rr )
 	             ActivityFailed( activity == $b ) 
  		         ActivityErrorFixed( activity == $b ) )
@@ -27,6 +21,7 @@ rule "Activity_New"
 		pkg = "defaultpkg";
 		System.out.println("## pkg: " + pkg);
 		System.out.println("## type: " + type);
+		System.out.println("## activities (" + $list.size() + "): " + new java.util.HashSet($list));
 		
 		org.drools.definition.type.FactType factType = drools.getKnowledgeRuntime().getKnowledgeBase().getFactType(pkg, type);
 		Object fact = factType.newInstance();
@@ -39,39 +34,30 @@ rule "Activity Request Failure Status"
 	when
 		$request : ReqNewActivity( )
 		$activity : Activity( request == $request )
+		ActivityCompleted( activity == $activity)
 		$failure : ActivityFailed( activity == $activity )
 		not ActivityErrorFixed(activity == $activity)
 	then
 		insertLogical(new RequestFailed($request, $failure.getMessage()));
 end
 
-rule "Propagate UserActionAlias (rstatus)"
-	when
-		$request : ReqNewActivity( )
-		$rstatus : RequestStatus( request == $request )
-		$activity : Activity( request == $request )
-		$ua : UserActionAlias( activity == $activity)
-	then
-		insertLogical(new UserActionAlias($rstatus, $ua));
-end 
-
-rule "Propagate UserActionAlias (activity)"
-	when
-		$activity : Activity(  )
-		$request : ReqNewActivity( parentActivity == $activity )
-		$rstatus : RequestStatus( request == $request )
-		$ua : UserActionAlias( rstatus == $rstatus)
-	then
-		insertLogical(new UserActionAlias($activity, $ua));
-end 
-
-rule "Suspend activity for user action (propagation)"
+rule "Assert user action ref (propagation)"
 	when
 		$activity : Activity( )
 		$ua : UserAction( activity == $activity )
 	then
-		insertLogical(new GenericActivitySuspended($activity, "Activity suspended due to user action: " + $ua));
-		insertLogical(new UserActionAlias($activity, $ua));
+		UserActionRef uar = new UserActionRef($ua);
+		insertLogical(uar);
+end
+
+rule "Suspend activity for user action (propagation)"
+	when
+		$activity : Activity( )
+		$uar : UserActionRef( activity == $activity )
+	then
+		GenericActivitySuspended activityStatus = new GenericActivitySuspended($activity, "Activity suspended due to user action: " + $uar);
+		insertLogical(activityStatus);
+		insertLogical(new GenericAlias().reset(activityStatus, $uar));
 end
 
 rule "Suspend request for suspended activity (propagation)"

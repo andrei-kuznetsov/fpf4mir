@@ -1,0 +1,14 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+rule "CommandExecutor"
+	when
+		active activity 'Activity'
+		$cmd : ExecCommand for activity
+		not ExecStatus( execCommand == $cmd ) for activity
+	then
+>		insertLogical( new ExecAction($cmd) );
+end

@@ -23,7 +23,8 @@ end
 rule "NewBuild_Mvn"
 	when
 		active activity 'BuildActivity'
->		$artifact : BuildFile( activity == $activity, getFileName().endsWith("pom.xml") )
+		$artifact : BuildFile( getFileName().endsWith("pom.xml") ) for activity
+		not subrequest ReqMvnBuild for activity
 	then
 		add subrequest 'ReqMvnBuild'
 		add subrequest parameter '$artifact' as 'GenericFileArtifactAlias'
@@ -32,10 +33,38 @@ end
 rule "Guess run executable after build"
 	when
 		active activity 'BuildActivity'
->		exists ExecStatus( activity == $activity, succeeded == true )
-		$folder : FolderArtifact for activity
-		not 'ExecutableFileArtifact' for activity
+		$folder : BuildOutputDir for activity
+		not ExecutableFileArtifact for activity
+		not subrequest ReqGuessRunExecutable for activity
 	then
 		add subrequest 'ReqGuessRunExecutable'
 		add subrequest parameter '$folder' as 'GenericFolderArtifactAlias'
+end
+
+rule "Guess run executable after build: Exec artifact found"
+	when
+	 	active activity 'BuildActivity'
+		$exec : ExecFileArtifactList(size == 1) for activity
+	then
+		insert artifact '(ExecutableFileArtifact)$exec.get(0)' as 'ExecutableFileArtifact'
+end
+
+rule "Guess run executable after build: multiple exec artifacts found"
+	when
+	 	active activity 'BuildActivity'
+		not ExecutableFileArtifact for activity
+		$exec : ExecFileArtifactList(size > 1) for activity
+	then
+		// user action to choose the correct exec or build file
+		def user action UserActionSelectBuildOrRun
+		add user action attr ExecArtifacts as $exec
+		add user action
+end
+
+rule "Guess run executable after build: no exec artifacts found"
+	when
+	 	active activity 'BuildActivity'
+		$exec : ExecFileArtifactList(size == 0) for activity
+	then
+		activity failed with type FR_NO_BUILD_OR_EXEC_FILES_FOUND and message "no executable files found"
 end

@@ -3,24 +3,20 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityError;
 
-public class ActivityErrorBase implements ActivityError{
-	private Activity activity;
+public class ActivityErrorBase extends ActivityRelatedFactBase implements ActivityError{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8836066602385597753L;
+	
 	private String message;
 
 	public ActivityErrorBase() {
 	}
 	
 	public ActivityErrorBase(Activity activity, String message) {
-		super();
-		this.activity = activity;
-	}
-
-	public Activity getActivity() {
-		return activity;
-	}
-
-	public void setActivity(Activity activity) {
-		this.activity = activity;
+		super(activity);
+		this.message = message;
 	}
 
 	public String getMessage() {
@@ -30,5 +26,10 @@ public class ActivityErrorBase implements ActivityError{
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
+
+	public ActivityErrorBase reset(Activity activity, String message){
+		super.reset(activity);
+		this.message = message;
+		return this;
+	}
 }

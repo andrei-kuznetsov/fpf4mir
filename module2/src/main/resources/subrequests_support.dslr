@@ -41,7 +41,7 @@ rule "Request to activity (single fact)"
 		request inputs (
 		    input 'Alias'
 >		)
->		not RequestToActivityFactProcessed( activity == $activity, input == $input )
+		not RequestToActivityFactProcessed( input == $input ) for activity
 	then
 		add activity fact from request input
 >		insert(new RequestToActivityFactProcessed($activity, $input));
@@ -52,10 +52,10 @@ rule "Activity to activity status (single fact)"
 		any activity
 		$astatus : ActivityStatus for activity
 		$value : UserInfo for activity 
->		not ActivityToActivityStatusFactProcessed( activity == $activity, value == $value )
+//>		not ActivityToActivityStatusFactProcessed( activity == $activity, value == $value )
 	then
-		add parameter '$value' to '$astatus';
->		insert(new ActivityToActivityStatusFactProcessed($activity, $value));
+		add logical parameter '$value' to '$astatus';
+>		insertLogical(new ActivityToActivityStatusFactProcessed($activity, $value));
 end
 
 
@@ -65,10 +65,13 @@ rule "Request result to parent activity (single fact)"
 		subrequest 'ReqNewActivity' for activity
 		subrequest completed
 >		$output : Alias( rstatus == $subrequestStatus )
->		not RequestStatusToParentActivityFactProcessed( activity == $activity, output == $output )
+//>		not RequestStatusToParentActivityFactProcessed( activity == $activity, output == $output )
 	then
-		add activity fact from request output
->		insert(new RequestStatusToParentActivityFactProcessed($activity, $output));
+>		System.out.println("#=#= $output: " + $output);
+>		System.out.println("#=#= cloned: " + $output.cloneRefObject($activity));
+//		add logical activity fact from alias '$output';
+>		insertLogical($output.cloneRefObject($activity));
+>		insertLogical(new RequestStatusToParentActivityFactProcessed($activity, $output));
 end
 
 
@@ -79,16 +82,16 @@ rule "Activity result to request result (single fact)"
 	 	$rstatus : RequestStatus for request
 	 	$astatus : ActivityStatus for activity
 >		$output : Alias( astatus == $astatus )
->		not ActivityStatusToRequestStatusFactProcessed( activityStatus == $astatus, output == $output )
+//>		not ActivityStatusToRequestStatusFactProcessed( activityStatus == $astatus, output == $output )
 	then
-		add parameter '$output' to '$rstatus';
->		insert(new ActivityStatusToRequestStatusFactProcessed($astatus, $output));
+		add logical parameter '$output' to '$rstatus';
+>		insertLogical(new ActivityStatusToRequestStatusFactProcessed($astatus, $output));
 end
 
 rule "All activity status outputs copied from activity"
 	when
 		any activity
-	 	$astatus : ActivityStatus for activity
+	 	$ac : ActivityCompleted for activity
 >		forall ( $ui : UserInfo(activity == $activity)
 >                ActivityToActivityStatusFactProcessed( activity == $activity, value == $ui ))
 	then
@@ -161,6 +164,14 @@ rule "Activity activation"
 >		insertLogical(new ActivityActive($activity));
 end
 
+rule "Activity analitycs activation"
+	when 
+		any activity
+	 	ActivityStatus for activity
+	 	not ActivityCompleted for activity  
+	then
+>		insertLogical(new ActivityAnalyze($activity));
+end
 
 rule "Request activation"
 	when 
@@ -187,6 +198,19 @@ rule "Propagate subactivity success"
 	 	any activity request
 	 	activity for request
 		activity succeeded
+		ActivityCompleted for activity
 	then
 		request succeeded
 end
+
+rule "Default activity completion rule"
+	salience -10000
+	when
+		any activity
+	 	ActivityStatus for activity
+	 	not ActivityCompleted for activity
+	 	not ActionFact for activity
+ 	then
+ >		insert(new ActivityCompleted($activity));
+ end
+ 		

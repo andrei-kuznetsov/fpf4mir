@@ -4,6 +4,10 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivitySuspended;
 
 public class GenericActivitySuspended extends ActivityStatusBase implements ActivitySuspended {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2311110161455714685L;
 	private String message;
 	
 	public GenericActivitySuspended() {

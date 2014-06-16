@@ -9,6 +9,7 @@
 
 [when]active activity request '{request}'=$request:{request}(  ) and RequestActive( request == $request )
 [when]active activity '{activity}'=$activity:{activity}(  ) and ActivityActive( activity == $activity )
+[when]analyze activity '{activity}'=$activity:{activity}(  ) and ActivityAnalyze( activity == $activity )
 
 [when]activity succeeded=exists ActivitySucceeded( activity == $activity )
 [when]request '{request}'=$request:{request}(  )
@@ -16,6 +17,7 @@
 [when]input '{type}'=$input : {type}( request == $request ) 
 
 [when]subrequest '{subrequest}' for activity=$subrequest : {subrequest}(parentActivity == $activity)
+[when]subrequest {subrequest:\w+} for activity=$subrequest : {subrequest}(parentActivity == $activity)
 #[when]- has name=name != null
 [when]subrequest completed=$subrequestStatus : RequestStatus( request == $subrequest )
 [when]subrequest succeeded=$subrequestStatus : RequestSucceeded( request == $subrequest )
@@ -28,21 +30,27 @@
 
 [when]'{type}' for activity=$artifact : {type}(activity == $activity)
 [when]{type:\w+} for activity={type}(activity == $activity)
+[when]{type:\w+}\({whatever}\) for activity={type}(activity == $activity, {whatever})
 [when]{type:\w+} for request={type}(request == $request)
 
 [then]log {message}=System.out.println({message});
 [then]def user action {type:\w+}={type} useraction = new {type}(); useraction.setActivity($activity);
 [then]add user action attr {attr:\w+} as {value}=useraction.set{attr}({value});
 [then]add user action=insert(useraction);
+[then]add feature action '{feature}' version '{version}';=insert( new AddFeatureAction($activity, "{feature}", "{version}") );
+[then]add feature action '{feature}';=insert( new AddFeatureAction($activity, "{feature}") );
+[then]error '{err}' fixed=insert( new ActivityErrorFixed({err}) );
 
 [then]add subrequest '{type}'={type} r = new {type}(); r.setParentActivity($activity); insert(r);
 [then]add subrequest parameter '{param}' as '{type}'=\{{type} o = new {type}(); o.reset(r, {param}); insert(o);\}
 
 [then]add activity fact from request input=insert( $input.cloneRefObject($activity) );
-[then]add activity fact from request output=insert( $output.cloneRefObject($activity) );
+[then]add activity fact from request output=insertLogical( $output.cloneRefObject($activity) );
+[then]add activity fact from alias '{alias}';=insert( {alias}.cloneRefObject($activity) );
+[then]add logical activity fact from alias '{alias}';=insertLogical( {alias}.cloneRefObject($activity) );
 
 [then]add ordinal {order} {value}=insertLogical( new OrdinalArgument( $activity, {order}, {value}) );
-[then]execute command "{cmd}" in working dir {wd}=insertLogical( new ListExecCommand($activity, "{cmd}", {wd}, $options) );
+[then]execute command {cmd} in working dir {wd}=insertLogical( new ListExecCommand($activity, {cmd}, {wd}, $options) );
 
 [then]activity succeeded=GenericActivitySucceeded activityStatus=new GenericActivitySucceeded($activity); insert(activityStatus);
 [then]activity failed with status {status}=insert( new GenericActivityFailed($activity, {status}) );
@@ -57,8 +65,13 @@
 #[then]add activity status parameter {param} as {type}=\{{type} o = new {type}(); o.reset(activityStatus, {param}); insert(o);\};
 [then]add request status parameter {param} as {type}=add parameter '{param}' to 'requestStatus' as {type};
 [then]add activity status parameter {param} as {type}=add parameter '{param}' to 'activityStatus' as {type};
+
 [then]add parameter '{param}' to '{status}';=add parameter '{param}' to '{status}' as GenericAlias;
+[then]add logical parameter '{param}' to '{status}';=add logical parameter '{param}' to '{status}' as GenericAlias;
+
 [then]add parameter '{param}' to '{status}' as {type};=\{{type} o = new {type}(); o.reset({status}, {param}); insert(o);\};
+[then]add logical parameter '{param}' to '{status}' as {type};=\{{type} o = new {type}(); o.reset({status}, {param}); insertLogical(o);\};
+
 
 [then]insert artifact '{value}' as '{type}'=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
 [then]insert {type:\w+}=\{{type} o = new {type}(); o.setActivity($activity); insert(o);\};

@@ -41,4 +41,9 @@ public class ActivityRelatedFactBase implements ActivityRelatedFact,
 	public String toString() {
 		return getClass().getSimpleName() + " [activity=" + activity + "]";
 	}
+
+	public ActivityRelatedFactBase reset(Activity activity) {
+		this.activity = activity;
+		return this;
+	}
 }

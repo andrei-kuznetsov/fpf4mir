@@ -5,6 +5,8 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
 ///////////////////////////// java /////////////////////////////////////
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactAliasBase /* java */ end
 
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecutableFileArtifact /* java */ end
+
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact /* java */ end
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactBase /* java */ end
 
@@ -26,7 +28,11 @@ declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqDeployExecutab
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.AliasBase /* java */ end
 
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.RequestScopedKnowledgeBase /* java */ end
 
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityErrorBase /* java */ end
+
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.RSKIncompatibleFeatureVersion /* java */ end
 ///////////////////////////// non-java /////////////////////////////////////
 
 declare DeployFolder extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactAliasBase end
@@ -72,6 +78,7 @@ declare UserActionSelectBuildOrRun extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.
 	 buildArtifacts : BuildFileArtifactList
 end
 
+declare BuildOutputDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactBase end
 
 declare MavenProjectDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactBase end
-declare MavenTargetDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactBase end
+declare MavenTargetDir extends BuildOutputDir end

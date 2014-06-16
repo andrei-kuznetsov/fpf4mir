@@ -14,11 +14,11 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActionStatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.BuildSystem;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.BuildSystem.BUILD_SYSTEMS;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.BuildErrorFixed;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.MvnBuild;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.JavacErr_UnmappableCharacter;
 import utils.AgendaListener;
 import utils.DrlObjectsUtils;
@@ -29,7 +29,7 @@ public class DrlBuildTest {
 
 	@Test
 	@Ignore
-	public void newMvnBuildTest() throws URISyntaxException  {
+	public void newActivityTest() throws URISyntaxException  {
 		StatefulKnowledgeSession ksession = DrlObjectsUtils.prepareStatefullSession(DRL_FILENAME);
         
         AgendaListener al = new AgendaListener();
@@ -44,11 +44,11 @@ public class DrlBuildTest {
         
         Collection<Object> objects = ksession.getObjects();
         Map<Class, List> omap = DrlObjectsUtils.convertToMap(objects);
-        assertTrue(omap.containsKey(MvnBuild.class));
-        assertEquals(1, omap.get(MvnBuild.class).size());
+        assertTrue(omap.containsKey(Activity.class));
+        assertEquals(1, omap.get(Activity.class).size());
         
         // Set status (false) and Fire yet another time
-        MvnBuild b = (MvnBuild) omap.get(MvnBuild.class).get(0);
+        Activity b = (Activity) omap.get(Activity.class).get(0);
         ActionStatus status = new ExecStatus(b, null, 1, null, null);
         ksession.insert(status);
         
@@ -56,8 +56,8 @@ public class DrlBuildTest {
         ksession.fireAllRules();
         objects = ksession.getObjects();
         omap = DrlObjectsUtils.convertToMap(objects);
-        assertTrue(omap.containsKey(MvnBuild.class));
-        assertEquals(1, omap.get(MvnBuild.class).size());
+        assertTrue(omap.containsKey(Activity.class));
+        assertEquals(1, omap.get(Activity.class).size());
         
         // Now fix the build
         BuildErrorFixed fix = null;//TODO: new BuildErrorFixed(new JavacErr_UnmappableCharacter(b, ""));
@@ -66,8 +66,8 @@ public class DrlBuildTest {
         System.out.println(Arrays.deepToString(al.getFiredRules().toArray()));
         objects = ksession.getObjects();
         omap = DrlObjectsUtils.convertToMap(objects);
-        assertTrue(omap.containsKey(MvnBuild.class));
-        assertEquals(2, omap.get(MvnBuild.class).size());
+        assertTrue(omap.containsKey(Activity.class));
+        assertEquals(2, omap.get(Activity.class).size());
         
         ksession.dispose();
 	}

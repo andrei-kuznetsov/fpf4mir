@@ -215,6 +215,7 @@ public class Index {
 	public void assertFactForActivity(@Context HttpServletRequest request,
 			@PathParam("id") long id) throws Exception {
 		assertFactForActivityImpl(request.getReader(), id);
+		session.run();
 	}
 
 	@POST
@@ -227,12 +228,12 @@ public class Index {
 		if (uaction != null
 				&& uaction.getClass().getSimpleName().equals(actionName)) {
 
+			assertFactForActivityImpl(request.getReader(), uaction.getActivity());
 			session.setFactHandled(uaction);
-			assertFactForActivityImpl(request.getReader(),
-					uaction.getActivity());
-
+			session.run();
+			
 			return Response.seeOther(
-					new URI(PATH_REQUEST_STATUS + "/"
+					new URI("/rest/" + PATH_REQUEST_STATUS + "/"
 							+ uaction.getActivity().getRequest().getRefId()))
 					.build();
 		} else {
@@ -257,7 +258,6 @@ public class Index {
 			fact.setActivity(activity);
 			session.assertFact(fact);
 		}
-		session.run();
 	}
 
 	private void assertFactForActivityImpl(Reader r, long id) throws Exception {

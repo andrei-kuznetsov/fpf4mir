@@ -70,4 +70,8 @@ public class Activity implements Serializable, FactWithRefId, RequestRelatedFact
 	public void setRefId(long refId) {
 		this.refId = refId;
 	}
+
+	public String toShortString() {
+		return getClass().getSimpleName() +  " [id=" + id + "]";
+	}
 }

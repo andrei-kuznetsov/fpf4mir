@@ -1,17 +1,16 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core;
 
-import java.io.ByteArrayOutputStream;
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -29,11 +28,13 @@ import org.drools.builder.KnowledgeBuilderFactory;
 import org.drools.builder.ResourceType;
 import org.drools.definition.KnowledgePackage;
 import org.drools.definition.rule.Global;
+import org.drools.definition.type.FactField;
 import org.drools.definition.type.FactType;
 import org.drools.io.ResourceFactory;
+import org.drools.logger.KnowledgeRuntimeLogger;
+import org.drools.logger.KnowledgeRuntimeLoggerFactory;
 import org.drools.marshalling.Marshaller;
 import org.drools.marshalling.MarshallerFactory;
-import org.drools.marshalling.ObjectMarshallingStrategy;
 import org.drools.runtime.ObjectFilter;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.runtime.rule.FactHandle;
@@ -41,10 +42,12 @@ import org.drools.runtime.rule.QueryResults;
 import org.drools.runtime.rule.QueryResultsRow;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.ActionFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.AddFeatureAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.DetectEncodingAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.ExecAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ActionHandler;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.AddFeatureHandler_Local;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.DetectEncodingActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ExecActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
@@ -54,8 +57,6 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.DataDirRoot;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestSubstatus;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityStatusRelatedFact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestStatusRelatedFact;
 
 public class DeploymentSession {
@@ -72,6 +73,7 @@ public class DeploymentSession {
 
 	private KnowledgeBase kbase = null;
 	private StatefulKnowledgeSession ksession = null;
+	private KnowledgeRuntimeLogger logger = null;
 	private Marshaller marshaller;
 	private static final Logger log = Logger.getLogger(DeploymentSession.class);
 	private static final Map<Class<? extends ActionFact>, ActionHandler> actionsMap = new HashMap<Class<? extends ActionFact>, ActionHandler>();
@@ -125,6 +127,7 @@ public class DeploymentSession {
 		actionsMap.put(ExecAction.class, new ExecActionHandler());
 		actionsMap.put(DetectEncodingAction.class,
 				new DetectEncodingActionHandler());
+		actionsMap.put(AddFeatureAction.class, new AddFeatureHandler_Local());
 
 	}
 
@@ -232,6 +235,8 @@ public class DeploymentSession {
 		// ksession.addEventListener(new DebugAgendaEventListener());
 		// ksession.addEventListener(new DebugWorkingMemoryEventListener());
 		ksession.addEventListener(new AgendaDebugListener());
+		logger = KnowledgeRuntimeLoggerFactory.newFileLogger(ksession, "test");
+//		logger = KnowledgeRuntimeLoggerFactory.newConsoleLogger(ksession);
 		initGlobals(kbase, ksession);
 	}
 
@@ -326,8 +331,10 @@ public class DeploymentSession {
 
 	public void dispose() {
 		if (ksession != null) {
+			logger.close();
 			ksession.dispose();
 			ksession = null;
+			logger = null;
 		}
 	}
 
@@ -454,11 +461,18 @@ public class DeploymentSession {
 	}
 
 	public Object newFact(JsonNode fact) throws InstantiationException,
-			IllegalAccessException {
+			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		final String className = fact.get("class").asText();
+
 		final String pkg = className.substring(0, className.lastIndexOf('.'));
 		final String cn = className.substring(className.lastIndexOf('.') + 1);
 		FactType ftype = ksession.getKnowledgeBase().getFactType(pkg, cn);
+		
+		if (ftype == null){
+			log.error("Can't find class definition for " + className);
+			throw new IllegalStateException("Can't find class definition for " + className);
+		}
+		
 		Object o = ftype.newInstance();
 
 		Iterator<String> it = fact.getFieldNames();
@@ -468,19 +482,41 @@ public class DeploymentSession {
 			if (fname.equals("class"))
 				continue;
 
-			Class<?> fclass = ftype.getField(fname).getType();
-			if (fclass.isAssignableFrom(String.class)) {
-				ftype.set(o, fname, fact.get(fname).asText());
-			} else if (fclass.isAssignableFrom(Integer.class)) {
-				ftype.set(o, fname, fact.get(fname).asInt());
-			} else if (fclass.isAssignableFrom(Long.class)) {
-				ftype.set(o, fname, fact.get(fname).asLong());
-			} else if (fclass.isAssignableFrom(Boolean.class)) {
-				ftype.set(o, fname, fact.get(fname).asBoolean());
+			FactField field = ftype.getField(fname);
+			final Class<?> fclass;
+			if (field == null){
+				PropertyDescriptor propertyDescriptor;
+				try {
+					propertyDescriptor = new PropertyDescriptor(fname, ftype.getFactClass());
+				} catch (IntrospectionException e) {
+					final String msg = "Can't find field '" + fname + "' in class " + className;
+					log.error(msg);
+					throw new IllegalStateException(msg, e);
+				}
+
+				fclass = propertyDescriptor.getPropertyType();
+				propertyDescriptor.getWriteMethod().invoke(o, typedJsonObject(fact.get(fname), fclass));
+			} else {
+				fclass = field.getType();
+				ftype.set(o, fname, typedJsonObject(fact.get(fname), fclass));
 			}
 		}
 
 		return o;
+	}
+	
+	private Object typedJsonObject(JsonNode node, Class<?> fclass){
+		if (fclass.isAssignableFrom(String.class)) {
+			return node.asText();
+		} else if (fclass.isAssignableFrom(Integer.class)) {
+			return node.asInt();
+		} else if (fclass.isAssignableFrom(Long.class)) {
+			return node.asLong();
+		} else if (fclass.isAssignableFrom(Boolean.class)) {
+			return node.asBoolean();
+		} else {
+			throw new IllegalStateException("Don't know how to parse type " + fclass);
+		}
 	}
 
 	public void setFactHandled(UserAction uaction) {

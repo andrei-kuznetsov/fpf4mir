@@ -4,6 +4,10 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityFailed;
 
 public class ActivityFailedBase extends ActivityStatusBase implements ActivityFailed{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3287526973266183983L;
 	private String message = "no message";
 	private String type = "";
 	

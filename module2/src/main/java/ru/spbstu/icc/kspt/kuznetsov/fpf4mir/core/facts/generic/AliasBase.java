@@ -103,53 +103,54 @@ public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneabl
 		return copy;
 	}
 
-	@Override
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}
 
-	@Override
-	public void reset(RequestStatus rstatus, U object) {
+	public AliasBase<U> reset(RequestStatus rstatus, U object) {
 		this.reset(rstatus, ((FactWithName)object).getName(), object);
+		return this;
 	}
 
-	@Override
-	public void reset(RequestStatus rstatus, String name, U object) {
+	public AliasBase<U> reset(RequestStatus rstatus, String name, U object) {
 		this.reset(null, rstatus, null, name, object);
+		return this;
 	}
 
-	@Override
-	public void reset(ActivityStatus astatus, U object) {
+	public AliasBase<U> reset(ActivityStatus astatus, U object) {
 		this.reset(astatus, ((FactWithName)object).getName(), object);
+		return this;
 	}
 
-	@Override
-	public void reset(ActivityStatus astatus, String name, U object) {
+	public AliasBase<U> reset(ActivityStatus astatus, String name, U object) {
 		this.reset(null, null, astatus, name, object);
+		return this;
 	}
 	
-	@Override
-	public void reset(RequestFact request, String name, U object) {
+	public AliasBase<U> reset(RequestFact request, String name, U object) {
 		this.reset(request, null, null, name, object);
+		return this;
 	}
 
-	@Override
-	public void reset(RequestFact request, U object) {
+	public AliasBase<U> reset(RequestFact request, U object) {
 		final String name = ((FactWithName)object).getName();
 		this.reset(request, null, null, name, object);
+		return this;
 	}
 	
-	public void reset(RequestFact request, RequestStatus rstatus, ActivityStatus astatus, String name,
+	public AliasBase<U> reset(RequestFact request, RequestStatus rstatus, ActivityStatus astatus, String name,
 			U object) {
 		this.refObject = object;
 		this.rstatus = rstatus;
 		this.request = request;
 		this.astatus = astatus;
 		this.name = name;
+		return this;
 	}
 
-	public void reset(RequestStatus rstatus, Alias<U> alias) {
+	public AliasBase<U> reset(RequestStatus rstatus, Alias<U> alias) {
 		this.reset(rstatus, alias.getName(), alias.getRefObject());
+		return this;
 	}
 	
 	@Override

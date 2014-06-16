@@ -28,7 +28,7 @@ public interface Alias<U> extends RequestRelatedFact, RequestStatusRelatedFact, 
 
 	public U cloneRefObject(Activity newActivity);
 	public U cloneRefObject(Activity newActivity, String newName);
-	
+	/*
 	public void reset(RequestStatus rstatus, U object);
 	public void reset(ActivityStatus astatus, U object);
 	public void reset(RequestFact request, U object);
@@ -36,6 +36,6 @@ public interface Alias<U> extends RequestRelatedFact, RequestStatusRelatedFact, 
 	public void reset(RequestStatus rstatus, String name, U object);
 	public void reset(ActivityStatus astatus, String name, U object);
 	public void reset(RequestFact request, String name, U object);
-	
+	*/
 	//public void reset(RequestFact request, RequestStatus rstatus, String name, U object);
 }

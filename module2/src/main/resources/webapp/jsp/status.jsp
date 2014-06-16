@@ -1,3 +1,4 @@
+<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserActionRef"%>
 <%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Alias"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact"%>
@@ -6,7 +7,6 @@
 <%@page import="java.util.List"%>
 <%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction"%>
 <%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestStatusRelatedFact"%>
-<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserActionAlias"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
@@ -28,8 +28,8 @@
 	<%
 		List<RequestStatusRelatedFact> extras = (List<RequestStatusRelatedFact>)request.getAttribute("extras");
 		for (RequestStatusRelatedFact i : extras) {
-			if (i instanceof UserActionAlias){
-				UserAction ua = ((UserActionAlias)i).getRefObject();
+			if (i instanceof Alias && ((Alias)i).getRefObject() instanceof UserActionRef){
+				UserAction ua = ((UserActionRef)((Alias)i).getRefObject()).getRefObject();
 				String url = null;
 				String description = null;
 				switch (ua.getClass().getCanonicalName()){

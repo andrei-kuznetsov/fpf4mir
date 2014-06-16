@@ -16,11 +16,13 @@ function assertFact(factType, baseDir, fileName) {
             // complete
 
 			if (req.status == 304 /*see other*/){
-				//window.location.href = ""
+				//window.location.href = "/rest/status/request/${uaction.getActivity().getRequest().getRefId()}"
 				alert("redirect");
-			} else if (req.status != 200) { 
+			} else if (req.status == 200) {
+				window.location.href = "/rest/status/request/${uaction.getActivity().getRequest().getRefId()}";
+			} else { 
 				alert(req.responseText);
-			}
+			} 
 		}
 	}
 
@@ -34,7 +36,7 @@ function assertFact(factType, baseDir, fileName) {
 	<h1>Build script candidates:</h1>
 	
 	<ul>
-		<c:forEach items="${uaction.buildArtifacts}" var="b">
+		<c:forEach items="${uaction.buildArtifacts.list()}" var="b">
 			<li>
 			<a href="javascript:assertFact('defaultpkg.BuildFile', '${b.getBaseDir().replace('\\','//')}', '${b.getFileName().replace('\\','//')}')">${b.fileName}</a> 
 			<br>
@@ -44,8 +46,10 @@ function assertFact(factType, baseDir, fileName) {
 	<h1>Run executable candidates:</h1>
 	
 	<ul>
-		<c:forEach items="${uaction.execArtifacts}" var="b">
-			<li> <a href="run">${b.getFileName()}</a><br>
+		<c:forEach items="${uaction.execArtifacts.list()}" var="b">
+			<li>
+			<a href="javascript:assertFact('ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecutableFileArtifact', '${b.getBaseDir().replace('\\','//')}', '${b.getFileName().replace('\\','//')}')">${b.fileName}</a>
+			<br>
 		</c:forEach>
 	</ul>
 </body>

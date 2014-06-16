@@ -4,6 +4,11 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 
 public class GenericActivityFailed extends ActivityFailedBase {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1937028327487900101L;
+
 	public GenericActivityFailed() {
 		super();
 	}

@@ -1,33 +1,19 @@
 package dslr;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import junit.framework.TestCase;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.junit.Test;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActionStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Alias;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.BuildSystem;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.BuildSystem.BUILD_SYSTEMS;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.BuildErrorFixed;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.MvnBuild;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericActivitySucceeded;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestSucceeded;
 import utils.AgendaListener;
 import utils.DrlObjectsUtils;
-import junit.framework.TestCase;
 
 public class SubrequestSupoprtTest extends TestCase {
 	

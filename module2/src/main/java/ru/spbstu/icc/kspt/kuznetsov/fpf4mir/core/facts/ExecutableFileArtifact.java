@@ -36,4 +36,34 @@ public class ExecutableFileArtifact extends FileArtifact{
 				+ _getFile() + "]";
 	}
 
+/*######################################################################################
+ *  Empty methods for compatibility with Drools (otherwise it's not possible to set 
+ * properties via FactField because Drools doesn't look for methods in super classes
+ *######################################################################################*/
+	@Override
+	public void setBaseDir(String baseDir) {
+		super.setBaseDir(baseDir);
+	}
+	
+	@Override
+	public String getBaseDir() {
+		return super.getBaseDir();
+	}
+
+	@Override
+	public String getFileName() {
+		return super.getFileName();
+	}
+
+	@Override
+	public Activity getActivity() {
+		return super.getActivity();
+	}
+
+	@Override
+	public void setActivity(Activity activity) {
+		super.setActivity(activity);
+	}
+	
+	
 }
