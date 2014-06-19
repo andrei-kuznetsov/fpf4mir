@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Artifact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifactList;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.Dataset_FileArtifactList;
 
 public class OrdinalArgument implements CmdLineArgument, Comparable<OrdinalArgument> {
 	private int order;
@@ -20,6 +23,14 @@ public class OrdinalArgument implements CmdLineArgument, Comparable<OrdinalArgum
 		this.activity = activity;
 	}
 
+	public OrdinalArgument(Activity activity, int order, Artifact artifact) {
+		this(activity, order, artifact._getFile().getAbsolutePath());
+	}
+
+	public OrdinalArgument(Activity activity, int order, Dataset_FileArtifactList flist) {
+		this(activity, order, flist.getAbsolutePath());
+	}
+	
 	public OrdinalArgument(Activity activity, String value) {
 		this(activity, 0, value);
 	}

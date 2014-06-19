@@ -37,10 +37,11 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Artifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.R;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericFileArtifactAlias;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericFolderArtifactAlias;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericAlias;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.RestArgument;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.proxy.Utils.UploadedFileDetails;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqDeployExecutable;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqRun;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityRelatedFact;
@@ -55,7 +56,6 @@ public class Index {
 	private static final String PATH_REQUEST_STATUS = PATH_STATUS + "/request";
 
 	private DeploymentSession session = new DeploymentSession();
-	private static volatile long reqRefId = 1;
 
 	private static final Logger log = Logger.getLogger(Index.class);
 
@@ -158,24 +158,17 @@ public class Index {
 		UploadedFileDetails files = Utils.doUploadOriginalArtifact(httpreq);
 
 		ReqDeployExecutable req = new ReqDeployExecutable(Activity.USER);
-		req.setRefId(reqRefId++);
 		req.setDeploymentName(R.id.MainDeployment);
 
 		Artifact userArtifact;
-		Object artifactAlias;
+		GenericAlias artifactAlias = new GenericAlias();
 
 		if (files.fileNames.size() == 1) {
-			userArtifact = new FileArtifact(Activity.USER, files.baseDir,
-					files.fileNames.get(0));
-			artifactAlias = new GenericFileArtifactAlias();
-			((GenericFileArtifactAlias) artifactAlias).reset(req,
-					R.artifact.main, (FileArtifact) userArtifact);
+			userArtifact = new FileArtifact(Activity.USER, files.baseDir, files.fileNames.get(0));
 		} else {
 			userArtifact = new FolderArtifact(Activity.USER, files.baseDir, "");
-			artifactAlias = new GenericFolderArtifactAlias();
-			((GenericFolderArtifactAlias) artifactAlias).reset(req,
-					R.artifact.main, (FolderArtifact) userArtifact);
 		}
+		artifactAlias.reset(req, R.artifact.main, userArtifact);
 
 		try {
 			session.reset(); // recreate new session
@@ -291,6 +284,43 @@ public class Index {
 		} catch (RuntimeException rt) {
 			rt.printStackTrace();
 			throw rt;
+		}
+	}
+
+	@POST
+	@Path("/execute/{many:.*}")
+	public Response executeRequest(@Context HttpServletRequest httpreq)
+			throws Exception {
+
+		UploadedFileDetails files = Utils.doUploadOriginalArtifact(httpreq);
+
+		ReqRun req = new ReqRun(Activity.USER);
+
+		Artifact userArtifact;
+		GenericAlias artifactAlias = new GenericAlias();
+
+		if (files.fileNames.size() == 1) {
+			userArtifact = new FileArtifact(Activity.USER, files.baseDir, files.fileNames.get(0));
+		} else {
+			userArtifact = new FolderArtifact(Activity.USER, files.baseDir, "");
+		}
+		artifactAlias.reset(req, userArtifact);
+
+		session.assertFact(req, userArtifact, artifactAlias);
+		int reqArgument = 0;
+		for (String i : httpreq.getPathInfo().split("/")){
+			RestArgument arg = new RestArgument(Activity.USER, reqArgument++, i);
+			session.assertFact(arg, new GenericAlias().reset(req, arg));
+		}
+		
+		try {
+			session.run();
+			return Response.seeOther(
+					new URI(PATH_ROOT + PATH_REQUEST_STATUS + "/"
+							+ req.getRefId())).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ServletException("Can't process request", e);
 		}
 	}
 

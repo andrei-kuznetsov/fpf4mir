@@ -32,10 +32,15 @@
 				UserAction ua = ((UserActionRef)((Alias)i).getRefObject()).getRefObject();
 				String url = null;
 				String description = null;
+				
 				switch (ua.getClass().getCanonicalName()){
 				case "defaultpkg.UserActionSelectBuildOrRun":
 					url = "/rest/useraction/UserActionSelectBuildOrRun/" + ua.getRefId();
 					description = "Select build script or executable file";
+					break;
+				case "defaultpkg.UserActionSelectRunFormat":
+					url = "/rest/useraction/UserActionSelectRunFormat/" + ua.getRefId();
+					description = "Select run command format";
 					break;
 				default:
 					url = null;

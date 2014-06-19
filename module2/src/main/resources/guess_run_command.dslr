@@ -1,0 +1,81 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfos.*;
+
+// ----------------------------------- Output parameters ---------------------------------------
+
+rule "Run execution status succeeded"
+	when
+		active activity 'RunActivity'
+		$execstat : ExecStatus(succeeded==true) for activity
+	then
+		activity succeeded
+		insert artifact '"Execution completed"' as 'GenericUserInfoMessage'
+end
+
+// #############################################################################################
+
+rule "Err: no executable found"
+	when
+		active activity 'RunActivity'
+		not ExecutableFileArtifact for activity
+	then
+		activity failed with message 'No executables to be executed found'
+end
+
+rule "Deploy input data from file artifact"
+	when
+		active activity 'RunActivity'
+		$a : (FileArtifact for activity or 
+			ArtifactRef for activity)
+		not FolderArtifact for activity
+	then
+		add subrequest 'ReqDeployFolder'
+		add subrequest parameter '$a'
+end
+
+rule "Select run format"
+	when
+		active activity 'RunActivity'
+		not RunFormat for activity
+	then
+		def user action UserActionSelectRunFormat
+		//add user action attr ExecArtifacts as $exec
+		add user action
+end
+
+
+rule "Cast FolderArtifact to Dataset"
+	when
+		any activity 'RunActivity'
+		$dataset : FolderArtifact(name=='dataset') for activity
+	then
+		insertLogical '$dataset' as 'Dataset';
+end
+
+rule "Collect cmd arguments"
+	when 
+	    active activity 'RunActivity'
+		cmd options for activity
+	then
+		insertLogical  '$options' as 'OrdinalArguments';
+end
+
+rule "Run main executable"
+		salience -1 //shall be less than for rule 'Run command from REST args'
+	when 
+	    active activity 'RunActivity'
+		$exec : JavaExecutableFileArtifact for activity
+		$options : OrdinalArguments for activity
+	then
+		add subrequest 'ReqRunJava'
+		add subrequest parameter '$options'
+		add subrequest parameter '$exec'
+end

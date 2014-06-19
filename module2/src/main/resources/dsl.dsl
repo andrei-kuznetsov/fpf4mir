@@ -5,7 +5,9 @@
 [when]activity for request=$activity:Activity( request == $request )
 
 [when]any activity request=$request: ReqNewActivity(  )
+[when]any activity '{type}'=$activity: {type}(  )
 [when]any activity=$activity: Activity(  )
+[when]any '{type}'={type}(  )
 
 [when]active activity request '{request}'=$request:{request}(  ) and RequestActive( request == $request )
 [when]active activity '{activity}'=$activity:{activity}(  ) and ActivityActive( activity == $activity )
@@ -43,6 +45,7 @@
 
 [then]add subrequest '{type}'={type} r = new {type}(); r.setParentActivity($activity); insert(r);
 [then]add subrequest parameter '{param}' as '{type}'=\{{type} o = new {type}(); o.reset(r, {param}); insert(o);\}
+[then]add subrequest parameter '{param}'=\{GenericAlias o = new GenericAlias(); o.reset(r, {param}); insert(o);\}
 
 [then]add activity fact from request input=insert( $input.cloneRefObject($activity) );
 [then]add activity fact from request output=insertLogical( $output.cloneRefObject($activity) );
@@ -74,5 +77,8 @@
 
 
 [then]insert artifact '{value}' as '{type}'=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
+[then]insert '{value}' as '{type}';=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
+[then]insertLogical  '{value}' as '{type}';=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
+
 [then]insert {type:\w+}=\{{type} o = new {type}(); o.setActivity($activity); insert(o);\};
 [then]insertLogical {type:\w+}=\{{type} o = new {type}(); o.setActivity($activity); insertLogical(o);\};

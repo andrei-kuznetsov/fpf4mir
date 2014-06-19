@@ -17,9 +17,11 @@ rule "Eval DeployExecutableActivity succeeded"
 	when
 		active activity 'DeployExecutableActivity'
 		$exec : ExecutableFileArtifact for activity
+		$rf : RunFormat for activity
 	then
 		activity succeeded
-		add activity status parameter $exec as GenericFileArtifactAlias
+		add activity status parameter $exec as GenericAlias
+		add activity status parameter $rf as GenericAlias
 end
 
 // #############################################################################################
@@ -136,4 +138,15 @@ rule "Do build"
 	then
 		add subrequest 'ReqBuild'
 		add subrequest parameter '$artifact' as 'GenericFileArtifactAlias'
+end
+
+rule "Guess RunFormat"
+	when
+		active activity 'DeployExecutableActivity'
+		exists ExecutableFileArtifact for activity
+		not RunFormat for activity
+	then
+		// user action to choose run format
+		def user action UserActionSelectRunFormat
+		add user action
 end

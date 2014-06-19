@@ -1,0 +1,58 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
+
+
+// ----------------------------------- Output parameters ---------------------------------------
+
+rule "Evaluate ExtractActivity result"
+	when 
+	    active activity 'ExtractActivity'
+	    exec command succeeded
+		$extracted : FolderArtifact for activity
+	then 
+		activity succeeded
+		add activity status parameter $extracted as GenericFolderArtifactAlias
+end
+
+// #############################################################################################
+
+rule "Prepare output dir"
+	when 
+	    active activity 'ExtractActivity'
+>	    $tmp : TmpDirRoot( )
+	then
+>		insert( $tmp.newTempFolder( $activity ) );
+end
+/*
+rule "Need TmpDir"
+	when 
+	    active activity 'ExtractActivity'
+>	    not TmpDirRoot( )
+	then
+		activity failed with status "No TmpDir provided"
+end
+*/
+rule "Unzip with jar"
+	when 
+	    active activity 'ExtractActivity'
+>		$file : FileArtifact(activity == $activity)
+	then
+		add ordinal 1 "xf"
+		add ordinal 2 $file.getAbsolutePath()
+end
+
+rule "Unzip with jar command"
+	when 
+	    active activity 'ExtractActivity'
+	    cmd options for activity
+>	    $target : FolderArtifact( activity == $activity )
+	then
+		execute command "jar" in working dir $target
+end

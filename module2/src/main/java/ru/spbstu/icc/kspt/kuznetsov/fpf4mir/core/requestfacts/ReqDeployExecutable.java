@@ -1,8 +1,9 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ReqNewActivityBase;
 
-public class ReqDeployExecutable extends RequestFactBase implements ReqNewActivity {
+public class ReqDeployExecutable extends ReqNewActivityBase implements ReqNewActivity {
 	/**
 	 * 
 	 */

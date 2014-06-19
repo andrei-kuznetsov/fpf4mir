@@ -349,15 +349,14 @@ public class DeploymentSession {
 	}
 
 	public void assertFactAndRun(Object... f) throws Exception {
-		for (Object i : f) {
-			ksession.insert(i);
-		}
-
+		assertFact(f);
 		this.run();
 	}
 
-	public void assertFact(Object f) {
-		ksession.insert(f);
+	public void assertFact(Object... f) {
+		for (Object i : f) {
+			ksession.insert(i);
+		}
 	}
 
 	public static class QResult {

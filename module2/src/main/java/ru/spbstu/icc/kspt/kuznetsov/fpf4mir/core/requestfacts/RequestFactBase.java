@@ -12,7 +12,7 @@ public class RequestFactBase implements RequestFact, Serializable, FactWithRefId
 	private static final long serialVersionUID = 1571771513334573701L;
 
 	private static volatile long refIdCounter = 1;
-	private long refId = refIdCounter++;
+	private long refId;
 	private Activity parentActivity;
 	
 	public RequestFactBase() {
@@ -20,7 +20,7 @@ public class RequestFactBase implements RequestFact, Serializable, FactWithRefId
 	}
 	
 	public RequestFactBase(Activity parentActivity) {
-		this(0, parentActivity);
+		this(refIdCounter++, parentActivity);
 	}
 
 	public RequestFactBase(long refId, Activity parentActivity) {

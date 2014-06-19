@@ -33,6 +33,7 @@ declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.RequestScopedKno
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityErrorBase /* java */ end
 
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.RSKIncompatibleFeatureVersion /* java */ end
+
 ///////////////////////////// non-java /////////////////////////////////////
 
 declare DeployFolder extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactAliasBase end
@@ -49,6 +50,9 @@ declare DownloadHttpActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.f
 declare ReqExtract extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ReqNewActivityBase end
 declare ExtractActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity end
 
+declare ReqRunJava extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ReqNewActivityBase end
+declare RunJavaActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity end
+declare JavaExecutableFileArtifact extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecutableFileArtifact end
 
 declare ReqDeployFolder extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ReqNewActivityBase end
 
@@ -78,7 +82,13 @@ declare UserActionSelectBuildOrRun extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.
 	 buildArtifacts : BuildFileArtifactList
 end
 
+declare UserActionSelectRunFormat extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction end
+
 declare BuildOutputDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactBase end
 
 declare MavenProjectDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactBase end
 declare MavenTargetDir extends BuildOutputDir end
+
+declare RunFormat extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
+declare RunFormat_Mirex_Aud_ChEst extends RunFormat end
+declare RunFormat_Rest extends RunFormat end

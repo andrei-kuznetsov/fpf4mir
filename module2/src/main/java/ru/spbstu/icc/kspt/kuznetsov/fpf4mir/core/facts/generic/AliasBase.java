@@ -118,7 +118,11 @@ public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneabl
 	}
 
 	public AliasBase<U> reset(ActivityStatus astatus, U object) {
-		this.reset(astatus, ((FactWithName)object).getName(), object);
+		if (object instanceof FactWithName){
+			this.reset(astatus, ((FactWithName)object).getName(), object);
+		} else {
+			this.reset(astatus, "<no name>", object);
+		}
 		return this;
 	}
 
@@ -133,9 +137,14 @@ public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneabl
 	}
 
 	public AliasBase<U> reset(RequestFact request, U object) {
-		final String name = ((FactWithName)object).getName();
-		this.reset(request, null, null, name, object);
-		return this;
+		final String name;
+		if (object instanceof FactWithName){
+			name = ((FactWithName)object).getName();
+		} else {
+			name = "<no name>";
+		}
+
+		return this.reset(request, null, null, name, object);
 	}
 	
 	public AliasBase<U> reset(RequestFact request, RequestStatus rstatus, ActivityStatus astatus, String name,

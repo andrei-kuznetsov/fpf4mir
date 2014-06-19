@@ -1,0 +1,58 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfos.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.*;
+
+
+declare MirexScratchDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact end
+declare MirexOutputDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact end
+
+rule "Run Mirex audio chord estimation task"
+	when
+		active activity 'RunActivity'
+		RunFormat_Mirex_Aud_ChEst for activity
+		$dataset : Dataset for activity
+		$tmpdir : any 'TmpDirRoot'
+		not MirexScratchDir for activity
+		not MirexOutputDir for activity
+		not Dataset_FileArtifactList for activity
+	then
+		// data, scratch, output
+>		insert(new Dataset_FileArtifactList($activity, $dataset, "*.wav", $tmpdir));
+		insert '$tmpdir.newTempFolder($activity)' as 'MirexScratchDir';
+		insert '$tmpdir.newTempFolder($activity)' as 'MirexOutputDir';
+end
+
+rule "Add dataset file list"
+	when
+		active activity 'RunActivity'
+		$datasetList : Dataset_FileArtifactList for activity
+	then
+		// data, scratch, output
+		add ordinal 1 $datasetList
+end
+
+rule "Add scratch"
+	when
+		active activity 'RunActivity'
+		$scratch : MirexScratchDir for activity
+	then
+		// data, scratch, output
+		add ordinal 2 $scratch
+end
+
+rule "Add result dir"
+	when
+		active activity 'RunActivity'
+		$output : MirexOutputDir for activity
+	then
+		// data, scratch, output
+		add ordinal 3 $output
+end
+

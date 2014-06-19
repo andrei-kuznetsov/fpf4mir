@@ -5,7 +5,6 @@ import java.io.File;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifactList;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.R;
 
 public class Dataset_FileArtifactList extends FileArtifactList {
 	private static final long serialVersionUID = 1L;

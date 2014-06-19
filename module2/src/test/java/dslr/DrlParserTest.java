@@ -50,6 +50,11 @@ public class DrlParserTest extends TestCase {
     	String dslr = "/fix_maven_goldin_copy_plugin.dslr";
 		printExpandedRule(dslr);
     }
+
+    public void testExpandDRL_guess_run_command() throws Exception {
+    	String dslr = "/guess_run_command.dslr";
+		printExpandedRule(dslr);
+    }
     
 	private void printExpandedRule(String dslr) throws IOException,
 			DroolsParserException {

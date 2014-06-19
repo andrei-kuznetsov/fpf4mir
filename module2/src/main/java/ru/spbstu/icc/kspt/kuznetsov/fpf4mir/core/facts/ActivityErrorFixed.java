@@ -1,6 +1,13 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts;
 
-public class ActivityErrorFixed {
+import java.io.Serializable;
+
+public class ActivityErrorFixed implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5599505171674685786L;
+	
 	private ActivityError error;
 
 	public ActivityErrorFixed(ActivityError error) {
