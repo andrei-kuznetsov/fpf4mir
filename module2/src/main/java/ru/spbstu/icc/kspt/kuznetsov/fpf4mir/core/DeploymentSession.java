@@ -62,6 +62,8 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestStatusRelatedFact;
 public class DeploymentSession {
 	private static final String QKEY_ACTIVITY_OBJECT = "$object";
 
+	private static DeploymentSession dsession = null;
+	
 	public static enum EXECUTION_STATE {
 		RUNNING, DONE, WAITING_FOR_USER
 	};
@@ -110,6 +112,8 @@ public class DeploymentSession {
 	
 	private void unmarshallKSession(InputStream is) throws ClassNotFoundException, IOException {
 		ksession = marshaller.unmarshall(is);
+		ksession.addEventListener(new AgendaDebugListener());
+		logger = KnowledgeRuntimeLoggerFactory.newFileLogger(ksession, "test");
 	}
 
 	private void initExecEnvironment() {
@@ -331,9 +335,12 @@ public class DeploymentSession {
 
 	public void dispose() {
 		if (ksession != null) {
-			logger.close();
 			ksession.dispose();
 			ksession = null;
+		}
+
+		if (logger != null){
+			logger.close();
 			logger = null;
 		}
 	}
@@ -560,5 +567,19 @@ public class DeploymentSession {
 
 	public List<UserInfo> getUserInfoFacts(ActivityStatus key) {
 		return simpleListRequest(key, "Get userInfo facts for request");
+	}
+
+	public static DeploymentSession getInstance() {
+		if (dsession == null){
+			dsession = new DeploymentSession();
+		}
+		return dsession;
+	}
+	
+	protected DeploymentSession(){
+	}
+
+	public List<Activity> getRoots() {
+		return simpleListRequest(null, "Get root activities");
 	}
 }

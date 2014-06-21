@@ -35,4 +35,10 @@ public class RequestRelatedFactBase implements RequestRelatedFact, Serializable{
 	public void reset(RequestRelatedFactBase other){
 		this.request = other.request;
 	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + " [request=" + request + "]";
+	}
+	
 }

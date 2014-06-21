@@ -1,5 +1,6 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase;
 
-public class OrdinalArguments extends ActivityRelatedFactBase implements CmdLineArgument, Comparable<OrdinalArguments> {
+public class OrdinalArguments extends ActivityRelatedFactBase implements CmdLineArgument, Comparable<OrdinalArguments>, Serializable {
 	/**
 	 * 
 	 */

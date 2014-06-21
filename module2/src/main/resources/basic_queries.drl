@@ -53,3 +53,7 @@ end
 query "Get userInfo facts for request"  (RequestFact request)
 	$object : UserInfo( request == request )
 end
+
+query "Get root activities"  (Object ignored)
+	$object : Activity( request == null )
+end

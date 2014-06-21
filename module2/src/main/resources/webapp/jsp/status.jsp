@@ -76,8 +76,8 @@
 			if (i instanceof Alias && ((Alias)i).getRefObject() instanceof UserInfo){
 				UserInfo usrInfo = (UserInfo)((Alias)i).getRefObject();
 				String url = null;
-				String description = usrInfo.getName();
-				String title = usrInfo.getMessage().getClass().getCanonicalName();
+				String description = usrInfo.getMessage().toString();
+				String title = usrInfo.getName();
 				
 				if (usrInfo.getMessage() instanceof FileArtifact){
 					FileArtifact file = (FileArtifact)usrInfo.getMessage();
@@ -85,6 +85,7 @@
 					// TODO: /rest/userinfo/refId
 					url = "/rest/files?file=" + URLEncoder.encode(file.getAbsolutePath());
 					title = file.getName();
+					description = "view the file";
 				}
 				if (url != null){
 					%>

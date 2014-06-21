@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.Stack"%>
@@ -28,12 +29,10 @@
 			<%
 				Map<Object, List<Object>> tree = (Map<Object, List<Object>>) request
 						.getAttribute("tree");
-				Object root = request.getAttribute("root");
-				ArrayList<Object> stub = new ArrayList<Object>(2);
-				stub.add(root);
+				List<Object> roots = (List<Object>)request.getAttribute("roots");
 
 				Stack<Iterator<Object>> stack = new Stack<Iterator<Object>>();
-				stack.push(stub.iterator());
+				stack.push(roots.iterator());
 
 				while (!stack.isEmpty()) {
 					Iterator<Object> it = stack.peek();

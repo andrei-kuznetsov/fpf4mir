@@ -36,12 +36,12 @@ public class AddFeatureHandler_Local implements ActionHandler {
 	}
 
 	private MavenFeature installMaven(String featureVersion) {
-		if (featureVersion == null || "3.1.1".equals(featureVersion)){
+		if ("3.1.1".equals(featureVersion)){
 			MavenFeature mvn = new MavenFeature();
 			mvn.setCmdName("D:\\Program_Files\\apache-maven-3.1.1\\bin\\mvn.bat");
 			mvn.setVersion("3.1.1");
 			return mvn;
-		} else if ("3.0.4".equals(featureVersion)){
+		} else if (featureVersion == null || "3.0.4".equals(featureVersion)){
 			MavenFeature mvn = new MavenFeature();
 			mvn.setCmdName("D:\\Program_Files\\apache-maven-3.0.4\\bin\\mvn.bat");
 			mvn.setVersion("3.0.4");

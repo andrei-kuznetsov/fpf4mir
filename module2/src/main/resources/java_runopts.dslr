@@ -7,18 +7,35 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.java.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mirex.*;
 
+rule "JavaRun arguments ready"
+		salience -1
+	when
+		active activity 'RunActivity'
+		RunType_Java for activity
+		exists JavaExecutableFileArtifact for activity 
+	then
+		insert Run_JavaOptionsReady 
+end
 
 rule "JavaRun_JavaArgs_Jar"
 	when
-		$exec : JavaRunExecutableArtifact(workingDir  != null, file != null)
+		active activity 'RunActivity'
+		RunType_Java for activity
+		$exec : JavaExecutableFileArtifact for activity
 	then
-		insertLogical( new JavaRunOption_Jar($exec.getFile()) );
-		insertLogical( new JavaRunOption_VerboseCL() );
+		// verbose CL
+		add ordinal 1 "-verbose:class" 
+		
+		// jar
+		add ordinal 998 "-jar"
+		add ordinal 999 $exec.getAbsolutePath()
 end
 
 rule "JavaRun_JavaArgs_XOrg"
 	when
-		not X11Available()
+		active activity 'RunActivity'
+		RunType_Java for activity
+		not any 'X11Available'
 	then
-		insertLogical( new JavaRunOption_Headless() );
+		add ordinal 1 "-Djava.awt.headless=true" 
 end

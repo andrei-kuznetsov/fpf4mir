@@ -16,9 +16,10 @@ rule "Evaluate ExtractActivity result"
 	    active activity 'ExtractActivity'
 	    exec command succeeded
 		$extracted : FolderArtifact for activity
+		$file : FileArtifact for activity
 	then 
 		activity succeeded
-		add activity status parameter $extracted as GenericFolderArtifactAlias
+		add activity status parameter '$extracted' with name '$file.getName()';
 end
 
 // #############################################################################################
@@ -42,7 +43,7 @@ end
 rule "Unzip with jar"
 	when 
 	    active activity 'ExtractActivity'
->		$file : FileArtifact(activity == $activity)
+		$file : FileArtifact for activity
 	then
 		add ordinal 1 "xf"
 		add ordinal 2 $file.getAbsolutePath()

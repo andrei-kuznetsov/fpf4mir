@@ -85,6 +85,11 @@ public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneabl
 
 	@Override
 	public U cloneRefObject(Activity newActivity) {
+		return this.cloneRefObject(newActivity, getName());
+	}
+
+	@Override
+	public U cloneRefObject(Activity newActivity, String newName) {
 		U copy;
 		try {
 			copy = (U)refObject.clone();
@@ -93,13 +98,9 @@ public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneabl
 			throw new RuntimeException(e);
 		}
 		((ActivityRelatedFact)copy).setActivity(newActivity);
-		return copy;
-	}
-
-	@Override
-	public U cloneRefObject(Activity newActivity, String newName) {
-		U copy = this.cloneRefObject(newActivity);
-		((FactWithName)copy).setName(newName);
+		if (copy instanceof FactWithName){
+			((FactWithName)copy).setName(newName);
+		}
 		return copy;
 	}
 

@@ -1,0 +1,35 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
+
+
+// ----------------------------------- Output parameters ---------------------------------------
+
+// #############################################################################################
+
+rule "Assert RunType_Java"
+	when
+		active activity 'RunActivity'
+		$exec : GenericExecutableFileArtifact(getFileName().endsWith(".jar")) for activity
+	then
+		insert RunType_Java
+		insert '$exec' as 'JavaExecutableFileArtifact';
+end
+
+rule "Execute java command"
+	when
+	    active activity 'RunActivity'
+	    RunType_Java for activity
+	    Run_JavaOptionsReady for activity
+	    Run_AppOptionsReady for activity
+	    cmd options for activity
+		$exec : JavaExecutableFileArtifact for activity
+	then
+		execute command "java" in working dir $exec.getWorkingDir()
+end

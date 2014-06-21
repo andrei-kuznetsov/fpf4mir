@@ -1,14 +1,18 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Artifact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifactList;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.Dataset_FileArtifactList;
 
-public class OrdinalArgument implements CmdLineArgument, Comparable<OrdinalArgument> {
+public class OrdinalArgument implements CmdLineArgument, Comparable<OrdinalArgument>, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7563903193611604495L;
 	private int order;
 	private String value;
 	private Activity activity;

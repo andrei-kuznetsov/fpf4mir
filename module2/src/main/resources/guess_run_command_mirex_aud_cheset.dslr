@@ -13,6 +13,19 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.*;
 declare MirexScratchDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact end
 declare MirexOutputDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact end
 
+rule "Application inputs ready"
+		salience -1 // after all options are onserted 
+	when
+		active activity 'RunActivity'
+		RunFormat_Mirex_Aud_ChEst for activity
+		exists MirexScratchDir for activity
+		exists Dataset_FileArtifactList for activity
+		$output :  MirexOutputDir for activity
+	then
+		insert Run_AppOptionsReady
+		insert artifact '$output' as 'GenericUserInfoFolderArtifact'
+end
+
 rule "Run Mirex audio chord estimation task"
 	when
 		active activity 'RunActivity'
@@ -35,7 +48,7 @@ rule "Add dataset file list"
 		$datasetList : Dataset_FileArtifactList for activity
 	then
 		// data, scratch, output
-		add ordinal 1 $datasetList
+		add ordinal 1001 $datasetList
 end
 
 rule "Add scratch"
@@ -44,7 +57,7 @@ rule "Add scratch"
 		$scratch : MirexScratchDir for activity
 	then
 		// data, scratch, output
-		add ordinal 2 $scratch
+		add ordinal 1002 $scratch
 end
 
 rule "Add result dir"
@@ -53,6 +66,6 @@ rule "Add result dir"
 		$output : MirexOutputDir for activity
 	then
 		// data, scratch, output
-		add ordinal 3 $output
+		add ordinal 1003 $output
 end
 

@@ -28,6 +28,8 @@ public class HttpMain {
 		h.setInitParameter(Application.class.getCanonicalName(), RESTService.class.getCanonicalName());
 		context.addServlet(h, "/rest/*");
 		
+		context.addServlet(new ServletHolder(new KBServlet()), "/kb/*");
+		
 		server.setHandler(context);
 
 		server.start();

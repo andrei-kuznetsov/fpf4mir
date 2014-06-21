@@ -35,6 +35,7 @@ declare SubrequestProcessingCompleted extends ru.spbstu.icc.kspt.kuznetsov.fpf4m
 
 
 rule "Request to activity (single fact)"
+		salience -10000
 	when
 		any activity request
 		activity for request
@@ -48,6 +49,7 @@ rule "Request to activity (single fact)"
 end
 
 rule "Activity to activity status (single fact)"
+		salience 10000
 	when
 		any activity
 		$astatus : ActivityStatus for activity
@@ -60,6 +62,7 @@ end
 
 
 rule "Request result to parent activity (single fact)"
+		salience 10000
 	when 
 	 	any activity
 		subrequest 'ReqNewActivity' for activity
@@ -76,6 +79,7 @@ end
 
 
 rule "Activity result to request result (single fact)"
+		salience 10000
 	when 
 	 	any activity request
 	 	activity for request
@@ -89,6 +93,7 @@ rule "Activity result to request result (single fact)"
 end
 
 rule "All activity status outputs copied from activity"
+		salience 10000
 	when
 		any activity
 	 	$ac : ActivityCompleted for activity
@@ -101,6 +106,7 @@ rule "All activity status outputs copied from activity"
 end
 
 rule "All activity inputs copied from parent request"
+		salience -10000
 	when
 		any activity request
 		activity for request
@@ -113,6 +119,7 @@ rule "All activity inputs copied from parent request"
 end
 
 rule "All request status outputs copied from activity status (single activity)"
+		salience 10000
 	when
 	 	any activity request
 	 	activity for request
@@ -128,6 +135,7 @@ rule "All request status outputs copied from activity status (single activity)"
 end
 
 rule "All request status outputs copied from activity status (all activities)"
+		salience 10000
 	when
 		any activity request
 >		forall ( $subactivity : Activity(request == $request)
@@ -139,6 +147,7 @@ rule "All request status outputs copied from activity status (all activities)"
 end
 
 rule "All request outputs copied to parent activity"
+		salience 10000
 	when
 	 	any activity
 		subrequest 'ReqNewActivity' for activity
@@ -154,37 +163,41 @@ end
 
 
 rule "Activity activation"
+		salience 10000
 	when 
 		any activity
-	 	not ActivityStatus for activity // disable finished
+	 	not ActivityFailed for activity // disable finished
+	 	not ActivitySucceeded for activity // disable finished
+	 	// ok to have activity suspended
 	 	AllActivityInputsReady for activity //inputs are ready
->	 	forall( $subreq : RequestFact(parentActivity==$activity) 
->	 			SubrequestProcessingCompleted(request==$subreq))  // block for subrequest 
 	then
 >		insertLogical(new ActivityActive($activity));
 end
 
 rule "Activity analitycs activation"
+		salience 10000
 	when 
 		any activity
-	 	ActivityStatus for activity
+	 	(ActivityFailed for activity or ActivitySucceeded for activity)
 	 	not ActivityCompleted for activity  
 	then
 >		insertLogical(new ActivityAnalyze($activity));
 end
 
 rule "Request activation"
+		salience 10000
 	when 
 		any activity request
 	 	not RequestStatus for request // disable finished
 //	 	AllRerquestInputsReady for activity //inputs are ready
->	 	forall( $subactivity : Activity(request==$request) 
->	 			ActivityProcessingCompleted(activity==$subactivity))  // block for subactivity 
+//>	 	forall( $subactivity : Activity(request==$request) 
+//>	 			ActivityProcessingCompleted(activity==$subactivity))  // block for subactivity 
 	then
 >		insertLogical(new RequestActive($request));
 end
 
 rule "Propagate subrequest failure"
+		salience -10000
 	when 
 	 	any activity
 		subrequest 'ReqNewActivity' for activity
@@ -194,6 +207,7 @@ rule "Propagate subrequest failure"
 end
 
 rule "Propagate subactivity success"
+		salience -10000
 	when 
 	 	any activity request
 	 	activity for request

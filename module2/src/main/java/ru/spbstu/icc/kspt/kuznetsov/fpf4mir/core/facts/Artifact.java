@@ -113,7 +113,7 @@ public class Artifact implements Serializable, FPFCloneable, ActivityRelatedFact
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [fileName=" + fileName + ", activity=" + activity + "]";
+		return getClass().getSimpleName() + " [name=" + name + ", fileName=" + fileName + ", activity=" + activity.toShortString() + "]";
 	}
 	
 	@Override
@@ -121,15 +121,20 @@ public class Artifact implements Serializable, FPFCloneable, ActivityRelatedFact
 		return super.clone();
 	}
 	
-	public void reset(Activity activity, Artifact artifact){
-		this.reset(activity, artifact.baseDir, artifact.fileName);
+	public Artifact reset(Activity activity, Artifact artifact){
+		return this.reset(activity, null, artifact.baseDir, artifact.fileName);
 	}
 
-	public void reset(Activity activity, String baseDir, String fileName) {
+	public Artifact reset(Activity activity, String baseDir, String fileName) {
+		return this.reset(activity, null, baseDir, fileName);
+	}
+
+	public Artifact reset(Activity activity, String name, String baseDir, String fileName) {
 		this.activity = activity;
 		this.baseDir = baseDir;
 		this.fileName = fileName;
+		this.name = name;
 		validate(_getFile());
+		return this;
 	}
-	
 }

@@ -1,0 +1,50 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+
+// ----------------------------------- Output parameters ---------------------------------------
+
+// #############################################################################################
+
+
+rule "Run exec command"
+	when
+		any activity
+		$exec : ExecutableFileArtifact for activity
+		$req : RestRequestCommand for activity
+>		RestPathArgument(restCmd == $req, order == 1, value == "execute")
+>		RestArtifact(restCmd == $req, $dataset : artifact)
+	then
+		add subrequest 'ReqRun' with refId '$req.getRefId()'; 
+		add subrequest parameter '$exec'
+		add subrequest parameter '$req'
+		add subrequest parameter '$dataset' with name "dataset";
+end
+
+rule "Run exec command - invocation format"
+	when
+		any activity
+		active subrequest 'ReqRun' for activity
+		$rf : RunFormat for activity
+	then
+		add subrequest parameter '$rf'
+end
+
+rule "Run deploy command"
+	when
+		any activity
+		not ExecutableFileArtifact for activity
+		$req : RestRequestCommand for activity
+>		RestPathArgument(restCmd == $req, order == 1, value == "deploy")
+>		RestArtifact(restCmd == $req, $artifact : artifact)
+	then
+		add subrequest 'ReqDeployExecutable' with refId '$req.getRefId()';
+		add subrequest parameter '$artifact'
+end

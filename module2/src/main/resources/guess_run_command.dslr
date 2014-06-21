@@ -17,10 +17,23 @@ rule "Run execution status succeeded"
 		$execstat : ExecStatus(succeeded==true) for activity
 	then
 		activity succeeded
+		insert artifact '$execstat.getFileOut()' as 'GenericUserInfoFileArtifact'
 		insert artifact '"Execution completed"' as 'GenericUserInfoMessage'
 end
 
 // #############################################################################################
+
+
+rule "Run execution status failed"
+	when
+		active activity 'RunActivity'
+		$execstat : ExecStatus(succeeded==false) for activity
+	then
+		insert artifact '$execstat.getFileOut()' as 'GenericUserInfoFileArtifact'
+		insert artifact '$execstat.getFileErr()' as 'GenericUserInfoFileArtifact'
+		activity failed with message "Run failed with status " + $execstat.getStatus()
+end
+
 
 rule "Err: no executable found"
 	when
@@ -33,12 +46,19 @@ end
 rule "Deploy input data from file artifact"
 	when
 		active activity 'RunActivity'
-		$a : (FileArtifact for activity or 
-			ArtifactRef for activity)
-		not FolderArtifact for activity
+		$a : (FileArtifact(name=="dataset") for activity or 
+			ArtifactRef(name=="dataset") for activity)
 	then
 		add subrequest 'ReqDeployFolder'
 		add subrequest parameter '$a'
+end
+
+rule "Cast folder to dataset"
+	when
+		active activity 'RunActivity'
+		$f : FolderArtifact(name=="dataset") for activity
+	then
+		insertLogical '$f' as 'Dataset';
 end
 
 rule "Select run format"
@@ -49,33 +69,4 @@ rule "Select run format"
 		def user action UserActionSelectRunFormat
 		//add user action attr ExecArtifacts as $exec
 		add user action
-end
-
-
-rule "Cast FolderArtifact to Dataset"
-	when
-		any activity 'RunActivity'
-		$dataset : FolderArtifact(name=='dataset') for activity
-	then
-		insertLogical '$dataset' as 'Dataset';
-end
-
-rule "Collect cmd arguments"
-	when 
-	    active activity 'RunActivity'
-		cmd options for activity
-	then
-		insertLogical  '$options' as 'OrdinalArguments';
-end
-
-rule "Run main executable"
-		salience -1 //shall be less than for rule 'Run command from REST args'
-	when 
-	    active activity 'RunActivity'
-		$exec : JavaExecutableFileArtifact for activity
-		$options : OrdinalArguments for activity
-	then
-		add subrequest 'ReqRunJava'
-		add subrequest parameter '$options'
-		add subrequest parameter '$exec'
 end

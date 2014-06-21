@@ -80,6 +80,6 @@ public class FolderArtifact extends Artifact {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [getAbsolutePath()=" + getAbsolutePath() + "]";
+		return getClass().getSimpleName() + " [name=" + getName() + ", getAbsolutePath()=" + getAbsolutePath() + "]";
 	}
 }

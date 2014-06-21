@@ -52,4 +52,11 @@ public class RequestFactBase implements RequestFact, Serializable, FactWithRefId
 		this.parentActivity = parentActivity;
 		return this;
 	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + " [refId=" + refId + ", parentActivity="
+				+ parentActivity + "]";
+	}
+	
 }

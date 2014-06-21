@@ -8,13 +8,13 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfos.*;
 
-rule "Run command from REST args"
-	when
-		active activity 'RunActivity'
-		RunFormat_Rest for activity
-		$arg : RestArgument for activity
+//rule "Run command from REST args"
+//	when
+//		active activity 'RunActivity'
+//		RunFormat_Rest for activity
+//		$arg : RestPathArgument for activity
 		// todo: add processed flag or remove activity deactivation
-	then
-		add ordinal $arg.getOrder() $arg.getValue()
-end
+//	then
+//		add ordinal $arg.getOrder() $arg.getValue()
+//end
 

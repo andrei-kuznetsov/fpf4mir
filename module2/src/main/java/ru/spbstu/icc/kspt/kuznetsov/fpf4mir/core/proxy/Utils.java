@@ -14,7 +14,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class Utils {
-	private static final int maxFileSize = 50 * 1024 * 1024;
+	private static final int maxFileSize = 500 * 1024 * 1024;
 	private static final int maxMemSize = 4 * 1024 * 1024;
 	
 	public static final String filePathRoot = "/home/andrei/OpenShift/datadir/jetty/";
@@ -24,7 +24,7 @@ public class Utils {
 		public List<String> fileNames = new LinkedList<String>();
 	}
 	
-	static UploadedFileDetails doUploadOriginalArtifact(HttpServletRequest request) throws IOException {
+	static UploadedFileDetails doUploadOriginalArtifact(HttpServletRequest request) throws Exception {
 		boolean isMultipart;
 		String filePath = "/home/andrei/OpenShift/datadir/jetty/";
 		String tmpPath = "/home/andrei/OpenShift/datadir/jetty/";
@@ -56,37 +56,34 @@ public class Utils {
 		// maximum file size to be uploaded.
 		upload.setSizeMax(maxFileSize);
 
-		try {
-			// Parse the request to get file items.
-			List<FileItem> fileItems = upload.parseRequest(request);
+		// Parse the request to get file items.
+		List<FileItem> fileItems = upload.parseRequest(request);
 
-			// Process the uploaded file items
-			Iterator<FileItem> i = fileItems.iterator();
+		// Process the uploaded file items
+		Iterator<FileItem> i = fileItems.iterator();
 
-			while (i.hasNext()) {
-				FileItem fi = (FileItem) i.next();
-				if (!fi.isFormField()) {
-					// Get the uploaded file parameters
+		while (i.hasNext()) {
+			FileItem fi = (FileItem) i.next();
+			if (!fi.isFormField()) {
+				// Get the uploaded file parameters
 //					String fieldName = fi.getFieldName();
-					String fileName = fi.getName();
-					uploadedFiles.fileNames.add(fileName);
+				String fileName = fi.getName();
+				uploadedFiles.fileNames.add(fileName);
 //					String contentType = fi.getContentType();
 //					boolean isInMemory = fi.isInMemory();
 //					long sizeInBytes = fi.getSize();
-					// Write the file
-					if (fileName.lastIndexOf("\\") >= 0) {
-						file = new File(base, fileName.substring(fileName
-								.lastIndexOf("\\")));
-					} else {
-						file = new File(base, fileName.substring(fileName
-								.lastIndexOf("\\") + 1));
-					}
-					fi.write(file);
+				// Write the file
+				if (fileName.lastIndexOf("\\") >= 0) {
+					file = new File(base, fileName.substring(fileName
+							.lastIndexOf("\\")));
+				} else {
+					file = new File(base, fileName.substring(fileName
+							.lastIndexOf("\\") + 1));
 				}
+				fi.write(file);
 			}
-		} catch (Exception ex) {
-			System.out.println(ex);
 		}
+			
 		return uploadedFiles;
 	}
 }

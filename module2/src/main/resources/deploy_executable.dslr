@@ -86,17 +86,17 @@ end
 rule "Exec artifact found"
 	when
 	 	active activity 'DeployExecutableActivity'
->		$exec : ExecFileArtifactList(size == 1, activity == $activity)
->		BuildFileArtifactList(size == 0, activity == $activity)
+		$exec : ExecFileArtifactList(size == 1) for activity
+		BuildFileArtifactList(size == 0) for activity
 	then
-		insert artifact '(ExecutableFileArtifact)$exec.get(0)' as 'ExecutableFileArtifact'
+		insert artifact '(ExecArtifactCandidate)$exec.get(0)' as 'GenericExecutableFileArtifact'
 end
 
 rule "Build file found"
 	when
 	 	active activity 'DeployExecutableActivity'
->		$exec : ExecFileArtifactList(size == 0, activity == $activity)
->		$build : BuildFileArtifactList(size == 1, activity == $activity)
+		$exec : ExecFileArtifactList(size == 0) for activity
+		$build : BuildFileArtifactList(size == 1) for activity
 	then
 		insert artifact '(BuildFile)$exec.get(0)' as 'BuildFile'
 end

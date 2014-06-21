@@ -6,6 +6,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactAliasBase /* java */ end
 
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecutableFileArtifact /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericExecutableFileArtifact /* java */ end
 
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact /* java */ end
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactBase /* java */ end
@@ -79,7 +80,7 @@ declare BuildFileMake extends BuildFile end
 
 declare UserActionSelectBuildOrRun extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction
 	 execArtifacts : ExecFileArtifactList;
-	 buildArtifacts : BuildFileArtifactList
+	 buildArtifacts : BuildFileArtifactList;
 end
 
 declare UserActionSelectRunFormat extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction end
@@ -92,3 +93,7 @@ declare MavenTargetDir extends BuildOutputDir end
 declare RunFormat extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
 declare RunFormat_Mirex_Aud_ChEst extends RunFormat end
 declare RunFormat_Rest extends RunFormat end
+
+declare RunType_Java extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
+declare Run_JavaOptionsReady extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
+declare Run_AppOptionsReady extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end

@@ -12,6 +12,11 @@ public class ReqDeployExecutable extends ReqNewActivityBase implements ReqNewAct
 	private String deploymentName;
 
 	
+	
+	public ReqDeployExecutable() {
+		super();
+	}
+
 	public ReqDeployExecutable(Activity parentActivity) {
 		super(parentActivity);
 	}

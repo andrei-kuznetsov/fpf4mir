@@ -38,10 +38,8 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.R;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericAlias;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.RestArgument;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.proxy.Utils.UploadedFileDetails;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqDeployExecutable;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqRun;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityRelatedFact;
@@ -55,7 +53,7 @@ public class Index {
 	private static final String PATH_USERACTION = "/useraction";
 	private static final String PATH_REQUEST_STATUS = PATH_STATUS + "/request";
 
-	private DeploymentSession session = new DeploymentSession();
+	private DeploymentSession session = DeploymentSession.getInstance();
 
 	private static final Logger log = Logger.getLogger(Index.class);
 
@@ -68,12 +66,19 @@ public class Index {
 			@Context HttpServletResponse response) throws ServletException,
 			IOException {
 		HashMap<Object, List<Object>> tree = new HashMap<>();
-		fillDbgTraceTree(tree, Activity.USER);
+		List<Activity> roots = session.getRoots();
+		if (roots.size() != 1) {
+			log.warn("Number of root activities should be 1, but was " + roots.size());
+		}
+		
+		for (Activity root : roots){
+			fillDbgTraceTree(tree, root);
+		}
 
 		RequestDispatcher dispatcher = request
 				.getRequestDispatcher("/jsp/dbg_tree.jsp");
 		request.setAttribute("tree", tree);
-		request.setAttribute("root", Activity.USER);
+		request.setAttribute("roots", roots);
 		dispatcher.forward(request, response);
 	}
 
@@ -107,6 +112,15 @@ public class Index {
 		}
 	}
 
+	@GET
+	@Path("/dbg/reset")
+	public Response dbgResetSession() throws Exception {
+		session.reset(); // recreate new session
+		session.assertFact(Activity.USER);
+		session.run();
+		return Response.seeOther(new URI("/index.jsp")).build();
+	}
+	
 	@GET
 	@Path("/files")
 	public File dbgAll(@QueryParam("file") String fileName)
@@ -286,7 +300,7 @@ public class Index {
 			throw rt;
 		}
 	}
-
+/*
 	@POST
 	@Path("/execute/{many:.*}")
 	public Response executeRequest(@Context HttpServletRequest httpreq)
@@ -294,23 +308,23 @@ public class Index {
 
 		UploadedFileDetails files = Utils.doUploadOriginalArtifact(httpreq);
 
-		ReqRun req = new ReqRun(Activity.USER);
+		RestRequestCommand req = new RestRequestCommand(Activity.USER);
 
 		Artifact userArtifact;
-		GenericAlias artifactAlias = new GenericAlias();
+		RestArtifact artifactAlias;
 
 		if (files.fileNames.size() == 1) {
 			userArtifact = new FileArtifact(Activity.USER, files.baseDir, files.fileNames.get(0));
 		} else {
 			userArtifact = new FolderArtifact(Activity.USER, files.baseDir, "");
 		}
-		artifactAlias.reset(req, userArtifact);
+		artifactAlias = new RestArtifact(req, userArtifact);
 
 		session.assertFact(req, userArtifact, artifactAlias);
 		int reqArgument = 0;
 		for (String i : httpreq.getPathInfo().split("/")){
-			RestArgument arg = new RestArgument(Activity.USER, reqArgument++, i);
-			session.assertFact(arg, new GenericAlias().reset(req, arg));
+			RestPathArgument arg = new RestPathArgument(req, reqArgument++, i);
+			session.assertFact(arg);
 		}
 		
 		try {
@@ -323,5 +337,5 @@ public class Index {
 			throw new ServletException("Can't process request", e);
 		}
 	}
-
+*/
 }

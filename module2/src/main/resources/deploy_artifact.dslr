@@ -54,8 +54,8 @@ end
 rule "ExtractArtifact"
 	when 
 		active activity 'DeployFolderActivity'
->		$artifact : FileArtifact(activity == $activity, fileName.endsWith(".zip"))
->		not FolderArtifact(activity == $activity)
+		$artifact : FileArtifact(fileName.endsWith(".zip")) for activity
+		not FolderArtifact for activity
 	then
 		add subrequest 'ReqExtract'
 		add subrequest parameter '$artifact' as 'GenericFileArtifactAlias'
@@ -82,3 +82,14 @@ rule "Process exctracted artifact failed"
 		activity failed with status "Can't extract artifact. Reason: " + $subrequestStatus.getMessage()
 end
 
+
+rule "Deploy default: provide parent folder"
+		salience -1
+	when 
+		active activity 'DeployFolderActivity'
+		$artifact : FileArtifact for activity
+		not subrequest 'ReqNewActivity' for activity
+		not FolderArtifact for activity
+	then
+		insert '$artifact.getName(), $artifact._getFile().getParent(), ""' as 'GenericFolderArtifact';
+end

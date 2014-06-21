@@ -46,7 +46,7 @@ rule "Guess run executable after build: Exec artifact found"
 	 	active activity 'BuildActivity'
 		$exec : ExecFileArtifactList(size == 1) for activity
 	then
-		insert artifact '(ExecutableFileArtifact)$exec.get(0)' as 'ExecutableFileArtifact'
+		insert artifact '(ExecutableFileArtifact)$exec.get(0)' as 'GenericExecutableFileArtifact'
 end
 
 rule "Guess run executable after build: multiple exec artifacts found"

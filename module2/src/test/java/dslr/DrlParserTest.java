@@ -55,6 +55,16 @@ public class DrlParserTest extends TestCase {
     	String dslr = "/guess_run_command.dslr";
 		printExpandedRule(dslr);
     }
+
+    public void testExpandDRL_basic_rest_processor() throws Exception {
+    	String dslr = "/basic_rest_processor.dslr";
+		printExpandedRule(dslr);
+    }
+
+    public void testExpandDRL_run_java() throws Exception {
+    	String dslr = "/run_java.dslr";
+		printExpandedRule(dslr);
+    }
     
 	private void printExpandedRule(String dslr) throws IOException,
 			DroolsParserException {

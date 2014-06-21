@@ -1,9 +1,7 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase;
 
-public class RestArgument extends ActivityRelatedFactBase{
+public class RestPathArgument extends RestRequestRelatedFactBase {
 	/**
 	 * 
 	 */
@@ -11,11 +9,11 @@ public class RestArgument extends ActivityRelatedFactBase{
 	private int order;
 	private String value;
 	
-	public RestArgument() {
+	public RestPathArgument() {
 	}
 	
-	public RestArgument(Activity activity, int order, String value) {
-		super(activity);
+	public RestPathArgument(RestRequestCommand restCmd, int order, String value) {
+		super(restCmd);
 		this.order = order;
 		this.value = value;
 	}
@@ -36,6 +34,7 @@ public class RestArgument extends ActivityRelatedFactBase{
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + " [order=" + order + ", value=" + value
-				+ ", getActivity()=" + getActivity() + "]";
+				+ ", restCmd" + getRestCmd() + "]";
 	}
+	
 }
