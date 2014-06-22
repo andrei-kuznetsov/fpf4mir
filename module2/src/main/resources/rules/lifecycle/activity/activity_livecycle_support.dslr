@@ -1,0 +1,86 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+rule "Activity first lifecycle phase"
+		salience -20000
+	when 
+		any activity
+		not ActivityLifeCycleState for activity
+	then
+ 		insert ALCPrepareWork
+end
+
+rule "Activity activation"
+		salience -20000
+	when 
+		any activity
+		$aa : ALCPrepareWork for activity
+	 	not ALCWork for activity  
+	then
+>		retract($aa);
+ 		insert ALCWork
+end
+
+rule "Activity analitycs activation"
+		salience -20000
+	when 
+		any activity
+		$aa : ALCWork for activity
+	 	ActivityResult for activity
+	 	not ALCAnalyze for activity  
+	then
+>		retract($aa);
+ 		insert ALCAnalyze
+end
+
+rule "Default activity analytics (success)"
+		salience -10000
+	when
+		any activity
+		ActivityResultSucceeded for activity
+		ALCAnalyze for activity
+	 	not ActivityStatus for activity
+	 	not ActionFact for activity
+ 	then
+ 		insert GenericActivitySucceeded
+end
+ 
+rule "Default activity analytics (failure)"
+		salience -10000
+	when
+		any activity
+		ActivityResultFailed for activity
+		ALCAnalyze for activity
+	 	not ActivityStatus for activity
+	 	not ActionFact for activity
+ 	then
+ 		insert GenericActivityFailed
+end
+
+rule "Activity prepare astatus facts"
+	salience -20000
+	when
+		any activity
+	 	ActivityStatus for activity //?? do we need this ??
+	 	$aa : ALCAnalyze for activity
+	 	not ALCPrepareAStatus for activity
+	 	not ActionFact for activity
+ 	then
+>		retract($aa);
+ 		insert ALCPrepareAStatus
+end
+
+rule "Activity completed"
+	salience -20000
+	when
+		any activity
+	 	$aa : ALCPrepareAStatus for activity
+	 	not ALCCompleted for activity
+ 	then
+>		retract($aa);
+ 		insert ALCCompleted
+end

@@ -1,8 +1,19 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.sources;
 
-public class SrcEncoding extends SrcFactBase{
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase;
+
+public class SrcEncoding extends ActivityRelatedFactBase{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5069318834266896174L;
+	
 	private String encoding;
 
+	public SrcEncoding() {
+	}
+	
 	public SrcEncoding(String srcEncoding) {
 		this.encoding = srcEncoding;
 	}
@@ -20,4 +31,9 @@ public class SrcEncoding extends SrcFactBase{
 		return "SrcEncoding [srcEncoding=" + encoding + "]";
 	}
 
+	public SrcEncoding reset(Activity activity, String encoding){
+		super.reset(activity);
+		this.encoding = encoding;
+		return this;
+	}
 }

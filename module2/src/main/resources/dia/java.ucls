@@ -34,96 +34,10 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" 
-    name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.java.JavaRunExecutableArtifact" project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/run/java/JavaRunExecutableArtifact.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="244" x="1413" y="128"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="5" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.java.JavaRun" 
+  <class id="4" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity" 
     project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/run/java/JavaRun.java" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/Activity.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="244" x="1165" y="310"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="6" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.java.JavaRunArgument" 
-    project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/run/java/JavaRunArgument.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="244" x="467" y="219"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </interface>  
-  <class id="7" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.java.JavaRunOption_VerboseCL" 
-    project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/run/java/JavaRunOption_VerboseCL.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="244" x="328" y="128"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="8" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.java.JavaRunCommand" 
-    project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/run/java/JavaRunCommand.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="244" x="1413" y="37"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="9" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.java.JavaRunOption_Jar" 
-    project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/run/java/JavaRunOption_Jar.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="244" x="881" y="128"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="10" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.java.JavaRunOption_Headless" 
-    project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/run/java/JavaRunOption_Headless.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="244" x="44" y="128"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="11" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Run" project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/Run.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="51" width="208" x="1165" y="219"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="12" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity" project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/Activity.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
     <position height="51" width="208" x="1165" y="128"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -131,18 +45,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunExecutableArtifact" 
-    project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/RunExecutableArtifact.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="208" x="1165" y="37"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="14" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunCommand" 
+  <interface id="5" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.RunCommand" 
     project="fpf4mir-core" 
     file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/RunCommand.java" binary="false" 
     corner="BOTTOM_RIGHT">    
@@ -153,7 +56,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <interface id="15" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecCommand" 
+  <interface id="6" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecCommand" 
     project="fpf4mir-core" 
     file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/ExecCommand.java" binary="false" 
     corner="BOTTOM_RIGHT">    
@@ -164,78 +67,34 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <realization id="16">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="6"/>  
-  </realization>  
-  <generalization id="17">    
+  <generalization id="7">    
     <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="11"/>  
-  </generalization>  
-  <realization id="18">    
-    <end type="SOURCE" refId="9"/>    
     <end type="TARGET" refId="6"/>  
-  </realization>  
-  <generalization id="19">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="15"/>  
   </generalization>  
-  <generalization id="20">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <association id="21">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="22" name="activity"/>      
-      <multiplicity id="23" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="24">    
+  <realization id="8">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="1"/>  
   </realization>  
-  <realization id="25">    
+  <association id="9">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="10" name="activity"/>      
+      <multiplicity id="11" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="12">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="1"/>  
   </realization>  
-  <realization id="26">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="6"/>  
-  </realization>  
-  <generalization id="27">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <generalization id="28">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <generalization id="29">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <association id="30">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="31" name="activity"/>      
-      <multiplicity id="32" minimum="0" maximum="1"/>    
+  <association id="13">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="14" name="activity"/>      
+      <multiplicity id="15" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="33">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="14"/>  
-  </realization>  
-  <generalization id="34">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <generalization id="35">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="2"/>  
-  </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
     <attributes public="false" package="false" protected="false" private="false" static="true"/>    

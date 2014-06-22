@@ -1,6 +1,6 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 
 public class CloneUtils {
 	/*public static <T extends ActivityRelatedFact> T cloneActivityRelatedFact(

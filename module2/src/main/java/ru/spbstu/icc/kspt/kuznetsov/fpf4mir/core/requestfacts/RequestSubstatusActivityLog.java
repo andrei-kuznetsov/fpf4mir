@@ -2,7 +2,7 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts;
 
 import java.util.List;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 
 public class RequestSubstatusActivityLog extends RequestSubstatusBase implements RequestSubstatus{
 	private List<Activity> activities;

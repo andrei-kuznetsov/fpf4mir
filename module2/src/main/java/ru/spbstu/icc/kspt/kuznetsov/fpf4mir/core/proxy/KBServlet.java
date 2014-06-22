@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.DeploymentSession;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Artifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.RestArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.RestPathArgument;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.RestRequestCommand;

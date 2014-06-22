@@ -14,12 +14,11 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActionStatus;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.BuildSystem;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.BuildSystem.BUILD_SYSTEMS;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecStatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.BuildErrorFixed;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.JavacErr_UnmappableCharacter;
 import utils.AgendaListener;
 import utils.DrlObjectsUtils;
 

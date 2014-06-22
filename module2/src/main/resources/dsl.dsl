@@ -9,20 +9,18 @@
 [when]any activity=$activity: Activity(  )
 [when]any '{type}'={type}(  )
 
-[when]active activity request '{request}'=$request:{request}(  ) and RequestActive( request == $request )
-[when]active activity '{activity}'=$activity:{activity}(  ) and ActivityActive( activity == $activity )
-[when]analyze activity '{activity}'=$activity:{activity}(  ) and ActivityAnalyze( activity == $activity )
+[when]active activity '{activity}'=$activity:{activity}(  ) and ALCWork( activity == $activity )
+[when]analyze activity '{activity}'=$activity:{activity}(  ) and ALCAnalyze( activity == $activity )
 
-[when]activity succeeded=exists ActivitySucceeded( activity == $activity )
 [when]request '{request}'=$request:{request}(  )
 [when]request inputs \(=(or
 [when]input '{type}'=$input : {type}( request == $request ) 
 
-[when]active subrequest '{subrequest}' for activity=$subrequest : {subrequest}(parentActivity == $activity)
+[when]subrequest for activity=subrequest 'ReqNewActivity' for activity
 [when]subrequest '{subrequest}' for activity=$subrequest : {subrequest}(parentActivity == $activity)
 [when]subrequest {subrequest:\w+} for activity=$subrequest : {subrequest}(parentActivity == $activity)
 #[when]- has name=name != null
-[when]subrequest completed=$subrequestStatus : RequestStatus( request == $subrequest )
+[when]subrequest completed=RLCCompleted( request == $subrequest )
 [when]subrequest succeeded=$subrequestStatus : RequestSucceeded( request == $subrequest )
 [when]subrequest failed=$subrequestStatus : RequestFailed( request == $subrequest )
 [when]subrequest outputs \(=(or
@@ -35,6 +33,7 @@
 [when]{type:\w+} for activity={type}(activity == $activity)
 [when]{type:\w+}\({whatever}\) for activity={type}(activity == $activity, {whatever})
 [when]{type:\w+} for request={type}(request == $request)
+[when]{type:\w+} for subrequest={type}(request == $subrequest)
 
 [then]log {message}=System.out.println({message});
 [then]def user action {type:\w+}={type} useraction = new {type}(); useraction.setActivity($activity);
@@ -54,7 +53,7 @@
 [then]add subrequest parameter '{param}'=\{GenericAlias o = new GenericAlias(); o.reset($subrequest, {param}); insert(o);\}
 
 
-
+[then]add activity fact from alias '{alias}'=insert( {alias}.cloneRefObject($activity) );
 [then]add activity fact from request input=insert( $input.cloneRefObject($activity) );
 [then]add activity fact from request output=insertLogical( $output.cloneRefObject($activity) );
 [then]add activity fact from alias '{alias}';=insert( {alias}.cloneRefObject($activity) );
@@ -63,10 +62,9 @@
 [then]add ordinal {order} {value}=insertLogical( new OrdinalArgument( $activity, {order}, {value}) );
 [then]execute command {cmd} in working dir {wd}=insertLogical( new ListExecCommand($activity, {cmd}, {wd}, $options) );
 
-[then]activity succeeded=GenericActivitySucceeded activityStatus=new GenericActivitySucceeded($activity); insert(activityStatus);
-[then]activity failed with status {status}=insert( new GenericActivityFailed($activity, {status}) );
-[then]activity failed with message {status}=insert( new GenericActivityFailed($activity, {status}) );
-[then]activity failed with type {type:\w+} and message {message}=insert( new GenericActivityFailed($activity, {type}, {message}) );
+[then]activity succeeded=GenericActivityResultSucceeded activityStatus=new GenericActivityResultSucceeded($activity); insert(activityStatus);
+[then]activity failed with status {status}=insert( new GenericActivityResultFailed($activity, {status}) );
+[then]activity failed with message {status}=insert( new GenericActivityResultFailed($activity, {status}) );
 [then]set request status succeeded=RequestStatus requestStatus = new RequestSucceeded($request, "ok"); insert(requestStatus);
 [then]request succeeded=RequestStatus requestStatus = new RequestSucceeded($request, "ok"); insert(requestStatus);
 [then]subrequest succeeded=RequestStatus subrequestStatus = new RequestSucceeded($subrequest, "ok"); insert(subrequestStatus);
@@ -83,6 +81,14 @@
 [then]add request status parameter {param} as {type}=add parameter '{param}' to 'requestStatus' as {type};
 [then]add activity status parameter {param} as {type}=add parameter '{param}' to 'activityStatus' as {type};
 
+[then]insert artifact '{value}' as '{type}'=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
+[then]insert '{value}' as '{type}';=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
+[then]insert '{value}' as new {type:\w+};=insert( new {type}($activity, {value}) );
+[then]insertLogical '{value}' as '{type}';=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
+
+[then]insert {type:\w+} for request;=\{{type} o = new {type}(); o.setRequest($request); insert(o);\};
+[then]insert {type:\w+}=\{{type} o = new {type}(); o.setActivity($activity); insert(o);\};
+[then]insertLogical {type:\w+}=\{{type} o = new {type}(); o.setActivity($activity); insertLogical(o);\};
 
 [then]add parameter '{param}' to '{status}';=add parameter '{param}' to '{status}' as GenericAlias;
 [then]add logical parameter '{param}' to '{status}';=add logical parameter '{param}' to '{status}' as GenericAlias;
@@ -90,10 +96,3 @@
 [then]add parameter '{param}' to '{status}' as {type};=\{{type} o = new {type}(); o.reset({status}, {param}); insert(o);\};
 [then]add logical parameter '{param}' to '{status}' as {type};=\{{type} o = new {type}(); o.reset({status}, {param}); insertLogical(o);\};
 
-
-[then]insert artifact '{value}' as '{type}'=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
-[then]insert '{value}' as '{type}';=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
-[then]insertLogical '{value}' as '{type}';=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
-
-[then]insert {type:\w+}=\{{type} o = new {type}(); o.setActivity($activity); insert(o);\};
-[then]insertLogical {type:\w+}=\{{type} o = new {type}(); o.setActivity($activity); insertLogical(o);\};

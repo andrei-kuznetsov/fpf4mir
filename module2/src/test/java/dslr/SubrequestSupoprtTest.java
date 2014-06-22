@@ -7,9 +7,9 @@ import org.apache.log4j.Logger;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.junit.Test;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Alias;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestSucceeded;
 import utils.AgendaListener;

@@ -1,7 +1,7 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.KeyValueArgument;
 
 public class MvnOption_PomFile extends KeyValueArgument implements MvnOption {

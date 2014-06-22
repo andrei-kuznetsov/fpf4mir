@@ -4,7 +4,7 @@ import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 
 
 public class TestRunVerification_FileNamesOkTest {

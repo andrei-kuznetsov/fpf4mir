@@ -1,7 +1,7 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivitySucceeded;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 
 public class ActivitySucceededBase extends ActivityStatusBase implements ActivitySucceeded {
 

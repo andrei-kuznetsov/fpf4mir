@@ -1,0 +1,34 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+
+rule "Activity_New"
+		salience -10000
+	when
+		any activity request
+		RLCMain for request
+//		$dbg_list : java.util.LinkedList(  ) from collect ( Activity( request == $request ) )
+>		forall ( $a : Activity( request == $request )
+>				 ALCCompleted( activity == $a ) 
+>	             ActivityFailed( activity == $a ) 
+> 		         ActivityErrorFixed( activity == $a ) )
+	then
+//		System.out.println("## activities (" + $dbg_list.size() + "): " + new java.util.HashSet($dbg_list));
+>		insert ( createActivityForRequest($request, drools) );
+end
+
+rule "req phase main: fail request if activity cant be fixed (default)"
+		salience -10000
+	when
+		any activity request
+		activity for request
+		ALCCompleted for activity
+		$failure : ActivityFailed for activity
+		not ActivityErrorFixed for activity
+	then
+>		insertLogical(new RequestFailed($request, $failure.getMessage()));
+end

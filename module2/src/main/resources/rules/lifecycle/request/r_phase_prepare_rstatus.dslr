@@ -1,0 +1,22 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+rule "req prepare rstatus: activity status to request status (single fact)"
+		salience -10000
+	when 
+	 	any activity request
+	 	activity for request
+	 	ALCCompleted for activity
+	 	RLCPrepareRStatus for request
+	 	$rstatus : RequestStatus for request
+	 	$astatus : ActivityStatus for activity
+>		$value : Alias( astatus == $astatus )
+	then
+		add parameter '$value' to '$rstatus';
+end
+

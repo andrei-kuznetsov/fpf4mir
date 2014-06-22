@@ -31,12 +31,13 @@ import org.codehaus.jackson.map.ObjectMapper;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.DeploymentSession;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.DeploymentSession.QResult;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityResult;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Artifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.R;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericAlias;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.proxy.Utils.UploadedFileDetails;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqDeployExecutable;
@@ -139,10 +140,11 @@ public class Index {
 			} else if (key instanceof RequestFact) {
 				lst = session.getRequestRelatedFacts((RequestFact) key);
 			} else if (key instanceof ActivityStatus) {
-				lst = session
-						.getActivityStatusRelatedFacts((ActivityStatus) key);
+				lst = session.getActivityStatusRelatedFacts((ActivityStatus) key);
 			} else if (key instanceof RequestStatus) {
 				lst = session.getRequestStatusRelatedFacts((RequestStatus) key);
+			} else if (key instanceof ActivityResult) {
+				lst = session.getActivityResultRelatedFacts((ActivityResult) key);
 			}
 
 			tree.put(key, lst);

@@ -48,15 +48,18 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.ExecAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.AddFeatureHandler_Local;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.AddFeatureHandler_Local_Linux;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.DetectEncodingActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ExecActionHandler;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityResult;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.UserInfo;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.DataDirRoot;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestSubstatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.OS;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestStatusRelatedFact;
 
 public class DeploymentSession {
@@ -131,7 +134,12 @@ public class DeploymentSession {
 		actionsMap.put(ExecAction.class, new ExecActionHandler());
 		actionsMap.put(DetectEncodingAction.class,
 				new DetectEncodingActionHandler());
-		actionsMap.put(AddFeatureAction.class, new AddFeatureHandler_Local());
+		
+		if (OS.isWindows()){
+			actionsMap.put(AddFeatureAction.class, new AddFeatureHandler_Local());
+		} else {
+			actionsMap.put(AddFeatureAction.class, new AddFeatureHandler_Local_Linux());
+		}
 
 	}
 
@@ -263,6 +271,7 @@ public class DeploymentSession {
 		// for (String resFileName : drlFiles) addClassPathEntry(kbuilder,
 		// resFileName, ResourceType.DRL);
 		addClassPathEntry(kbuilder, "a_definitions.drl", ResourceType.DRL);
+		addClassPathEntry(kbuilder, "a_activity_states.drl", ResourceType.DRL);
 		addClassPathEntry(kbuilder, "a_functions.drl", ResourceType.DRL);
 		addClassPathEntry(kbuilder, "basic_actions.drl", ResourceType.DRL);
 		addClassPathEntry(kbuilder, "basic_queries.drl", ResourceType.DRL);
@@ -311,7 +320,7 @@ public class DeploymentSession {
 
 	private void addClassPathEntry(KnowledgeBuilder kbuilder,
 			String resFileName, ResourceType type) {
-		if (resFileName.indexOf('/') == -1) {
+		if (resFileName.indexOf('/') == -1 || resFileName.startsWith("rules/")) {
 			System.out.println("[+] Found classpath resource: " + resFileName);
 
 			try {
@@ -563,6 +572,10 @@ public class DeploymentSession {
 
 	public List<Object> getActivityStatusRelatedFacts(ActivityStatus key) {
 		return simpleListRequest(key, "Get activity status related facts");
+	}
+
+	public List<Object> getActivityResultRelatedFacts(ActivityResult key) {
+		return simpleListRequest(key, "Get activity result related facts");
 	}
 
 	public List<UserInfo> getUserInfoFacts(ActivityStatus key) {

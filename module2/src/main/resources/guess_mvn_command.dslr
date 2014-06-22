@@ -25,8 +25,8 @@ rule "Maven_DefaultTargets"
 		active activity 'MvnBuildActivity'
 		not MvnBuildTarget for activity
 	then
-		add ordinal 100 "clean"
-		add ordinal 200 "package"
+		add ordinal 500 "clean"
+		add ordinal 501 "package"
 end
 
 rule "Maven project dir"
@@ -53,16 +53,33 @@ rule "Maven_DfltOption_PomFile"
 		$pom : BuildFile for activity
 		// not MvnRootPom
 	then
-//		add keyvalue 50 "-f" $pom.getAbsolutePath();
 		add ordinal 50 "-f"
 		add ordinal 51 $pom.getAbsolutePath()
+end
+
+rule "Maven option: sources encoding"
+	when
+		active activity 'MvnBuildActivity'
+		$enc : SrcEncoding for activity
+	then
+		add ordinal 60 "-Dproject.build.sourceEncoding=" + $enc.getEncoding()
+end
+
+rule "Select source encoding"
+	when
+		active activity 'MvnBuildActivity'
+		$upe : UsrUseEncoding for activity
+		not RSK_JavacIncompatibleEncodings(encoding == $upe.encoding) for activity
+		not SrcEncoding for activity
+	then
+		insert '$upe.getEncoding()' as 'SrcEncoding';
 end
 
 rule "Select maven version"
 	when
 		active activity 'MvnBuildActivity'
 		not FeatureInUse(feature.name=="maven") for activity
->		$mvn : MavenFeature()
+		$mvn : any 'MavenFeature'
 		not RSKIncompatibleFeatureVersion(feature==$mvn) for activity
 	then
 >		insert( new GenericFeatureInUse($activity, $mvn) );
@@ -79,7 +96,7 @@ end
 rule "Detect maven version deadlock"
 	when
 		active activity 'MvnBuildActivity'
->		exists MavenFeature()
+		exists any 'MavenFeature'
 >		forall ($mvn : MavenFeature()
 >				RSKIncompatibleFeatureVersion(activity==$activity, feature==$mvn) )
 	then

@@ -127,7 +127,8 @@ rule "Can't build or run (no alternatives)"
 >		$exec : ExecFileArtifactList(size == 0, activity == $activity)
 >		$build : BuildFileArtifactList(size == 0, activity == $activity)
 	then
-		activity failed with type FR_NO_BUILD_OR_EXEC_FILES_FOUND and message "no build or executable files found"
+		activity failed with message "no build or executable files found"
+		insertLogical BuildErr_NoBuildOrExecFilesFound;
 end
 
 rule "Do build"

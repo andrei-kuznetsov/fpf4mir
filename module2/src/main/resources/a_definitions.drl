@@ -11,7 +11,7 @@ declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericExecutabl
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact /* java */ end
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactBase /* java */ end
 
-declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity /* java */ end
 
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase /* java */ end
 
@@ -32,42 +32,42 @@ declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction /* java
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.RequestScopedKnowledgeBase /* java */ end
 
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityErrorBase /* java */ end
-
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityWarningBase /* java */ end
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.RSKIncompatibleFeatureVersion /* java */ end
 
 ///////////////////////////// non-java /////////////////////////////////////
 
 declare DeployFolder extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactAliasBase end
 
-declare DeployExecutableActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity end
-declare DeployFolderActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity end
-declare BuildActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity end
-declare RunActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity end
+declare DeployExecutableActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity end
+declare DeployFolderActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity end
+declare BuildActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity end
+declare RunActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity end
 
 declare ReqDownloadHttp extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ReqNewActivityBase end
-declare DownloadHttpActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity end
+declare DownloadHttpActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity end
 
 
 declare ReqExtract extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ReqNewActivityBase end
-declare ExtractActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity end
+declare ExtractActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity end
 
 declare ReqRunJava extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ReqNewActivityBase end
-declare RunJavaActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity end
+declare RunJavaActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity end
 declare JavaExecutableFileArtifact extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecutableFileArtifact end
 
 declare ReqDeployFolder extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ReqNewActivityBase end
 
 declare ReqGuessRunExecutable extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ReqNewActivityBase end
-declare GuessRunExecutableActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity end
+declare GuessRunExecutableActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity end
 declare ExecArtifactCandidate extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FileArtifactBase end
 declare ExecFileArtifactList extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FileArtifactListBase end
 declare ExecFileArtifactListAlias extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.AliasBase end
 
 declare ReqGuessBuildFile extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ReqNewActivityBase end
-declare GuessBuildFileActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity end
+declare GuessBuildFileActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity end
 
 declare ReqMvnBuild extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ReqNewActivityBase end
-declare MvnBuildActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity end
+declare MvnBuildActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity end
 
 declare BuildFileCandidate extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FileArtifactBase end
 declare BuildFileArtifactList extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FileArtifactListBase end
@@ -97,3 +97,21 @@ declare RunFormat_Rest extends RunFormat end
 declare RunType_Java extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
 declare Run_JavaOptionsReady extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
 declare Run_AppOptionsReady extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
+
+
+declare UsrUseEncoding extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.RequestScopedKnowledgeBase
+	encoding: String
+end
+
+declare RSK_JavacIncompatibleEncodings extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.RequestScopedKnowledgeBase
+	encoding: String
+end
+
+declare MvnWarn_NoFileEncoding extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityWarningBase end
+
+declare BuildErr_NoBuildOrExecFilesFound extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityErrorBase end
+
+declare ActivityToActivityStatusCopy
+	activity : ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity
+	value : ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityRelatedFact
+end

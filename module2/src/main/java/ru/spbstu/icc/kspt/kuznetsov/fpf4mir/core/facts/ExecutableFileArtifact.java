@@ -2,6 +2,8 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts;
 
 import java.io.File;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+
 public class ExecutableFileArtifact extends FileArtifact{
 	/**
 	 * 

@@ -1,0 +1,30 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+
+rule "activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy)"
+		salience -10000
+	when
+		any activity
+		$astatus : ActivityStatus for activity
+		ALCPrepareAStatus for activity
+		ActivityToActivityStatusCopy($value : value) for activity 
+	then
+		add parameter '$value' to '$astatus';
+end
+
+rule "activity prepare astatus: ActivityResult to ActivityStatus (single fact)"
+		salience -10000
+	when
+		any activity
+		ALCPrepareAStatus for activity
+		$astatus : ActivityStatus for activity
+		$aresult : ActivityResult for activity
+>		$value : Alias(aresult == $aresult)
+	then
+		add parameter '$value' to '$astatus';
+end

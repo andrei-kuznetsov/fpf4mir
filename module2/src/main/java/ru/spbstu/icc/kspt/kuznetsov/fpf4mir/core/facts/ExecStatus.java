@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.ActionStatusBase;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 
 public class ExecStatus extends ActionStatusBase implements ActionStatus {
 	/**

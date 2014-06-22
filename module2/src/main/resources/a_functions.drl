@@ -21,3 +21,20 @@ function FileArtifact getTopmost(FileArtifactList list){
 	
 	return topmost;
 }
+
+function Object createActivityForRequest(ReqNewActivity request, org.drools.spi.KnowledgeHelper drools) {
+	String pkg = request.getClass().getPackage().toString();
+	String type = request.getClass().getSimpleName();
+	type = type.replaceAll("ReqNew","").replaceAll("Req", "") + "Activity";
+	
+	// TODO: package name?
+	pkg = "defaultpkg";
+	System.out.println("## pkg: " + pkg);
+	System.out.println("## type: " + type);
+	
+	org.drools.definition.type.FactType factType = drools.getKnowledgeRuntime().getKnowledgeBase().getFactType(pkg, type);
+	Object fact = factType.newInstance();
+	factType.set(fact, "request", request);
+	
+	return fact;
+}

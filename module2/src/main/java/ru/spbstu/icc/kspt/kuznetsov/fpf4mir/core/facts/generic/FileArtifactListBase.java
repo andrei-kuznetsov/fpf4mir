@@ -3,9 +3,9 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic;
 import java.io.File;
 import java.util.List;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifactList;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 
 public class FileArtifactListBase extends FileArtifactList{
 

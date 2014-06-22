@@ -38,11 +38,11 @@ rule "Propose mvn compatible version for goldin copy plugin"
 	when
 		analyze activity 'MvnBuildActivity'
 		$err : MvnErr_GoldinCopyPlugin_RepositorySystem for activity
-		not RSK_MvnIncompatibleVersion(featureVersion=="3.0.4") for activity
-		not ProposedMavenVersion(version == "3.0.4") for activity
+		not RSK_MvnIncompatibleVersion(featureVersion.startsWith("3.0")) for activity
+		not ProposedMavenVersion(version == "3.0") for activity
 	then
-		add feature action 'maven' version '3.0.4';
->		insert( new ProposedMavenVersion($activity, "3.0.4") );
+		add feature action 'maven' version '3.0';
+>		insert( new ProposedMavenVersion($activity, "3.0") );
 end
 
 rule "Mvn version fixed for GoldinCopyPlugin"
@@ -50,7 +50,7 @@ rule "Mvn version fixed for GoldinCopyPlugin"
 		analyze activity 'MvnBuildActivity'
 		$err : MvnErr_GoldinCopyPlugin_RepositorySystem for activity
 		$prop_mvn : ProposedMavenVersion for activity
->		$mvn : MavenFeature(version == $prop_mvn.version)
+>		$mvn : MavenFeature(version.startsWith($prop_mvn.version))
 	then
 		error '$err' fixed
 end

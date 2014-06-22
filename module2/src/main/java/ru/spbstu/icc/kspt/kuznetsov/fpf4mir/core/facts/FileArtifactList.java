@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.drools.RuntimeDroolsException;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FPFCloneable;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithName;

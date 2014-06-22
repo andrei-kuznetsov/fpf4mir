@@ -1,48 +1,13 @@
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 
 
-rule "Activity_New"
-	salience -10000
-	when
-		$rr : ReqNewActivity(  )
-		$list : java.util.LinkedList(  ) from collect ( Activity( request == $rr ) )
-		forall ( $b : Activity( request == $rr )
-	             ActivityFailed( activity == $b ) 
- 		         ActivityErrorFixed( activity == $b ) )
-	then
-		String pkg = $rr.getClass().getPackage().toString();
-		String type = $rr.getClass().getSimpleName();
-		type = type.replaceAll("ReqNew","").replaceAll("Req", "") + "Activity";
-		
-		// TODO: package name?
-		pkg = "defaultpkg";
-		System.out.println("## pkg: " + pkg);
-		System.out.println("## type: " + type);
-		System.out.println("## activities (" + $list.size() + "): " + new java.util.HashSet($list));
-		
-		org.drools.definition.type.FactType factType = drools.getKnowledgeRuntime().getKnowledgeBase().getFactType(pkg, type);
-		Object fact = factType.newInstance();
-		factType.set(fact, "request", $rr);
-		insert( fact );
-end
-
-rule "Activity Request Failure Status"
-	salience -10001 // salience shall be less than for rule "Activity_New"
-	when
-		$request : ReqNewActivity( )
-		$activity : Activity( request == $request )
-		ActivityCompleted( activity == $activity)
-		$failure : ActivityFailed( activity == $activity )
-		not ActivityErrorFixed(activity == $activity)
-	then
-		insertLogical(new RequestFailed($request, $failure.getMessage()));
-end
-
 rule "Assert user action ref (propagation)"
+		salience 10000
 	when
 		$activity : Activity( )
 		$ua : UserAction( activity == $activity )
@@ -52,16 +17,20 @@ rule "Assert user action ref (propagation)"
 end
 
 rule "Suspend activity for user action (propagation)"
+		salience -10000
 	when
 		$activity : Activity( )
-		$uar : UserActionRef( activity == $activity )
+		exists UserAction( activity == $activity )
 	then
-		GenericActivitySuspended activityStatus = new GenericActivitySuspended($activity, "Activity suspended due to user action: " + $uar);
+		System.out.println("**** activity:" + $activity);
+		System.out.println("**** user action(s)");
+		
+		GenericActivitySuspended activityStatus = new GenericActivitySuspended($activity, "Activity suspended due to user action(s) ");
 		insertLogical(activityStatus);
-		insertLogical(new GenericAlias().reset(activityStatus, $uar));
 end
 
 rule "Suspend request for suspended activity (propagation)"
+		salience -10000
 	when
 		$request : ReqNewActivity( )
 		$activity : Activity( request == $request )
@@ -71,10 +40,14 @@ rule "Suspend request for suspended activity (propagation)"
 end
 
 rule "Suspend activity for suspended subrequest (propagation)"
+		salience -10000
 	when
 		$activity : Activity(  )
 		$request : ReqNewActivity( parentActivity == $activity )
 		exists RequestSuspended( request == $request )
 	then
+		System.out.println("**** activity:" + $activity);
+		System.out.println("**** request:" + $request);
+		
 		insertLogical(new GenericActivitySuspended($activity, "Suspended because subrequest is suspended"));
 end

@@ -2,8 +2,8 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env;
 
 import java.util.UUID;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 
 public class TmpDirRoot extends FolderArtifact {
 

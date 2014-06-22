@@ -25,6 +25,7 @@ public class AgendaDebugListener implements WorkingMemoryEventListener {
 			
 		rule = "'" + rule + "'";
 		log.debug(rule + " inserted: " + event.getObject());
+		rule = null;
 	}
 
 	@Override

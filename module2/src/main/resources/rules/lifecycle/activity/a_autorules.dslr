@@ -1,0 +1,36 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+
+rule "Activity-to-ActivityStatus facts (UserActionRef)"
+		salience 10000
+	when
+		any activity
+		// any phase
+		$value : UserActionRef for activity
+	then
+>		insertLogical(new ActivityToActivityStatusCopy($activity, $value));
+end
+
+rule "Activity-to-ActivityStatus facts (UserInfo)"
+		salience 10000
+	when
+		any activity
+		// any phase
+		$value : UserInfo for activity
+	then
+>		insertLogical(new ActivityToActivityStatusCopy($activity, $value));
+end
+
+rule "convert (ALCWork || ALCAnalyze) to main"
+		salience 10000
+	when
+		any activity
+		(ALCWork for activity or
+		ALCAnalyze for activity)
+	then
+		insertLogical ALCMain
+end

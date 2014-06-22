@@ -2,8 +2,8 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic;
 
 import java.util.Date;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.UserInfo;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 
 public class UserInfoBase<U> extends ActivityRelatedFactBase implements UserInfo<U>{
 	/**

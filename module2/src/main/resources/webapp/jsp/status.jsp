@@ -42,6 +42,10 @@
 					url = "/rest/useraction/UserActionSelectRunFormat/" + ua.getRefId();
 					description = "Select run command format";
 					break;
+				case "defaultpkg.UserActionSelectEncoding":
+					url = "/rest/useraction/UserActionSelectEncoding/" + ua.getRefId();
+					description = "Select sources encoding";
+					break;
 				default:
 					url = null;
 				}

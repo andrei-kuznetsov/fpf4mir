@@ -1,0 +1,61 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.sources.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+
+declare JavacErr_UnmappableCharacter extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityErrorBase end
+declare UserActionSelectEncoding extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction end
+
+rule "Maven_Warn_NoFileEncoding"
+	when
+		analyze activity 'MvnBuildActivity'
+>		ExecStatus( activity == $activity,
+>					succeeded == false,
+>					containsString("[WARNING] File encoding has not been set") )
+	then
+		insert MvnWarn_NoFileEncoding
+end
+
+rule "Javac Err UnmappableCharacter Detected"
+	when
+		analyze activity 'MvnBuildActivity'
+>		ExecStatus( activity == $activity,
+>					$errLine : getSingleLine("error: unmappable character for encoding"), 
+>                   $errLine != null )
+	then
+		insert '$errLine' as 'JavacErr_UnmappableCharacter';
+end
+
+rule "Javac Err Incompatible Encoding Detected"
+	when
+		analyze activity 'MvnBuildActivity'
+		JavacErr_UnmappableCharacter for activity
+		$enc :  SrcEncoding for activity
+	then
+		insert '$enc.getEncoding()' as new RSK_JavacIncompatibleEncodings;
+end
+
+rule "Javac request encoding from user"
+	when
+		analyze activity 'MvnBuildActivity'
+		JavacErr_UnmappableCharacter for activity
+		forall ($upe : UsrUseEncoding for activity
+				RSK_JavacIncompatibleEncodings(encoding == $upe.encoding) for activity )
+	then
+		// user action to choose the correct encoding for the build
+		def user action UserActionSelectEncoding
+		add user action
+end
+
+rule "Javac encoding error fixed"
+	when
+		analyze activity 'MvnBuildActivity'
+		$err : JavacErr_UnmappableCharacter for activity
+		$upe : UsrUseEncoding for activity
+		not RSK_JavacIncompatibleEncodings(encoding == $upe.encoding) for activity
+	then
+		error '$err' fixed
+end
+

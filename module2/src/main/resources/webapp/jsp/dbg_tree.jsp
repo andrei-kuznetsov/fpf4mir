@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity"%>
+<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.Stack"%>

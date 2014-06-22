@@ -1,0 +1,20 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+rule "activity main (auto): read from subrequest (single fact)"
+		salience 10000
+	when 
+	 	any activity
+	 	ALCMain for activity
+	 	subrequest 'ReqNewActivity' for activity
+		subrequest completed
+	 	$subrequestStatus : RequestStatus for subrequest
+>		$value : Alias(rstatus == $subrequestStatus)
+	then
+		add activity fact from alias '$value'
+end
+

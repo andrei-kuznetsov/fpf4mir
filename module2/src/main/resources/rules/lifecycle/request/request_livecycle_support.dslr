@@ -1,0 +1,38 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+rule "Request first lifecycle phase"
+		salience -20000
+	when 
+		any activity request
+		not RequestLifeCycleState for request
+	then
+ 		insert RLCMain for request;
+end
+
+rule "Request prepare rstatus facts"
+	salience -20000
+	when
+		any activity request
+		RequestStatus for request
+	 	$aa : RLCMain for request
+	 	not RLCPrepareRStatus for request
+ 	then
+>		retract($aa);
+ 		insert RLCPrepareRStatus for request;
+end
+
+rule "Request completed"
+	salience -20000
+	when
+		any activity request
+	 	$aa : RLCPrepareRStatus for request
+	 	not RLCCompleted for request
+ 	then
+>		retract($aa);
+ 		insert RLCCompleted for request;
+end

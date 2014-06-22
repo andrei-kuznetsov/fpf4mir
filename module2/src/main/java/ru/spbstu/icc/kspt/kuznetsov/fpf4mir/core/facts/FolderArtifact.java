@@ -5,6 +5,8 @@ import java.io.File;
 import org.apache.tools.ant.DirectoryScanner;
 import org.drools.RuntimeDroolsException;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+
 public class FolderArtifact extends Artifact {
 	/**
 	 * 

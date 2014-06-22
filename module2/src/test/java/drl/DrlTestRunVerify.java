@@ -13,8 +13,8 @@ import org.drools.runtime.StatefulKnowledgeSession;
 import org.junit.Test;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActionStatus;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecStatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.Dataset;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.Dataset_FileArtifactList;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.Dataset_FileArtifactList4Run;

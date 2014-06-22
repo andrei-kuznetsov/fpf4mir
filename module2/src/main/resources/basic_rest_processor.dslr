@@ -31,7 +31,7 @@ end
 rule "Run exec command - invocation format"
 	when
 		any activity
-		active subrequest 'ReqRun' for activity
+		subrequest 'ReqRun' for activity
 		$rf : RunFormat for activity
 	then
 		add subrequest parameter '$rf'

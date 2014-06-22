@@ -30,7 +30,7 @@ public class DrlParserTest extends TestCase {
     	String dslr = "/guess_run_executable.dslr";
 		printExpandedRule(dslr);
     }
-
+    
     public void testExpandDRL_build() throws Exception {
     	String dslr = "/build.dslr";
 		printExpandedRule(dslr);
@@ -63,6 +63,16 @@ public class DrlParserTest extends TestCase {
 
     public void testExpandDRL_run_java() throws Exception {
     	String dslr = "/run_java.dslr";
+		printExpandedRule(dslr);
+    }
+
+    public void testExpandDRL_fixmavenbuild_unmappablecharacter() throws Exception {
+    	String dslr = "/fixmavenbuild_unmappablecharacter.dslr";
+		printExpandedRule(dslr);
+    }
+    
+    public void testExpandDRL_request_livecycle_support() throws Exception {
+    	String dslr = "/rules/lifecycle/request/request_livecycle_support.dslr";
 		printExpandedRule(dslr);
     }
     
