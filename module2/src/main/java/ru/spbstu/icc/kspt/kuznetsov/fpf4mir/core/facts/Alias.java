@@ -1,8 +1,8 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityResultRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityStatusRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestRelatedFact;
@@ -34,14 +34,4 @@ public interface Alias<U> extends RequestRelatedFact, RequestStatusRelatedFact, 
 
 	public U cloneRefObject(Activity newActivity);
 	public U cloneRefObject(Activity newActivity, String newName);
-	/*
-	public void reset(RequestStatus rstatus, U object);
-	public void reset(ActivityStatus astatus, U object);
-	public void reset(RequestFact request, U object);
-	
-	public void reset(RequestStatus rstatus, String name, U object);
-	public void reset(ActivityStatus astatus, String name, U object);
-	public void reset(RequestFact request, String name, U object);
-	*/
-	//public void reset(RequestFact request, RequestStatus rstatus, String name, U object);
 }

@@ -11,6 +11,7 @@ import org.drools.event.rule.WorkingMemoryEventListener;
 public class AgendaDebugListener implements WorkingMemoryEventListener {
 
 	private static final Logger log;
+	public transient Boolean doDebug = false;
 	
 	static {
 		log = Logger.getLogger(AgendaDebugListener.class);
@@ -25,6 +26,15 @@ public class AgendaDebugListener implements WorkingMemoryEventListener {
 			
 		rule = "'" + rule + "'";
 		log.debug(rule + " inserted: " + event.getObject());
+		
+		if (doDebug){
+			try {
+				doDebug.wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		rule = null;
 	}
 

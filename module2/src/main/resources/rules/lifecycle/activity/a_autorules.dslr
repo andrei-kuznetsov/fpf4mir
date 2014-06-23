@@ -4,8 +4,17 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 
+rule "Assert user action ref (propagation)"
+		salience 10000
+	when
+		any activity
+		// any phase
+		$ua : UserAction for activity
+	then
+		insertLogical '$ua' as 'UserActionRef';
+end
 
-rule "Activity-to-ActivityStatus facts (UserActionRef)"
+rule "ActivityToActivityStatusCopy facts (UserActionRef)"
 		salience 10000
 	when
 		any activity
@@ -15,7 +24,7 @@ rule "Activity-to-ActivityStatus facts (UserActionRef)"
 >		insertLogical(new ActivityToActivityStatusCopy($activity, $value));
 end
 
-rule "Activity-to-ActivityStatus facts (UserInfo)"
+rule "ActivityToActivityStatusCopy facts (UserInfo)"
 		salience 10000
 	when
 		any activity

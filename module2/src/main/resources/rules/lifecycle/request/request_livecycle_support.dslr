@@ -18,7 +18,7 @@ rule "Request prepare rstatus facts"
 	salience -20000
 	when
 		any activity request
-		RequestStatus for request
+		RequestFinalStatus for request
 	 	$aa : RLCMain for request
 	 	not RLCPrepareRStatus for request
  	then

@@ -43,7 +43,7 @@ rule "Default activity analytics (success)"
 		any activity
 		ActivityResultSucceeded for activity
 		ALCAnalyze for activity
-	 	not ActivityStatus for activity
+	 	not ActivityFinalStatus for activity
 	 	not ActionFact for activity
  	then
  		insert GenericActivitySucceeded
@@ -55,7 +55,7 @@ rule "Default activity analytics (failure)"
 		any activity
 		ActivityResultFailed for activity
 		ALCAnalyze for activity
-	 	not ActivityStatus for activity
+	 	not ActivityFinalStatus for activity
 	 	not ActionFact for activity
  	then
  		insert GenericActivityFailed
@@ -65,7 +65,7 @@ rule "Activity prepare astatus facts"
 	salience -20000
 	when
 		any activity
-	 	ActivityStatus for activity //?? do we need this ??
+	 	ActivityFinalStatus for activity //?? do we need this ??
 	 	$aa : ALCAnalyze for activity
 	 	not ALCPrepareAStatus for activity
 	 	not ActionFact for activity

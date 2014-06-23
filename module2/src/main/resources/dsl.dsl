@@ -65,9 +65,8 @@
 [then]activity succeeded=GenericActivityResultSucceeded activityStatus=new GenericActivityResultSucceeded($activity); insert(activityStatus);
 [then]activity failed with status {status}=insert( new GenericActivityResultFailed($activity, {status}) );
 [then]activity failed with message {status}=insert( new GenericActivityResultFailed($activity, {status}) );
-[then]set request status succeeded=RequestStatus requestStatus = new RequestSucceeded($request, "ok"); insert(requestStatus);
-[then]request succeeded=RequestStatus requestStatus = new RequestSucceeded($request, "ok"); insert(requestStatus);
-[then]subrequest succeeded=RequestStatus subrequestStatus = new RequestSucceeded($subrequest, "ok"); insert(subrequestStatus);
+[then]request succeeded=RequestFinalStatus requestStatus = new RequestSucceeded($request, "ok"); insert(requestStatus);
+[then]subrequest succeeded=RequestFinalStatus subrequestStatus = new RequestSucceeded($subrequest, "ok"); insert(subrequestStatus);
 
 [then]add {type:\w+} as request status=add request status parameter $artifact as Generic{type}Alias
 
@@ -84,7 +83,9 @@
 [then]insert artifact '{value}' as '{type}'=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
 [then]insert '{value}' as '{type}';=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
 [then]insert '{value}' as new {type:\w+};=insert( new {type}($activity, {value}) );
-[then]insertLogical '{value}' as '{type}';=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
+[then]insertLogical '{value}' as '{type}';=\{{type} o = new {type}(); o.reset($activity, {value}); insertLogical(o);\};
+
+[then]insertLogical '{value}' as '{type}' for request;=\{{type} o = new {type}(); o.reset($request, {value}); insertLogical(o);\};
 
 [then]insert {type:\w+} for request;=\{{type} o = new {type}(); o.setRequest($request); insert(o);\};
 [then]insert {type:\w+}=\{{type} o = new {type}(); o.setActivity($activity); insert(o);\};

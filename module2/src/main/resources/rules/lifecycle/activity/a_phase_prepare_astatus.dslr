@@ -10,19 +10,19 @@ rule "activity prepare astatus: activity to activity status (single fact)(Activi
 		salience -10000
 	when
 		any activity
-		$astatus : ActivityStatus for activity
+		$astatus : ActivityFinalStatus for activity
 		ALCPrepareAStatus for activity
 		ActivityToActivityStatusCopy($value : value) for activity 
 	then
 		add parameter '$value' to '$astatus';
 end
 
-rule "activity prepare astatus: ActivityResult to ActivityStatus (single fact)"
+rule "activity prepare astatus: ActivityResult to ActivityFinalStatus (single fact)"
 		salience -10000
 	when
 		any activity
 		ALCPrepareAStatus for activity
-		$astatus : ActivityStatus for activity
+		$astatus : ActivityFinalStatus for activity
 		$aresult : ActivityResult for activity
 >		$value : Alias(aresult == $aresult)
 	then

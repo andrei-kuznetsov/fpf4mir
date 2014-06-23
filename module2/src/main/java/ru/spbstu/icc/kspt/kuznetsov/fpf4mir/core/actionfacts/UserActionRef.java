@@ -54,4 +54,9 @@ public final class UserActionRef extends ActivityRelatedFactBase implements Acti
 		this.name = name;
 	}
 	
+	public UserActionRef reset(Activity activity, UserAction refObject){
+		super.reset(activity);
+		this.refObject = refObject;
+		return this;
+	}
 }

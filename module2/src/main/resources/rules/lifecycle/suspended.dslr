@@ -1,0 +1,79 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+rule "suspend (auto): suspend request for suspended activity"
+		salience 10000
+	when 
+		any activity request
+	 	RLCMain for request
+	 	activity for request
+	 	ALCMain for activity
+	 	exists ActivitySuspended for activity
+	then
+		insertLogical '"Suspended because nested activity is suspended"' as 'RequestSuspended' for request;
+//>		insertLogical(new RequestSuspended($request, "Suspended because nested activity is suspended")); 
+end
+
+rule "suspend (auto): suspend activity for subrequest"
+		salience 10000
+	when 
+		active activity 'Activity'
+	 	subrequest for activity
+	 	RLCMain for subrequest
+	 	exists RequestSuspended for subrequest
+	then
+		insertLogical '"Suspended because subrequest is suspended"' as 'GenericActivitySuspended';
+//>		insertLogical(new GenericActivitySuspended($activity, "Suspended because subrequest is suspended"));
+end
+
+rule "Suspend activity for user action (propagation)"
+		salience 10000
+	when
+		active activity 'Activity'
+		exists UserAction for activity
+	then
+>		System.out.println("**** activity:" + $activity);
+>		System.out.println("**** user action(s)");
+		insertLogical '"Activity suspended due to user action(s) "' as 'GenericActivitySuspended';
+//>		insertLogical(new GenericActivitySuspended($activity, "Activity suspended due to user action(s) "));
+end
+
+rule "suspended activity: activity to activity status (single fact)(ActivityToActivityStatusCopy)"
+		salience 10000
+	when
+		any activity
+		$astatus : ActivityRuntimeStatus for activity
+		ActivityToActivityStatusCopy($value : value) for activity 
+	then
+		add logical parameter '$value' to '$astatus';
+end
+
+rule "suspended activity: activity to parent request (single fact)"
+		salience 10000
+	when 
+	 	any activity request
+	 	activity for request
+		// any phase
+	 	$astatus : ActivityRuntimeStatus for activity
+	 	$rstatus : RequestRuntimeStatus for request
+>		$value : Alias(astatus == $astatus)
+	then
+		add logical parameter '$value' to '$rstatus';
+end
+
+rule "suspended activity: request to parent activity (single fact)"
+		salience 10000
+	when 
+	 	any activity
+		// any phase
+	 	subrequest 'ReqNewActivity' for activity
+	 	$subrequestStatus : RequestRuntimeStatus for subrequest
+>		$value : Alias(rstatus == $subrequestStatus)
+	then
+		add logical activity fact from alias '$value';
+end

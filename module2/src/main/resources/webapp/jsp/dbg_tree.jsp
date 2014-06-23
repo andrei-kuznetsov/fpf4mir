@@ -24,6 +24,10 @@
 			<a id="expandList">Expand All</a> <a id="collapseList">Collapse
 				All</a>
 		</div>
+		
+		<br>
+		<a href="">debug on</a> <a href="">debug off</a> <a href="">debug step</a>
+		
 		<ol id="expList">
 
 			<%

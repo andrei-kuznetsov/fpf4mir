@@ -6,19 +6,6 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 
 /*
-rule "Request status to parent activity (single fact)"
-		salience 10000
-	when 
-	 	any activity
-		subrequest 'ReqNewActivity' for activity
-	 	$subrequestStatus : RequestStatus for subrequest
->		$output : Alias( rstatus == $subrequestStatus )
-	then
->		insertLogical($output.cloneRefObject($activity));
-end
-*/
-
-/*
 rule "Activity to request (RequestScopedKnowledge)"
 		salience 10000
 	when 

@@ -31,5 +31,9 @@ public class GenericActivitySuspended extends ActivityStatusBase implements Acti
 		this.message = message;
 	}
 
-
+	public GenericActivitySuspended reset(Activity activity, String message){
+		super.reset(activity);
+		this.message = message;
+		return this;
+	}
 }

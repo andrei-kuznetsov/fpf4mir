@@ -13,8 +13,8 @@ rule "req prepare rstatus: activity status to request status (single fact)"
 	 	activity for request
 	 	ALCCompleted for activity
 	 	RLCPrepareRStatus for request
-	 	$rstatus : RequestStatus for request
-	 	$astatus : ActivityStatus for activity
+	 	$rstatus : RequestFinalStatus for request
+	 	$astatus : ActivityFinalStatus for activity
 >		$value : Alias( astatus == $astatus )
 	then
 		add parameter '$value' to '$rstatus';
