@@ -19,7 +19,7 @@ rule "suspend (auto): suspend request for suspended activity"
 //>		insertLogical(new RequestSuspended($request, "Suspended because nested activity is suspended")); 
 end
 
-rule "suspend (auto): suspend activity for subrequest"
+rule "suspend (auto): suspend activity for suspended subrequest"
 		salience 10000
 	when 
 		active activity 'Activity'
@@ -31,10 +31,11 @@ rule "suspend (auto): suspend activity for subrequest"
 //>		insertLogical(new GenericActivitySuspended($activity, "Suspended because subrequest is suspended"));
 end
 
-rule "Suspend activity for user action (propagation)"
+rule "Suspend activity for user action"
 		salience 10000
 	when
-		active activity 'Activity'
+		any activity
+	 	ALCMain for activity
 		exists UserAction for activity
 	then
 >		System.out.println("**** activity:" + $activity);

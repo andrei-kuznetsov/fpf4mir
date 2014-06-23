@@ -28,3 +28,14 @@ rule "activity prepare astatus: ActivityResult to ActivityFinalStatus (single fa
 	then
 		add parameter '$value' to '$astatus';
 end
+
+rule "activity prepare astatus: activity to request (single fact)(RequestScopedKnowledge)"
+		salience -10000
+	when
+		any activity request
+		activity for request
+		ALCPrepareAStatus for activity
+		$rsk : RequestScopedKnowledge for activity
+	then
+		add parameter '$rsk' to '$request';
+end

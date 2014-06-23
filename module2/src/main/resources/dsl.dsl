@@ -74,7 +74,7 @@
 [then]add activity status parameter '{param}' with name "{name}";=add alias 'activityStatus' '{param}'  '"{name}"';
 [then]add activity status parameter '{param}' with name '{name}';=add alias 'activityStatus' '{param}'  '{name}';
 
-[then]add alias '{subj}' '{obj}'  '{name}';=\{GenericAlias o = new GenericAlias(); o.reset({subj}, {name}, {obj}); insert(o);\}
+[then]add alias '{subj}' '{obj}' '{name}';=\{GenericAlias o = new GenericAlias(); o.reset({subj}, {name}, {obj}); insert(o);\}
 
 
 [then]add request status parameter {param} as {type}=add parameter '{param}' to 'requestStatus' as {type};
