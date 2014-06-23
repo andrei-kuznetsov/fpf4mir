@@ -7,6 +7,7 @@
 [when]any activity request=$request: ReqNewActivity(  )
 [when]any activity '{type}'=$activity: {type}(  )
 [when]any activity=$activity: Activity(  )
+[when]any '{type}\({whatever}\)'={type}({whatever})
 [when]any '{type}'={type}(  )
 
 [when]active activity '{activity}'=$activity:{activity}(  ) and ALCWork( activity == $activity )

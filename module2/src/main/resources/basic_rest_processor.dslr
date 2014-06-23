@@ -31,6 +31,7 @@ end
 rule "Run exec command - invocation format"
 	when
 		any activity
+		exists RestRequestCommand for activity
 		subrequest 'ReqRun' for activity
 		$rf : RunFormat for activity
 	then

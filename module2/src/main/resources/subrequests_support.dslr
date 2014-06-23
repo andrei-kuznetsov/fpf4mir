@@ -5,17 +5,6 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 
-/*
-rule "Activity to request (RequestScopedKnowledge)"
-		salience 10000
-	when 
-	 	any activity request
-	 	activity for request
-	 	$rsk : RequestScopedKnowledge for activity
-	then
-		add logical parameter '$rsk' to '$request';
-end
-*/
 
 rule "Propagate subrequest failure"
 		salience -10000

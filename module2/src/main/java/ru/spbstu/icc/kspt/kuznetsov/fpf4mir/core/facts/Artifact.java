@@ -24,20 +24,6 @@ public class Artifact implements Serializable, FPFCloneable, ActivityRelatedFact
 	
 	private File _fileCache = null;
 	
-	/*protected Artifact(Activity activity, File file) {
-		this.activity = activity;
-		this.file = file;
-	}
-
-	protected Artifact(){
-		this(null, null);
-	}
-	
-	protected Artifact(Activity activity) {
-		this(activity, null);
-	}*/
-	
-
 	protected Artifact(){
 	}
 	

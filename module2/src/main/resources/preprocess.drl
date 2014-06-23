@@ -4,25 +4,6 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
 
-/*
-rule "Propose build command at ReqNewOriginalArtifact_handler.drl"
-	when
-		$r : ReqNewDeployment(  )
-		$buildCommands : java.util.LinkedList( size > 1 ) from collect ( BuildCommand() )
-		not ExecutableFileArtifact()
-	then
-		insertLogical( new RequestSubstatusBuildProposal($r, $buildCommands) );
-end
-*/
-
-/* rule "DefaultScratchDir"
-	when
-		not DefaultScratchDir()
-		$dd : DataDirRoot(  )
-	then
-		insert(new DefaultScratchDir($dd));
-end */
-
 rule "DefaultTmpDir"
 	when
 		not TmpDirRoot( )

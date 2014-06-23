@@ -70,9 +70,19 @@ public class DrlParserTest extends TestCase {
     	String dslr = "/fixmavenbuild_unmappablecharacter.dslr";
 		printExpandedRule(dslr);
     }
+
+    public void testExpandDRL_guess_mvn_command() throws Exception {
+    	String dslr = "/guess_mvn_command.dslr";
+		printExpandedRule(dslr);
+    }
     
     public void testExpandDRL_request_livecycle_support() throws Exception {
     	String dslr = "/rules/lifecycle/request/request_livecycle_support.dslr";
+		printExpandedRule(dslr);
+    }
+
+    public void testExpandDRL_ut_mirex_audio_ch_est() throws Exception {
+    	String dslr = "/rules/unittests/ut_mirex_audio_ch_est.dslr";
 		printExpandedRule(dslr);
     }
     

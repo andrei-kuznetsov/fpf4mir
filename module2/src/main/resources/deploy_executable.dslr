@@ -10,6 +10,7 @@ declare DeployExecOption_Build extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core
 declare DeployExecOption_Run extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
 declare DeployExecOption_Autodetect extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
 
+declare ExecutableUnitTestsPassed extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
 
 // ----------------------------------- Output parameters ---------------------------------------
 
@@ -18,6 +19,7 @@ rule "Eval DeployExecutableActivity succeeded"
 		active activity 'DeployExecutableActivity'
 		$exec : ExecutableFileArtifact for activity
 		$rf : RunFormat for activity
+		exists ExecutableUnitTestsPassed for activity
 	then
 		activity succeeded
 		add activity status parameter $exec as GenericAlias
@@ -150,4 +152,41 @@ rule "Guess RunFormat"
 		// user action to choose run format
 		def user action UserActionSelectRunFormat
 		add user action
+end
+
+rule "Do unit tests"
+	when
+		active activity 'DeployExecutableActivity'
+		$exec : ExecutableFileArtifact for activity
+		$rf : RunFormat_Mirex_Aud_ChEst for activity
+		not ExecutableUnitTestsPassed for activity
+	then
+		add subrequest 'ReqUTMirexAudChEst'
+		add subrequest parameter '$exec'
+		add subrequest parameter '$rf'
+		
+		insert artifact '"Running unit tests"' as 'GenericUserInfoMessage'
+end
+
+rule "Do unit tests passed"
+	when
+		active activity 'DeployExecutableActivity'
+		subrequest 'ReqUT' for activity
+		subrequest succeeded
+		// otherwce subrequest will fail the activity
+	then
+		insert ExecutableUnitTestsPassed
+		insert artifact '"Unit tests succeeded"' as 'GenericUserInfoMessage'
+end
+
+rule "(default) no unit tests"
+		salience -999
+	when
+		active activity 'DeployExecutableActivity'
+		not subrequest 'ReqUT' for activity
+		$exec : ExecutableFileArtifact for activity
+		$rf : RunFormat_Mirex_Aud_ChEst for activity
+		not ExecutableUnitTestsPassed for activity
+	then
+		insert ExecutableUnitTestsPassed
 end

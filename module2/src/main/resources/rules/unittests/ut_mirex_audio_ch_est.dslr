@@ -1,0 +1,56 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.java.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mirex.*;
+
+// ----------------------------------- Output parameters ---------------------------------------
+
+rule "Eval UTMirexAudChEstActivity succeeded"
+	when
+		active activity 'UTMirexAudChEstActivity'
+		subrequest 'ReqRun' for activity
+		subrequest succeeded
+	then
+		activity succeeded
+		insert artifact '"Unit tests succeeded"' as 'GenericUserInfoMessage'
+end
+
+// #############################################################################################
+
+rule "ut mirex audchest: assert ut dataset"
+	when
+		active activity 'UTMirexAudChEstActivity'
+		not FolderArtifact(name=="dataset_ut_mirex_audio_ch_est") for activity
+	then
+//		insert '"/home/andrei/OpenShift/git/fpf4mir/module2/src/test/resources/oma", "dataset_ut_mirex_audio_ch_est"' as 'ArtifactRef'
+		insert '"dataset_ut_mirex_audio_ch_est", "/home/andrei/OpenShift/datadir/cea1c11a-ff7b-4f6f-8974-d327f3ec544b/dataset_ut_mirex_audio_ch_est", ""' as 'FolderArtifact';
+end
+
+rule "ut mirex audchest: download ut dataset"
+	when
+		active activity 'UTMirexAudChEstActivity'
+		$aref : ArtifactRef(name=="dataset_ut_mirex_audio_ch_est") for activity
+	then
+		add subrequest 'ReqDeployFolder'
+		add subrequest parameter '$aref'
+end
+
+rule "ut mirex audchest: run on test dataset"
+	when
+		active activity 'UTMirexAudChEstActivity'
+		$exec : ExecutableFileArtifact for activity
+		$dataset : any 'FolderArtifact(name=="dataset_ut_mirex_audio_ch_est")'
+		$req : RunFormat for activity
+	then
+		add subrequest 'ReqRun'; 
+		add subrequest parameter '$exec'
+		add subrequest parameter '$req'
+		add subrequest parameter '$dataset' with name "dataset";
+end
+
