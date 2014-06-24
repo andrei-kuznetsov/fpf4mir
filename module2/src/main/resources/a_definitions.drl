@@ -35,6 +35,7 @@ declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityErrorBas
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityWarningBase /* java */ end
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.RSKIncompatibleFeatureVersion /* java */ end
 
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.TextFileArtifact /* java */ end
 ///////////////////////////// non-java /////////////////////////////////////
 
 declare DeployFolder extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FolderArtifactAliasBase end
@@ -119,3 +120,14 @@ end
 declare ReqUT extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ReqNewActivityBase end
 declare ReqUTMirexAudChEst extends ReqUT end
 declare UTMirexAudChEstActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity end
+
+declare ReqOutputVerification extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ReqNewActivityBase end
+declare ReqOVMirexAudChEst extends ReqOutputVerification end
+declare OVMirexAudChEstActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity end
+
+declare SrcDataFileArtifact extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FileArtifactBase end
+declare ResFileArtifact extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FileArtifactBase end
+
+declare Verified_FileArtifactList extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FileArtifactListBase end
+declare Result_FileArtifactList extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.FileArtifactListBase end
+

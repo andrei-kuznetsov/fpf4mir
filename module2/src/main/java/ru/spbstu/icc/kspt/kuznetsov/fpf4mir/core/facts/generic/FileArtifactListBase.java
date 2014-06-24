@@ -37,4 +37,11 @@ public class FileArtifactListBase extends FileArtifactList{
 		setName("default");
 		addAll(list);
 	}
+
+	public void reset(Activity activity, FileArtifactList list){
+		this.clear();
+		setActivity(activity);
+		setName("default");
+		addAll(list.list());
+	}
 }

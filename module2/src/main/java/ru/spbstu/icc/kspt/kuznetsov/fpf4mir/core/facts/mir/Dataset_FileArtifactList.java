@@ -9,17 +9,13 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 public class Dataset_FileArtifactList extends FileArtifactList {
 	private static final long serialVersionUID = 1L;
 	private Dataset dataset;
+	private FolderArtifact tmpDir;
 	private File materializedFile;
 
 	public Dataset_FileArtifactList(Activity activity, Dataset dataset, String pattern, FolderArtifact tmpDir) {
 		super(activity, dataset.getFileArtifactListForPattern(pattern));
 		this.dataset = dataset;
-		
-		if (tmpDir != null){
-			materializedFile = materialize(tmpDir._getFile());
-		} else {
-			materializedFile = null;
-		}
+		this.tmpDir = tmpDir;
 	}
 	
 	public Dataset getDataset() {
@@ -31,6 +27,11 @@ public class Dataset_FileArtifactList extends FileArtifactList {
 	}
 	
 	public String getAbsolutePath(){
+
+		if (materializedFile == null && tmpDir != null){
+			materializedFile = materialize(tmpDir._getFile());
+		}
+
 		if (materializedFile != null) {
 			return materializedFile.getAbsolutePath();
 		} else {
@@ -40,7 +41,7 @@ public class Dataset_FileArtifactList extends FileArtifactList {
 	
 	@Override
 	public String toString() {
-		return "Dataset_FileArtifactList [dataset=" + dataset
+		return getClass() + " [dataset=" + dataset
 				+ ", materializedFile=" + materializedFile + "]";
 	}
 }

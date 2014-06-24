@@ -17,9 +17,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.Dataset;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.Dataset_FileArtifactList;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.Dataset_FileArtifactList4Run;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.ResultDir4Run;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mirex.CallFormat_MIREX_AudioChordEstimation;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.RunDatasetIn;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.TestRunVerificationSucceeded;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.TestRunVerification_FileFormatOk;
@@ -121,9 +119,9 @@ public class DrlTestRunVerify {
         ksession.insert(src);
         ksession.insert(status);
         ksession.insert(dsal);
-        ksession.insert(new Dataset_FileArtifactList4Run(testRun, dsal));
+//        ksession.insert(new Dataset_FileArtifactList4Run(testRun, dsal));
         ksession.insert(res);
-        ksession.insert(new CallFormat_MIREX_AudioChordEstimation());
+        //ksession.insert(new CallFormat_MIREX_AudioChordEstimation());
 		return ksession;
 	}
 

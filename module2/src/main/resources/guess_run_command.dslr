@@ -9,12 +9,16 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfos.*;
 
+declare OutputDataVerificationPassed extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
+
 // ----------------------------------- Output parameters ---------------------------------------
 
 rule "Run execution status succeeded"
 	when
 		active activity 'RunActivity'
 		$execstat : ExecStatus(succeeded==true) for activity
+		exists OutputDataVerificationPassed for activity
+		$res : Verified_FileArtifactList for activity
 	then
 		activity succeeded
 		insert artifact '$execstat.getFileOut()' as 'GenericUserInfoFileArtifact'
@@ -67,6 +71,45 @@ rule "Select run format"
 		not RunFormat for activity
 	then
 		def user action UserActionSelectRunFormat
-		//add user action attr ExecArtifacts as $exec
 		add user action
+end
+
+rule "Verify run output data"
+	when
+		active activity 'RunActivity'
+		$execstat : ExecStatus(succeeded==true) for activity
+		$rf : RunFormat_Mirex_Aud_ChEst for activity
+		$results : Result_FileArtifactList for activity
+		not OutputDataVerificationPassed for activity
+	then
+		add subrequest 'ReqOVMirexAudChEst'
+		add subrequest parameter '$results'
+		add subrequest parameter '$rf'
+		
+		insert artifact '"Started output data verification"' as 'GenericUserInfoMessage'
+end
+
+rule "Output data verification passed"
+	when
+		active activity 'RunActivity'
+		Verified_FileArtifactList for activity
+		subrequest 'ReqOutputVerification' for activity
+		subrequest succeeded
+		// otherwise by default subrequest will fail the activity
+	then
+		insert OutputDataVerificationPassed
+		insert artifact '"Output data verification completed"' as 'GenericUserInfoMessage'
+end
+
+rule "(default) no output data verification"
+		salience -999 // last rule in the file
+	when
+		active activity 'RunActivity'
+		Verified_FileArtifactList for activity
+		subrequest 'ReqOutputVerification' for activity
+		$results : Result_FileArtifactList for activity
+		not OutputDataVerificationPassed for activity
+	then
+		insert OutputDataVerificationPassed
+		insert artifact '$results' as 'Verified_FileArtifactList'
 end

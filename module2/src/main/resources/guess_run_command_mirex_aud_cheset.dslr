@@ -13,17 +13,24 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.*;
 declare MirexScratchDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact end
 declare MirexOutputDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact end
 
+rule "MirexAudChEst: output files list"
+	when
+		active activity 'RunActivity'
+		$execstat : ExecStatus(succeeded==true) for activity
+		MirexOutputDir($output : getFileArtifactListForPattern("*.txt")) for activity
+	then
+		insert '$output' as 'Result_FileArtifactList';
+end
+
 rule "Application inputs ready"
-		salience -1 // after all options are onserted 
+		salience -1 // after all options are inserted 
 	when
 		active activity 'RunActivity'
 		RunFormat_Mirex_Aud_ChEst for activity
 		exists MirexScratchDir for activity
 		exists Dataset_FileArtifactList for activity
-		$output :  MirexOutputDir for activity
 	then
 		insert Run_AppOptionsReady
-		insert artifact '$output' as 'GenericUserInfoFolderArtifact'
 end
 
 rule "Run Mirex audio chord estimation task"

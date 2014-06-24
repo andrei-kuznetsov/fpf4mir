@@ -28,8 +28,8 @@ rule "ut mirex audchest: assert ut dataset"
 		active activity 'UTMirexAudChEstActivity'
 		not FolderArtifact(name=="dataset_ut_mirex_audio_ch_est") for activity
 	then
-//		insert '"/home/andrei/OpenShift/git/fpf4mir/module2/src/test/resources/oma", "dataset_ut_mirex_audio_ch_est"' as 'ArtifactRef'
-		insert '"dataset_ut_mirex_audio_ch_est", "/home/andrei/OpenShift/datadir/cea1c11a-ff7b-4f6f-8974-d327f3ec544b/dataset_ut_mirex_audio_ch_est", ""' as 'FolderArtifact';
+//		insert '"dataset_ut_mirex_audio_ch_est", "/home/andrei/OpenShift/datadir/cea1c11a-ff7b-4f6f-8974-d327f3ec544b/dataset_ut_mirex_audio_ch_est", ""' as 'FolderArtifact';
+		insert '"dataset_ut_mirex_audio_ch_est", "D:\\SPBSTU\\git\\dataset_ut_mirex_audio_ch_est", ""' as 'FolderArtifact';
 end
 
 rule "ut mirex audchest: download ut dataset"

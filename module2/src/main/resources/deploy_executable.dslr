@@ -1,4 +1,5 @@
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfos.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;

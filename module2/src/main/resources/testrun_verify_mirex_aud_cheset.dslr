@@ -1,0 +1,130 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.java.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mirex.*;
+
+declare ResArtifactVStatus_Base extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase
+	activity : Activity
+	artifact : FileArtifact
+end
+
+declare ResTextFileArtifact extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.TextFileArtifact end
+
+declare VerifiedFileArtifact extends ResFileArtifact end
+
+declare ResArtifactFn_OK extends ResArtifactVStatus_Base end
+declare ResArtifactFn_NOK extends ResArtifactVStatus_Base end
+
+declare ResArtifactFormat_OK extends ResArtifactVStatus_Base end
+declare ResArtifactFormat_NOK extends ResArtifactVStatus_Base end
+
+declare ResArtifactWarn_SrcFileNotProcessed extends ResArtifactVStatus_Base end
+// ----------------------------------- Output parameters ---------------------------------------
+
+rule "Eval OVMirexAudChEstActivity succeeded"
+		salience -999 // last rule in the file
+	when
+		active activity 'OVMirexAudChEstActivity'
+		$good_files : Verified_FileArtifactList for activity
+	then
+		activity succeeded
+		add activity status parameter $good_files as GenericAlias
+end
+
+// #############################################################################################
+
+rule "testrun_verify_mirex_aud_cheset : collect good filelist"
+		salience -999 // last rule in the file
+	when
+		active activity 'OVMirexAudChEstActivity'
+>		$good_files : java.util.LinkedList() from collect(VerifiedFileArtifact(activity==$activity)) 
+	then
+		insert '$good_files' as 'Verified_FileArtifactList';
+end
+
+rule "testrun_verify_mirex_aud_cheset : insert good (single fact)"
+	when
+		active activity 'OVMirexAudChEstActivity'
+		$res : ResTextFileArtifact for activity
+		exists ResArtifactFn_OK(artifact == $res) for activity
+		exists ResArtifactFormat_OK(artifact == $res) for activity
+	then
+		insert '$res' as 'VerifiedFileArtifact';
+end
+
+rule "testrun_verify_mirex_aud_cheset : unpack artifacts from list"
+		salience 999 // first rule in the file
+	when
+		active activity 'OVMirexAudChEstActivity'
+		$res : Result_FileArtifactList for activity
+		$src : Dataset_FileArtifactList for activity
+	then
+>		for (FileArtifact i : $src.list()){
+			insert 'i' as 'SrcDataFileArtifact';
+>		}
+		
+>		for (FileArtifact i : $res.list()){
+			insert 'i' as 'ResTextFileArtifact';
+>		}
+end
+
+rule "testrun_verify_mirex_aud_cheset : verify file names"
+	when
+		active activity 'OVMirexAudChEstActivity'
+		
+		SrcDataFileArtifact($srcFileName : fileName) for activity
+		$res : ResTextFileArtifact($dstFileName : fileName, $dstFileName == $srcFileName + ".txt") for activity
+	then
+		insert '$res' as new 'ResArtifactFn_OK';
+end
+
+rule "testrun_verify_mirex_aud_cheset : verify not processed files"
+	when
+		active activity 'OVMirexAudChEstActivity'
+		
+		$src : SrcDataFileArtifact($srcFileName : fileName) for activity
+		not ResTextFileArtifact($dstFileName : fileName, $dstFileName == $srcFileName + ".txt") for activity
+	then
+//		insert '$src' as new 'ResArtifactWarn_SrcFileNotProcessed';
+		insert artifact '"Original file hasnt been processed. File: " + $src.getFileName()' as 'GenericUserInfoMessage';
+end
+
+rule "testrun_verify_mirex_aud_cheset : verify file format (pos)"
+	when
+		active activity 'OVMirexAudChEstActivity'
+		$res : ResTextFileArtifact(lineFormatPattern( "^\\d+\\.\\d+\\s+\\d+\\.\\d+\\s+[a-hA-HN][#]?(:min)?$" ) == true) for activity
+	then
+		insert '$res' as new 'ResArtifactFormat_OK';
+end
+
+rule "testrun_verify_mirex_aud_cheset : verify file format (neg)"
+	when
+		active activity 'OVMirexAudChEstActivity'
+		$res : ResTextFileArtifact(lineFormatPattern( "^\\d+\\.\\d+\\s+\\d+\\.\\d+\\s+[a-hA-HN][#]?(:min)?$" ) == false) for activity
+	then
+//		insert '$res' as new 'ResArtifactFormat_NOK';
+		insert artifact '"File contents doesnt match expected format. File: " + $res.getFileName()' as 'GenericUserInfoMessage';
+end
+
+rule "TestRun_Diag1"
+	when
+		active activity 'OVMirexAudChEstActivity'
+		not Result_FileArtifactList for activity
+	then
+		activity failed with message "No Result_FileArtifactList found. Cant verify execution results"
+end
+
+rule "TestRun_Diag2"
+	when
+		active activity 'OVMirexAudChEstActivity'
+		not Dataset_FileArtifactList for activity
+	then
+		activity failed with message "No Dataset_FileArtifactList found. Cant verify execution results"
+end
+
+

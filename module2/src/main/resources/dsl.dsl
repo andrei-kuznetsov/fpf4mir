@@ -83,7 +83,7 @@
 
 [then]insert artifact '{value}' as '{type}'=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
 [then]insert '{value}' as '{type}';=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
-[then]insert '{value}' as new {type:\w+};=insert( new {type}($activity, {value}) );
+[then]insert '{value}' as new '{type:\w+}';=insert( new {type}($activity, {value}) );
 [then]insertLogical '{value}' as '{type}';=\{{type} o = new {type}(); o.reset($activity, {value}); insertLogical(o);\};
 
 [then]insertLogical '{value}' as '{type}' for request;=\{{type} o = new {type}(); o.reset($request, {value}); insertLogical(o);\};
