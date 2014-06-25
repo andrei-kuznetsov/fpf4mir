@@ -1,3 +1,4 @@
+<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifactList"%>
 <%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserActionRef"%>
 <%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Alias"%>
 <%@page import="java.net.URLEncoder"%>
@@ -88,19 +89,40 @@
 					
 					// TODO: /rest/userinfo/refId
 					url = "/rest/files?file=" + URLEncoder.encode(file.getAbsolutePath());
-					title = file.getName();
-					description = "view the file";
-				}
-				if (url != null){
+					description = file.getFileName();
+
 					%>
 					<tr>
+						<td><%=usrInfo.getDate()%></td>
 						<td><%=title%></td>
 						<td><a href="<%=url%>"><%=description%></a></td>
 					</tr>
 					<%
+				} else if (usrInfo.getMessage() instanceof FileArtifactList){
+					FileArtifactList flist = (FileArtifactList)usrInfo.getMessage();
+
+					%>
+					<tr>
+						<td><%=usrInfo.getDate()%></td>
+						<td><%=title%></td>
+						<td>
+					<%
+					
+					for (FileArtifact f : flist.list()){
+						String _url = "/rest/files?file=" + URLEncoder.encode(f.getAbsolutePath());
+						String _description = f.getFileName();
+						%>
+							<a href="<%=_url%>"><%=_description%></a><br>
+						<%
+					}
+
+					%>
+						</td></tr>
+					<%
 				} else {
 					%>
 					<tr>
+						<td><%=usrInfo.getDate()%></td>
 						<td><%=title%></td>
 						<td><%=description%></td>
 					</tr>

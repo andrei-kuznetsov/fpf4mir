@@ -47,7 +47,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.DetectEncodingActio
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.ExecAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ActionHandler;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.AddFeatureHandler_Local;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.AddFeatureHandler_Local_Windows;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.AddFeatureHandler_Local_Linux;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.DetectEncodingActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ExecActionHandler;
@@ -136,7 +136,7 @@ public class DeploymentSession {
 				new DetectEncodingActionHandler());
 		
 		if (OS.isWindows()){
-			actionsMap.put(AddFeatureAction.class, new AddFeatureHandler_Local());
+			actionsMap.put(AddFeatureAction.class, new AddFeatureHandler_Local_Windows());
 		} else {
 			actionsMap.put(AddFeatureAction.class, new AddFeatureHandler_Local_Linux());
 		}

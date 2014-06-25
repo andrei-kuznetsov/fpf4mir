@@ -177,7 +177,6 @@ rule "Do unit tests passed"
 		// otherwce subrequest will fail the activity
 	then
 		insert ExecutableUnitTestsPassed
-		insert artifact '"Unit tests succeeded"' as 'GenericUserInfoMessage'
 end
 
 rule "(default) no unit tests"

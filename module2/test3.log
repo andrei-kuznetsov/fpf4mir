@@ -1,0 +1,1338 @@
+<object-stream>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>Eval OVMirexAudChEstActivity succeeded [807, 794, 788]</activationId>
+  <rule>Eval OVMirexAudChEstActivity succeeded</rule>
+  <declarations>$good_files=Verified_FileArtifactList( activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) ), name=default )(807); $activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Activity analitycs activation [808, 794, 788]</activationId>
+  <rule>Activity analitycs activation</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788); $aa=ALCWork [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )](794)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>808</factId>
+  <objectToString>GenericActivityResultSucceeded [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>809</factId>
+  <objectToString>GenericAlias [object=Verified_FileArtifactList( activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) ), name=default ), name=default]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>Eval OVMirexAudChEstActivity succeeded [807, 794, 788]</activationId>
+  <rule>Eval OVMirexAudChEstActivity succeeded</rule>
+  <declarations>$good_files=Verified_FileArtifactList( activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) ), name=default )(807); $activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>Activity analitycs activation [808, 794, 788]</activationId>
+  <rule>Activity analitycs activation</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788); $aa=ALCWork [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )](794)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>794</factId>
+  <objectToString>ALCWork [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Activity first lifecycle phase [788]</activationId>
+  <rule>Activity first lifecycle phase</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>796</factId>
+  <objectToString>ALCMain [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Default activity analytics (success) [810, 808, 788]</activationId>
+  <rule>Default activity analytics (success)</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>convert (ALCWork || ALCAnalyze) to main [810, 788]</activationId>
+  <rule>convert (ALCWork || ALCAnalyze) to main</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>5</type>
+  <activationId>Activity first lifecycle phase [788]</activationId>
+  <rule>Activity first lifecycle phase</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>810</factId>
+  <objectToString>ALCAnalyze [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>Activity analitycs activation [808, -1, 788]</activationId>
+  <rule>Activity analitycs activation</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788); </declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>convert (ALCWork || ALCAnalyze) to main [810, 788]</activationId>
+  <rule>convert (ALCWork || ALCAnalyze) to main</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>811</factId>
+  <objectToString>ALCMain [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>convert (ALCWork || ALCAnalyze) to main [810, 788]</activationId>
+  <rule>convert (ALCWork || ALCAnalyze) to main</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>Default activity analytics (success) [810, 808, 788]</activationId>
+  <rule>Default activity analytics (success)</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Activity prepare astatus facts [810, 812, 788]</activationId>
+  <rule>Activity prepare astatus facts</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788); $aa=ALCAnalyze [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )](810)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>812</factId>
+  <objectToString>GenericActivitySucceeded [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>Default activity analytics (success) [810, 808, 788]</activationId>
+  <rule>Default activity analytics (success)</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>Activity prepare astatus facts [810, 812, 788]</activationId>
+  <rule>Activity prepare astatus facts</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788); $aa=ALCAnalyze [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )](810)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>810</factId>
+  <objectToString>ALCAnalyze [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Activity first lifecycle phase [788]</activationId>
+  <rule>Activity first lifecycle phase</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>811</factId>
+  <objectToString>ALCMain [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>5</type>
+  <activationId>Activity first lifecycle phase [788]</activationId>
+  <rule>Activity first lifecycle phase</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Activity completed [813, 788]</activationId>
+  <rule>Activity completed</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788); $aa=ALCPrepareAStatus [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )](813)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>activity prepare astatus: ActivityResult to ActivityFinalStatus (single fact) [809, 808, 812, 813, 788]</activationId>
+  <rule>activity prepare astatus: ActivityResult to ActivityFinalStatus (single fact)</rule>
+  <declarations>$aresult=GenericActivityResultSucceeded [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )](808); $activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788); $value=GenericAlias [object=Verified_FileArtifactList( activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) ), name=default ), name=default](809); $astatus=GenericActivitySucceeded [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )](812)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>813</factId>
+  <objectToString>ALCPrepareAStatus [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>Activity prepare astatus facts [-1, 812, 788]</activationId>
+  <rule>Activity prepare astatus facts</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788); </declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>activity prepare astatus: ActivityResult to ActivityFinalStatus (single fact) [809, 808, 812, 813, 788]</activationId>
+  <rule>activity prepare astatus: ActivityResult to ActivityFinalStatus (single fact)</rule>
+  <declarations>$aresult=GenericActivityResultSucceeded [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )](808); $activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788); $value=GenericAlias [object=Verified_FileArtifactList( activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) ), name=default ), name=default](809); $astatus=GenericActivitySucceeded [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )](812)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>814</factId>
+  <objectToString>GenericAlias [object=Verified_FileArtifactList( activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) ), name=default ), astatus=GenericActivitySucceeded [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )], name=default]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>activity prepare astatus: ActivityResult to ActivityFinalStatus (single fact) [809, 808, 812, 813, 788]</activationId>
+  <rule>activity prepare astatus: ActivityResult to ActivityFinalStatus (single fact)</rule>
+  <declarations>$aresult=GenericActivityResultSucceeded [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )](808); $activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788); $value=GenericAlias [object=Verified_FileArtifactList( activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) ), name=default ), name=default](809); $astatus=GenericActivitySucceeded [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )](812)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>Activity completed [813, 788]</activationId>
+  <rule>Activity completed</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788); $aa=ALCPrepareAStatus [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )](813)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Activity first lifecycle phase [788]</activationId>
+  <rule>Activity first lifecycle phase</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>813</factId>
+  <objectToString>ALCPrepareAStatus [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Propagate subactivity success [815, 812, 788, 781]</activationId>
+  <rule>Propagate subactivity success</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788); $request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>5</type>
+  <activationId>Activity first lifecycle phase [788]</activationId>
+  <rule>Activity first lifecycle phase</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>815</factId>
+  <objectToString>ALCCompleted [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>Activity completed [-1, 788]</activationId>
+  <rule>Activity completed</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788); </declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>Propagate subactivity success [815, 812, 788, 781]</activationId>
+  <rule>Propagate subactivity success</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788); $request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Request prepare rstatus facts [787, 816, 781]</activationId>
+  <rule>Request prepare rstatus facts</rule>
+  <declarations>$request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781); $aa=RLCMain [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )](787)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>816</factId>
+  <objectToString>RequestSucceeded [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ), statusString=ok]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>Propagate subactivity success [815, 812, 788, 781]</activationId>
+  <rule>Propagate subactivity success</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788); $request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>Request prepare rstatus facts [787, 816, 781]</activationId>
+  <rule>Request prepare rstatus facts</rule>
+  <declarations>$request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781); $aa=RLCMain [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )](787)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Activity_New [787, 781]</activationId>
+  <rule>Activity_New</rule>
+  <declarations>$request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>5</type>
+  <activationId>Activity_New [787, 781]</activationId>
+  <rule>Activity_New</rule>
+  <declarations>$request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Request first lifecycle phase [781]</activationId>
+  <rule>Request first lifecycle phase</rule>
+  <declarations>$request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>787</factId>
+  <objectToString>RLCMain [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Request completed [817, 781]</activationId>
+  <rule>Request completed</rule>
+  <declarations>$request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781); $aa=RLCPrepareRStatus [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )](817)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>req prepare rstatus: activity status to request status (single fact) [814, 812, 816, 817, 815, 788, 781]</activationId>
+  <rule>req prepare rstatus: activity status to request status (single fact)</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788); $value=GenericAlias [object=Verified_FileArtifactList( activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) ), name=default ), astatus=GenericActivitySucceeded [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )], name=default](814); $astatus=GenericActivitySucceeded [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )](812); $rstatus=RequestSucceeded [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ), statusString=ok](816); $request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>5</type>
+  <activationId>Request first lifecycle phase [781]</activationId>
+  <rule>Request first lifecycle phase</rule>
+  <declarations>$request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>817</factId>
+  <objectToString>RLCPrepareRStatus [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>Request prepare rstatus facts [-1, 816, 781]</activationId>
+  <rule>Request prepare rstatus facts</rule>
+  <declarations>$request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781); </declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>req prepare rstatus: activity status to request status (single fact) [814, 812, 816, 817, 815, 788, 781]</activationId>
+  <rule>req prepare rstatus: activity status to request status (single fact)</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788); $value=GenericAlias [object=Verified_FileArtifactList( activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) ), name=default ), astatus=GenericActivitySucceeded [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )], name=default](814); $astatus=GenericActivitySucceeded [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )](812); $rstatus=RequestSucceeded [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ), statusString=ok](816); $request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>activity main phase (auto): read from subrequest (single fact) [818, 816, 817, 781, 760, 752]</activationId>
+  <rule>activity main phase (auto): read from subrequest (single fact)</rule>
+  <declarations>$subrequest=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781); $subrequestStatus=RequestSucceeded [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ), statusString=ok](816); $activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericAlias [object=Verified_FileArtifactList( activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) ), name=default ), rstatus=RequestSucceeded [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ), statusString=ok], name=default](818)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>818</factId>
+  <objectToString>GenericAlias [object=Verified_FileArtifactList( activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) ), name=default ), rstatus=RequestSucceeded [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ), statusString=ok], name=default]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>req prepare rstatus: activity status to request status (single fact) [814, 812, 816, 817, 815, 788, 781]</activationId>
+  <rule>req prepare rstatus: activity status to request status (single fact)</rule>
+  <declarations>$activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )(788); $value=GenericAlias [object=Verified_FileArtifactList( activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) ), name=default ), astatus=GenericActivitySucceeded [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )], name=default](814); $astatus=GenericActivitySucceeded [activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) )](812); $rstatus=RequestSucceeded [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ), statusString=ok](816); $request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>activity main phase (auto): read from subrequest (single fact) [818, 816, 817, 781, 760, 752]</activationId>
+  <rule>activity main phase (auto): read from subrequest (single fact)</rule>
+  <declarations>$subrequest=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781); $subrequestStatus=RequestSucceeded [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ), statusString=ok](816); $activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericAlias [object=Verified_FileArtifactList( activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) ), name=default ), rstatus=RequestSucceeded [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ), statusString=ok], name=default](818)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>819</factId>
+  <objectToString>Verified_FileArtifactList( activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), name=default )</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>activity main phase (auto): read from subrequest (single fact) [818, 816, 817, 781, 760, 752]</activationId>
+  <rule>activity main phase (auto): read from subrequest (single fact)</rule>
+  <declarations>$subrequest=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781); $subrequestStatus=RequestSucceeded [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ), statusString=ok](816); $activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericAlias [object=Verified_FileArtifactList( activity=OVMirexAudChEstActivity( date=null, id=null, refId=18, request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ) ), name=default ), rstatus=RequestSucceeded [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ), statusString=ok], name=default](818)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>Request completed [817, 781]</activationId>
+  <rule>Request completed</rule>
+  <declarations>$request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781); $aa=RLCPrepareRStatus [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )](817)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Request first lifecycle phase [781]</activationId>
+  <rule>Request first lifecycle phase</rule>
+  <declarations>$request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>817</factId>
+  <objectToString>RLCPrepareRStatus [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Output data verification passed [820, 816, 781, 819, 759, 752]</activationId>
+  <rule>Output data verification passed</rule>
+  <declarations>$subrequest=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781); $subrequestStatus=RequestSucceeded [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ), statusString=ok](816); $activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>5</type>
+  <activationId>Request first lifecycle phase [781]</activationId>
+  <rule>Request first lifecycle phase</rule>
+  <declarations>$request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>820</factId>
+  <objectToString>RLCCompleted [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>Request completed [-1, 781]</activationId>
+  <rule>Request completed</rule>
+  <declarations>$request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781); </declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>Output data verification passed [820, 816, 781, 819, 759, 752]</activationId>
+  <rule>Output data verification passed</rule>
+  <declarations>$subrequest=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781); $subrequestStatus=RequestSucceeded [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ), statusString=ok](816); $activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Run execution status succeeded [819, 779, 759, 752]</activationId>
+  <rule>Run execution status succeeded</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $res=Verified_FileArtifactList( activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), name=default )(819); $execstat=ExecStatus [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), execCommand=ListExecCommand [command=java, args=[java, -verbose:class, -Djava.awt.headless=true, -jar, C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\6d02c0eb-813e-4a8d-a7c4-f9380a7ea9dd\chordest-master\chordest\target\dist\chordest.jar, C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\9fcc87c8-f7a8-402a-982b-b72278b91a3f, C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\235deeb6-5a8b-4c71-a5f7-a28e664cb955, C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\503096ac-136e-40c1-b563-d08fbf66a4a8], workingDir=C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\6d02c0eb-813e-4a8d-a7c4-f9380a7ea9dd\chordest-master\chordest\target\dist, activity=RunActivity [id=null]], status=0, fileOut=C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\6d02c0eb-813e-4a8d-a7c4-f9380a7ea9dd\chordest-master\chordest\target\dist\bbb7d4a0-db30-4cf6-bd68-4b57f2c306cd.out, fileErr=C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\6d02c0eb-813e-4a8d-a7c4-f9380a7ea9dd\chordest-master\chordest\target\dist\17650aa4-a25a-4a4c-a300-a85f239cd29f.err](779)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>821</factId>
+  <objectToString>OutputDataVerificationPassed( activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ) )</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [822, 752]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](822)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>822</factId>
+  <objectToString>GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>Output data verification passed [820, 816, 781, 819, 759, 752]</activationId>
+  <rule>Output data verification passed</rule>
+  <declarations>$subrequest=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 )(781); $subrequestStatus=RequestSucceeded [request=ReqOVMirexAudChEst( parentActivity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), refId=17 ), statusString=ok](816); $activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [822, 752]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](822)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>823</factId>
+  <objectToString>ActivityToActivityStatusCopy( activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), value=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )] )</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [822, 752]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](822)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>Run execution status succeeded [819, 779, 759, 752]</activationId>
+  <rule>Run execution status succeeded</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $res=Verified_FileArtifactList( activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), name=default )(819); $execstat=ExecStatus [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), execCommand=ListExecCommand [command=java, args=[java, -verbose:class, -Djava.awt.headless=true, -jar, C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\6d02c0eb-813e-4a8d-a7c4-f9380a7ea9dd\chordest-master\chordest\target\dist\chordest.jar, C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\9fcc87c8-f7a8-402a-982b-b72278b91a3f, C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\235deeb6-5a8b-4c71-a5f7-a28e664cb955, C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\503096ac-136e-40c1-b563-d08fbf66a4a8], workingDir=C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\6d02c0eb-813e-4a8d-a7c4-f9380a7ea9dd\chordest-master\chordest\target\dist, activity=RunActivity [id=null]], status=0, fileOut=C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\6d02c0eb-813e-4a8d-a7c4-f9380a7ea9dd\chordest-master\chordest\target\dist\bbb7d4a0-db30-4cf6-bd68-4b57f2c306cd.out, fileErr=C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\6d02c0eb-813e-4a8d-a7c4-f9380a7ea9dd\chordest-master\chordest\target\dist\17650aa4-a25a-4a4c-a300-a85f239cd29f.err](779)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Activity analitycs activation [824, 759, 752]</activationId>
+  <rule>Activity analitycs activation</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $aa=ALCWork [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](759)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>824</factId>
+  <objectToString>GenericActivityResultSucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [825, 752]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoFileArtifact [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](825)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>825</factId>
+  <objectToString>GenericUserInfoFileArtifact [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [826, 752]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](826)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>826</factId>
+  <objectToString>GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [827, 752]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoFileArtifactList [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](827)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>827</factId>
+  <objectToString>GenericUserInfoFileArtifactList [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>Run execution status succeeded [819, 779, 759, 752]</activationId>
+  <rule>Run execution status succeeded</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $res=Verified_FileArtifactList( activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), name=default )(819); $execstat=ExecStatus [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), execCommand=ListExecCommand [command=java, args=[java, -verbose:class, -Djava.awt.headless=true, -jar, C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\6d02c0eb-813e-4a8d-a7c4-f9380a7ea9dd\chordest-master\chordest\target\dist\chordest.jar, C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\9fcc87c8-f7a8-402a-982b-b72278b91a3f, C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\235deeb6-5a8b-4c71-a5f7-a28e664cb955, C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\503096ac-136e-40c1-b563-d08fbf66a4a8], workingDir=C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\6d02c0eb-813e-4a8d-a7c4-f9380a7ea9dd\chordest-master\chordest\target\dist, activity=RunActivity [id=null]], status=0, fileOut=C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\6d02c0eb-813e-4a8d-a7c4-f9380a7ea9dd\chordest-master\chordest\target\dist\bbb7d4a0-db30-4cf6-bd68-4b57f2c306cd.out, fileErr=C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\6d02c0eb-813e-4a8d-a7c4-f9380a7ea9dd\chordest-master\chordest\target\dist\17650aa4-a25a-4a4c-a300-a85f239cd29f.err](779)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [827, 752]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoFileArtifactList [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](827)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>828</factId>
+  <objectToString>ActivityToActivityStatusCopy( activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), value=GenericUserInfoFileArtifactList [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )] )</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [827, 752]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoFileArtifactList [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](827)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [826, 752]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](826)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>829</factId>
+  <objectToString>ActivityToActivityStatusCopy( activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), value=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )] )</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [826, 752]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](826)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [825, 752]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoFileArtifact [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](825)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>830</factId>
+  <objectToString>ActivityToActivityStatusCopy( activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] ), value=GenericUserInfoFileArtifact [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )] )</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [825, 752]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoFileArtifact [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](825)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>Activity analitycs activation [824, 759, 752]</activationId>
+  <rule>Activity analitycs activation</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $aa=ALCWork [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](759)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>759</factId>
+  <objectToString>ALCWork [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Activity first lifecycle phase [752]</activationId>
+  <rule>Activity first lifecycle phase</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>760</factId>
+  <objectToString>ALCMain [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>767</factId>
+  <objectToString>Dataset [name=null, getAbsolutePath()=C:\home\andrei\OpenShift\datadir\jetty\1403644823059]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>773</factId>
+  <objectToString>OrdinalArgument [order=1001, value=C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\9fcc87c8-f7a8-402a-982b-b72278b91a3f]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>772</factId>
+  <objectToString>OrdinalArgument [order=1002, value=C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\235deeb6-5a8b-4c71-a5f7-a28e664cb955]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>771</factId>
+  <objectToString>OrdinalArgument [order=1003, value=C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\503096ac-136e-40c1-b563-d08fbf66a4a8]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>763</factId>
+  <objectToString>OrdinalArgument [order=1, value=-verbose:class]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>764</factId>
+  <objectToString>OrdinalArgument [order=998, value=-jar]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>765</factId>
+  <objectToString>OrdinalArgument [order=999, value=C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\6d02c0eb-813e-4a8d-a7c4-f9380a7ea9dd\chordest-master\chordest\target\dist\chordest.jar]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>766</factId>
+  <objectToString>OrdinalArgument [order=1, value=-Djava.awt.headless=true]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>777</factId>
+  <objectToString>ListExecCommand [command=java, args=[java, -verbose:class, -Djava.awt.headless=true, -jar, C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\6d02c0eb-813e-4a8d-a7c4-f9380a7ea9dd\chordest-master\chordest\target\dist\chordest.jar, C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\9fcc87c8-f7a8-402a-982b-b72278b91a3f, C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\235deeb6-5a8b-4c71-a5f7-a28e664cb955, C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\503096ac-136e-40c1-b563-d08fbf66a4a8], workingDir=C:\Users\qnf863\git\fpf4mir\module2\OpenShift\datadir\tmp_43387a69-b6dd-4b15-8a57-df4dbdbc1bc4\6d02c0eb-813e-4a8d-a7c4-f9380a7ea9dd\chordest-master\chordest\target\dist, activity=RunActivity [id=null]]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Default activity analytics (success) [831, 824, 752]</activationId>
+  <rule>Default activity analytics (success)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>convert (ALCWork || ALCAnalyze) to main [831, 752]</activationId>
+  <rule>convert (ALCWork || ALCAnalyze) to main</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>5</type>
+  <activationId>Activity first lifecycle phase [752]</activationId>
+  <rule>Activity first lifecycle phase</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>831</factId>
+  <objectToString>ALCAnalyze [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>Activity analitycs activation [824, -1, 752]</activationId>
+  <rule>Activity analitycs activation</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); </declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>convert (ALCWork || ALCAnalyze) to main [831, 752]</activationId>
+  <rule>convert (ALCWork || ALCAnalyze) to main</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>832</factId>
+  <objectToString>ALCMain [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>convert (ALCWork || ALCAnalyze) to main [831, 752]</activationId>
+  <rule>convert (ALCWork || ALCAnalyze) to main</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>Default activity analytics (success) [831, 824, 752]</activationId>
+  <rule>Default activity analytics (success)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Activity prepare astatus facts [831, 833, 752]</activationId>
+  <rule>Activity prepare astatus facts</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $aa=ALCAnalyze [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](831)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>833</factId>
+  <objectToString>GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>Default activity analytics (success) [831, 824, 752]</activationId>
+  <rule>Default activity analytics (success)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>Activity prepare astatus facts [831, 833, 752]</activationId>
+  <rule>Activity prepare astatus facts</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $aa=ALCAnalyze [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](831)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>831</factId>
+  <objectToString>ALCAnalyze [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Activity first lifecycle phase [752]</activationId>
+  <rule>Activity first lifecycle phase</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>832</factId>
+  <objectToString>ALCMain [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>5</type>
+  <activationId>Activity first lifecycle phase [752]</activationId>
+  <rule>Activity first lifecycle phase</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Activity completed [834, 752]</activationId>
+  <rule>Activity completed</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $aa=ALCPrepareAStatus [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](834)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy) [786, 834, 833, 752]</activationId>
+  <rule>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](786); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy) [823, 834, 833, 752]</activationId>
+  <rule>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](823); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy) [828, 834, 833, 752]</activationId>
+  <rule>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoFileArtifactList [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](828); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy) [829, 834, 833, 752]</activationId>
+  <rule>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](829); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy) [830, 834, 833, 752]</activationId>
+  <rule>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoFileArtifact [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](830); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>834</factId>
+  <objectToString>ALCPrepareAStatus [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>Activity prepare astatus facts [-1, 833, 752]</activationId>
+  <rule>Activity prepare astatus facts</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); </declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy) [830, 834, 833, 752]</activationId>
+  <rule>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoFileArtifact [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](830); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>835</factId>
+  <objectToString>GenericAlias [object=GenericUserInfoFileArtifact [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy) [830, 834, 833, 752]</activationId>
+  <rule>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoFileArtifact [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](830); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy) [829, 834, 833, 752]</activationId>
+  <rule>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](829); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>836</factId>
+  <objectToString>GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy) [829, 834, 833, 752]</activationId>
+  <rule>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](829); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy) [828, 834, 833, 752]</activationId>
+  <rule>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoFileArtifactList [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](828); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>837</factId>
+  <objectToString>GenericAlias [object=GenericUserInfoFileArtifactList [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy) [828, 834, 833, 752]</activationId>
+  <rule>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoFileArtifactList [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](828); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy) [823, 834, 833, 752]</activationId>
+  <rule>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](823); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>838</factId>
+  <objectToString>GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy) [823, 834, 833, 752]</activationId>
+  <rule>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](823); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy) [786, 834, 833, 752]</activationId>
+  <rule>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](786); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>839</factId>
+  <objectToString>GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy) [786, 834, 833, 752]</activationId>
+  <rule>activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](786); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>Activity completed [834, 752]</activationId>
+  <rule>Activity completed</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $aa=ALCPrepareAStatus [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](834)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Activity first lifecycle phase [752]</activationId>
+  <rule>Activity first lifecycle phase</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>834</factId>
+  <objectToString>ALCPrepareAStatus [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Propagate subactivity success [840, 833, 752, 746]</activationId>
+  <rule>Propagate subactivity success</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>5</type>
+  <activationId>Activity first lifecycle phase [752]</activationId>
+  <rule>Activity first lifecycle phase</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>840</factId>
+  <objectToString>ALCCompleted [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>Activity completed [-1, 752]</activationId>
+  <rule>Activity completed</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); </declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>Propagate subactivity success [840, 833, 752, 746]</activationId>
+  <rule>Propagate subactivity success</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Request prepare rstatus facts [751, 841, 746]</activationId>
+  <rule>Request prepare rstatus facts</rule>
+  <declarations>$request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746); $aa=RLCMain [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]]](751)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>841</factId>
+  <objectToString>RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>Propagate subactivity success [840, 833, 752, 746]</activationId>
+  <rule>Propagate subactivity success</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>Request prepare rstatus facts [751, 841, 746]</activationId>
+  <rule>Request prepare rstatus facts</rule>
+  <declarations>$request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746); $aa=RLCMain [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]]](751)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Activity_New [751, 746]</activationId>
+  <rule>Activity_New</rule>
+  <declarations>$request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>5</type>
+  <activationId>Activity_New [751, 746]</activationId>
+  <rule>Activity_New</rule>
+  <declarations>$request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Request first lifecycle phase [746]</activationId>
+  <rule>Request first lifecycle phase</rule>
+  <declarations>$request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>751</factId>
+  <objectToString>RLCMain [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]]]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Request completed [842, 746]</activationId>
+  <rule>Request completed</rule>
+  <declarations>$request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746); $aa=RLCPrepareRStatus [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]]](842)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>req prepare rstatus: activity status to request status (single fact) [835, 833, 841, 842, 840, 752, 746]</activationId>
+  <rule>req prepare rstatus: activity status to request status (single fact)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericAlias [object=GenericUserInfoFileArtifact [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]](835); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833); $rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>req prepare rstatus: activity status to request status (single fact) [836, 833, 841, 842, 840, 752, 746]</activationId>
+  <rule>req prepare rstatus: activity status to request status (single fact)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]](836); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833); $rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>req prepare rstatus: activity status to request status (single fact) [837, 833, 841, 842, 840, 752, 746]</activationId>
+  <rule>req prepare rstatus: activity status to request status (single fact)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericAlias [object=GenericUserInfoFileArtifactList [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]](837); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833); $rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>req prepare rstatus: activity status to request status (single fact) [838, 833, 841, 842, 840, 752, 746]</activationId>
+  <rule>req prepare rstatus: activity status to request status (single fact)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]](838); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833); $rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>req prepare rstatus: activity status to request status (single fact) [839, 833, 841, 842, 840, 752, 746]</activationId>
+  <rule>req prepare rstatus: activity status to request status (single fact)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]](839); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833); $rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>5</type>
+  <activationId>Request first lifecycle phase [746]</activationId>
+  <rule>Request first lifecycle phase</rule>
+  <declarations>$request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>842</factId>
+  <objectToString>RLCPrepareRStatus [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]]]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>Request prepare rstatus facts [-1, 841, 746]</activationId>
+  <rule>Request prepare rstatus facts</rule>
+  <declarations>$request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746); </declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>req prepare rstatus: activity status to request status (single fact) [839, 833, 841, 842, 840, 752, 746]</activationId>
+  <rule>req prepare rstatus: activity status to request status (single fact)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]](839); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833); $rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>activity main phase (auto): read from subrequest (single fact) [843, 841, 842, 746, 6, 2]</activationId>
+  <rule>activity main phase (auto): read from subrequest (single fact)</rule>
+  <declarations>$subrequest=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746); $subrequestStatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok]](843)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>843</factId>
+  <objectToString>GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok]]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>req prepare rstatus: activity status to request status (single fact) [839, 833, 841, 842, 840, 752, 746]</activationId>
+  <rule>req prepare rstatus: activity status to request status (single fact)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]](839); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833); $rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>activity main phase (auto): read from subrequest (single fact) [843, 841, 842, 746, 6, 2]</activationId>
+  <rule>activity main phase (auto): read from subrequest (single fact)</rule>
+  <declarations>$subrequest=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746); $subrequestStatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok]](843)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [844, 2]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericUserInfoMessage [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](844)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>844</factId>
+  <objectToString>GenericUserInfoMessage [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>activity main phase (auto): read from subrequest (single fact) [843, 841, 842, 746, 6, 2]</activationId>
+  <rule>activity main phase (auto): read from subrequest (single fact)</rule>
+  <declarations>$subrequest=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746); $subrequestStatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok]](843)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [844, 2]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericUserInfoMessage [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](844)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>845</factId>
+  <objectToString>ActivityToActivityStatusCopy( activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null], value=GenericUserInfoMessage [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [844, 2]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericUserInfoMessage [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](844)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>req prepare rstatus: activity status to request status (single fact) [838, 833, 841, 842, 840, 752, 746]</activationId>
+  <rule>req prepare rstatus: activity status to request status (single fact)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]](838); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833); $rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>activity main phase (auto): read from subrequest (single fact) [846, 841, 842, 746, 6, 2]</activationId>
+  <rule>activity main phase (auto): read from subrequest (single fact)</rule>
+  <declarations>$subrequest=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746); $subrequestStatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok]](846)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>846</factId>
+  <objectToString>GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok]]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>req prepare rstatus: activity status to request status (single fact) [838, 833, 841, 842, 840, 752, 746]</activationId>
+  <rule>req prepare rstatus: activity status to request status (single fact)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]](838); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833); $rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>activity main phase (auto): read from subrequest (single fact) [846, 841, 842, 746, 6, 2]</activationId>
+  <rule>activity main phase (auto): read from subrequest (single fact)</rule>
+  <declarations>$subrequest=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746); $subrequestStatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok]](846)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [847, 2]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericUserInfoMessage [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](847)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>847</factId>
+  <objectToString>GenericUserInfoMessage [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>activity main phase (auto): read from subrequest (single fact) [846, 841, 842, 746, 6, 2]</activationId>
+  <rule>activity main phase (auto): read from subrequest (single fact)</rule>
+  <declarations>$subrequest=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746); $subrequestStatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok]](846)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [847, 2]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericUserInfoMessage [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](847)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>848</factId>
+  <objectToString>ActivityToActivityStatusCopy( activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null], value=GenericUserInfoMessage [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [847, 2]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericUserInfoMessage [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](847)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>req prepare rstatus: activity status to request status (single fact) [837, 833, 841, 842, 840, 752, 746]</activationId>
+  <rule>req prepare rstatus: activity status to request status (single fact)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericAlias [object=GenericUserInfoFileArtifactList [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]](837); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833); $rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>activity main phase (auto): read from subrequest (single fact) [849, 841, 842, 746, 6, 2]</activationId>
+  <rule>activity main phase (auto): read from subrequest (single fact)</rule>
+  <declarations>$subrequest=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746); $subrequestStatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericAlias [object=GenericUserInfoFileArtifactList [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok]](849)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>849</factId>
+  <objectToString>GenericAlias [object=GenericUserInfoFileArtifactList [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok]]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>req prepare rstatus: activity status to request status (single fact) [837, 833, 841, 842, 840, 752, 746]</activationId>
+  <rule>req prepare rstatus: activity status to request status (single fact)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericAlias [object=GenericUserInfoFileArtifactList [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]](837); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833); $rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>activity main phase (auto): read from subrequest (single fact) [849, 841, 842, 746, 6, 2]</activationId>
+  <rule>activity main phase (auto): read from subrequest (single fact)</rule>
+  <declarations>$subrequest=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746); $subrequestStatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericAlias [object=GenericUserInfoFileArtifactList [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok]](849)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [850, 2]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericUserInfoFileArtifactList [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](850)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>850</factId>
+  <objectToString>GenericUserInfoFileArtifactList [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>activity main phase (auto): read from subrequest (single fact) [849, 841, 842, 746, 6, 2]</activationId>
+  <rule>activity main phase (auto): read from subrequest (single fact)</rule>
+  <declarations>$subrequest=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746); $subrequestStatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericAlias [object=GenericUserInfoFileArtifactList [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok]](849)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [850, 2]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericUserInfoFileArtifactList [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](850)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>851</factId>
+  <objectToString>ActivityToActivityStatusCopy( activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null], value=GenericUserInfoFileArtifactList [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [850, 2]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericUserInfoFileArtifactList [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](850)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>req prepare rstatus: activity status to request status (single fact) [836, 833, 841, 842, 840, 752, 746]</activationId>
+  <rule>req prepare rstatus: activity status to request status (single fact)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]](836); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833); $rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>activity main phase (auto): read from subrequest (single fact) [852, 841, 842, 746, 6, 2]</activationId>
+  <rule>activity main phase (auto): read from subrequest (single fact)</rule>
+  <declarations>$subrequest=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746); $subrequestStatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok]](852)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>852</factId>
+  <objectToString>GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok]]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>req prepare rstatus: activity status to request status (single fact) [836, 833, 841, 842, 840, 752, 746]</activationId>
+  <rule>req prepare rstatus: activity status to request status (single fact)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]](836); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833); $rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>activity main phase (auto): read from subrequest (single fact) [852, 841, 842, 746, 6, 2]</activationId>
+  <rule>activity main phase (auto): read from subrequest (single fact)</rule>
+  <declarations>$subrequest=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746); $subrequestStatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok]](852)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [853, 2]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericUserInfoMessage [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](853)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>853</factId>
+  <objectToString>GenericUserInfoMessage [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>activity main phase (auto): read from subrequest (single fact) [852, 841, 842, 746, 6, 2]</activationId>
+  <rule>activity main phase (auto): read from subrequest (single fact)</rule>
+  <declarations>$subrequest=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746); $subrequestStatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericAlias [object=GenericUserInfoMessage [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok]](852)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [853, 2]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericUserInfoMessage [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](853)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>854</factId>
+  <objectToString>ActivityToActivityStatusCopy( activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null], value=GenericUserInfoMessage [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [853, 2]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericUserInfoMessage [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](853)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>req prepare rstatus: activity status to request status (single fact) [835, 833, 841, 842, 840, 752, 746]</activationId>
+  <rule>req prepare rstatus: activity status to request status (single fact)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericAlias [object=GenericUserInfoFileArtifact [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]](835); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833); $rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>activity main phase (auto): read from subrequest (single fact) [855, 841, 842, 746, 6, 2]</activationId>
+  <rule>activity main phase (auto): read from subrequest (single fact)</rule>
+  <declarations>$subrequest=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746); $subrequestStatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericAlias [object=GenericUserInfoFileArtifact [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok]](855)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>855</factId>
+  <objectToString>GenericAlias [object=GenericUserInfoFileArtifact [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok]]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>req prepare rstatus: activity status to request status (single fact) [835, 833, 841, 842, 840, 752, 746]</activationId>
+  <rule>req prepare rstatus: activity status to request status (single fact)</rule>
+  <declarations>$activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )(752); $value=GenericAlias [object=GenericUserInfoFileArtifact [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )]](835); $astatus=GenericActivitySucceeded [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )](833); $rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>activity main phase (auto): read from subrequest (single fact) [855, 841, 842, 746, 6, 2]</activationId>
+  <rule>activity main phase (auto): read from subrequest (single fact)</rule>
+  <declarations>$subrequest=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746); $subrequestStatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericAlias [object=GenericUserInfoFileArtifact [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok]](855)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [856, 2]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericUserInfoFileArtifact [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](856)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>856</factId>
+  <objectToString>GenericUserInfoFileArtifact [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>activity main phase (auto): read from subrequest (single fact) [855, 841, 842, 746, 6, 2]</activationId>
+  <rule>activity main phase (auto): read from subrequest (single fact)</rule>
+  <declarations>$subrequest=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746); $subrequestStatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok](841); $activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericAlias [object=GenericUserInfoFileArtifact [activity=RunActivity( date=null, id=null, refId=17, request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )], rstatus=RequestSucceeded [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]], statusString=ok]](855)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [856, 2]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericUserInfoFileArtifact [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](856)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>857</factId>
+  <objectToString>ActivityToActivityStatusCopy( activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null], value=GenericUserInfoFileArtifact [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]] )</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>ActivityToActivityStatusCopy facts (UserInfo) [856, 2]</activationId>
+  <rule>ActivityToActivityStatusCopy facts (UserInfo)</rule>
+  <declarations>$activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null](2); $value=GenericUserInfoFileArtifact [activity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](856)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>Request completed [842, 746]</activationId>
+  <rule>Request completed</rule>
+  <declarations>$request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746); $aa=RLCPrepareRStatus [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]]](842)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>Request first lifecycle phase [746]</activationId>
+  <rule>Request first lifecycle phase</rule>
+  <declarations>$request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>3</type>
+  <factId>842</factId>
+  <objectToString>RLCPrepareRStatus [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]]]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>5</type>
+  <activationId>Request first lifecycle phase [746]</activationId>
+  <rule>Request first lifecycle phase</rule>
+  <declarations>$request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>858</factId>
+  <objectToString>RLCCompleted [request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]]]</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>Request completed [-1, 746]</activationId>
+  <rule>Request completed</rule>
+  <declarations>$request=ReqRun [refId=3, parentActivity=GenericActivity [id=UserActivity, date=Wed Jun 25 01:14:58 MSK 2014, request=null]](746); </declarations>
+</org.drools.audit.event.ActivationLogEvent>
+</object-stream>

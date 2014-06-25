@@ -9,4 +9,7 @@ public class GenericUserInfoMessage extends UserInfoBase<String> {
 	 */
 	private static final long serialVersionUID = -7501441584730381576L;
 
+	public GenericUserInfoMessage() {
+		super("message");
+	}
 }

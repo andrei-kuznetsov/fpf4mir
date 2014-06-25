@@ -53,12 +53,12 @@ rule "Default activity analytics (failure)"
 		salience -10000
 	when
 		any activity
-		ActivityResultFailed for activity
+		$rfailed : ActivityResultFailed for activity
 		ALCAnalyze for activity
 	 	not ActivityFinalStatus for activity
 	 	not ActionFact for activity
  	then
- 		insert GenericActivityFailed
+ 		insert '$rfailed.getMessage()' as new 'GenericActivityFailed';
 end
 
 rule "Activity prepare astatus facts"

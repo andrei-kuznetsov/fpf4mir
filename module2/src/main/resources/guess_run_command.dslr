@@ -21,8 +21,9 @@ rule "Run execution status succeeded"
 		$res : Verified_FileArtifactList for activity
 	then
 		activity succeeded
-		insert artifact '$execstat.getFileOut()' as 'GenericUserInfoFileArtifact'
-		insert artifact '"Execution completed"' as 'GenericUserInfoMessage'
+		insert '$execstat.getFileOut()' as 'GenericUserInfoFileArtifact' with name "Console output";
+		insert '"Execution completed"' as 'GenericUserInfoMessage';
+		insert '$res' as 'GenericUserInfoFileArtifactList' with name "Results";
 end
 
 // #############################################################################################
@@ -80,11 +81,13 @@ rule "Verify run output data"
 		$execstat : ExecStatus(succeeded==true) for activity
 		$rf : RunFormat_Mirex_Aud_ChEst for activity
 		$results : Result_FileArtifactList for activity
+		$dataset : Dataset_FileArtifactList for activity
 		not OutputDataVerificationPassed for activity
 	then
 		add subrequest 'ReqOVMirexAudChEst'
 		add subrequest parameter '$results'
 		add subrequest parameter '$rf'
+		add subrequest parameter '$dataset'
 		
 		insert artifact '"Started output data verification"' as 'GenericUserInfoMessage'
 end
@@ -109,6 +112,8 @@ rule "(default) no output data verification"
 		subrequest 'ReqOutputVerification' for activity
 		$results : Result_FileArtifactList for activity
 		not OutputDataVerificationPassed for activity
+		// these can and must be verified
+		not RunFormat_Mirex_Aud_ChEst for activity
 	then
 		insert OutputDataVerificationPassed
 		insert artifact '$results' as 'Verified_FileArtifactList'

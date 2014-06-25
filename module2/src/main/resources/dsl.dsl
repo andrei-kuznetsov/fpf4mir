@@ -22,8 +22,8 @@
 [when]subrequest {subrequest:\w+} for activity=$subrequest : {subrequest}(parentActivity == $activity)
 #[when]- has name=name != null
 [when]subrequest completed=RLCCompleted( request == $subrequest )
-[when]subrequest succeeded=$subrequestStatus : RequestSucceeded( request == $subrequest )
-[when]subrequest failed=$subrequestStatus : RequestFailed( request == $subrequest )
+[when]subrequest succeeded=$subrequestStatus : RequestSucceeded( request == $subrequest ) and RLCCompleted( request == $subrequest )
+[when]subrequest failed=$subrequestStatus : RequestFailed( request == $subrequest ) and RLCCompleted( request == $subrequest )
 [when]subrequest outputs \(=(or
 [when]subrequest output '{type}'=$output : {type}( rstatus == $subrequestStatus ) 
 
@@ -82,7 +82,14 @@
 [then]add activity status parameter {param} as {type}=add parameter '{param}' to 'activityStatus' as {type};
 
 [then]insert artifact '{value}' as '{type}'=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
-[then]insert '{value}' as '{type}';=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
+#[then]insert '{value}' as '{type}';=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
+
+[then]insert '{value}' as '{type}'=\{{type} o = new {type}(); o.reset($activity, {value}); !!!appender!!! 
+[then]!!!appender!!! with name "{name}"=!!!appender!!! with name '"{name}"'
+[then]!!!appender!!! with name '{name}'=o.setName({name}); !!!appender!!!
+[then]!!!appender!!! ;=!!!appender!!!;
+[then]!!!appender!!!;=insert(o);\};
+
 [then]insert '{value}' as new '{type:\w+}';=insert( new {type}($activity, {value}) );
 [then]insertLogical '{value}' as '{type}';=\{{type} o = new {type}(); o.reset($activity, {value}); insertLogical(o);\};
 
