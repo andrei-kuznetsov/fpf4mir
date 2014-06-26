@@ -21,6 +21,7 @@ public class ExecActionHandler implements ActionHandler{
 	public void process(ActionFact a, StatefulKnowledgeSession ksession) throws IOException, InterruptedException {
 		ExecAction action = (ExecAction) a;
 		final File workingDir = action.getWorkingDir();
+		final File fileIn = new File(workingDir, UUID.randomUUID().toString() + ".in");
 		final File fileOut = new File(workingDir, UUID.randomUUID().toString() + ".out");
 		final File fileErr = new File(workingDir, UUID.randomUUID().toString() + ".err");
 		
@@ -31,8 +32,10 @@ public class ExecActionHandler implements ActionHandler{
         args.add(0, command);
         
         System.out.println("Exec: " + Arrays.toString(args.toArray()));
+        fileIn.createNewFile();
         
         b.command(args);
+        b.redirectInput(fileIn);
         b.redirectOutput(fileOut);
         b.redirectError(fileErr);
         b.directory(workingDir);

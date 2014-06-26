@@ -1,7 +1,7 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.RequestScopedKnowledgeBase;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.RequestScopedKnowledgeBase;
 
 public class RSKIncompatibleFeatureVersion extends RequestScopedKnowledgeBase {
 

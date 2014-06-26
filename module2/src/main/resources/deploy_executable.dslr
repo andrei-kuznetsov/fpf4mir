@@ -1,17 +1,17 @@
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfos.*;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.generic.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 
-declare DeployExecOption_Build extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
-declare DeployExecOption_Run extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
-declare DeployExecOption_Autodetect extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
+declare DeployExecOption_Build extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityRelatedFactBase end
+declare DeployExecOption_Run extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityRelatedFactBase end
+declare DeployExecOption_Autodetect extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityRelatedFactBase end
 
-declare ExecutableUnitTestsPassed extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
+declare ExecutableUnitTestsPassed extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityRelatedFactBase end
 
 // ----------------------------------- Output parameters ---------------------------------------
 
@@ -25,6 +25,8 @@ rule "Eval DeployExecutableActivity succeeded"
 		activity succeeded
 		add activity status parameter $exec as GenericAlias
 		add activity status parameter $rf as GenericAlias
+		
+		insert artifact '"Successfully deployed executable artifact"' as 'GenericUserInfoMessage'
 end
 
 // #############################################################################################
@@ -185,8 +187,11 @@ rule "(default) no unit tests"
 		active activity 'DeployExecutableActivity'
 		not subrequest 'ReqUT' for activity
 		$exec : ExecutableFileArtifact for activity
-		$rf : RunFormat_Mirex_Aud_ChEst for activity
 		not ExecutableUnitTestsPassed for activity
+		not UserAction for activity
+		
+		not RunFormat_Mirex_Aud_ChEst for activity
 	then
 		insert ExecutableUnitTestsPassed
+		insert artifact '"Unit tests skipped"' as 'GenericUserInfoMessage'
 end

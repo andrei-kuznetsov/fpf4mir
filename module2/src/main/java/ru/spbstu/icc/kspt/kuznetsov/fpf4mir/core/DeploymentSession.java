@@ -43,13 +43,11 @@ import org.drools.runtime.rule.QueryResultsRow;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.ActionFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.AddFeatureAction;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.DetectEncodingAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.ExecAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ActionHandler;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.AddFeatureHandler_Local_Windows;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.AddFeatureHandler_Local_Linux;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.DetectEncodingActionHandler;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.AddFeatureHandler_Local_Windows;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ExecActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityResult;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityStatus;
@@ -57,6 +55,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.UserInfo;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.DataDirRoot;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.RestRequestCommand;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestSubstatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.OS;
@@ -132,8 +131,6 @@ public class DeploymentSession {
 
 	private static void initActions() {
 		actionsMap.put(ExecAction.class, new ExecActionHandler());
-		actionsMap.put(DetectEncodingAction.class,
-				new DetectEncodingActionHandler());
 		
 		if (OS.isWindows()){
 			actionsMap.put(AddFeatureAction.class, new AddFeatureHandler_Local_Windows());
@@ -577,6 +574,10 @@ public class DeploymentSession {
 		return simpleListRequest(key, "Get activity result related facts");
 	}
 
+	public List<Object> getRestRequestRelatedFacts(RestRequestCommand key) {
+		return simpleListRequest(key, "Get rest result related facts");
+	}
+	
 	public List<UserInfo> getUserInfoFacts(ActivityStatus key) {
 		return simpleListRequest(key, "Get userInfo facts for request");
 	}

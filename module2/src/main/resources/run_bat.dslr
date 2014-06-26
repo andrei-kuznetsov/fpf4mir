@@ -1,0 +1,59 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
+
+
+// ----------------------------------- Output parameters ---------------------------------------
+
+// #############################################################################################
+
+rule "Assert RunType Windows batch file"
+	when
+		active activity 'RunActivity'
+		$exec : GenericExecutableFileArtifact(getFileName().endsWith(".bat")) for activity
+	then
+		insert RunType_Bat
+		insert '$exec' as 'BatExecutableFileArtifact';
+end
+
+rule "Select working dir"
+	when
+		active activity 'RunActivity'
+		not ExecWorkingDir for activity
+		$wdc : ExecWorkingDirCandidate for activity
+		not IncompatibleFactCandidate(fact == $wdc.fact) for activity
+	then
+		insert '(FolderArtifact)$wdc.getFact()' as 'ExecWorkingDir';
+end
+
+rule "Bat: detected incompatible working dir"
+	when
+		analyze activity 'RunActivity'
+>		ExecStatus( activity == $activity,
+>					succeeded == false,
+>					containsString("is not recognized as an internal or external command, operable program or batch file.") )
+		$wd : ExecWorkingDir for activity
+		$wdc : FactCandidate(fact == $wd) for activity
+	then
+		insert '$wdc' as 'GenericIncompatibleFactCandidate';
+end
+
+rule "Execute bat command"
+	when
+	    active activity 'RunActivity'
+	    RunType_Bat for activity
+	    $wd : ExecWorkingDir for activity
+//	    Run_BatOptionsReady for activity // extra options (no options so far)
+	    Run_AppOptionsReady for activity
+	    cmd options for activity
+		$exec : BatExecutableFileArtifact for activity
+	then
+		execute command $exec._getFile().getAbsolutePath() in working dir $wd
+end

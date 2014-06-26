@@ -1,20 +1,74 @@
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.*;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.generic.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfos.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.*;
 
-//rule "Run command from REST args"
-//	when
-//		active activity 'RunActivity'
-//		RunFormat_Rest for activity
-//		$arg : RestPathArgument for activity
-		// todo: add processed flag or remove activity deactivation
-//	then
-//		add ordinal $arg.getOrder() $arg.getValue()
-//end
+declare ResultsOutputDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact end
 
+declare FNParamFilter extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityRelatedFactBase
+	activity : Activity
+	flist : FileArtifactList
+end
+
+rule "REST: output files list"
+	when
+		active activity 'RunActivity'
+		RunFormat_Rest for activity
+		$execstat : ExecStatus(succeeded==true) for activity
+		ResultsOutputDir($output : getFileArtifactListForPattern("**\\*.pdf")) for activity
+	then
+		insert '$output' as 'Result_FileArtifactList';
+end
+
+rule "REST: output dir"
+	when
+		active activity 'RunActivity'
+		RunFormat_Rest for activity
+		$dataset : Dataset for activity
+		not ResultsOutputDir for activity
+	then
+		insert '$dataset' as 'ResultsOutputDir';
+end
+
+rule "REST: default ExecWorkingDirCandidate from dataset"
+	when
+		active activity 'RunActivity'
+		RunFormat_Rest for activity
+		$dataset : Dataset for activity
+	then
+		insert '$dataset.getAbsolutePath(), ""' as candidate 'ExecWorkingDir';
+end
+
+rule "REST: guess FNParamFilter from rest arguments"
+	when
+		active activity 'RunActivity'
+		RunFormat_Rest for activity
+		OrdinalArgument(order >= 1000, order < 10000, $value : value) for activity
+		$dataset : Dataset for activity
+	then
+		insert '$dataset.getFileArtifactListForPattern("**\\" + $value)' as new 'FNParamFilter';
+end
+
+rule "REST: executable working dir (try FNParamFilter)"
+	when
+		active activity 'RunActivity'
+		RunFormat_Rest for activity
+		FNParamFilter($flist : flist, $flist.size() == 1) for activity
+	then
+		insert '$flist.get(0)._getFile().getParent(), ""' as candidate 'ExecWorkingDir';
+end
+
+rule "REST: cmdline options ready"
+		salience -1 // after all options are inserted 
+	when
+		active activity 'RunActivity'
+		RunFormat_Rest for activity
+	then
+		insert Run_AppOptionsReady
+end

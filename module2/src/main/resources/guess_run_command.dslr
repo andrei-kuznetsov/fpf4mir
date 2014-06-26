@@ -1,7 +1,7 @@
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.*;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.generic.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
@@ -9,7 +9,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfos.*;
 
-declare OutputDataVerificationPassed extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase end
+declare OutputDataVerificationPassed extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityRelatedFactBase end
 
 // ----------------------------------- Output parameters ---------------------------------------
 
@@ -26,16 +26,16 @@ rule "Run execution status succeeded"
 		insert '$res' as 'GenericUserInfoFileArtifactList' with name "Results";
 end
 
-// #############################################################################################
 
+// #############################################################################################
 
 rule "Run execution status failed"
 	when
 		active activity 'RunActivity'
 		$execstat : ExecStatus(succeeded==false) for activity
 	then
-		insert artifact '$execstat.getFileOut()' as 'GenericUserInfoFileArtifact'
-		insert artifact '$execstat.getFileErr()' as 'GenericUserInfoFileArtifact'
+		insert '$execstat.getFileOut()' as 'GenericUserInfoFileArtifact' with name "err console output";
+		insert '$execstat.getFileErr()' as 'GenericUserInfoFileArtifact' with name "std console output";
 		activity failed with message "Run failed with status " + $execstat.getStatus()
 end
 
@@ -104,17 +104,79 @@ rule "Output data verification passed"
 		insert artifact '"Output data verification completed"' as 'GenericUserInfoMessage'
 end
 
+rule "default working dir: executable parent dir"
+		salience -999
+	when
+		active activity 'RunActivity'
+		// just to make sure that rules depending on dataset also fired
+		Dataset for activity 
+		$exec : JavaExecutableFileArtifact for activity
+		not ExecWorkingDir for activity
+	then
+		insert '$exec._getFile().getParent(), ""' as 'ExecWorkingDir';
+end
+
 rule "(default) no output data verification"
 		salience -999 // last rule in the file
 	when
 		active activity 'RunActivity'
-		Verified_FileArtifactList for activity
-		subrequest 'ReqOutputVerification' for activity
 		$results : Result_FileArtifactList for activity
 		not OutputDataVerificationPassed for activity
+		not Verified_FileArtifactList for activity
+		not subrequest 'ReqOutputVerification' for activity
 		// these can and must be verified
 		not RunFormat_Mirex_Aud_ChEst for activity
 	then
 		insert OutputDataVerificationPassed
-		insert artifact '$results' as 'Verified_FileArtifactList'
+		insert '$results' as 'Verified_FileArtifactList';
+end
+
+////////////////////// diagnistics ////////////////////////////
+
+rule "run command: diag: no exec status"
+	when
+		active activity 'RunActivity'
+		not ExecStatus(succeeded==true) for activity
+	then
+		insertLogical '"No ExecStatus or ExecStatus failed (yet)"' as 'GenericUserInfoMessage';
+end
+
+rule "run command: diag: OutputDataVerificationPassed"
+	when
+		active activity 'RunActivity'
+		not OutputDataVerificationPassed for activity
+	then
+		insertLogical '"No OutputDataVerificationPassed (yet)"' as 'GenericUserInfoMessage';
+end
+
+rule "run command: diag: Verified_FileArtifactList"
+	when
+		active activity 'RunActivity'
+		not Verified_FileArtifactList for activity
+	then
+		insertLogical '"No Verified_FileArtifactList (yet)"' as 'GenericUserInfoMessage';
+end
+
+rule "run command: diag: ExecWorkingDir"
+	when
+		active activity 'RunActivity'
+		not ExecWorkingDir for activity
+	then
+		insertLogical '"No ExecWorkingDir (yet)"' as 'GenericUserInfoMessage';
+end
+
+rule "run command: diag: ExecutableFileArtifact"
+	when
+		active activity 'RunActivity'
+		not ExecutableFileArtifact for activity
+	then
+		insertLogical '"No ExecutableFileArtifact (yet)"' as 'GenericUserInfoMessage';
+end
+
+rule "run command: diag: RunFormat"
+	when
+		active activity 'RunActivity'
+		not RunFormat for activity
+	then
+		insertLogical '"No RunFormat (yet)"' as 'GenericUserInfoMessage';
 end

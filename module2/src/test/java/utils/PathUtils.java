@@ -6,11 +6,9 @@ import java.net.URL;
 
 import org.junit.Assert;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actions.ZipUnzipTest;
-
 public class PathUtils {
 	public static File getTestResource(String child) throws URISyntaxException{
-        URL url = ZipUnzipTest.class.getClassLoader().getResource("c1.zip");
+        URL url = PathUtils.class.getClassLoader().getResource("c1.zip");
 		File f = new File(url.toURI());
 		f = new File(f.getParent() + child);
 		return f;

@@ -1,7 +1,9 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.proxy;
 
 import java.io.IOException;
+import java.util.Map.Entry;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.RestArtifact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.RestFormArgument;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.RestPathArgument;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.RestRequestCommand;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.proxy.Utils.UploadedFileDetails;
@@ -57,6 +60,11 @@ public class KBServlet extends HttpServlet {
 			RestPathArgument arg = new RestPathArgument(req, reqArgument++, i);
 			session.assertFact(arg);
 		}
+
+		for (Entry<String, String> i : files.formFields.entrySet()){
+			RestFormArgument arg = new RestFormArgument(req, i.getKey(), i.getValue());
+			session.assertFact(arg);
+		}
 		
 		try {
 			session.run();
@@ -65,6 +73,12 @@ public class KBServlet extends HttpServlet {
 			e.printStackTrace();
 			throw new ServletException("Can't process request", e);
 		}
-
+    }
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/exec.jsp");
+		dispatcher.forward(request, response);
     }
 }

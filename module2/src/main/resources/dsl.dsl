@@ -84,6 +84,8 @@
 [then]insert artifact '{value}' as '{type}'=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
 #[then]insert '{value}' as '{type}';=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
 
+[then]insert '{value}' as candidate '{type}';=\{{type} oo = new {type}(); oo.reset($activity, {value}); {type}Candidate o = new {type}Candidate(); o.reset($activity, oo); !!!appender!!!; 
+
 [then]insert '{value}' as '{type}'=\{{type} o = new {type}(); o.reset($activity, {value}); !!!appender!!! 
 [then]!!!appender!!! with name "{name}"=!!!appender!!! with name '"{name}"'
 [then]!!!appender!!! with name '{name}'=o.setName({name}); !!!appender!!!

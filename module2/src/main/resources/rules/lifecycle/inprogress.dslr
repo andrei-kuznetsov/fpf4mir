@@ -1,0 +1,40 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+
+rule "in progress (auto): in progress request for in progress activity"
+		salience 10000
+	when 
+		any activity request
+	 	RLCMain for request
+	 	activity for request
+	 	ALCMain for activity
+	 	exists ActivityInProgress for activity
+	then
+		insertLogical '"In progress because nested activity is in progress"' as 'GenericRequestInProgress' for request;
+end
+
+rule "in progress (auto): in progress activity for in progress subrequest"
+		salience 10000
+	when 
+		active activity 'Activity'
+	 	subrequest for activity
+	 	RLCMain for subrequest
+	 	exists RequestInProgress for subrequest
+	then
+		insertLogical '"In progress because subrequest is in progress"' as 'GenericActivityInProgress';
+end
+
+rule "In progress activity for active activiy"
+		salience 10000
+	when
+		any activity
+	 	ALCMain for activity
+		not ActivitySuspended for activity
+	then
+		insertLogical '"Activity in progress"' as 'GenericActivityInProgress';
+end

@@ -35,10 +35,10 @@ public class FileArtifact extends Artifact {
 				try {
 					file.createNewFile();
 				} catch (IOException e) {
-					throw new RuntimeDroolsException("Can't create a file!", e);
+					throw new RuntimeDroolsException("Can't create a file: " + file.getAbsolutePath(), e);
 				}
 			} else if (file.isDirectory() == true){
-				throw new RuntimeDroolsException("Artifact must be a file!");
+				throw new RuntimeDroolsException("Artifact must be a file: " + file.getAbsolutePath());
 			}
 		}
 	}

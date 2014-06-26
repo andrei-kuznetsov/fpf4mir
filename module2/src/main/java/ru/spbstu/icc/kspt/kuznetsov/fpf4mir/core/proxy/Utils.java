@@ -3,9 +3,11 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.proxy;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,6 +24,7 @@ public class Utils {
 	public static class UploadedFileDetails{
 		public String baseDir = "";
 		public List<String> fileNames = new LinkedList<String>();
+		public Map<String, String> formFields = new HashMap<String, String>();
 	}
 	
 	static UploadedFileDetails doUploadOriginalArtifact(HttpServletRequest request) throws Exception {
@@ -81,6 +84,9 @@ public class Utils {
 							.lastIndexOf("\\") + 1));
 				}
 				fi.write(file);
+			} else {
+				System.out.println("Form field: " + fi.getFieldName() + ", " + fi.getString());
+				uploadedFiles.formFields.put(fi.getFieldName(), fi.getString());
 			}
 		}
 			

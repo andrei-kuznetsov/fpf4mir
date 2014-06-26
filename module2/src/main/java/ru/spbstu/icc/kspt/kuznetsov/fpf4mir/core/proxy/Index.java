@@ -33,15 +33,9 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.DeploymentSession.QResult;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityResult;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityStatus;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Artifact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.R;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericAlias;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatus;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.proxy.Utils.UploadedFileDetails;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqDeployExecutable;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.RestRequestCommand;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestStatusRelatedFact;
@@ -145,6 +139,8 @@ public class Index {
 				lst = session.getRequestStatusRelatedFacts((RequestStatus) key);
 			} else if (key instanceof ActivityResult) {
 				lst = session.getActivityResultRelatedFacts((ActivityResult) key);
+			} else if (key instanceof RestRequestCommand) {
+				lst = session.getRestRequestRelatedFacts((RestRequestCommand) key);
 			}
 
 			tree.put(key, lst);
@@ -166,38 +162,38 @@ public class Index {
 		req.getInputStream().close();
 	}
 
-	@POST
-	@Path("/original_artifact")
-	public Response uploadProcess(@Context HttpServletRequest httpreq)
-			throws Exception {
-
-		UploadedFileDetails files = Utils.doUploadOriginalArtifact(httpreq);
-
-		ReqDeployExecutable req = new ReqDeployExecutable(Activity.USER);
-		req.setDeploymentName(R.id.MainDeployment);
-
-		Artifact userArtifact;
-		GenericAlias artifactAlias = new GenericAlias();
-
-		if (files.fileNames.size() == 1) {
-			userArtifact = new FileArtifact(Activity.USER, files.baseDir, files.fileNames.get(0));
-		} else {
-			userArtifact = new FolderArtifact(Activity.USER, files.baseDir, "");
-		}
-		artifactAlias.reset(req, R.artifact.main, userArtifact);
-
-		try {
-			session.reset(); // recreate new session
-			session.assertFactAndRun(req, userArtifact, artifactAlias);
-
-			return Response.seeOther(
-					new URI(PATH_ROOT + PATH_REQUEST_STATUS + "/"
-							+ req.getRefId())).build();
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new ServletException("Can't init deployment session", e);
-		}
-	}
+//	@POST
+//	@Path("/original_artifact")
+//	public Response uploadProcess(@Context HttpServletRequest httpreq)
+//			throws Exception {
+//
+//		UploadedFileDetails files = Utils.doUploadOriginalArtifact(httpreq);
+//
+//		ReqDeployExecutable req = new ReqDeployExecutable(Activity.USER);
+//		req.setDeploymentName(R.id.MainDeployment);
+//
+//		Artifact userArtifact;
+//		GenericAlias artifactAlias = new GenericAlias();
+//
+//		if (files.fileNames.size() == 1) {
+//			userArtifact = new FileArtifact(Activity.USER, files.baseDir, files.fileNames.get(0));
+//		} else {
+//			userArtifact = new FolderArtifact(Activity.USER, files.baseDir, "");
+//		}
+//		artifactAlias.reset(req, R.artifact.main, userArtifact);
+//
+//		try {
+//			session.reset(); // recreate new session
+//			session.assertFactAndRun(req, userArtifact, artifactAlias);
+//
+//			return Response.seeOther(
+//					new URI(PATH_ROOT + PATH_REQUEST_STATUS + "/"
+//							+ req.getRefId())).build();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			throw new ServletException("Can't init deployment session", e);
+//		}
+//	}
 
 	@GET
 	@Path(PATH_USERACTION + "/{actionName}/{id}")

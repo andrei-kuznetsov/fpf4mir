@@ -2,6 +2,7 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts;
 
 import java.io.Serializable;
 import java.net.URI;
+import java.net.URISyntaxException;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityRelatedFact;
@@ -17,6 +18,9 @@ public class ArtifactRef implements ActivityRelatedFact, FactWithName, FPFClonea
 	private URI ref;
 	private Activity activity;
 	private String name;
+
+	public ArtifactRef() {
+	}
 	
 	public ArtifactRef(Activity activity, URI ref) {
 		this.activity = activity;
@@ -59,4 +63,5 @@ public class ArtifactRef implements ActivityRelatedFact, FactWithName, FPFClonea
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}
+	
 }

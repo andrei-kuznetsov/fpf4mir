@@ -1,6 +1,6 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfos;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.UserInfoBase;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.UserInfoBase;
 
 public class GenericUserInfoMessage extends UserInfoBase<String> {
 

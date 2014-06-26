@@ -1,5 +1,5 @@
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.generic.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.*;
@@ -25,11 +25,12 @@ end
 rule "Execute java command"
 	when
 	    active activity 'RunActivity'
+	    $wd : ExecWorkingDir for activity
 	    RunType_Java for activity
 	    Run_JavaOptionsReady for activity
 	    Run_AppOptionsReady for activity
 	    cmd options for activity
 		$exec : JavaExecutableFileArtifact for activity
 	then
-		execute command "java" in working dir $exec.getWorkingDir()
+		execute command "java" in working dir $wd
 end

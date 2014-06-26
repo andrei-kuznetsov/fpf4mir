@@ -6,6 +6,7 @@ import org.apache.tools.ant.DirectoryScanner;
 import org.drools.RuntimeDroolsException;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.generic.GenericFileArtifactList;
 
 public class FolderArtifact extends Artifact {
 	/**
@@ -64,7 +65,7 @@ public class FolderArtifact extends Artifact {
 	
 	public FileArtifactList getFileArtifactListForPattern(Class<? extends FileArtifact> c, String... patterns){
 		String fileNames[] = getFileNamesForPattern(patterns);
-		return new FileArtifactList(getActivity(), patterns.toString(), _getFile(), fileNames, c);
+		return new GenericFileArtifactList(getActivity(), patterns.toString(), _getFile(), fileNames, c);
 	}
 	
 	@Override

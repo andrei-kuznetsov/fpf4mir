@@ -1,15 +1,15 @@
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.generic.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.sources.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 
-declare MvnErr_GoldinCopyPlugin_RepositorySystem extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityErrorBase end
+declare MvnErr_GoldinCopyPlugin_RepositorySystem extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityErrorBase end
 declare RSK_MvnIncompatibleVersion extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.RSKIncompatibleFeatureVersion end
 
-declare ProposedMavenVersion extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.ActivityRelatedFactBase
+declare ProposedMavenVersion extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityRelatedFactBase
 	activity : Activity
 	version: String
 end
