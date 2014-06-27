@@ -1,7 +1,9 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.RequestRelatedFactBase;
 
-public class RestFormArgument extends RestRequestRelatedFactBase {
+
+public class RestFormArgument extends RequestRelatedFactBase {
 	/**
 	 * 
 	 */
@@ -13,7 +15,7 @@ public class RestFormArgument extends RestRequestRelatedFactBase {
 	public RestFormArgument() {
 	}
 	
-	public RestFormArgument(RestRequestCommand restCmd, String name, String value) {
+	public RestFormArgument(ReqRestCommand restCmd, String name, String value) {
 		super(restCmd);
 		this.name = name;
 		this.value = value;
@@ -35,6 +37,6 @@ public class RestFormArgument extends RestRequestRelatedFactBase {
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + " [name=" + name + ", value=" + value
-				+ ", restCmd" + getRestCmd() + "]";
+				+ ", restCmd" + getRequest() + "]";
 	}
 }

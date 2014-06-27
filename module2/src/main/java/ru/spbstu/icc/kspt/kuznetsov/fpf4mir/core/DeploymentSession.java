@@ -55,7 +55,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.UserInfo;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.DataDirRoot;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatus;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.RestRequestCommand;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.ReqRestCommand;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestSubstatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.OS;
@@ -572,10 +572,6 @@ public class DeploymentSession {
 
 	public List<Object> getActivityResultRelatedFacts(ActivityResult key) {
 		return simpleListRequest(key, "Get activity result related facts");
-	}
-
-	public List<Object> getRestRequestRelatedFacts(RestRequestCommand key) {
-		return simpleListRequest(key, "Get rest result related facts");
 	}
 	
 	public List<UserInfo> getUserInfoFacts(ActivityStatus key) {

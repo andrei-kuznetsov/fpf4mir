@@ -1,0 +1,87 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.*;
+
+// ----------------------------------- Output parameters ---------------------------------------
+
+rule "rest : run exec command - status eval"
+	when
+		active activity 'RestCommandActivity'
+		RestAction_Execute for activity
+		subrequest 'ReqRun' for activity
+		subrequest succeeded
+	then
+		activity succeeded
+end
+
+// #############################################################################################
+
+rule "prepare rest : Run exec command - dataset and executable"
+	when
+		any activity
+		subrequest 'ReqRestCommand' for activity
+		RLCPrepareMain for subrequest 
+		RestPathArgument(order == 1, value == "execute") for subrequest
+		
+		$exec : ExecutableFileArtifact for activity
+		$dataset : RestArtifact for subrequest
+		$rf : RunFormat for activity
+	then
+		add subrequest parameter '$exec'
+		add subrequest parameter '$rf'
+		add subrequest parameter 'new RestAction_Execute()'
+		add subrequest parameter '$dataset.getArtifact()' with name "dataset";
+end
+
+rule "prepare rest : Run exec command - rest invocation format"
+	when
+		any activity
+		subrequest 'ReqRestCommand' for activity
+		RLCPrepareMain for subrequest 
+		RestPathArgument(order == 1, value == "execute") for subrequest
+		RunFormat_Rest for activity
+		RestPathArgument($order : order, $order > 1, $opt : value) for subrequest 
+	then
+		add subrequest parameter 'new OrdinalArgument( $activity, 1000 + $order, $opt)'
+end
+
+rule "rest : run exec command - do run"
+	when
+		active activity 'RestCommandActivity'
+		RestAction_Execute for activity
+		$exec :  ExecutableFileArtifact for activity
+		$rf : RunFormat for activity
+		$dataset : Artifact(name == "dataset") for activity
+	then
+		add subrequest 'ReqRun'; 
+		add subrequest parameter '$exec'
+		add subrequest parameter '$rf'
+		add subrequest parameter '$dataset'
+end
+
+rule "rest : run exec command - invocation arguments"
+	when
+		active activity 'RestCommandActivity'
+		subrequest 'ReqRun' for activity
+		RLCPrepareMain for subrequest 
+		$arg : OrdinalArgument for activity
+	then
+		add subrequest parameter '$arg'
+end
+
+
+rule "rest : diag - no dataset"
+	when
+		active activity 'RestCommandActivity'
+		RestAction_Execute for activity
+		not Artifact(name == "dataset") for activity
+	then
+		insertLogical '"no dataset (yet)"' as 'GenericUserInfoMessage';
+end

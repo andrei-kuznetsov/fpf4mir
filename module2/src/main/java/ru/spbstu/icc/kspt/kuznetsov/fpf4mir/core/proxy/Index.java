@@ -35,7 +35,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityResult;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatus;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.RestRequestCommand;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.ReqRestCommand;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestStatusRelatedFact;
@@ -113,7 +113,7 @@ public class Index {
 		session.reset(); // recreate new session
 		session.assertFact(Activity.USER);
 		session.run();
-		return Response.seeOther(new URI("/index.jsp")).build();
+		return Response.seeOther(new URI("/kb/deploy")).build();
 	}
 	
 	@GET
@@ -139,8 +139,6 @@ public class Index {
 				lst = session.getRequestStatusRelatedFacts((RequestStatus) key);
 			} else if (key instanceof ActivityResult) {
 				lst = session.getActivityResultRelatedFacts((ActivityResult) key);
-			} else if (key instanceof RestRequestCommand) {
-				lst = session.getRestRequestRelatedFacts((RestRequestCommand) key);
 			}
 
 			tree.put(key, lst);
@@ -162,44 +160,12 @@ public class Index {
 		req.getInputStream().close();
 	}
 
-//	@POST
-//	@Path("/original_artifact")
-//	public Response uploadProcess(@Context HttpServletRequest httpreq)
-//			throws Exception {
-//
-//		UploadedFileDetails files = Utils.doUploadOriginalArtifact(httpreq);
-//
-//		ReqDeployExecutable req = new ReqDeployExecutable(Activity.USER);
-//		req.setDeploymentName(R.id.MainDeployment);
-//
-//		Artifact userArtifact;
-//		GenericAlias artifactAlias = new GenericAlias();
-//
-//		if (files.fileNames.size() == 1) {
-//			userArtifact = new FileArtifact(Activity.USER, files.baseDir, files.fileNames.get(0));
-//		} else {
-//			userArtifact = new FolderArtifact(Activity.USER, files.baseDir, "");
-//		}
-//		artifactAlias.reset(req, R.artifact.main, userArtifact);
-//
-//		try {
-//			session.reset(); // recreate new session
-//			session.assertFactAndRun(req, userArtifact, artifactAlias);
-//
-//			return Response.seeOther(
-//					new URI(PATH_ROOT + PATH_REQUEST_STATUS + "/"
-//							+ req.getRefId())).build();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			throw new ServletException("Can't init deployment session", e);
-//		}
-//	}
-
 	@GET
 	@Path(PATH_USERACTION + "/{actionName}/{id}")
 	public void getUserAction(@Context HttpServletResponse response,
 			@Context HttpServletRequest request, @PathParam("id") long id,
-			@PathParam("actionName") String actionName)
+			@PathParam("actionName") String actionName,
+			@QueryParam("r") int reqRefId)
 			throws ServletException, IOException {
 
 		UserAction uaction = session.getUserAction(id);
@@ -208,6 +174,7 @@ public class Index {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/"
 					+ actionName + ".jsp");
 			request.setAttribute("uaction", uaction);
+			request.setAttribute("r", reqRefId);
 			dispatcher.forward(request, response);
 		} else {
 			response.sendError(404, "No action '" + actionName
@@ -226,7 +193,7 @@ public class Index {
 	@POST
 	@Path(PATH_USERACTION + "/{actionName}/{id}/handled")
 	public Response handleUserAction(@Context HttpServletRequest request,
-			@PathParam("id") long id, @PathParam("actionName") String actionName)
+			@PathParam("id") long id, @PathParam("actionName") String actionName, @QueryParam("r") int reqRefId)
 			throws Exception {
 
 		UserAction uaction = session.getUserAction(id);
@@ -238,8 +205,7 @@ public class Index {
 			session.run();
 			
 			return Response.seeOther(
-					new URI("/rest/" + PATH_REQUEST_STATUS + "/"
-							+ uaction.getActivity().getRequest().getRefId()))
+					new URI("/rest/" + PATH_REQUEST_STATUS + "/" + reqRefId))
 					.build();
 		} else {
 			log.warn("No action '" + actionName + "' found with id=" + id);

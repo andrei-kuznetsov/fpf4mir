@@ -1,8 +1,9 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Artifact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.RequestRelatedFactBase;
 
-public class RestArtifact extends RestRequestRelatedFactBase {
+public class RestArtifact extends RequestRelatedFactBase {
 
 	/**
 	 * 
@@ -15,7 +16,7 @@ public class RestArtifact extends RestRequestRelatedFactBase {
 		super();
 	}
 
-	public RestArtifact(RestRequestCommand restCmd, Artifact artifact) {
+	public RestArtifact(ReqRestCommand restCmd, Artifact artifact) {
 		super(restCmd);
 		this.artifact = artifact;
 	}

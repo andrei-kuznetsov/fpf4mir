@@ -2,7 +2,7 @@
 /* GENERAL SETTINGS */
 /********************/
 body {
-    background-color: #AAAAAA;
+/*    background-color: #AAAAAA;*/
     font-size: 16px;
 }
 
@@ -24,8 +24,8 @@ body {
   margin-top:15px;
 }
 
-#expList ul, li {
-    list-style: none;
+#expList ol, ul, li {
+/*    list-style: none;*/
     margin:0;
     padding:0;
     cursor: pointer;

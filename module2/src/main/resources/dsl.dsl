@@ -34,7 +34,9 @@
 [when]{type:\w+} for activity={type}(activity == $activity)
 [when]{type:\w+}\({whatever}\) for activity={type}(activity == $activity, {whatever})
 [when]{type:\w+} for request={type}(request == $request)
-[when]{type:\w+} for subrequest={type}(request == $subrequest)
+[when]{type:\w+}\({whatever}\) for subrequest={type}(request == $subrequest, {whatever})
+[when]{type:\w+} for subrequest='{type}' for subrequest
+[when]'{type}' for subrequest={type}(request == $subrequest)
 
 [then]log {message}=System.out.println({message});
 [then]def user action {type:\w+}={type} useraction = new {type}(); useraction.setActivity($activity);
@@ -79,6 +81,7 @@
 
 
 [then]add request status parameter {param} as {type}=add parameter '{param}' to 'requestStatus' as {type};
+[then]add activity status parameter '{param}';=add activity status parameter {param} as GenericAlias
 [then]add activity status parameter {param} as {type}=add parameter '{param}' to 'activityStatus' as {type};
 
 [then]insert artifact '{value}' as '{type}'=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};

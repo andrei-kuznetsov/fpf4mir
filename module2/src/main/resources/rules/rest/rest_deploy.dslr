@@ -1,0 +1,56 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.*;
+
+// ----------------------------------- Output parameters ---------------------------------------
+
+rule "rest : deploy [latex] command - status eval"
+	when
+		active activity 'RestCommandActivity'
+		(RestAction_Deploy_Latex for activity or
+		 RestAction_Deploy for activity)
+		subrequest 'ReqDeployExecutable' for activity
+		subrequest succeeded
+		
+		$exec : ExecutableFileArtifact for activity
+		$rf : RunFormat for activity
+	then
+		activity succeeded
+		add activity status parameter '$exec';
+		add activity status parameter '$rf';
+end
+
+// #############################################################################################
+
+
+rule "rest : deploy - prepare request"
+	when
+		any activity
+		subrequest 'ReqRestCommand' for activity
+		RLCPrepareMain for subrequest 
+		not ExecutableFileArtifact for activity
+		RestPathArgument(order == 1, value == "deploy") for subrequest
+		not RestFormArgument(name=="magic") for subrequest
+		$artifact : RestArtifact for subrequest
+	then
+		add subrequest parameter '$artifact.getArtifact()' with name "user_artifact";
+		add subrequest parameter 'new RestAction_Deploy()'
+end
+
+rule "rest : deploy command - do deploy"
+	when
+		active activity 'RestCommandActivity'
+		RestAction_Deploy for activity
+		$artifact : Artifact(name=="user_artifact") for activity
+	then
+		add subrequest 'ReqDeployExecutable';
+		add subrequest parameter '$artifact'
+end
+

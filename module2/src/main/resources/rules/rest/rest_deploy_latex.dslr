@@ -1,0 +1,41 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.*;
+
+
+// ----------------------------------- Output parameters ---------------------------------------
+
+// prcessed by rst_deploy
+
+// #############################################################################################
+
+rule "rest : deploy latex - prepare request"
+	when
+		any activity
+		subrequest 'ReqRestCommand' for activity
+		RLCPrepareMain for subrequest 
+		not ExecutableFileArtifact for activity
+		RestPathArgument(order == 1, value == "deploy") for subrequest
+		RestFormArgument(name=="magic", value=="latex") for subrequest
+	then
+		add subrequest parameter 'new RestAction_Deploy_Latex()'
+end
+
+rule "rest : deploy latex command - do deploy"
+	when
+		active activity 'RestCommandActivity'
+		RestAction_Deploy_Latex for activity
+	then
+		add subrequest 'ReqDeployExecutable';
+		add subrequest parameter 'new FolderArtifact($activity, "D:/SW/miktex-portable-2.9.5105", "")';
+		add subrequest parameter 'new GenericExecutableFileArtifact($activity, "D:/SW/miktex-portable-2.9.5105/miktex/bin", "run.bat")';
+		add subrequest parameter 'new RunFormat_Rest().reset($activity)';
+end

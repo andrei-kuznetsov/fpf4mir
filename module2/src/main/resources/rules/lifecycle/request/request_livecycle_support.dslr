@@ -11,6 +11,17 @@ rule "Request first lifecycle phase"
 		any activity request
 		not RequestLifeCycleState for request
 	then
+ 		insert RLCPrepareMain for request;
+end
+
+rule "Request prepare->main phase transition"
+		salience -20000
+	when 
+		any activity request
+		$aa : RLCPrepareMain for request
+		not RLCMain for request
+	then
+>		retract($aa);
  		insert RLCMain for request;
 end
 

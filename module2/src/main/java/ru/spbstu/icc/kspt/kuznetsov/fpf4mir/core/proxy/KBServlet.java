@@ -17,7 +17,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.RestArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.RestFormArgument;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.RestPathArgument;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.RestRequestCommand;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.ReqRestCommand;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.proxy.Utils.UploadedFileDetails;
 
 public class KBServlet extends HttpServlet {
@@ -42,7 +42,7 @@ public class KBServlet extends HttpServlet {
 			//throw new IOException("Can't upload files", e1);
 		}
 
-		RestRequestCommand req = new RestRequestCommand(Activity.USER);
+		ReqRestCommand req = new ReqRestCommand(Activity.USER);
 
 		Artifact userArtifact;
 		RestArtifact artifactAlias;

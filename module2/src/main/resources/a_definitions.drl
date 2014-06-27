@@ -145,3 +145,9 @@ declare Dataset_FileArtifactList extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.co
 declare Verified_FileArtifactList extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.FileArtifactListBase end
 declare Result_FileArtifactList extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.FileArtifactListBase end
 
+declare RestCommandActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity end
+
+
+declare RestAction_Execute extends  ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityRelatedFactBase end
+declare RestAction_Deploy extends  ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityRelatedFactBase end
+declare RestAction_Deploy_Latex extends  ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityRelatedFactBase end

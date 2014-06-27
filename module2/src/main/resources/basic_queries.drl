@@ -60,10 +60,6 @@ query "Get activity result related facts"  (ActivityResult aresult)
 	$object : ActivityResultRelatedFact( aresult == aresult )
 end
 
-query "Get rest result related facts"  (RestRequestCommand rreq)
-	$object : RestRequestRelatedFactBase( restCmd == rreq )
-end
-
 query "Get root activities"  (Object ignored)
 	$object : Activity( request == null )
 end

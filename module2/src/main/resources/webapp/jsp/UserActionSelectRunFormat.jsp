@@ -19,14 +19,14 @@ function assertFact(factType) {
 				//window.location.href = "/rest/status/request/${uaction.getActivity().getRequest().getRefId()}"
 				alert("redirect");
 			} else if (req.status == 200) {
-				window.location.href = "/rest/status/request/${uaction.getActivity().getRequest().getRefId()}";
+				window.location.href = "/rest/status/request/${r}";
 			} else { 
 				alert(req.responseText);
 			} 
 		}
 	}
 
-	req.open('POST', '/rest/useraction/${uaction.getClass().getSimpleName()}/${uaction.getRefId()}/handled', true);
+	req.open('POST', '/rest/useraction/${uaction.getClass().getSimpleName()}/${uaction.getRefId()}/handled?r=${r}', true);
 	req.send('{"class":"' + factType + '"}');
 }
 

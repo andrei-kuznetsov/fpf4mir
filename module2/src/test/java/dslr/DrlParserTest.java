@@ -60,6 +60,21 @@ public class DrlParserTest extends TestCase {
     	String dslr = "/guess_run_command_rest.dslr";
 		printExpandedRule(dslr);
     }
+
+    public void testExpandDRL_rest_deploy() throws Exception {
+    	String dslr = "/rules//rest/rest_deploy.dslr";
+		printExpandedRule(dslr);
+    }
+
+    public void testExpandDRL_rest_deploy_latex() throws Exception {
+    	String dslr = "/rules//rest/rest_deploy_latex.dslr";
+		printExpandedRule(dslr);
+    }
+
+    public void testExpandDRL_rest_exec() throws Exception {
+    	String dslr = "/rules//rest/rest_exec.dslr";
+		printExpandedRule(dslr);
+    }
     
     public void testExpandDRL_basic_rest_processor() throws Exception {
     	String dslr = "/basic_rest_processor.dslr";

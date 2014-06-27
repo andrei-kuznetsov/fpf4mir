@@ -66,15 +66,6 @@ rule "Cast folder to dataset"
 		insertLogical '$f' as 'Dataset';
 end
 
-rule "Select run format"
-	when
-		active activity 'RunActivity'
-		not RunFormat for activity
-	then
-		def user action UserActionSelectRunFormat
-		add user action
-end
-
 rule "Verify run output data"
 	when
 		active activity 'RunActivity'

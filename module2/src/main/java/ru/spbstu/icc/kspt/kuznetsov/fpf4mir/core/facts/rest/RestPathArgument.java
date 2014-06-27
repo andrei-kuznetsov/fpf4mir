@@ -1,7 +1,9 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.RequestRelatedFactBase;
 
-public class RestPathArgument extends RestRequestRelatedFactBase {
+
+public class RestPathArgument extends RequestRelatedFactBase {
 	/**
 	 * 
 	 */
@@ -12,7 +14,7 @@ public class RestPathArgument extends RestRequestRelatedFactBase {
 	public RestPathArgument() {
 	}
 	
-	public RestPathArgument(RestRequestCommand restCmd, int order, String value) {
+	public RestPathArgument(ReqRestCommand restCmd, int order, String value) {
 		super(restCmd);
 		this.order = order;
 		this.value = value;
@@ -34,7 +36,7 @@ public class RestPathArgument extends RestRequestRelatedFactBase {
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + " [order=" + order + ", value=" + value
-				+ ", restCmd" + getRestCmd() + "]";
+				+ ", restCmd" + getRequest() + "]";
 	}
 	
 }

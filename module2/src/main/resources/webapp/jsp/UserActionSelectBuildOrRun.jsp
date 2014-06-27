@@ -19,14 +19,14 @@ function assertFact(factType, baseDir, fileName) {
 				//window.location.href = "/rest/status/request/${uaction.getActivity().getRequest().getRefId()}"
 				alert("redirect");
 			} else if (req.status == 200) {
-				window.location.href = "/rest/status/request/${uaction.getActivity().getRequest().getRefId()}";
+				window.location.href = "/rest/status/request/${r}";
 			} else { 
 				alert(req.responseText);
 			} 
 		}
 	}
 
-	req.open('POST', '/rest/useraction/${uaction.getClass().getSimpleName()}/${uaction.getRefId()}/handled', true);
+	req.open('POST', '/rest/useraction/${uaction.getClass().getSimpleName()}/${uaction.getRefId()}/handled?r=${r}', true);
 	req.send('{"class":"' + factType + '","baseDir":"' + baseDir + '","fileName":"' + fileName + '"}');
 }
 
@@ -48,7 +48,7 @@ function assertFact(factType, baseDir, fileName) {
 	<ul>
 		<c:forEach items="${uaction.execArtifacts.list()}" var="b">
 			<li>
-			<a href="javascript:assertFact('ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.generic.GenericExecutableFileArtifact', '${b.getBaseDir().replace('\\','//')}', '${b.getFileName().replace('\\','//')}')">${b.fileName}</a>
+			<a href="javascript:assertFact('ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.generic.GenericExecutableFileArtifact', '${b.getBaseDir().replace('\\','//')}', '${b.getFileName().replace('\\','//')}')">${b.fileName}</a>
 			<br>
 		</c:forEach>
 	</ul>
