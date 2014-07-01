@@ -44,7 +44,7 @@
 [then]add user action=insert(useraction);
 [then]add feature action '{feature}' version '{version}';=insert( new AddFeatureAction($activity, "{feature}", "{version}") );
 [then]add feature action '{feature}';=insert( new AddFeatureAction($activity, "{feature}") );
-[then]error '{err}' fixed=insert( new ActivityErrorFixed({err}) );
+[then]error '{err}' fixed=insert( new GenericActivityErrorFixed({err}) );
 
 [then]add subrequest '{type}' with refId '{refId}';={type} $subrequest = new {type}(); $subrequest.setParentActivity($activity); $subrequest.setRefId({refId}); insert($subrequest);
 [then]add subrequest '{type}'={type} $subrequest = new {type}(); $subrequest.setParentActivity($activity); insert($subrequest);

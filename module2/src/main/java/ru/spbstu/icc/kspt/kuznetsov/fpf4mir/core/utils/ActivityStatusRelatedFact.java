@@ -1,6 +1,6 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityStatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityStatus;
 
 public interface ActivityStatusRelatedFact {
 	public ActivityStatus getAstatus();

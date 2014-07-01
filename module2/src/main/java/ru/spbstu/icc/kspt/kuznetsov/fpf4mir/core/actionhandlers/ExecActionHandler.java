@@ -9,9 +9,9 @@ import java.util.UUID;
 import org.apache.log4j.Logger;
 import org.drools.runtime.StatefulKnowledgeSession;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.ActionFact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.ExecAction;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecStatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.ActionFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.ExecAction;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.GenericExecStatus;
 
 public class ExecActionHandler implements ActionHandler{
 	@SuppressWarnings("unused")
@@ -59,7 +59,7 @@ public class ExecActionHandler implements ActionHandler{
 //        is2.close();
         
         ksession.retract(ksession.getFactHandle(a));
-    	ksession.insert(new ExecStatus(action.getActivity(), action.getExecCommand(), returnCode, fileOut, fileErr));
+    	ksession.insert(new GenericExecStatus(action.getActivity(), action.getExecCommand(), returnCode, fileOut, fileErr));
 	}
 
 }

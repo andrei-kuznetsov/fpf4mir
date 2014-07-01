@@ -6,12 +6,12 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfos.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.*;
 
 
-declare MirexScratchDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact end
-declare MirexOutputDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact end
+declare MirexScratchDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.FolderArtifactBase end
+declare MirexOutputDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.FolderArtifactBase end
 
 rule "MirexAudChEst: output files list"
 	when

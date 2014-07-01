@@ -11,8 +11,8 @@ import java.util.Map;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.junit.Test;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActionStatus;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecStatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.ActionStatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.GenericExecStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import utils.AgendaListener;
 import utils.DrlObjectsUtils;
@@ -101,7 +101,7 @@ public class DrlTestRunVerify {
         //RunDatasetIn src = new RunDatasetIn(rr, dataset.getName());
         Activity testRun = null; //TODO: (RunActivity) new RunActivity().reset(R.id.TestActivity, new Date(), rr);
 //		Dataset_FileArtifactList dsal = new Dataset_FileArtifactList(testRun, dataset, "*.wav", null);
-        ActionStatus status = new ExecStatus(testRun, null, 0, null, null);
+        ActionStatus status = new GenericExecStatus(testRun, null, 0, null, null);
 //        ResultDir4Run res = new ResultDir4Run();
 //        res.reset(testRun, PathUtils.getTestResourceDir(resDir).getAbsolutePath(), "");
 

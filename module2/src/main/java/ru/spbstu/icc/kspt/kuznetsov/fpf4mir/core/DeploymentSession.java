@@ -41,21 +41,21 @@ import org.drools.runtime.rule.FactHandle;
 import org.drools.runtime.rule.QueryResults;
 import org.drools.runtime.rule.QueryResultsRow;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.ActionFact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.AddFeatureAction;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.ExecAction;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.AddFeatureHandler_Local_Linux;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.AddFeatureHandler_Local_Windows;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ExecActionHandler;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityResult;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityStatus;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.UserInfo;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.ActionFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.AddFeatureAction;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.ExecAction;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.UserAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityResult;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityStatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityBase;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.DataDirRoot;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatus;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.ReqRestCommand;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.UserInfo;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestSubstatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.OS;
@@ -126,7 +126,7 @@ public class DeploymentSession {
 		File f = new File(dataDir);
 		f.mkdirs();
 		log.info("Data dir: " + f.getAbsolutePath());
-		ksession.insert(new DataDirRoot(Activity.USER, f.getAbsolutePath(), ""));
+		ksession.insert(new DataDirRoot(ActivityBase.USER, f.getAbsolutePath(), ""));
 	}
 
 	private static void initActions() {

@@ -3,9 +3,9 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils;
 import java.io.File;
 import java.io.Serializable;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecCommand;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityRelatedFactBase;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.ExecCommand;
 
 public abstract class BaseExecCommand extends ActivityRelatedFactBase implements ExecCommand, Serializable{
 	/**

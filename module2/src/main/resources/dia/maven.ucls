@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.5" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+<class-diagram version="1.1.6" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
   <interface id="1" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.CmdLineArgument" 
     project="fpf4mir-core" 
@@ -34,63 +34,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.MvnOption_TgtPackage" 
-    project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/build/maven/MvnOption_TgtPackage.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="261" x="1408" y="128"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="5" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.MvnOption_SrcEncoding" 
-    project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/build/maven/MvnOption_SrcEncoding.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="261" x="1709" y="128"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="6" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.MvnBuildCommand" 
-    project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/build/maven/MvnBuildCommand.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="261" x="2311" y="37"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="7" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.MvnOption_PomFile" 
-    project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/build/maven/MvnOption_PomFile.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="261" x="838" y="128"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="8" language="java" 
-    name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.MvnBuildCommand.MvnOptionComparator" 
-    project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/build/maven/MvnBuildCommand.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="261" x="2311" y="128"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="9" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.MvnOption" 
+  <interface id="4" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.MvnOption" 
     project="fpf4mir-core" 
     file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/build/maven/MvnOption.java" 
     binary="false" corner="BOTTOM_RIGHT">    
@@ -101,18 +45,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="10" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.MvnRootPom" 
-    project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/build/maven/MvnRootPom.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="261" x="41" y="219"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="11" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.MvnBuildTarget" 
+  <interface id="5" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.MvnBuildTarget" 
     project="fpf4mir-core" 
     file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/build/maven/MvnBuildTarget.java" 
     binary="false" corner="BOTTOM_RIGHT">    
@@ -123,40 +56,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="12" language="java" 
-    name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.MvnBuildTarget_Package" project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/build/maven/MvnBuildTarget_Package.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="261" x="590" y="37"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="13" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.MvnOption_TgtClean" 
-    project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/build/maven/MvnOption_TgtClean.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="261" x="2010" y="128"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="14" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.MvnBuildTarget_Clean" 
-    project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/build/maven/MvnBuildTarget_Clean.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="261" x="289" y="37"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="15" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.BuildError" 
+  <class id="6" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.BuildError" 
     project="fpf4mir-core" 
     file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/build/BuildError.java" 
     binary="false" corner="BOTTOM_RIGHT">    
@@ -167,7 +67,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.BuildErrorFixed" 
+  <class id="7" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.BuildErrorFixed" 
     project="fpf4mir-core" 
     file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/build/BuildErrorFixed.java" 
     binary="false" corner="BOTTOM_RIGHT">    
@@ -178,7 +78,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.BuildSucceeded" 
+  <class id="8" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.BuildSucceeded" 
     project="fpf4mir-core" 
     file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/build/BuildSucceeded.java" 
     binary="false" corner="BOTTOM_RIGHT">    
@@ -189,7 +89,8 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="18" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Artifact" project="fpf4mir-core" 
+  <interface id="9" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Artifact" 
+    project="fpf4mir-core" 
     file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/Artifact.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="51" width="208" x="41" y="37"/>    
@@ -198,33 +99,22 @@
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
-  </class>  
-  <class id="19" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact" 
+  </interface>  
+  <interface id="10" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FileArtifact" 
     project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/FileArtifact.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/artifact/FileArtifact.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="51" width="208" x="41" y="128"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
-  </class>  
-  <class id="20" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity" 
+  </interface>  
+  <interface id="11" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityError" 
     project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/Activity.java" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/ActivityError.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="208" x="590" y="128"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="21" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityError" 
-    project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/ActivityError.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
     <position height="51" width="208" x="1923" y="310"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -232,9 +122,9 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="22" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityErrorFixed" 
+  <interface id="12" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityErrorFixed" 
     project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/ActivityErrorFixed.java" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/ActivityErrorFixed.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="51" width="208" x="1213" y="219"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -242,99 +132,27 @@
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
-  </class>  
-  <realization id="23">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="11"/>  
-  </realization>  
-  <realization id="24">    
-    <end type="SOURCE" refId="3"/>    
+  </interface>  
+  <generalization id="13">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <generalization id="14">    
+    <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="1"/>  
-  </realization>  
-  <realization id="25">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="21"/>  
-  </realization>  
-  <generalization id="26">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="22"/>  
   </generalization>  
-  <association id="27">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="28" name="activity"/>      
-      <multiplicity id="29" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="20" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="30">    
-    <end type="SOURCE" refId="22" navigable="false">      
-      <attribute id="31" name="error"/>      
-      <multiplicity id="32" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="21" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="33">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <generalization id="34">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <realization id="35">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="9"/>  
-  </realization>  
-  <realization id="36">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="9"/>  
-  </realization>  
-  <generalization id="37">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <realization id="38">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="9"/>  
-  </realization>  
-  <realization id="39">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="9"/>  
-  </realization>  
-  <generalization id="40">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="18"/>  
-  </generalization>  
-  <realization id="41">    
+  <realization id="15">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="1"/>  
   </realization>  
-  <nesting id="42">    
+  <realization id="16">    
     <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="8"/>  
-  </nesting>  
-  <association id="43">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="44" name="activity"/>      
-      <multiplicity id="45" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="20" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="46">    
-    <end type="SOURCE" refId="12"/>    
     <end type="TARGET" refId="11"/>  
   </realization>  
-  <generalization id="47">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="2"/>  
-  </generalization>  
-  <generalization id="48">    
-    <end type="SOURCE" refId="9"/>    
+  <realization id="17">    
+    <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="1"/>  
-  </generalization>  
+  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
     <attributes public="false" package="false" protected="false" private="false" static="true"/>    

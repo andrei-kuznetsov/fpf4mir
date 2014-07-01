@@ -1,12 +1,12 @@
-<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifactList"%>
-<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserActionRef"%>
-<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Alias"%>
+<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FileArtifactList"%>
+<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.impl.UserActionRef"%>
+<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.Alias"%>
 <%@page import="java.net.URLEncoder"%>
-<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact"%>
-<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.UserInfo"%>
+<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FileArtifact"%>
+<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.UserInfo"%>
 <%@page import="java.net.URL"%>
 <%@page import="java.util.List"%>
-<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction"%>
+<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.UserAction"%>
 <%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestStatusRelatedFact"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 

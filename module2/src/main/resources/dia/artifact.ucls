@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.5" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+<class-diagram version="1.1.6" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.TextFileArtifact" 
+  <interface id="1" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.TextFileArtifact" 
     project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/TextFileArtifact.java" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/artifact/TextFileArtifact.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="51" width="208" x="289" y="219"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -11,18 +11,18 @@
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
-  </class>  
-  <class id="2" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact" 
+  </interface>  
+  <interface id="2" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FileArtifact" 
     project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/FileArtifact.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/artifact/FileArtifact.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="51" width="208" x="289" y="128"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
-  </class>  
+  </interface>  
   <class id="3" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.TmpDirRoot" 
     project="fpf4mir-core" 
     file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/env/TmpDirRoot.java" 
@@ -34,9 +34,9 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact" 
+  <interface id="4" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FolderArtifact" 
     project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/FolderArtifact.java" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/artifact/FolderArtifact.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="51" width="208" x="537" y="128"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -44,7 +44,7 @@
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
-  </class>  
+  </interface>  
   <class id="5" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.DataDirRoot" 
     project="fpf4mir-core" 
     file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/env/DataDirRoot.java" 
@@ -56,7 +56,8 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Artifact" project="fpf4mir-core" 
+  <interface id="6" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Artifact" 
+    project="fpf4mir-core" 
     file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/Artifact.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="51" width="208" x="289" y="37"/>    
@@ -65,26 +66,14 @@
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
-  </class>  
+  </interface>  
   <generalization id="7">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="2"/>  
   </generalization>  
   <generalization id="8">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="4"/>  
-  </generalization>  
-  <generalization id="9">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <generalization id="10">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <generalization id="11">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="4"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     accessors="true" visibility="true">    

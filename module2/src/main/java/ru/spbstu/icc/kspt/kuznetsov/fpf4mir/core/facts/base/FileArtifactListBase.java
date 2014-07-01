@@ -11,9 +11,10 @@ import java.util.List;
 
 import org.drools.RuntimeDroolsException;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifactList;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FileArtifact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FileArtifactList;
 
 public class FileArtifactListBase extends ActivityRelatedFactBase implements FileArtifactList{
 

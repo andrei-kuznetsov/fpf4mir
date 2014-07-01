@@ -1,6 +1,6 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifactList;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FileArtifactList;
 
 public class FileArtifactListAliasBase extends AliasBase<FileArtifactList>{
 

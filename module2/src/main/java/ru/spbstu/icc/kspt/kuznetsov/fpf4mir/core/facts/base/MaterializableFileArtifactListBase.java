@@ -5,10 +5,10 @@ import java.io.IOException;
 
 import org.drools.RuntimeDroolsException;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.MaterializableFileArtifactList;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FileArtifact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FolderArtifact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.MaterializableFileArtifactList;
 
 public class MaterializableFileArtifactListBase extends FileArtifactListBase implements MaterializableFileArtifactList{
 	private static final long serialVersionUID = 1L;

@@ -3,10 +3,10 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env;
 import java.io.File;
 import java.util.UUID;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.FolderArtifactBase;
 
-public class DataDirRoot extends FolderArtifact {
+public class DataDirRoot extends FolderArtifactBase {
 
 	/**
 	 * 

@@ -4,24 +4,23 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.generic.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
 
 ///////////////////////////// java /////////////////////////////////////
-declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.FolderArtifactAliasBase /* java */ end
 
-declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecutableFileArtifact /* java */ end
-declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.generic.GenericExecutableFileArtifact /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.GenericExecutableFileArtifact /* java */ end
 
-declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact /* java */ end
-declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.FolderArtifactBase /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.ExecutableFileArtifactBase /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.FileArtifactBase /* java */ end
 
-declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity /* java */ end
-
-declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityRelatedFactBase /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.FolderArtifactBase /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityBase /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityFailedBase /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityErrorBase /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityWarningBase /* java */ end
 
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.RequestRelatedFactBase /* java */ end
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.RequestStatusRelatedFactBase /* java */ end
 
-declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityFailedBase /* java */ end
 
-declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.FileArtifactBase /* java */ end
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.FileArtifactListBase /* java */ end
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.MaterializableFileArtifactListBase /* java */ end
 
@@ -29,19 +28,17 @@ declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ReqNewActivityBase 
 
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.AliasBase /* java */ end
 
-declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actions.UserAction /* java */ end
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.RequestScopedKnowledgeBase /* java */ end
 
-declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityErrorBase /* java */ end
-declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityWarningBase /* java */ end
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.RSKIncompatibleFeatureVersion /* java */ end
 
-declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.TextFileArtifact /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.TextFileArtifactBase /* java */ end
 
-declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.FactCandidateBase /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.base.FactCandidateBase /* java */ end
 ///////////////////////////// non-java /////////////////////////////////////
 
-declare DeployFolder extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.FolderArtifactAliasBase end
+declare DeployFolder extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.AliasBase end
 
 declare DeployExecutableActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity end
 declare DeployFolderActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity end
@@ -60,15 +57,15 @@ declare ReqRunJava extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.
 declare RunJavaActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity end
 declare ReqBuild extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ReqNewActivityBase end
 
-declare JavaExecutableFileArtifact extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecutableFileArtifact end
-declare BatExecutableFileArtifact extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ExecutableFileArtifact end
+declare JavaExecutableFileArtifact extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.base.ExecutableFileArtifactBase end
+declare BatExecutableFileArtifact extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.base.ExecutableFileArtifactBase end
 
 declare ReqDeployFolder extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ReqNewActivityBase end
 declare ReqDeployExecutable extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ReqNewActivityBase end
 
 declare ReqGuessRunExecutable extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ReqNewActivityBase end
 declare GuessRunExecutableActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity end
-declare ExecArtifactCandidate extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.FileArtifactBase end
+declare ExecArtifactCandidate extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.base.FileArtifactBase end
 declare ExecFileArtifactList extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.FileArtifactListBase end
 declare ExecFileArtifactListAlias extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.AliasBase end
 
@@ -78,11 +75,11 @@ declare GuessBuildFileActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core
 declare ReqMvnBuild extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ReqNewActivityBase end
 declare MvnBuildActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity end
 
-declare BuildFileCandidate extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.FileArtifactBase end
+declare BuildFileCandidate extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.base.FileArtifactBase end
 declare BuildFileArtifactList extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.FileArtifactListBase end
 declare BuildFileArtifactListAlias extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.AliasBase end
 
-declare BuildFile extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.FileArtifactBase end
+declare BuildFile extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.base.FileArtifactBase end
 declare BuildFileMvn extends BuildFile end
 declare BuildFileAnt extends BuildFile end
 declare BuildFileMake extends BuildFile end
@@ -94,11 +91,11 @@ end
 
 declare UserActionSelectRunFormat extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction end
 
-declare BuildOutputDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.FolderArtifactBase end
-declare ExecWorkingDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.FolderArtifactBase end
-declare ExecWorkingDirCandidate extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.FactCandidateBase end
+declare BuildOutputDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.base.FolderArtifactBase end
+declare ExecWorkingDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.base.FolderArtifactBase end
+declare ExecWorkingDirCandidate extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.base.FactCandidateBase end
 
-declare MavenProjectDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.FolderArtifactBase end
+declare MavenProjectDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.base.FolderArtifactBase end
 declare MavenTargetDir extends BuildOutputDir end
 
 declare RunFormat extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityRelatedFactBase end
@@ -137,10 +134,10 @@ declare ReqOutputVerification extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.
 declare ReqOVMirexAudChEst extends ReqOutputVerification end
 declare OVMirexAudChEstActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity end
 
-declare SrcDataFileArtifact extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.FileArtifactBase end
-declare ResFileArtifact extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.FileArtifactBase end
+declare SrcDataFileArtifact extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.base.FileArtifactBase end
+declare ResFileArtifact extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.base.FileArtifactBase end
 
-declare Dataset extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact end
+declare Dataset extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.base.FolderArtifactBase end
 declare Dataset_FileArtifactList extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.MaterializableFileArtifactListBase end
 declare Verified_FileArtifactList extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.FileArtifactListBase end
 declare Result_FileArtifactList extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.FileArtifactListBase end
@@ -151,3 +148,4 @@ declare RestCommandActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.fa
 declare RestAction_Execute extends  ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityRelatedFactBase end
 declare RestAction_Deploy extends  ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityRelatedFactBase end
 declare RestAction_Deploy_Latex extends  ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityRelatedFactBase end
+

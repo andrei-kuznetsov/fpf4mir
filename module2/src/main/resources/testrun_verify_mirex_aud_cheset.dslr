@@ -8,12 +8,12 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.run.java.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mirex.*;
 
-declare ResArtifactVStatus_Base extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityRelatedFactBase
+declare ResArtifactVStatus_Base extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase
 	activity : Activity
 	artifact : FileArtifact
 end
 
-declare ResTextFileArtifact extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.TextFileArtifact end
+declare ResTextFileArtifact extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.TextFileArtifactBase end
 
 declare VerifiedFileArtifact extends ResFileArtifact end
 

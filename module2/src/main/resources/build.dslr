@@ -1,4 +1,5 @@
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.generic.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.generic.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
@@ -27,7 +28,7 @@ rule "NewBuild_Mvn"
 		not subrequest ReqMvnBuild for activity
 	then
 		add subrequest 'ReqMvnBuild'
-		add subrequest parameter '$artifact' as 'GenericFileArtifactAlias'
+		add subrequest parameter '$artifact'
 end
 
 rule "Guess run executable after build"
@@ -38,7 +39,7 @@ rule "Guess run executable after build"
 		not subrequest ReqGuessRunExecutable for activity
 	then
 		add subrequest 'ReqGuessRunExecutable'
-		add subrequest parameter '$folder' as 'GenericFolderArtifactAlias'
+		add subrequest parameter '$folder'
 end
 
 rule "Guess run executable after build: Exec artifact found"

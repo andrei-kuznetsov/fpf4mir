@@ -2,12 +2,12 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.generic;
 
 import java.io.File;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifactList;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FileArtifact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FileArtifactList;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.FileArtifactListBase;
 
-public class GenericFileArtifactList extends FileArtifactListBase {
+public final class GenericFileArtifactList extends FileArtifactListBase {
 
 	/**
 	 * 

@@ -1,4 +1,5 @@
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.generic.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.generic.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.*;
@@ -35,7 +36,7 @@ rule "rest : deploy latex command - do deploy"
 		RestAction_Deploy_Latex for activity
 	then
 		add subrequest 'ReqDeployExecutable';
-		add subrequest parameter 'new FolderArtifact($activity, "D:/SW/miktex-portable-2.9.5105", "")';
+		add subrequest parameter 'new GenericFolderArtifact($activity, "D:/SW/miktex-portable-2.9.5105", "")';
 		add subrequest parameter 'new GenericExecutableFileArtifact($activity, "D:/SW/miktex-portable-2.9.5105/miktex/bin", "run.bat")';
 		add subrequest parameter 'new RunFormat_Rest().reset($activity)';
 end

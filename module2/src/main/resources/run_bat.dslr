@@ -1,4 +1,6 @@
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.base.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.generic.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.generic.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;

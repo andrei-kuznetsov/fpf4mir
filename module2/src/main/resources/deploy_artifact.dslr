@@ -25,7 +25,7 @@ rule "DownloadArtifact"
 >		not Artifact(activity == $activity)
 	then
 		add subrequest 'ReqDownloadHttp'
-		add subrequest parameter '$ref' as 'GenericArtifactRefAlias'
+		add subrequest parameter '$ref'
 end
 
 
@@ -35,7 +35,7 @@ rule "Assert Downloaded Artifact"
 		subrequest 'ReqDownloadHttp' for activity
 		subrequest succeeded
 		subrequest outputs (
-			subrequest output 'FileArtifactAlias'
+			subrequest output 'Alias'
 >		)
 	then
 		add activity fact from request output
@@ -58,9 +58,9 @@ rule "ExtractArtifact"
 		not FolderArtifact for activity
 	then
 		add subrequest 'ReqExtract'
-		add subrequest parameter '$artifact' as 'GenericFileArtifactAlias'
+		add subrequest parameter '$artifact'
 end
-
+/* TODO: done by default?
 rule "Process exctracted artifact"
 	when 
 	 	active activity 'DeployFolderActivity'
@@ -72,7 +72,7 @@ rule "Process exctracted artifact"
 	then
 		add activity fact from request output
 end
-
+*/
 rule "Process exctracted artifact failed"
 	when
 		active activity 'DeployFolderActivity'

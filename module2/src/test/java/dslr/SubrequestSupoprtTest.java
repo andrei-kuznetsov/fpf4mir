@@ -7,9 +7,10 @@ import org.apache.log4j.Logger;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.junit.Test;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Alias;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.Alias;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FileArtifact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.GenericFileArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestSucceeded;
 import utils.AgendaListener;
@@ -29,7 +30,7 @@ public class SubrequestSupoprtTest extends TestCase {
         
         ksession.addEventListener(al);
         
-        FileArtifact retObj = new FileArtifact();
+        FileArtifact retObj = new GenericFileArtifact();
         
         Activity da = (Activity) DrlObjectsUtils.createObject(ksession, "defaultpkg", "DeployExecutableActivity");
         RequestFact subreq = (RequestFact) DrlObjectsUtils.createObject(ksession, "defaultpkg", "ReqGuessRunExecutable");

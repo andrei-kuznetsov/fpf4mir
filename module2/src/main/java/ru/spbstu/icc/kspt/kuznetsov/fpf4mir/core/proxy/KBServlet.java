@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.DeploymentSession;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Artifact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FileArtifact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityBase;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.Artifact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.GenericFileArtifact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.GenericFolderArtifact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.ReqRestCommand;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.RestArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.RestFormArgument;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.RestPathArgument;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.ReqRestCommand;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.proxy.Utils.UploadedFileDetails;
 
 public class KBServlet extends HttpServlet {
@@ -42,15 +42,15 @@ public class KBServlet extends HttpServlet {
 			//throw new IOException("Can't upload files", e1);
 		}
 
-		ReqRestCommand req = new ReqRestCommand(Activity.USER);
+		ReqRestCommand req = new ReqRestCommand(ActivityBase.USER);
 
 		Artifact userArtifact;
 		RestArtifact artifactAlias;
 
 		if (files.fileNames.size() == 1) {
-			userArtifact = new FileArtifact(Activity.USER, files.baseDir, files.fileNames.get(0));
+			userArtifact = new GenericFileArtifact(ActivityBase.USER, files.baseDir, files.fileNames.get(0));
 		} else {
-			userArtifact = new FolderArtifact(Activity.USER, files.baseDir, "");
+			userArtifact = new GenericFolderArtifact(ActivityBase.USER, files.baseDir, "");
 		}
 		artifactAlias = new RestArtifact(req, userArtifact);
 

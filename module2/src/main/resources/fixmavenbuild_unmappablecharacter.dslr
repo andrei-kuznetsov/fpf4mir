@@ -1,12 +1,13 @@
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.generic.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.sources.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 
 
-declare JavacErr_UnmappableCharacter extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityErrorBase end
-declare UserActionSelectEncoding extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction end
+declare JavacErr_UnmappableCharacter extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityErrorBase end
+declare UserActionSelectEncoding extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.UserAction end
 
 rule "Maven_Warn_NoFileEncoding"
 	when

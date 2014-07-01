@@ -2,10 +2,10 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base;
 
 import java.io.Serializable;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityResult;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityStatus;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.Alias;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityResult;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityStatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.Alias;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityRelatedFact;

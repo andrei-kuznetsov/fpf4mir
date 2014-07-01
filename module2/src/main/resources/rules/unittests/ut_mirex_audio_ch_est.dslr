@@ -1,4 +1,5 @@
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.generic.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.mir.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
@@ -29,7 +30,7 @@ rule "ut mirex audchest: assert ut dataset"
 		not FolderArtifact(name=="dataset_ut_mirex_audio_ch_est") for activity
 	then
 //		insert '"dataset_ut_mirex_audio_ch_est", "/home/andrei/OpenShift/datadir/cea1c11a-ff7b-4f6f-8974-d327f3ec544b/dataset_ut_mirex_audio_ch_est", ""' as 'FolderArtifact';
-		insert '"dataset_ut_mirex_audio_ch_est", "D:\\SPBSTU\\git\\dataset_ut_mirex_audio_ch_est", ""' as 'FolderArtifact';
+		insert '"dataset_ut_mirex_audio_ch_est", "D:\\SPBSTU\\git\\dataset_ut_mirex_audio_ch_est", ""' as 'GenericFolderArtifact';
 end
 
 rule "ut mirex audchest: download ut dataset"

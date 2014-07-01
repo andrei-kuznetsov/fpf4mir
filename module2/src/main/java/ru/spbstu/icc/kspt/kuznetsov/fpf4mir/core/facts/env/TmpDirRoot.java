@@ -2,10 +2,12 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env;
 
 import java.util.UUID;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.FolderArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FolderArtifact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.FolderArtifactBase;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.GenericFolderArtifact;
 
-public class TmpDirRoot extends FolderArtifact {
+public class TmpDirRoot extends FolderArtifactBase {
 
 	/**
 	 * 
@@ -17,6 +19,6 @@ public class TmpDirRoot extends FolderArtifact {
 	}
 
 	public FolderArtifact newTempFolder(Activity activity){
-		return new FolderArtifact(activity, getAbsolutePath(), UUID.randomUUID().toString());
+		return new GenericFolderArtifact(activity, getAbsolutePath(), UUID.randomUUID().toString());
 	}
 }

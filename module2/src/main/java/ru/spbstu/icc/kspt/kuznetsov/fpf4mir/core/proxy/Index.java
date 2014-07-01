@@ -30,10 +30,11 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.DeploymentSession;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.DeploymentSession.QResult;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.UserAction;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityResult;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.ActivityStatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.UserAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityResult;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityStatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityBase;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.ReqRestCommand;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
@@ -111,7 +112,7 @@ public class Index {
 	@Path("/dbg/reset")
 	public Response dbgResetSession() throws Exception {
 		session.reset(); // recreate new session
-		session.assertFact(Activity.USER);
+		session.assertFact(ActivityBase.USER);
 		session.run();
 		return Response.seeOther(new URI("/kb/deploy")).build();
 	}

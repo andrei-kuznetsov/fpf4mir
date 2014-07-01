@@ -2,8 +2,9 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base;
 
 import java.util.Date;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.UserInfo;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.UserInfo;
 
 /**
  * @author qnf863

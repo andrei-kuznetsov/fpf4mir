@@ -1,5 +1,6 @@
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfos.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.generic.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.generic.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.deploy.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
@@ -7,11 +8,11 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
 
-declare DeployExecOption_Build extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityRelatedFactBase end
-declare DeployExecOption_Run extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityRelatedFactBase end
-declare DeployExecOption_Autodetect extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityRelatedFactBase end
+declare DeployExecOption_Build extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase end
+declare DeployExecOption_Run extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase end
+declare DeployExecOption_Autodetect extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase end
 
-declare ExecutableUnitTestsPassed extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ActivityRelatedFactBase end
+declare ExecutableUnitTestsPassed extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase end
 
 // ----------------------------------- Output parameters ---------------------------------------
 
@@ -47,7 +48,7 @@ rule "Deploy executable from file artifact"
 		not FolderArtifact for activity
 	then
 		add subrequest 'ReqDeployFolder'
-		add subrequest parameter '$file' as 'GenericFileArtifactAlias'
+		add subrequest parameter '$file'
 end
 
 /*
@@ -61,7 +62,7 @@ rule "Deploy executable from URL"
 		not FolderArtifact for activity
 	then
 		add subrequest 'ReqDeployFolder'
-		add subrequest parameter '$ref' as 'GenericArtifactRefAlias'
+		add subrequest parameter '$ref'
 end
 
 rule "Evaluate run executable list"
@@ -73,7 +74,7 @@ rule "Evaluate run executable list"
 		(DeployExecOption_Autodetect for activity or DeployExecOption_Run for activity)
 	then
 		add subrequest 'ReqGuessRunExecutable'
-		add subrequest parameter '$artifact' as 'GenericFolderArtifactAlias'
+		add subrequest parameter '$artifact'
 end
 
 rule "Evaluate build file list"
@@ -85,7 +86,7 @@ rule "Evaluate build file list"
 		(DeployExecOption_Autodetect for activity or DeployExecOption_Build for activity)
 	then
 		add subrequest 'ReqGuessBuildFile'
-		add subrequest parameter '$artifact' as 'GenericFolderArtifactAlias'
+		add subrequest parameter '$artifact'
 end
 
 rule "Exec artifact found"
@@ -143,7 +144,7 @@ rule "Do build"
 		not ExecutableFileArtifact for activity
 	then
 		add subrequest 'ReqBuild'
-		add subrequest parameter '$artifact' as 'GenericFileArtifactAlias'
+		add subrequest parameter '$artifact'
 end
 
 rule "Guess RunFormat"

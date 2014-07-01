@@ -10,11 +10,11 @@ public class CloneUtils {
 		return copy;
 	}*/
 
-	public static <T extends ActivityRelatedFactWithName> T cloneActivityRelatedFactWithName(
+	/*public static <T extends ActivityRelatedFactWithName> T cloneActivityRelatedFactWithName(
 			T src, Activity newActivity, String newName) {
 		T copy = org.apache.commons.lang3.SerializationUtils.clone(src);
 		copy.setActivity(newActivity);
 		copy.setName(newName);
 		return copy;
-	}
+	}*/
 }
