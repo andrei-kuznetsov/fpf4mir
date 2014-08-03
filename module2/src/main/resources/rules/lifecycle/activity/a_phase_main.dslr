@@ -27,7 +27,8 @@ rule "activity main phase (auto): read from subrequest (single fact)"
 		salience 10000
 	when 
 	 	any activity
-	 	ALCMain for activity
+	 	(ALCWork for activity or
+	 	ALCAnalyze for activity)
 	 	subrequest 'ReqNewActivity' for activity
 		RLCPrepareRStatus for subrequest
 	 	$subrequestStatus : RequestFinalStatus for subrequest

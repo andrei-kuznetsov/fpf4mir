@@ -52,25 +52,3 @@ rule "ActivityToActivityStatusCopy facts (UserInfo)"
 	then
 >		insertLogical(new ActivityToActivityStatusCopy($activity, $value));
 end
-
-rule "Insert ALCMain for (ALCWork || ALCAnalyze)"
-		salience 10000
-	when
-		any activity
-		not ALCMain for activity
-		(ALCWork for activity or
-		ALCAnalyze for activity)
-	then
-		insert ALCMain
-end
-
-rule "Retract ALCMain for not(ALCWork || ALCAnalyze)"
-		salience 10000
-	when
-		any activity
-		$m : ALCMain for activity
-		not ALCWork for activity
-		not ALCAnalyze for activity
-	then
->		retract($m);
-end

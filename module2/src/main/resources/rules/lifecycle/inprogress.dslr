@@ -29,7 +29,7 @@ rule "in progress (auto): in progress request for in progress activity"
 		any activity request
 	 	RLCMain for request
 	 	activity for request
-	 	ALCMain for activity
+	 	not ALCCompleted for activity
 	 	exists ActivityInProgress for activity
 	then
 		insertLogical '"In progress because nested activity is in progress"' as 'GenericRequestInProgress' for request;
@@ -50,7 +50,7 @@ rule "In progress activity for active activiy"
 		salience 10000
 	when
 		any activity
-	 	ALCMain for activity
+	 	not ALCCompleted for activity
 		not ActivitySuspended for activity
 	then
 		insertLogical '"Activity in progress"' as 'GenericActivityInProgress';

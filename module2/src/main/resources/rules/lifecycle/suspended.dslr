@@ -29,7 +29,7 @@ rule "suspend (auto): suspend request for suspended activity"
 		any activity request
 	 	RLCMain for request
 	 	activity for request
-	 	ALCMain for activity
+	 	not ALCCompleted for activity
 	 	exists ActivitySuspended for activity
 	then
 		insertLogical '"Suspended because nested activity is suspended"' as 'GenericRequestSuspended' for request;
@@ -52,7 +52,7 @@ rule "Suspend activity for user action"
 		salience 10000
 	when
 		any activity
-	 	ALCMain for activity
+	 	not ALCCompleted for activity
 		exists UserAction for activity
 	then
 >		System.out.println("**** activity:" + $activity);
