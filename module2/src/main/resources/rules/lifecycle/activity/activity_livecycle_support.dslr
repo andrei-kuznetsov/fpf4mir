@@ -30,7 +30,7 @@ rule "Activity lifecycle change permitted"
 	when 
 		any activity
 	 	not ActionFact for activity
->		forall ($rf : RequestFact(parentActivity == $activity)
+>		forall ($rf : Request(parentActivity == $activity)
 >               RLCCompleted(request == $rf))
 	then
 		insertLogical ActivityLifecycleChangePermitted

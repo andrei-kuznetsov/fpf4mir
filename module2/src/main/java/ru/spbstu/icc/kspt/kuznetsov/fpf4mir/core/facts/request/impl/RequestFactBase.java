@@ -3,10 +3,10 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl;
 import java.io.Serializable;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.Request;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithRefId;
 
-public class RequestFactBase implements RequestFact, Serializable, FactWithRefId {
+public class RequestFactBase implements Request, Serializable, FactWithRefId {
 	/**
 	 * 
 	 */

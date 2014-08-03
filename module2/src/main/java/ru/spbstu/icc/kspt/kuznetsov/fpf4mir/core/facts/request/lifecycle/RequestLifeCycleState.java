@@ -1,6 +1,6 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.lifecycle;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.Request;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.RequestRelatedFactBase;
 
 public class RequestLifeCycleState extends RequestRelatedFactBase {
@@ -14,7 +14,7 @@ public class RequestLifeCycleState extends RequestRelatedFactBase {
 		super();
 	}
 
-	public RequestLifeCycleState(RequestFact request) {
+	public RequestLifeCycleState(Request request) {
 		super(request);
 	}
 	

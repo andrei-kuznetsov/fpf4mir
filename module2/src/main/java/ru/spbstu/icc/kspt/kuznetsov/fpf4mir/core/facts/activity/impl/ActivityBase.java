@@ -4,7 +4,7 @@ import java.util.Date;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.R;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.Request;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.RequestRelatedFactBase;
 
 public class ActivityBase extends RequestRelatedFactBase implements Activity{
@@ -20,7 +20,7 @@ public class ActivityBase extends RequestRelatedFactBase implements Activity{
 	private Date date;
 	private long refId = refIdCounter++;
 	
-	public Activity reset(String id, Date date, RequestFact request) {
+	public Activity reset(String id, Date date, Request request) {
 		super.reset(request);
 		this.id = id;
 		this.date = date;

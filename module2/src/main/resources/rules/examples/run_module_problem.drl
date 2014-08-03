@@ -86,7 +86,7 @@ rule "START"
 	when
 		not Ak()
 	then
-		ReqNewActivity r;
+		Request r;
 		Ak a;
 		Alias als;
 		insert(r = new R_M1());

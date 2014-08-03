@@ -4,7 +4,7 @@
 
 [when]activity for request=$activity:Activity( request == $request )
 
-[when]any activity request=$request: ReqNewActivity(  )
+[when]any activity request=$request: Request(  )
 [when]any activity '{type}'=$activity: {type}(  )
 [when]any activity=$activity: Activity(  )
 [when]any '{type}\({whatever}\)'={type}({whatever})
@@ -17,7 +17,7 @@
 [when]request inputs \(=(or
 [when]input '{type}'=$input : {type}( request == $request ) 
 
-[when]subrequest for activity=subrequest 'ReqNewActivity' for activity
+[when]subrequest for activity=subrequest 'Request' for activity
 [when]subrequest '{subrequest}' for activity=$subrequest : {subrequest}(parentActivity == $activity)
 [when]subrequest {subrequest:\w+} for activity=$subrequest : {subrequest}(parentActivity == $activity)
 #[when]- has name=name != null

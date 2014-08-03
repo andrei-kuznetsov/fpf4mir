@@ -23,18 +23,18 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.impl.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
 ///////////////////////////////////////////////////////////////////////////////
 
-query "RequestStatus for request"  (RequestFact r)
+query "RequestStatus for request"  (Request r)
     status : RequestStatus(request == r)
 end
 
 query "RequestStatus for request refId"  (long reqRefId)
-	req : RequestFact(refId == reqRefId)
+	req : Request(refId == reqRefId)
     $rstatus : RequestStatus(request == req)
     activities : java.util.LinkedList(  ) from collect ( Activity( request == req) )
     extras : java.util.LinkedList(  ) from collect ( RequestStatusRelatedFact( rstatus == $rstatus ) )
 end
 
-query "Trace request activities"  (RequestFact r)
+query "Trace request activities"  (Request r)
     activity : Activity( request == r )
     activitySuccess : ActivitySucceeded( activity == activity )
     activityError : ActivityError( activity == activity )
@@ -50,10 +50,10 @@ query "Activity for refId"  (long refId)
 end
 
 query "Get activity related facts"  (Activity a)
-	$object : (ActivityRelatedFact( activity == a ) or RequestFact( parentActivity == a ))
+	$object : (ActivityRelatedFact( activity == a ) or Request( parentActivity == a ))
 end
 
-query "Get request related facts"  (RequestFact req)
+query "Get request related facts"  (Request req)
 	$object : RequestRelatedFact( request == req )
 end
 
@@ -65,7 +65,7 @@ query "Get activity status related facts"  (ActivityStatus astat)
 	$object : ActivityStatusRelatedFact( astatus == astat )
 end
 
-query "Get userInfo facts for request"  (RequestFact request)
+query "Get userInfo facts for request"  (Request request)
 	$object : UserInfo( request == request )
 end
 

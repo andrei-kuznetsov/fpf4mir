@@ -1,6 +1,6 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.Request;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFailed;
 
 public class GenericRequestFailed extends RequestFailedBase implements RequestFailed{
@@ -14,11 +14,11 @@ public class GenericRequestFailed extends RequestFailedBase implements RequestFa
 		super();
 	}
 
-	public GenericRequestFailed(RequestFact request, String statusString) {
+	public GenericRequestFailed(Request request, String statusString) {
 		super(request, statusString);
 	}
 
-	public GenericRequestFailed(RequestFact request) {
+	public GenericRequestFailed(Request request) {
 		super(request);
 	}
 

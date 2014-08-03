@@ -1,6 +1,6 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.Request;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestRuntimeStatus;
 
 public class RequestRuntimeStatusBase extends RequestStatusBase implements RequestRuntimeStatus {
@@ -14,11 +14,11 @@ public class RequestRuntimeStatusBase extends RequestStatusBase implements Reque
 		super();
 	}
 
-	protected RequestRuntimeStatusBase(RequestFact request, String statusString) {
+	protected RequestRuntimeStatusBase(Request request, String statusString) {
 		super(request, statusString);
 	}
 
-	protected RequestRuntimeStatusBase(RequestFact request) {
+	protected RequestRuntimeStatusBase(Request request) {
 		super(request);
 	}
 

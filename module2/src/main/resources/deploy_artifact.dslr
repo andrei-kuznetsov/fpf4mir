@@ -106,7 +106,7 @@ rule "Deploy default: provide parent folder"
 	when 
 		active activity 'DeployFolderActivity'
 		$artifact : FileArtifact for activity
-		not subrequest 'ReqNewActivity' for activity
+		not subrequest 'Request' for activity
 		not FolderArtifact for activity
 	then
 		insert '$artifact.getName(), $artifact._getFile().getParent(), ""' as 'GenericFolderArtifact';

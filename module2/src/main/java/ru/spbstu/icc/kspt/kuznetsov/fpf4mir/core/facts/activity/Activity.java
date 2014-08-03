@@ -3,14 +3,14 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity;
 import java.io.Serializable;
 import java.util.Date;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.Request;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithRefId;
 
 public interface Activity extends Serializable, FactWithRefId, RequestRelatedFact {
 
-	@Override public RequestFact getRequest();
-	@Override public void setRequest(RequestFact request);
+	@Override public Request getRequest();
+	@Override public void setRequest(Request request);
 
 	@Override public long getRefId();
 	@Override public void setRefId(long refId);

@@ -1,6 +1,6 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.Request;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatus;
 
 public class RequestStatusBase extends RequestRelatedFactBase implements RequestStatus {
@@ -14,11 +14,11 @@ public class RequestStatusBase extends RequestRelatedFactBase implements Request
 		super();
 	}
 
-	protected RequestStatusBase(RequestFact request) {
+	protected RequestStatusBase(Request request) {
 		super(request);
 	}
 
-	protected RequestStatusBase(RequestFact request, String statusString) {
+	protected RequestStatusBase(Request request, String statusString) {
 		super(request);
 		this.message = statusString;
 	}
@@ -37,7 +37,7 @@ public class RequestStatusBase extends RequestRelatedFactBase implements Request
 				+ message + "]";
 	}
 	
-	public RequestStatus reset(RequestFact request, String message){
+	public RequestStatus reset(Request request, String message){
 		super.reset(request);
 		this.message = message;
 		return this;

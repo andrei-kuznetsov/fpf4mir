@@ -29,7 +29,7 @@ rule "activity main phase (auto): read from subrequest (single fact)"
 	 	any activity
 	 	(ALCWork for activity or
 	 	ALCAnalyze for activity)
-	 	subrequest 'ReqNewActivity' for activity
+	 	subrequest 'Request' for activity
 		RLCPrepareRStatus for subrequest
 	 	$subrequestStatus : RequestFinalStatus for subrequest
 >		$value : Alias(rstatus == $subrequestStatus)

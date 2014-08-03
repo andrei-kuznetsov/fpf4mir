@@ -1,6 +1,6 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.Request;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestSuspended;
 
 public class RequestSuspendedBase extends RequestRuntimeStatusBase implements RequestSuspended{
@@ -14,11 +14,11 @@ public class RequestSuspendedBase extends RequestRuntimeStatusBase implements Re
 		super();
 	}
 
-	protected RequestSuspendedBase(RequestFact request, String statusString) {
+	protected RequestSuspendedBase(Request request, String statusString) {
 		super(request, statusString);
 	}
 
-	protected RequestSuspendedBase(RequestFact request) {
+	protected RequestSuspendedBase(Request request) {
 		super(request);
 	}
 

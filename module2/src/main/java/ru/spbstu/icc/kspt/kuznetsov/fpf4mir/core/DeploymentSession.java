@@ -54,7 +54,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityBase;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.DataDirRoot;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.Request;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatusRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.UserInfo;
@@ -437,7 +437,7 @@ public class DeploymentSession {
 		return parsedResults;
 	}
 
-	public List<QResult> getRequestStatus(RequestFact req) {
+	public List<QResult> getRequestStatus(Request req) {
 		QueryResults results = ksession.getQueryResults(
 				"RequestStatus for request", req);
 		return parseQResults(results);
@@ -548,7 +548,7 @@ public class DeploymentSession {
 		return ret;
 	}
 
-	public List<Object> getRequestRelatedFacts(RequestFact key) {
+	public List<Object> getRequestRelatedFacts(Request key) {
 		List<Object> lst = simpleListRequest(key, "Get request related facts");
 		// Collections.sort(lst, new Comparator<Object>() {
 		// @Override

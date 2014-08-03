@@ -2,7 +2,7 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl;
 
 import java.io.Serializable;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.Request;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestRelatedFact;
 
 public class RequestRelatedFactBase implements RequestRelatedFact, Serializable{
@@ -10,9 +10,9 @@ public class RequestRelatedFactBase implements RequestRelatedFact, Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private RequestFact request;
+	private Request request;
 
-	public RequestRelatedFactBase(RequestFact request) {
+	public RequestRelatedFactBase(Request request) {
 		this.request = request;
 	}
 
@@ -20,15 +20,15 @@ public class RequestRelatedFactBase implements RequestRelatedFact, Serializable{
 		super();
 	}
 
-	public RequestFact getRequest() {
+	public Request getRequest() {
 		return request;
 	}
 
-	public void setRequest(RequestFact request) {
+	public void setRequest(Request request) {
 		this.request = request;
 	}
 	
-	public void reset(RequestFact request){
+	public void reset(Request request){
 		this.request = request;
 	}
 

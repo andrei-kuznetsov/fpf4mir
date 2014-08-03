@@ -6,7 +6,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.Alias;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.Request;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FPFCloneable;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithName;
@@ -18,7 +18,7 @@ public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneabl
 	private static final long serialVersionUID = 1936012869829532600L;
 	
 	private U refObject;
-	private RequestFact request;
+	private Request request;
 	private RequestStatus rstatus;
 	private ActivityStatus astatus;
 	
@@ -32,11 +32,11 @@ public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneabl
 		this.refObject = object;
 	}
 	
-	public RequestFact getRequest() {
+	public Request getRequest() {
 		return request;
 	}
 	
-	public void setRequest(RequestFact request) {
+	public void setRequest(Request request) {
 		this.request = request;
 	}
 	
@@ -65,7 +65,7 @@ public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneabl
 	}
 	
 	@Override
-	public Alias<U> clone(RequestFact newRequest) {
+	public Alias<U> clone(Request newRequest) {
 		Alias<U> copy;
 		try {
 			copy = (Alias<U>)this.clone();
@@ -78,7 +78,7 @@ public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneabl
 	}
 	
 	@Override
-	public Alias<U> clone(RequestFact newRequest, String newName) {
+	public Alias<U> clone(Request newRequest, String newName) {
 		Alias<U> copy = this.clone(newRequest);
 		copy.setName(newName);
 		return copy;
@@ -133,12 +133,12 @@ public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneabl
 		return this;
 	}
 	
-	public AliasBase<U> reset(RequestFact request, String name, U object) {
+	public AliasBase<U> reset(Request request, String name, U object) {
 		this.reset(request, null, null, name, object);
 		return this;
 	}
 
-	public AliasBase<U> reset(RequestFact request, U object) {
+	public AliasBase<U> reset(Request request, U object) {
 		final String name;
 		if (object instanceof FactWithName){
 			name = ((FactWithName)object).getName();
@@ -149,7 +149,7 @@ public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneabl
 		return this.reset(request, null, null, name, object);
 	}
 	
-	public AliasBase<U> reset(RequestFact request, RequestStatus rstatus, ActivityStatus astatus,
+	public AliasBase<U> reset(Request request, RequestStatus rstatus, ActivityStatus astatus,
 			String name, U object) {
 		this.refObject = object;
 		this.rstatus = rstatus;

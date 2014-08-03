@@ -89,7 +89,7 @@ rule "suspended activity: request to parent activity (single fact)"
 	when 
 	 	any activity
 		// any phase
-	 	subrequest 'ReqNewActivity' for activity
+	 	subrequest 'Request' for activity
 	 	$subrequestStatus : RequestRuntimeStatus for subrequest
 >		$value : Alias(rstatus == $subrequestStatus)
 	then

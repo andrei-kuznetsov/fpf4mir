@@ -1,6 +1,6 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.Request;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestSucceeded;
 
 public class GenericRequestSucceeded extends RequestSucceededBase implements RequestSucceeded {
@@ -14,11 +14,11 @@ public class GenericRequestSucceeded extends RequestSucceededBase implements Req
 		super();
 	}
 
-	public GenericRequestSucceeded(RequestFact request, String statusString) {
+	public GenericRequestSucceeded(Request request, String statusString) {
 		super(request, statusString);
 	}
 
-	public GenericRequestSucceeded(RequestFact request) {
+	public GenericRequestSucceeded(Request request) {
 		super(request);
 	}
 

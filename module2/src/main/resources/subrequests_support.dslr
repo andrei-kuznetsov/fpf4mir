@@ -27,7 +27,7 @@ rule "Propagate subrequest failure"
 		salience -10000
 	when 
 	 	any activity
-		subrequest 'ReqNewActivity' for activity
+		subrequest 'Request' for activity
 		subrequest failed
 	then
 		activity failed with status "Subrequest failed: " + $subrequestStatus.getMessage()

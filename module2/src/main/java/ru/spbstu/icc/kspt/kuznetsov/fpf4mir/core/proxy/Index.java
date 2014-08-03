@@ -35,7 +35,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityBase;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.Request;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatusRelatedFact;
 
@@ -130,8 +130,8 @@ public class Index {
 			List<Object> lst = null;
 			if (key instanceof Activity) {
 				lst = session.getActivityRelatedFacts((Activity) key);
-			} else if (key instanceof RequestFact) {
-				lst = session.getRequestRelatedFacts((RequestFact) key);
+			} else if (key instanceof Request) {
+				lst = session.getRequestRelatedFacts((Request) key);
 			} else if (key instanceof ActivityStatus) {
 				lst = session.getActivityStatusRelatedFacts((ActivityStatus) key);
 			} else if (key instanceof RequestStatus) {

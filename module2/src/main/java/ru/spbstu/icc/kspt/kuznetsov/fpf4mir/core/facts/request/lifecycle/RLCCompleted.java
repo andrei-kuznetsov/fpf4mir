@@ -1,6 +1,6 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.lifecycle;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.Request;
 
 public class RLCCompleted extends RequestLifeCycleState {
 
@@ -13,7 +13,7 @@ public class RLCCompleted extends RequestLifeCycleState {
 		super();
 	}
 
-	public RLCCompleted(RequestFact request) {
+	public RLCCompleted(Request request) {
 		super(request);
 	}
 
