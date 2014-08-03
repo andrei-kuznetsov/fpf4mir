@@ -7,7 +7,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRel
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.Request;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithRefId;
 
-public class RequestFactBase extends ActivityRelatedFactBase implements Request, Serializable, FactWithRefId {
+public class RequestBase extends ActivityRelatedFactBase implements Request, Serializable, FactWithRefId {
 	/**
 	 * 
 	 */
@@ -16,15 +16,15 @@ public class RequestFactBase extends ActivityRelatedFactBase implements Request,
 	private static volatile long refIdCounter = 1;
 	private long refId;
 	
-	public RequestFactBase() {
+	public RequestBase() {
 		this(null);
 	}
 	
-	public RequestFactBase(Activity parentActivity) {
+	public RequestBase(Activity parentActivity) {
 		this(refIdCounter++, parentActivity);
 	}
 
-	public RequestFactBase(long refId, Activity parentActivity) {
+	public RequestBase(long refId, Activity parentActivity) {
 		super(parentActivity);
 		this.refId = refId;
 	}
@@ -39,7 +39,7 @@ public class RequestFactBase extends ActivityRelatedFactBase implements Request,
 		this.refId = refId;
 	}
 	
-	public RequestFactBase reset(long refId, Activity parentActivity){
+	public RequestBase reset(long refId, Activity parentActivity){
 		super.reset(parentActivity);
 		this.refId = refId;
 		return this;

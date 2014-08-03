@@ -26,14 +26,14 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
 ///////////// java /////////////////
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityBase end
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase end
-declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.ReqNewActivityBase end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.RequestBase end
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.RequestScopedKnowledgeBase end
 ////////// end of java /////////////
 
 declare R_M1Activity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityBase
 end
 
-declare R_M1 extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.ReqNewActivityBase
+declare R_M1 extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.RequestBase
 end
 
 declare Ak extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase
