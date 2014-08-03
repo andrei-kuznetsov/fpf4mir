@@ -9,7 +9,7 @@ import java.util.UUID;
 import org.apache.log4j.Logger;
 import org.drools.runtime.StatefulKnowledgeSession;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.ActionFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.Action;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.ExecAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.GenericExecStatus;
 
@@ -18,7 +18,7 @@ public class ExecActionHandler implements ActionHandler{
 	private static final Logger logger = Logger.getLogger(ActionHandler.class);
 
 	@Override
-	public void process(ActionFact a, StatefulKnowledgeSession ksession) throws IOException, InterruptedException {
+	public void process(Action a, StatefulKnowledgeSession ksession) throws IOException, InterruptedException {
 		ExecAction action = (ExecAction) a;
 		final File workingDir = action.getWorkingDir();
 		final File fileIn = new File(workingDir, UUID.randomUUID().toString() + ".in");

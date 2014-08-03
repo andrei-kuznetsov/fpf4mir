@@ -1,11 +1,11 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.ActionFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.Action;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithRefId;
 
-public class ActionFactBase extends ActivityRelatedFactBase implements ActionFact, FactWithRefId{
+public class ActionFactBase extends ActivityRelatedFactBase implements Action, FactWithRefId{
 	/**
 	 * 
 	 */

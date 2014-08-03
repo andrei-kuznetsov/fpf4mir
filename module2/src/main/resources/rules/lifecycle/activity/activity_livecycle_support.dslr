@@ -29,7 +29,7 @@ rule "Activity lifecycle change permitted"
 		salience -20000
 	when 
 		any activity
-	 	not ActionFact for activity
+	 	not Action for activity
 >		forall ($rf : Request(activity == $activity)
 >               RLCCompleted(request == $rf))
 	then

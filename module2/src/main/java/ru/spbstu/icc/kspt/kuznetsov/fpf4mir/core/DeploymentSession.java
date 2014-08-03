@@ -46,7 +46,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.AddFeatureHandler_Local_Linux;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.AddFeatureHandler_Local_Windows;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ExecActionHandler;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.ActionFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.Action;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.UserAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.GenericAddFeatureAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.GenericExecAction;
@@ -78,7 +78,7 @@ public class DeploymentSession {
 	private KnowledgeRuntimeLogger logger = null;
 	private Marshaller marshaller;
 	private static final Logger log = Logger.getLogger(DeploymentSession.class);
-	private static final Map<Class<? extends ActionFact>, ActionHandler> actionsMap = new HashMap<Class<? extends ActionFact>, ActionHandler>();
+	private static final Map<Class<? extends Action>, ActionHandler> actionsMap = new HashMap<Class<? extends Action>, ActionHandler>();
 
 	private EXECUTION_STATE state = EXECUTION_STATE.DONE;
 
@@ -146,7 +146,7 @@ public class DeploymentSession {
 				Collection actions = ksession.getObjects(new ObjectFilter() {
 					@Override
 					public boolean accept(Object object) {
-						return (object instanceof ActionFact);
+						return (object instanceof Action);
 					}
 				});
 
@@ -201,14 +201,14 @@ public class DeploymentSession {
 	}
 
 	private EXECUTION_STATE executeActions(
-			Collection<? extends ActionFact> actions) throws Exception {
+			Collection<? extends Action> actions) throws Exception {
 
 		final EXECUTION_STATE ret;
 
 		boolean hasUserAction = false;
 		boolean hasNonUserAction = false;
 
-		for (ActionFact i : actions) {
+		for (Action i : actions) {
 			if (i instanceof UserAction) {
 				log.info("Waiting for user action: " + i);
 				hasUserAction = true;

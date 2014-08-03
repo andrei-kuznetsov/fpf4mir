@@ -4,7 +4,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithRefId;
 
 
 
-public interface UserAction extends ActionFact, FactWithRefId {
+public interface UserAction extends Action, FactWithRefId {
 	public String getDescription();
 	public void setDescription(String description);
 }

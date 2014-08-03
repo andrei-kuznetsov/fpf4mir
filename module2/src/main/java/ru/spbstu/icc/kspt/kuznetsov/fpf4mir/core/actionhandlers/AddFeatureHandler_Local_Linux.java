@@ -2,7 +2,7 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers;
 
 import org.drools.runtime.StatefulKnowledgeSession;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.ActionFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.Action;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.AddFeatureAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.Feature;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.MavenFeature;
@@ -10,7 +10,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.MavenFeature;
 public class AddFeatureHandler_Local_Linux implements ActionHandler {
 
 	@Override
-	public void process(ActionFact action, StatefulKnowledgeSession ksession)
+	public void process(Action action, StatefulKnowledgeSession ksession)
 			throws Exception {
 		if (action instanceof AddFeatureAction){
 			AddFeatureAction a = (AddFeatureAction) action;
