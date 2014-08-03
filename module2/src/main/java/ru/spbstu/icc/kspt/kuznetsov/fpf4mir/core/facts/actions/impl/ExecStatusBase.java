@@ -11,12 +11,11 @@ import java.util.regex.Pattern;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.ExecStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FileArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.GenericFileArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.ExecCommand;
 
-public class ExecStatusBase extends ActivityRelatedFactBase implements ExecStatus {
+public class ExecStatusBase extends ActionStatusBase implements ExecStatus {
 	/**
 	 * 
 	 */

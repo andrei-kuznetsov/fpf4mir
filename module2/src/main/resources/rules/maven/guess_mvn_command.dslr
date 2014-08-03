@@ -39,7 +39,6 @@ end
 rule "Maven_DefaultTargets"
 	when
 		active activity 'MvnBuildActivity'
-//		not MvnBuildTarget for activity
 	then
 		add ordinal 500 "clean"
 		add ordinal 501 "package"
