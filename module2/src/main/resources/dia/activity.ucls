@@ -3,8 +3,8 @@
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
   <interface id="1" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.ExecStatus" 
     project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/actions/ExecStatus.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/actions/ExecStatus.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="942" y="237"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -45,21 +45,6 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </interface>  
-  <class id="5" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.BuildError" 
-    project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/build/BuildError.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="364" y="298"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
-      <operations public="false" package="false" protected="false" private="false" static="false"/>    
-    </display>  
-  </class>  
-  <realization id="6">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="4"/>  
-  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
     <attributes public="false" package="false" protected="false" private="false" static="false"/>    

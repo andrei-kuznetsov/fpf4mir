@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.6" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <interface id="1" language="java" 
+    name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityStatusRelatedFact" project="fpf4mir-core" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/ActivityStatusRelatedFact.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="245" x="35" y="56"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="2" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityInProgress" 
+    project="fpf4mir-core" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/ActivityInProgress.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="63" width="245" x="320" y="599"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="3" language="java" 
+    name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityRuntimeStatus" project="fpf4mir-core" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/ActivityRuntimeStatus.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="63" width="245" x="605" y="460"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="4" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityErrorFixed" 
+    project="fpf4mir-core" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/ActivityErrorFixed.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="245" x="35" y="321"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="5" language="java" 
+    name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityResultRelatedFact" project="fpf4mir-core" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/ActivityResultRelatedFact.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="245" x="320" y="56"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="6" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityResult" 
+    project="fpf4mir-core" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/ActivityResult.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="245" x="320" y="321"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="7" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity" 
+    project="fpf4mir-core" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/Activity.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="245" x="1175" y="56"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="8" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivitySuspended" 
+    project="fpf4mir-core" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/ActivitySuspended.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="63" width="245" x="605" y="599"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="9" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivitySucceeded" 
+    project="fpf4mir-core" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/ActivitySucceeded.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="63" width="245" x="890" y="599"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="10" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityStatus" 
+    project="fpf4mir-core" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/ActivityStatus.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="63" width="245" x="605" y="321"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="11" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityError" 
+    project="fpf4mir-core" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/ActivityError.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="63" width="245" x="1175" y="460"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="12" language="java" 
+    name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityAnalitycsInfo" project="fpf4mir-core" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/ActivityAnalitycsInfo.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="63" width="245" x="1175" y="321"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="13" language="java" 
+    name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityResultFailed" project="fpf4mir-core" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/ActivityResultFailed.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="63" width="245" x="320" y="460"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="14" language="java" 
+    name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityResultSucceeded" project="fpf4mir-core" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/ActivityResultSucceeded.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="63" width="245" x="35" y="460"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="15" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityFinalStatus" 
+    project="fpf4mir-core" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/ActivityFinalStatus.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="63" width="245" x="890" y="460"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="16" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityRelatedFact" 
+    project="fpf4mir-core" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/ActivityRelatedFact.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="245" x="605" y="56"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="17" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityWarning" 
+    project="fpf4mir-core" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/ActivityWarning.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="245" x="1460" y="460"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="18" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityFailed" 
+    project="fpf4mir-core" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/activity/ActivityFailed.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="245" x="1175" y="599"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <generalization id="19">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <generalization id="20">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <generalization id="21">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <generalization id="22">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <generalization id="23">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <generalization id="24">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <generalization id="25">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <generalization id="26">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <generalization id="27">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <generalization id="28">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <generalization id="29">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <generalization id="30">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <generalization id="31">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <generalization id="32">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

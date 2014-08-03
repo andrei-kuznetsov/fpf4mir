@@ -3,7 +3,7 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl;
 import java.io.Serializable;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityStatus;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityStatusRelatedFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityStatusRelatedFact;
 
 public class ActivityStatusRelatedFactBase implements ActivityStatusRelatedFact, Serializable{
 	/**

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.5" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+<class-diagram version="1.1.6" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <interface id="1" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqNewActivity" 
+  <interface id="1" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.ReqNewActivity" 
     project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/requestfacts/ReqNewActivity.java" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/request/ReqNewActivity.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="51" width="239" x="320" y="219"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -12,20 +12,9 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </interface>  
-  <class id="2" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqNewBuild" 
+  <interface id="2" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact" 
     project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/requestfacts/ReqNewBuild.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="239" x="599" y="128"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
-      <operations public="false" package="false" protected="false" private="false" static="false"/>    
-    </display>  
-  </class>  
-  <interface id="3" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact" 
-    project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/requestfacts/RequestFact.java" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/request/RequestFact.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="51" width="239" x="320" y="128"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -34,48 +23,10 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </interface>  
-  <class id="4" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.ReqNewRun" 
-    project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/requestfacts/ReqNewRun.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="51" width="239" x="41" y="128"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
-      <operations public="false" package="false" protected="false" private="false" static="false"/>    
-    </display>  
-  </class>  
-  <class id="5" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestStatus" 
-    project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/requestfacts/RequestStatus.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="438" y="334"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
-      <operations public="false" package="false" protected="false" private="false" static="false"/>    
-    </display>  
-  </class>  
-  <generalization id="6">    
+  <generalization id="3">    
     <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="3"/>  
+    <end type="TARGET" refId="2"/>  
   </generalization>  
-  <association id="7">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="8" name="request"/>      
-      <multiplicity id="9" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="false"/>  
-  </association>  
-  <realization id="10">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <realization id="11">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
     <attributes public="false" package="false" protected="false" private="false" static="false"/>    

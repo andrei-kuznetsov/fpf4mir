@@ -3,9 +3,9 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity;
 import java.io.Serializable;
 import java.util.Date;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithRefId;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestRelatedFact;
 
 public interface Activity extends Serializable, FactWithRefId, RequestRelatedFact {
 

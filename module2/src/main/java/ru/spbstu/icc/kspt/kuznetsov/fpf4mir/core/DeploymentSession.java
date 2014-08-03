@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -46,20 +47,19 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.AddFeatureHandle
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.AddFeatureHandler_Local_Windows;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ExecActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.ActionFact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.AddFeatureAction;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.ExecAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.UserAction;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.GenericAddFeatureAction;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.GenericExecAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityResult;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityBase;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.DataDirRoot;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatusRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.UserInfo;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestSubstatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.OS;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestStatusRelatedFact;
 
 public class DeploymentSession {
 	private static final String QKEY_ACTIVITY_OBJECT = "$object";
@@ -71,7 +71,6 @@ public class DeploymentSession {
 	};
 
 	private static final String QKEY_STATUS = "$rstatus";
-	private static final String QKEY_SUBSTATUS = "substatus";
 	private static final String QKEY_ACTIVITY = "activities";
 	private static final String QKEY_EXTRAS = "extras";
 
@@ -130,12 +129,12 @@ public class DeploymentSession {
 	}
 
 	private static void initActions() {
-		actionsMap.put(ExecAction.class, new ExecActionHandler());
+		actionsMap.put(GenericExecAction.class, new ExecActionHandler());
 		
 		if (OS.isWindows()){
-			actionsMap.put(AddFeatureAction.class, new AddFeatureHandler_Local_Windows());
+			actionsMap.put(GenericAddFeatureAction.class, new AddFeatureHandler_Local_Windows());
 		} else {
-			actionsMap.put(AddFeatureAction.class, new AddFeatureHandler_Local_Linux());
+			actionsMap.put(GenericAddFeatureAction.class, new AddFeatureHandler_Local_Linux());
 		}
 
 	}
@@ -253,8 +252,16 @@ public class DeploymentSession {
 		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory
 				.newKnowledgeBuilder();
 
+		addKBEntries(kbuilder);
+
+		kbase = kbuilder.newKnowledgeBase();
+		marshaller = MarshallerFactory.newMarshaller(kbase);
+	}
+
+	protected void addKBEntries(KnowledgeBuilder kbuilder) throws ZipException,
+			IOException {
 		URL t = DeploymentSession.class.getClassLoader().getResource(
-				"basic_actions.drl");
+				"basic_actions.dslr");
 		System.out.println("DRL is:" + t);
 
 		if (t == null)
@@ -262,20 +269,16 @@ public class DeploymentSession {
 
 		log.debug("Looking for *.drl files");
 
-		// String[] drlFiles =
-		// Classpath.getClasspathFileNamesWithExtension(".drl");
-		// Arrays.sort(drlFiles);
-		// for (String resFileName : drlFiles) addClassPathEntry(kbuilder,
-		// resFileName, ResourceType.DRL);
-		addClassPathEntry(kbuilder, "a_definitions.drl", ResourceType.DRL);
-		addClassPathEntry(kbuilder, "a_functions.drl", ResourceType.DRL);
-		addClassPathEntry(kbuilder, "basic_actions.drl", ResourceType.DRL);
-		addClassPathEntry(kbuilder, "basic_queries.drl", ResourceType.DRL);
+
+		addAllClassPathResources(kbuilder, "definitions.drl", ResourceType.DRL);
+		addAllClassPathResources(kbuilder, "functions.drl", ResourceType.DRL);
+		addAllClassPathResources(kbuilder, "queries.drl", ResourceType.DRL);
+		
 		addClassPathEntry(kbuilder, "preprocess.drl", ResourceType.DRL);
 
-		kbase = kbuilder.newKnowledgeBase();
-		debugTactType(kbase, "defaultpkg", "DeployFolder");
-		debugTactType(kbase, "defaultpkg", "ReqDownloadHttp");
+//		kbase = kbuilder.newKnowledgeBase();
+//		debugTactType(kbase, "defaultpkg", "DeployFolder");
+//		debugTactType(kbase, "defaultpkg", "ReqDownloadHttp");
 
 		String[] dslFiles = Classpath
 				.getClasspathFileNamesWithExtension(".dsl");
@@ -286,9 +289,15 @@ public class DeploymentSession {
 				.getClasspathFileNamesWithExtension(".dslr");
 		for (String resFileName : dslrFiles)
 			addClassPathEntry(kbuilder, resFileName, ResourceType.DSLR);
+	}
 
-		kbase = kbuilder.newKnowledgeBase();
-		marshaller = MarshallerFactory.newMarshaller(kbase);
+	protected void addAllClassPathResources(KnowledgeBuilder kbuilder, String fname, ResourceType rtype)
+			throws ZipException, IOException {
+		String[] defFiles = Classpath
+				.getClasspathFileNamesWithExtension(fname);
+		Arrays.sort(defFiles);
+		for (String resFileName : defFiles)
+			addClassPathEntry(kbuilder, resFileName, rtype);
 	}
 
 	private void initGlobals(KnowledgeBase kbase,
@@ -314,7 +323,7 @@ public class DeploymentSession {
 		}
 	}
 
-	private void addClassPathEntry(KnowledgeBuilder kbuilder,
+	public static void addClassPathEntry(KnowledgeBuilder kbuilder,
 			String resFileName, ResourceType type) {
 		if (resFileName.indexOf('/') == -1 || resFileName.startsWith("rules/")) {
 			System.out.println("[+] Found classpath resource: " + resFileName);
@@ -373,26 +382,19 @@ public class DeploymentSession {
 
 	public static class QResult {
 		public RequestStatus mainStatus;
-		public List<RequestSubstatus> substatuses;
 		public List<Activity> activities;
 		public List<RequestStatusRelatedFact> extras;
 
-		public QResult(RequestStatus mainStatus,
-				List<RequestSubstatus> substatuses, List<Activity> activities,
+		public QResult(RequestStatus mainStatus, List<Activity> activities,
 				List<RequestStatusRelatedFact> extras) {
 			super();
 			this.mainStatus = mainStatus;
-			this.substatuses = substatuses;
 			this.activities = activities;
 			this.extras = extras;
 		}
 
 		public RequestStatus getMainStatus() {
 			return mainStatus;
-		}
-
-		public List<RequestSubstatus> getSubstatuses() {
-			return substatuses;
 		}
 
 		public List<Activity> getActivities() {
@@ -419,15 +421,13 @@ public class DeploymentSession {
 			while (it.hasNext()) {
 				QueryResultsRow row = it.next();
 				RequestStatus status = (RequestStatus) row.get(QKEY_STATUS);
-				List<RequestSubstatus> substatus = (List<RequestSubstatus>) row
-						.get(QKEY_SUBSTATUS);
 				List<Activity> activities = (List<Activity>) row
 						.get(QKEY_ACTIVITY);
 
 				List<RequestStatusRelatedFact> extras = (List<RequestStatusRelatedFact>) row
 						.get(QKEY_EXTRAS);
 
-				QResult r = new QResult(status, substatus, activities, extras);
+				QResult r = new QResult(status, activities, extras);
 				parsedResults.add(r);
 			}
 

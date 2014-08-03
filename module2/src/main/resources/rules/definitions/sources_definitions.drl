@@ -1,0 +1,7 @@
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+
+declare SrcEncoding extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase
+	activity : Activity
+	encoding : String
+end
+

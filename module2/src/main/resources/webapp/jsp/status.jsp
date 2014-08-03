@@ -7,7 +7,7 @@
 <%@page import="java.net.URL"%>
 <%@page import="java.util.List"%>
 <%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.UserAction"%>
-<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.RequestStatusRelatedFact"%>
+<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatusRelatedFact"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>

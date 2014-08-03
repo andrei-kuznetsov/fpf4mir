@@ -1,0 +1,188 @@
+//////////////////////////  Import all  ////////////////////////////////////
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.lifecycle.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.lifecycle.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
+///////////////////////////////////////////////////////////////////////////////
+
+///////////// java /////////////////
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityBase end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.ReqNewActivityBase end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.RequestScopedKnowledgeBase end
+////////// end of java /////////////
+
+declare R_M1Activity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityBase
+end
+
+declare R_M1 extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.ReqNewActivityBase
+end
+
+declare Ak extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase
+end
+
+declare A extends Ak
+end
+
+declare B extends Ak
+end
+
+declare C extends Ak
+end
+
+declare Kk
+end
+
+declare K0 extends Kk
+end
+
+declare K1 extends Kk
+end
+
+declare K2 extends Kk
+end
+
+declare ErrInvalidK extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityErrorBase
+end
+
+declare IncompatibleK extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.RequestScopedKnowledgeBase
+	activity : Activity; // add the field to constructor 
+	k : Kk;
+end
+
+declare ExistsK
+	k : Kk;
+end
+
+declare UseK extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase
+	activity : Activity; // add the field to constructor 
+	k : Kk;
+end
+
+declare Log extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase
+	activity : Activity; // add the field to constructor 
+	msg : java.lang.String;
+end
+
+rule "START"
+	when
+		not Ak()
+	then
+		ReqNewActivity r;
+		Ak a;
+		Alias als;
+		insert(r = new R_M1());
+		insert(a = new A());
+		insert(new GenericAlias().reset(r, a));
+
+		insert(r = new R_M1());
+		insert(a = new B());
+		insert(new GenericAlias().reset(r, a));
+		
+		insert(r = new R_M1());
+		insert(a = new C());
+		insert(new GenericAlias().reset(r, a));
+
+		insert(new ExistsK(new K0()));
+		insert(new ExistsK(new K1()));
+		insert(new ExistsK(new K2()));
+end
+
+rule "ПД - устранение ошибки"
+	when 
+		$activity : R_M1Activity()
+	 	ALCAnalyze(activity == $activity)
+		UseK(activity == $activity, $k : k)
+		$err : ErrInvalidK(activity == $activity)
+	then 
+		insert( new IncompatibleK($activity, $k) );
+		insert( new GenericActivityErrorFixed($err) );
+		System.out.println("Problem fixed - decided not to use K: " + $k);
+end
+
+rule "ПД - идентификация ошибки"
+	when 
+		$activity : R_M1Activity()
+	 	ALCWork(activity == $activity)
+		Log(activity == $activity, msg == "invalid")
+	then 
+		insert(new ErrInvalidK().reset($activity));
+		insert(new GenericActivityResultFailed().reset($activity));
+		System.out.println("Activity failed: " + $activity);
+		System.out.println("Invalid component K detected");
+end
+
+rule "ПД - успех"
+	when 
+		$activity : R_M1Activity()
+	 	ALCWork(activity == $activity)
+		Log(activity == $activity, msg == "ok")
+	then 
+		insert(new GenericActivityResultSucceeded().reset($activity));
+		System.out.println("Success: " + $activity);
+end
+
+rule "ПВ"
+	when 
+		$activity : R_M1Activity()
+	 	ALCWork(activity == $activity)
+		ExistsK($k: k)
+		not IncompatibleK(activity == $activity, k == $k)
+		not UseK(activity == $activity)
+	then 
+		insert(new UseK($activity, $k));
+		System.out.println("Selected param (UseK): " + $k);
+end
+
+rule "ПИ"
+	when 
+		$activity : R_M1Activity()
+	 	ALCWork(activity == $activity)
+		$a : Ak(activity == $activity)
+		UseK(activity == $activity, $k: k)
+	then
+		System.out.println("run: " + $a + ", " + $k);
+		if ($a instanceof A){
+			if ($k instanceof K1){
+				insert( new Log($activity, "ok") );
+				System.out.println("run: OK");
+			} else {
+				insert( new Log($activity, "invalid") );
+				System.out.println("run: Invalid");
+			}
+		} else if ($a instanceof B){
+			if ($k instanceof K2){
+				insert( new Log($activity, "ok") );
+				System.out.println("run: OK");
+			} else {
+				insert( new Log($activity, "invalid") );
+				System.out.println("run: Invalid");
+			}
+		} else if ($a instanceof C){
+			if ($k instanceof K0){
+				insert( new Log($activity, "ok") );
+				System.out.println("run: OK");
+			} else {
+				insert( new Log($activity, "invalid") );
+				System.out.println("run: Invalid");
+			}
+		}
+end

@@ -4,8 +4,8 @@ import java.util.Date;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.R;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.RequestRelatedFactBase;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.RequestRelatedFactBase;
 
 public class ActivityBase extends RequestRelatedFactBase implements Activity{
 	/**

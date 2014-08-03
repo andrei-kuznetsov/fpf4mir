@@ -3,7 +3,7 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.AddFeatureAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 
-public class GenericAddFeatureAction extends AddFeatureActionBase implements AddFeatureAction {
+public final class GenericAddFeatureAction extends AddFeatureActionBase implements AddFeatureAction {
 
 	/**
 	 * 

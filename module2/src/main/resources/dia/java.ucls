@@ -23,9 +23,9 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.OrdinalArgument" 
+  <class id="3" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.impl.OrdinalArgumentument" 
     project="fpf4mir-core" 
-    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/cmd/OrdinalArgument.java" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/cmd/impl/OrdinalArgument.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="51" width="229" x="538" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 

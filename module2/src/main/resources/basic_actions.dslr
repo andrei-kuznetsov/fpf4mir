@@ -1,8 +1,27 @@
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
+//////////////////////////  Import all  ////////////////////////////////////
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.lifecycle.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.lifecycle.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
+///////////////////////////////////////////////////////////////////////////////
 
 rule "CommandExecutor"
 	when
@@ -10,5 +29,5 @@ rule "CommandExecutor"
 		$cmd : ExecCommand for activity
 		not ExecStatus( execCommand == $cmd ) for activity
 	then
->		insertLogical( new ExecAction($cmd) );
+>		insertLogical( new GenericExecAction($cmd) );
 end

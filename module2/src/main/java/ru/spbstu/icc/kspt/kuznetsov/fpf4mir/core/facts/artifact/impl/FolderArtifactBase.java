@@ -9,7 +9,6 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FileArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FileArtifactList;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FolderArtifact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.generic.GenericFileArtifactList;
 
 public class FolderArtifactBase extends ArtifactBase implements FolderArtifact{
 	/**

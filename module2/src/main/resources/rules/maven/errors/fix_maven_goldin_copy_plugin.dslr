@@ -1,0 +1,74 @@
+//////////////////////////  Import all  ////////////////////////////////////
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.lifecycle.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.lifecycle.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.impl.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
+///////////////////////////////////////////////////////////////////////////////
+
+declare MvnErr_GoldinCopyPlugin_RepositorySystem extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityErrorBase end
+declare RSK_MvnIncompatibleVersion extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.RSKIncompatibleFeatureVersion end
+
+declare ProposedMavenVersion extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase
+	activity : Activity
+	version: String
+end
+
+rule "Goldin copy maven plugin: incompatible versions"
+	when
+		analyze activity 'MvnBuildActivity'
+>		ExecStatus( activity == $activity,
+>					succeeded == false,
+>					containsString("A required class was missing while executing com.github.goldin:copy-maven-plugin:0.2.5:copy: Lorg/sonatype/aether/RepositorySystem") )
+	then
+		add parameter '"Error: goldin:copy-maven-plugin failed: RepositorySystem"' to '$activity' as MvnErr_GoldinCopyPlugin_RepositorySystem;
+end
+
+rule "Incompatible maven version for MvnErr_GoldinCopyPlugin_RepositorySystem"
+	when
+		analyze activity 'MvnBuildActivity'
+		MvnErr_GoldinCopyPlugin_RepositorySystem for activity
+>		$mvn : MavenFeature()
+		FeatureInUse(feature==$mvn) for activity
+	then
+		add parameter '$mvn' to '$activity' as RSKIncompatibleFeatureVersion;
+end
+
+rule "Propose mvn compatible version for goldin copy plugin"
+	when
+		analyze activity 'MvnBuildActivity'
+		$err : MvnErr_GoldinCopyPlugin_RepositorySystem for activity
+		not RSK_MvnIncompatibleVersion(featureVersion.startsWith("3.0")) for activity
+		not ProposedMavenVersion(version == "3.0") for activity
+	then
+		add feature action 'maven' version '3.0';
+>		insert( new ProposedMavenVersion($activity, "3.0") );
+end
+
+rule "Mvn version fixed for GoldinCopyPlugin"
+	when
+		analyze activity 'MvnBuildActivity'
+		$err : MvnErr_GoldinCopyPlugin_RepositorySystem for activity
+		$prop_mvn : ProposedMavenVersion for activity
+>		$mvn : MavenFeature(version.startsWith($prop_mvn.version))
+	then
+		error '$err' fixed
+end
+

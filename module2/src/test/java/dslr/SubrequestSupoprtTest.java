@@ -11,8 +11,9 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.Alias;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FileArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.GenericFileArtifact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestSucceeded;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestSucceeded;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.GenericRequestSucceeded;
 import utils.AgendaListener;
 import utils.DrlObjectsUtils;
 
@@ -35,7 +36,7 @@ public class SubrequestSupoprtTest extends TestCase {
         Activity da = (Activity) DrlObjectsUtils.createObject(ksession, "defaultpkg", "DeployExecutableActivity");
         RequestFact subreq = (RequestFact) DrlObjectsUtils.createObject(ksession, "defaultpkg", "ReqGuessRunExecutable");
         DrlObjectsUtils.setField(ksession, subreq, "parentActivity", da);
-        RequestSucceeded subreq_success = new RequestSucceeded();
+        RequestSucceeded subreq_success = new GenericRequestSucceeded();
         subreq_success.setRequest(subreq);
 
         Alias subreq_success_fact = (Alias) DrlObjectsUtils.createObject(ksession, "defaultpkg", "ExecFileArtifactListAlias");

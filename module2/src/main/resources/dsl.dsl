@@ -22,8 +22,8 @@
 [when]subrequest {subrequest:\w+} for activity=$subrequest : {subrequest}(parentActivity == $activity)
 #[when]- has name=name != null
 [when]subrequest completed=RLCCompleted( request == $subrequest )
-[when]subrequest succeeded=$subrequestStatus : RequestSucceeded( request == $subrequest ) and RLCCompleted( request == $subrequest )
-[when]subrequest failed=$subrequestStatus : RequestFailed( request == $subrequest ) and RLCCompleted( request == $subrequest )
+[when]subrequest succeeded=$subrequestStatus : GenericRequestSucceeded( request == $subrequest ) and RLCCompleted( request == $subrequest )
+[when]subrequest failed=$subrequestStatus : GenericRequestFailed( request == $subrequest ) and RLCCompleted( request == $subrequest )
 [when]subrequest outputs \(=(or
 [when]subrequest output '{type}'=$output : {type}( rstatus == $subrequestStatus ) 
 
@@ -42,8 +42,8 @@
 [then]def user action {type:\w+}={type} useraction = new {type}(); useraction.setActivity($activity);
 [then]add user action attr {attr:\w+} as {value}=useraction.set{attr}({value});
 [then]add user action=insert(useraction);
-[then]add feature action '{feature}' version '{version}';=insert( new AddFeatureAction($activity, "{feature}", "{version}") );
-[then]add feature action '{feature}';=insert( new AddFeatureAction($activity, "{feature}") );
+[then]add feature action '{feature}' version '{version}';=insert( new GenericAddFeatureAction($activity, "{feature}", "{version}") );
+[then]add feature action '{feature}';=insert( new GenericAddFeatureAction($activity, "{feature}") );
 [then]error '{err}' fixed=insert( new GenericActivityErrorFixed({err}) );
 
 [then]add subrequest '{type}' with refId '{refId}';={type} $subrequest = new {type}(); $subrequest.setParentActivity($activity); $subrequest.setRefId({refId}); insert($subrequest);
@@ -68,8 +68,8 @@
 [then]activity succeeded=GenericActivityResultSucceeded activityStatus=new GenericActivityResultSucceeded($activity); insert(activityStatus);
 [then]activity failed with status {status}=insert( new GenericActivityResultFailed($activity, {status}) );
 [then]activity failed with message {status}=insert( new GenericActivityResultFailed($activity, {status}) );
-[then]request succeeded=RequestFinalStatus requestStatus = new RequestSucceeded($request, "ok"); insert(requestStatus);
-[then]subrequest succeeded=RequestFinalStatus subrequestStatus = new RequestSucceeded($subrequest, "ok"); insert(subrequestStatus);
+[then]request succeeded=RequestFinalStatus requestStatus = new GenericRequestSucceeded($request, "ok"); insert(requestStatus);
+[then]subrequest succeeded=RequestFinalStatus subrequestStatus = new GenericRequestSucceeded($subrequest, "ok"); insert(subrequestStatus);
 
 [then]add {type:\w+} as request status=add request status parameter $artifact as Generic{type}Alias
 

@@ -3,7 +3,7 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd;
 import java.io.File;
 import java.util.List;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityRelatedFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityRelatedFact;
 
 public interface ExecCommand extends ActivityRelatedFact {
 	public String getCommand();

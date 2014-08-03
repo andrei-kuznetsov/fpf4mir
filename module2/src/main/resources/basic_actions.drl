@@ -1,8 +1,0 @@
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.*;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.*;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.*;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.*;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.build.maven.*;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionfacts.*;
-
-

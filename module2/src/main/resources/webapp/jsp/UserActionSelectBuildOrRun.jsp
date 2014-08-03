@@ -48,7 +48,7 @@ function assertFact(factType, baseDir, fileName) {
 	<ul>
 		<c:forEach items="${uaction.execArtifacts.list()}" var="b">
 			<li>
-			<a href="javascript:assertFact('ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.generic.GenericExecutableFileArtifact', '${b.getBaseDir().replace('\\','//')}', '${b.getFileName().replace('\\','//')}')">${b.fileName}</a>
+			<a href="javascript:assertFact('ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.GenericExecutableFileArtifact', '${b.getBaseDir().replace('\\','//')}', '${b.getFileName().replace('\\','//')}')">${b.fileName}</a>
 			<br>
 		</c:forEach>
 	</ul>

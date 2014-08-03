@@ -3,7 +3,7 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl;
 import java.io.Serializable;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityRelatedFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FPFCloneable;
 
 public class ActivityRelatedFactBase implements ActivityRelatedFact,
@@ -15,12 +15,12 @@ public class ActivityRelatedFactBase implements ActivityRelatedFact,
 
 	private Activity activity;
 
-	public ActivityRelatedFactBase(Activity activity) {
+	protected ActivityRelatedFactBase(Activity activity) {
 		super();
 		this.activity = activity;
 	}
 
-	public ActivityRelatedFactBase() {
+	protected ActivityRelatedFactBase() {
 
 	}
 

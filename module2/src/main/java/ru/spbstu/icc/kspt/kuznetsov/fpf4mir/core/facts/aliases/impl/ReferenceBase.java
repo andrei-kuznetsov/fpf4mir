@@ -1,9 +1,9 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.impl;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.Reference;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityRelatedFact;
 
 public class ReferenceBase<U extends ActivityRelatedFact> extends ActivityRelatedFactBase implements Reference<U> {
 	/**

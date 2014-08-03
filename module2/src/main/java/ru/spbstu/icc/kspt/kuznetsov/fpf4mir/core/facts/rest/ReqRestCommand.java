@@ -1,7 +1,7 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.ReqNewActivityBase;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.ReqNewActivityBase;
 
 public class ReqRestCommand extends ReqNewActivityBase {
 	/**

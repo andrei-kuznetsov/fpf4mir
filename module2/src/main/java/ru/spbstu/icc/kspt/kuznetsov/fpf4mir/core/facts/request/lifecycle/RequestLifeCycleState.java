@@ -1,7 +1,7 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.lifecycle;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.base.RequestRelatedFactBase;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.requestfacts.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.RequestRelatedFactBase;
 
 public class RequestLifeCycleState extends RequestRelatedFactBase {
 

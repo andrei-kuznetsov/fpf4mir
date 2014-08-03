@@ -3,7 +3,7 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl;
 import java.io.Serializable;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityResult;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.ActivityResultRelatedFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityResultRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FPFCloneable;
 
 public class ActivityResultRelatedFactBase implements ActivityResultRelatedFact, FPFCloneable, Serializable{
