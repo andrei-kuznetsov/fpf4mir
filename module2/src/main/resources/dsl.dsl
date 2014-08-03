@@ -65,9 +65,9 @@
 [then]add ordinal {order} {value}=insertLogical( new OrdinalArgument( $activity, {order}, {value}) );
 [then]execute command {cmd} in working dir {wd}=insertLogical( new ListExecCommand($activity, {cmd}, {wd}, $options) );
 
-[then]activity succeeded=GenericActivityResultSucceeded activityStatus=new GenericActivityResultSucceeded($activity); insert(activityStatus);
-[then]activity failed with status {status}=insert( new GenericActivityResultFailed($activity, {status}) );
-[then]activity failed with message {status}=insert( new GenericActivityResultFailed($activity, {status}) );
+[then]activity succeeded=GenericActivitySucceeded activityStatus=new GenericActivitySucceeded($activity); insert(activityStatus);
+[then]activity failed with status {status}=insert( new GenericActivityFailed($activity, {status}) );
+[then]activity failed with message {status}=insert( new GenericActivityFailed($activity, {status}) );
 [then]request succeeded=RequestFinalStatus requestStatus = new GenericRequestSucceeded($request, "ok"); insert(requestStatus);
 [then]subrequest succeeded=RequestFinalStatus subrequestStatus = new GenericRequestSucceeded($subrequest, "ok"); insert(subrequestStatus);
 

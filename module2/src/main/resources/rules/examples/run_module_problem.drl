@@ -125,7 +125,7 @@ rule "ПД - идентификация ошибки"
 		Log(activity == $activity, msg == "invalid")
 	then 
 		insert(new ErrInvalidK().reset($activity));
-		insert(new GenericActivityResultFailed().reset($activity));
+		insert(new GenericActivityFailed().reset($activity));
 		System.out.println("Activity failed: " + $activity);
 		System.out.println("Invalid component K detected");
 end
@@ -136,7 +136,7 @@ rule "ПД - успех"
 	 	ALCWork(activity == $activity)
 		Log(activity == $activity, msg == "ok")
 	then 
-		insert(new GenericActivityResultSucceeded().reset($activity));
+		insert(new GenericActivitySucceeded().reset($activity));
 		System.out.println("Success: " + $activity);
 end
 

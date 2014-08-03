@@ -48,35 +48,13 @@ rule "Activity analitycs activation"
 	when 
 		any activity
 		$aa : ALCWork for activity
-	 	ActivityResult for activity
+	 	not ActionFact for activity
+>		forall ($rf : RequestFact(parentActivity == $activity)
+>               RLCCompleted(request == $rf))
 	 	not ALCAnalyze for activity  
 	then
 >		retract($aa);
  		insert ALCAnalyze
-end
-
-rule "Default activity analytics (success)"
-		salience -10000
-	when
-		any activity
-		ActivityResultSucceeded for activity
-		ALCAnalyze for activity
-	 	not ActivityFinalStatus for activity
-	 	not ActionFact for activity
- 	then
- 		insert GenericActivitySucceeded
-end
- 
-rule "Default activity analytics (failure)"
-		salience -10000
-	when
-		any activity
-		$rfailed : ActivityResultFailed for activity
-		ALCAnalyze for activity
-	 	not ActivityFinalStatus for activity
-	 	not ActionFact for activity
- 	then
- 		insert '$rfailed.getMessage()' as new 'GenericActivityFailed';
 end
 
 rule "Activity prepare astatus facts"

@@ -33,13 +33,11 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.DeploymentSession.QResult;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.UserAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityRelatedFact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityResult;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityBase;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatusRelatedFact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.ReqRestCommand;
 
 @Path("/rest")
 public class Index {
@@ -138,8 +136,6 @@ public class Index {
 				lst = session.getActivityStatusRelatedFacts((ActivityStatus) key);
 			} else if (key instanceof RequestStatus) {
 				lst = session.getRequestStatusRelatedFacts((RequestStatus) key);
-			} else if (key instanceof ActivityResult) {
-				lst = session.getActivityResultRelatedFacts((ActivityResult) key);
 			}
 
 			tree.put(key, lst);

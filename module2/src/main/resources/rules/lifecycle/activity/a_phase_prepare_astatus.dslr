@@ -35,18 +35,6 @@ rule "activity prepare astatus: activity to activity status (single fact)(Activi
 		add parameter '$value' to '$astatus';
 end
 
-rule "activity prepare astatus: ActivityResult to ActivityFinalStatus (single fact)"
-		salience -10000
-	when
-		any activity
-		ALCPrepareAStatus for activity
-		$astatus : ActivityFinalStatus for activity
-		$aresult : ActivityResult for activity
->		$value : Alias(aresult == $aresult)
-	then
-		add parameter '$value' to '$astatus';
-end
-
 rule "activity prepare astatus: activity to request (single fact)(RequestScopedKnowledge)"
 		salience -10000
 	when

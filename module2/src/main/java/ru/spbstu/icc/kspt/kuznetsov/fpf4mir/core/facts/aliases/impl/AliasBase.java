@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityRelatedFact;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityResult;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.Alias;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFact;
@@ -22,7 +21,6 @@ public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneabl
 	private RequestFact request;
 	private RequestStatus rstatus;
 	private ActivityStatus astatus;
-	private ActivityResult aresult;
 	
 	private String name;
 	
@@ -56,14 +54,6 @@ public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneabl
 
 	public void setAstatus(ActivityStatus astatus) {
 		this.astatus = astatus;
-	}
-
-	public ActivityResult getAresult() {
-		return aresult;
-	}
-
-	public void setAresult(ActivityResult aresult) {
-		this.aresult = aresult;
 	}
 
 	public String getName() {
@@ -125,7 +115,7 @@ public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneabl
 	}
 
 	public AliasBase<U> reset(RequestStatus rstatus, String name, U object) {
-		this.reset(null, rstatus, null, null, name, object);
+		this.reset(null, rstatus, null, name, object);
 		return this;
 	}
 
@@ -139,26 +129,12 @@ public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneabl
 	}
 
 	public AliasBase<U> reset(ActivityStatus astatus, String name, U object) {
-		this.reset(null, null, astatus, null, name, object);
-		return this;
-	}
-
-	public AliasBase<U> reset(ActivityResult aresult, U object) {
-		if (object instanceof FactWithName){
-			this.reset(aresult, ((FactWithName)object).getName(), object);
-		} else {
-			this.reset(aresult, "<no name>", object);
-		}
-		return this;
-	}
-
-	public AliasBase<U> reset(ActivityResult aresult, String name, U object) {
-		this.reset(null, null, null, aresult, name, object);
+		this.reset(null, null, astatus, name, object);
 		return this;
 	}
 	
 	public AliasBase<U> reset(RequestFact request, String name, U object) {
-		this.reset(request, null, null, null, name, object);
+		this.reset(request, null, null, name, object);
 		return this;
 	}
 
@@ -170,16 +146,15 @@ public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneabl
 			name = "<no name>";
 		}
 
-		return this.reset(request, null, null, null, name, object);
+		return this.reset(request, null, null, name, object);
 	}
 	
-	public AliasBase<U> reset(RequestFact request, RequestStatus rstatus, ActivityStatus astatus, ActivityResult aresult,
+	public AliasBase<U> reset(RequestFact request, RequestStatus rstatus, ActivityStatus astatus,
 			String name, U object) {
 		this.refObject = object;
 		this.rstatus = rstatus;
 		this.request = request;
 		this.astatus = astatus;
-		this.aresult = aresult;
 		this.name = name;
 		return this;
 	}

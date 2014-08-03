@@ -51,7 +51,6 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.UserAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.GenericAddFeatureAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.GenericExecAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityResult;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityBase;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.DataDirRoot;
@@ -568,10 +567,6 @@ public class DeploymentSession {
 
 	public List<Object> getActivityStatusRelatedFacts(ActivityStatus key) {
 		return simpleListRequest(key, "Get activity status related facts");
-	}
-
-	public List<Object> getActivityResultRelatedFacts(ActivityResult key) {
-		return simpleListRequest(key, "Get activity result related facts");
 	}
 	
 	public List<UserInfo> getUserInfoFacts(ActivityStatus key) {
