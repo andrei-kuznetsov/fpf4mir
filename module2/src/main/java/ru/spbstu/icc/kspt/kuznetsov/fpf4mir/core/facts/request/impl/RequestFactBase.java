@@ -3,10 +3,11 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl;
 import java.io.Serializable;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.Request;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithRefId;
 
-public class RequestFactBase implements Request, Serializable, FactWithRefId {
+public class RequestFactBase extends ActivityRelatedFactBase implements Request, Serializable, FactWithRefId {
 	/**
 	 * 
 	 */
@@ -14,7 +15,6 @@ public class RequestFactBase implements Request, Serializable, FactWithRefId {
 
 	private static volatile long refIdCounter = 1;
 	private long refId;
-	private Activity parentActivity;
 	
 	public RequestFactBase() {
 		this(null);
@@ -25,17 +25,8 @@ public class RequestFactBase implements Request, Serializable, FactWithRefId {
 	}
 
 	public RequestFactBase(long refId, Activity parentActivity) {
-		super();
+		super(parentActivity);
 		this.refId = refId;
-		this.parentActivity = parentActivity;
-	}
-
-	public Activity getParentActivity() {
-		return parentActivity;
-	}
-
-	public void setParentActivity(Activity parentActivity) {
-		this.parentActivity = parentActivity;
 	}
 
 	@Override
@@ -49,15 +40,15 @@ public class RequestFactBase implements Request, Serializable, FactWithRefId {
 	}
 	
 	public RequestFactBase reset(long refId, Activity parentActivity){
+		super.reset(parentActivity);
 		this.refId = refId;
-		this.parentActivity = parentActivity;
 		return this;
 	}
 
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + " [refId=" + refId + ", parentActivity="
-				+ parentActivity + "]";
+				+ getActivity() + "]";
 	}
 	
 }

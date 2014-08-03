@@ -35,7 +35,7 @@ public class SubrequestSupoprtTest extends TestCase {
         
         Activity da = (Activity) DrlObjectsUtils.createObject(ksession, "defaultpkg", "DeployExecutableActivity");
         Request subreq = (Request) DrlObjectsUtils.createObject(ksession, "defaultpkg", "ReqGuessRunExecutable");
-        DrlObjectsUtils.setField(ksession, subreq, "parentActivity", da);
+        DrlObjectsUtils.setField(ksession, subreq, "activity", da);
         RequestSucceeded subreq_success = new GenericRequestSucceeded();
         subreq_success.setRequest(subreq);
 

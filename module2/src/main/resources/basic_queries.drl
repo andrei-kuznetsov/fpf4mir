@@ -50,7 +50,7 @@ query "Activity for refId"  (long refId)
 end
 
 query "Get activity related facts"  (Activity a)
-	$object : (ActivityRelatedFact( activity == a ) or Request( parentActivity == a ))
+	$object : ActivityRelatedFact( activity == a )
 end
 
 query "Get request related facts"  (Request req)

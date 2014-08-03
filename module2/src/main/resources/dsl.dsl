@@ -18,8 +18,8 @@
 [when]input '{type}'=$input : {type}( request == $request ) 
 
 [when]subrequest for activity=subrequest 'Request' for activity
-[when]subrequest '{subrequest}' for activity=$subrequest : {subrequest}(parentActivity == $activity)
-[when]subrequest {subrequest:\w+} for activity=$subrequest : {subrequest}(parentActivity == $activity)
+[when]subrequest '{subrequest}' for activity=$subrequest : {subrequest}(activity == $activity)
+[when]subrequest {subrequest:\w+} for activity=$subrequest : {subrequest}(activity == $activity)
 #[when]- has name=name != null
 [when]subrequest completed=RLCCompleted( request == $subrequest )
 [when]subrequest succeeded=$subrequestStatus : GenericRequestSucceeded( request == $subrequest ) and RLCCompleted( request == $subrequest )
@@ -46,8 +46,8 @@
 [then]add feature action '{feature}';=insert( new GenericAddFeatureAction($activity, "{feature}") );
 [then]error '{err}' fixed=insert( new GenericActivityErrorFixed({err}) );
 
-[then]add subrequest '{type}' with refId '{refId}';={type} $subrequest = new {type}(); $subrequest.setParentActivity($activity); $subrequest.setRefId({refId}); insert($subrequest);
-[then]add subrequest '{type}'={type} $subrequest = new {type}(); $subrequest.setParentActivity($activity); insert($subrequest);
+[then]add subrequest '{type}' with refId '{refId}';={type} $subrequest = new {type}(); $subrequest.setActivity($activity); $subrequest.setRefId({refId}); insert($subrequest);
+[then]add subrequest '{type}'={type} $subrequest = new {type}(); $subrequest.setActivity($activity); insert($subrequest);
 
 [then]add subrequest parameter '{param}' with name "{name}";=add subrequest parameter '{param}' with name '"{name}"';
 [then]add subrequest parameter '{param}' with name '{name}';=\{GenericAlias o = new GenericAlias(); o.reset($subrequest, {name}, {param}); insert(o);\}
