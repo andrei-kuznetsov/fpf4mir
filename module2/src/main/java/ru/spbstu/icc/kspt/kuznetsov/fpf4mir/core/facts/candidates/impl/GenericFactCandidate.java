@@ -1,8 +1,8 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.impl;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FPFCloneable;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityRelatedFact;
 
-public final class GenericFactCandidate<U extends FPFCloneable> extends FactCandidateBase<U>{
+public final class GenericFactCandidate<U extends ActivityRelatedFact> extends FactCandidateBase<U>{
 
 	/**
 	 * 

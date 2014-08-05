@@ -23,73 +23,11 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.impl.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
 ///////////////////////////////////////////////////////////////////////////////
 
-declare ActivityLifecycleChangePermitted extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase end
-
-rule "Activity lifecycle change permitted"
-		salience -20000
+rule "Keep UserActivity in ALCWork forever"
 	when 
-		any activity
-		not ALCCompleted for activity
-	 	not Action for activity
->		forall ($rf : Request(activity == $activity)
->               RLCCompleted(request == $rf))
+>		$activity : Activity(id=="UserActivity")
+		ALCWork for activity
 	then
-		insertLogical ActivityLifecycleChangePermitted
+		insert GenericUserAction
 end
 
-rule "Activity first lifecycle phase"
-		salience -20000
-	when 
-		any activity
-		not ActivityLifeCycleState for activity
-	then
- 		insert ALCPrepareWork
-end
-
-rule "Activity activation"
-		salience -20000
-	when 
-		any activity
-		ActivityLifecycleChangePermitted for activity
-		$aa : ALCPrepareWork for activity
-	 	not ALCWork for activity  
-	then
->		retract($aa);
- 		insert ALCWork
-end
-
-rule "Activity analitycs activation"
-		salience -20000
-	when 
-		any activity
-		ActivityLifecycleChangePermitted for activity
-		$aa : ALCWork for activity
-	 	not ALCAnalyze for activity  
-	then
->		retract($aa);
- 		insert ALCAnalyze
-end
-
-rule "Activity prepare astatus facts"
-	salience -20000
-	when
-		any activity
-		ActivityLifecycleChangePermitted for activity
-	 	$aa : ALCAnalyze for activity
-	 	not ALCPrepareAStatus for activity
- 	then
->		retract($aa);
- 		insert ALCPrepareAStatus
-end
-
-rule "Activity completed"
-	salience -20000
-	when
-		any activity
-		ActivityLifecycleChangePermitted for activity
-	 	$aa : ALCPrepareAStatus for activity
-	 	not ALCCompleted for activity
- 	then
->		retract($aa);
- 		insert ALCCompleted
-end

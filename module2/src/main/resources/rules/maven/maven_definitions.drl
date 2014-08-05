@@ -1,0 +1,7 @@
+
+declare MavenFeatureInUse extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.globals.GlobalFactInUseBase
+end
+
+declare MavenFeature extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.FeatureBase
+	cmdName : String
+end

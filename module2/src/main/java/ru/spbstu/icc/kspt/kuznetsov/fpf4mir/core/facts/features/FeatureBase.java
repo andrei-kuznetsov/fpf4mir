@@ -11,6 +11,10 @@ public class FeatureBase implements Feature, Serializable{
 	private String name;
 	private String version;
 	
+	public FeatureBase() {
+		super();
+	}
+
 	public FeatureBase(String name, String version) {
 		super();
 		this.name = name;
@@ -74,4 +78,8 @@ public class FeatureBase implements Feature, Serializable{
 		return getClass().getSimpleName() + " [name=" + name + ", version=" + version + "]";
 	}
 	
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
 }

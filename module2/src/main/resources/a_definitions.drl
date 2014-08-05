@@ -28,11 +28,13 @@ declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.impl.AliasBase /
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.UserActionBase /* java */ end
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.RequestScopedKnowledgeBase /* java */ end
 
-declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.RSKIncompatibleFeatureVersion /* java */ end
-
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.TextFileArtifactBase /* java */ end
 
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.impl.FactCandidateBase /* java */ end
+
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.globals.GlobalFactInUseBase /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.impl.IncompatibleFactBase /* jvava */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.FeatureBase /* java */ end
 ///////////////////////////// non-java /////////////////////////////////////
 
 declare DeployFolder extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.impl.AliasBase end

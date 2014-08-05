@@ -93,11 +93,11 @@ end
 rule "Select maven version"
 	when
 		active activity 'MvnBuildActivity'
-		not FeatureInUse(feature.name=="maven") for activity
+		not MavenFeatureInUse for activity
 		$mvn : any 'MavenFeature'
-		not RSKIncompatibleFeatureVersion(feature==$mvn) for activity
+		not IncompatibleFact(fact==$mvn) for activity
 	then
->		insert( new GenericFeatureInUse($activity, $mvn) );
+>		insert( new MavenFeatureInUse($activity, $mvn) );
 end
 
 rule "Request for maven"
@@ -113,7 +113,7 @@ rule "Detect maven version deadlock"
 		active activity 'MvnBuildActivity'
 		exists any 'MavenFeature'
 >		forall ($mvn : MavenFeature()
->				RSKIncompatibleFeatureVersion(activity==$activity, feature==$mvn) )
+>				IncompatibleFact(activity==$activity, fact==$mvn) )
 	then
 		activity failed with message "Can't select maven version: all available versions are incompatible"
 end
@@ -125,7 +125,7 @@ rule "Maven_BuildCommand"
 	    cmd options for activity
 		$pd : MavenProjectDir for activity
 		$mvn : any 'MavenFeature'
-		FeatureInUse(feature==$mvn) for activity
+		MavenFeatureInUse(fact==$mvn) for activity
 	then
 		execute command $mvn.getCmdName() in working dir $pd
 end

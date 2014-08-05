@@ -41,7 +41,7 @@ rule "Select working dir"
 		active activity 'RunActivity'
 		not ExecWorkingDir for activity
 		$wdc : ExecWorkingDirCandidate for activity
-		not IncompatibleFactCandidate(fact == $wdc.fact) for activity
+		not IncompatibleFact(fact == $wdc) for activity
 	then
 		insert '(FolderArtifact)$wdc.getFact()' as 'ExecWorkingDir';
 end
@@ -55,7 +55,7 @@ rule "Bat: detected incompatible working dir"
 		$wd : ExecWorkingDir for activity
 		$wdc : FactCandidate(fact == $wd) for activity
 	then
-		insert '$wdc' as 'GenericIncompatibleFactCandidate';
+		insert '$wdc' as 'GenericIncompatibleFact';
 end
 
 rule "Execute bat command"

@@ -1,11 +1,12 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers;
 
+import org.drools.definition.type.FactType;
 import org.drools.runtime.StatefulKnowledgeSession;
 
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.DeploymentSession;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.Action;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.AddFeatureAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.Feature;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.MavenFeature;
 
 public class AddFeatureHandler_Local_Linux implements ActionHandler {
 
@@ -14,7 +15,7 @@ public class AddFeatureHandler_Local_Linux implements ActionHandler {
 			throws Exception {
 		if (action instanceof AddFeatureAction){
 			AddFeatureAction a = (AddFeatureAction) action;
-			Feature feature = installFeature(a.getFeatureName(), a.getFeatureVersion());
+			Feature feature = installFeature(a.getFeatureName(), a.getFeatureVersion(), ksession);
 			ksession.retract(ksession.getFactHandle(action));
 			ksession.insert(feature);
 		} else {
@@ -22,33 +23,36 @@ public class AddFeatureHandler_Local_Linux implements ActionHandler {
 		}
 	}
 
-	private Feature installFeature(String featureName, String featureVersion) {
+	private Feature installFeature(String featureName, String featureVersion, StatefulKnowledgeSession ks) throws InstantiationException, IllegalAccessException {
 		if (featureName == null){
 			throw new IllegalStateException("Feature name can't be null");
 		}
 
 		switch (featureName){
 		case "maven":
-			return installMaven(featureVersion);
+			return installMaven(featureVersion, ks);
 		default:
 			throw new IllegalStateException("Feature '" + featureName + "' is not supported");
 		}
 	}
 
-	private MavenFeature installMaven(String featureVersion) {
+	private Feature installMaven(String featureVersion, StatefulKnowledgeSession ks) throws InstantiationException, IllegalAccessException {
 		if ("3".equals(featureVersion) || "3.1".equals(featureVersion) || "3.1.1".equals(featureVersion)){
-			MavenFeature mvn = new MavenFeature();
-			mvn.setCmdName("/home/andrei/OpenShift/apache-maven-3.1.1/bin/mvn");
-			mvn.setVersion("3.1.1");
-			return mvn;
+			return createMavenFeature("3.1.1", "/home/andrei/OpenShift/apache-maven-3.1.1/bin/mvn", ks);
 		} else if (featureVersion == null || "3.0".equals(featureVersion) || "3.0.5".equals(featureVersion)){
-			MavenFeature mvn = new MavenFeature();
-			mvn.setCmdName("/home/andrei/OpenShift/apache-maven-3.0.5/bin/mvn");
-			mvn.setVersion("3.0.5");
-			return mvn;
+			return createMavenFeature("3.0.5", "/home/andrei/OpenShift/apache-maven-3.0.5/bin/mvn", ks);
 		} else {
 			throw new IllegalStateException("Maven feature version '" + featureVersion + "' is not supported");
 		}
+	}
+	
+	static final Feature createMavenFeature(String version, String cmdName, StatefulKnowledgeSession ks) throws InstantiationException, IllegalAccessException{
+		FactType ftype = DeploymentSession.factTypeForClassName("defaultpkg.MavenFeature", ks);
+		Object f = ftype.newInstance();
+		ftype.set(f, "name", "maven");
+		ftype.set(f, "cmdName", cmdName);
+		ftype.set(f, "version", version);
+		return (Feature)f;
 	}
 
 }

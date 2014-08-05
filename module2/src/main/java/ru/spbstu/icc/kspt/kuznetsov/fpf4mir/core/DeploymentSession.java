@@ -474,14 +474,7 @@ public class DeploymentSession {
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		final String className = fact.get("class").asText();
 
-		final String pkg = className.substring(0, className.lastIndexOf('.'));
-		final String cn = className.substring(className.lastIndexOf('.') + 1);
-		FactType ftype = ksession.getKnowledgeBase().getFactType(pkg, cn);
-		
-		if (ftype == null){
-			log.error("Can't find class definition for " + className);
-			throw new IllegalStateException("Can't find class definition for " + className);
-		}
+		FactType ftype = factTypeForClassName(className, ksession);
 		
 		Object o = ftype.newInstance();
 
@@ -513,6 +506,18 @@ public class DeploymentSession {
 		}
 
 		return o;
+	}
+
+	public static FactType factTypeForClassName(final String className, final StatefulKnowledgeSession ksession) {
+		final String pkg = className.substring(0, className.lastIndexOf('.'));
+		final String cn = className.substring(className.lastIndexOf('.') + 1);
+		FactType ftype = ksession.getKnowledgeBase().getFactType(pkg, cn);
+		
+		if (ftype == null){
+			log.error("Can't find class definition for " + className);
+			throw new IllegalStateException("Can't find class definition for " + className);
+		}
+		return ftype;
 	}
 	
 	private Object typedJsonObject(JsonNode node, Class<?> fclass){

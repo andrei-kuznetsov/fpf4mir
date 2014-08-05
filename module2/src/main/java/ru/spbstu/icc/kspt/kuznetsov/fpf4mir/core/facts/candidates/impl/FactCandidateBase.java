@@ -1,11 +1,11 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.impl;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.FactCandidate;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FPFCloneable;
 
-public class FactCandidateBase<U extends FPFCloneable> extends ActivityRelatedFactBase implements FactCandidate<U>{
+public class FactCandidateBase<U extends ActivityRelatedFact> extends ActivityRelatedFactBase implements FactCandidate<U>{
 	/**
 	 * 
 	 */
