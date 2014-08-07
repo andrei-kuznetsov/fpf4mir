@@ -8,32 +8,32 @@ import java.util.List;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FolderArtifact;
 
-public class ListExecCommand extends BaseExecCommand{
+public class GenericExecCommand extends ExecCommandBase{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -9143661806870839936L;
 	private List<String> arguments = new LinkedList<String>();
 	
-	public ListExecCommand() {
+	public GenericExecCommand() {
 		super();
 	}
 
-	public ListExecCommand(Activity activity, String command, File workingDir) {
+	public GenericExecCommand(Activity activity, String command, File workingDir) {
 		super(activity, command, workingDir);
 	}
 
-	public ListExecCommand(Activity activity, String command, FolderArtifact workingDir,
-			List<OrdinalArgument> arguments) {
+	public GenericExecCommand(Activity activity, String command, FolderArtifact workingDir,
+			List<GenericOrdinalArgument> arguments) {
 		super(activity, command, workingDir._getFile());
 		
 		Collections.sort(arguments);
-		for (OrdinalArgument i : arguments){
+		for (GenericOrdinalArgument i : arguments){
 			this.arguments.addAll(i.getArguments());
 		}
 	}
 
-	public ListExecCommand(Activity activity, String command) {
+	public GenericExecCommand(Activity activity, String command) {
 		super(activity, command);
 	}
 

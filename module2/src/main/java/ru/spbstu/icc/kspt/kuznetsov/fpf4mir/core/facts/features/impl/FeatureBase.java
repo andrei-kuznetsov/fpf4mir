@@ -1,6 +1,8 @@
-package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features;
+package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.impl;
 
 import java.io.Serializable;
+
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.Feature;
 
 public class FeatureBase implements Feature, Serializable{
 	/**

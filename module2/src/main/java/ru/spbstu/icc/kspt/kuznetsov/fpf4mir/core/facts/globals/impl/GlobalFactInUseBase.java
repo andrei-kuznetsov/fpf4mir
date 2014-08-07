@@ -1,7 +1,9 @@
-package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.globals;
+package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.globals.impl;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.globals.GlobalFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.globals.GlobalFactInUse;
 
 public class GlobalFactInUseBase<U extends GlobalFact> extends ActivityRelatedFactBase implements GlobalFactInUse<U>{
 	/**
@@ -11,11 +13,11 @@ public class GlobalFactInUseBase<U extends GlobalFact> extends ActivityRelatedFa
 	
 	private U fact;
 	
-	public GlobalFactInUseBase() {
+	protected GlobalFactInUseBase() {
 		super();
 	}
 
-	public GlobalFactInUseBase(Activity activity, U fact) {
+	protected GlobalFactInUseBase(Activity activity, U fact) {
 		super(activity);
 		this.fact = fact;
 	}

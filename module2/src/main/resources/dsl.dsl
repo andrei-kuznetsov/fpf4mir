@@ -27,7 +27,7 @@
 [when]subrequest outputs \(=(or
 [when]subrequest output '{type}'=$output : {type}( rstatus == $subrequestStatus ) 
 
-[when]cmd options for activity=$options : java.util.LinkedList() from collect ( OrdinalArgument( activity == $activity ) )
+[when]cmd options for activity=$options : java.util.LinkedList() from collect ( GenericOrdinalArgument( activity == $activity ) )
 [when]exec command succeeded=ExecStatus( activity == $activity, succeeded == true )
 
 [when]'{type}' for activity=$artifact : {type}(activity == $activity)
@@ -62,8 +62,8 @@
 [then]add activity fact from alias '{alias}';=insert( {alias}.cloneRefObject($activity) );
 [then]add logical activity fact from alias '{alias}';=insertLogical( {alias}.cloneRefObject($activity) );
 
-[then]add ordinal {order} {value}=insertLogical( new OrdinalArgument( $activity, {order}, {value}) );
-[then]execute command {cmd} in working dir {wd}=insertLogical( new ListExecCommand($activity, {cmd}, {wd}, $options) );
+[then]add ordinal {order} {value}=insertLogical( new GenericOrdinalArgument( $activity, {order}, {value}) );
+[then]execute command {cmd} in working dir {wd}=insertLogical( new GenericExecCommand($activity, {cmd}, {wd}, $options) );
 
 [then]activity succeeded=GenericActivitySucceeded activityStatus=new GenericActivitySucceeded($activity); insert(activityStatus);
 [then]activity failed with status {status}=insert( new GenericActivityFailed($activity, {status}) );

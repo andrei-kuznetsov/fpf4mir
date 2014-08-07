@@ -32,9 +32,9 @@ declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.TextFileAr
 
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.impl.FactCandidateBase /* java */ end
 
-declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.globals.GlobalFactInUseBase /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.globals.impl.GlobalFactInUseBase /* java */ end
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.impl.IncompatibleFactBase /* jvava */ end
-declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.FeatureBase /* java */ end
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.impl.FeatureBase /* java */ end
 ///////////////////////////// non-java /////////////////////////////////////
 
 declare DeployFolder extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.impl.AliasBase end

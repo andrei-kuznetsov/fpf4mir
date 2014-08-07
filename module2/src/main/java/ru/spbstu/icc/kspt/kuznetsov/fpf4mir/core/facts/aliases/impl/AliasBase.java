@@ -11,7 +11,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FPFCloneable;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithName;
 
-public class AliasBase <U extends FPFCloneable> implements Alias<U>, FPFCloneable, Serializable{
+public class AliasBase <U extends ActivityRelatedFact> implements Alias<U>, FPFCloneable, Serializable{
 	/**
 	 * 
 	 */

@@ -63,7 +63,7 @@ rule "REST: guess FNParamFilter from rest arguments"
 	when
 		active activity 'RunActivity'
 		RunFormat_Rest for activity
-		OrdinalArgument(order >= 1000, order < 10000, $value : value) for activity
+		GenericOrdinalArgument(order >= 1000, order < 10000, $value : value) for activity
 		$dataset : Dataset for activity
 	then
 		insert '$dataset.getFileArtifactListForPattern("**\\" + $value)' as new 'FNParamFilter';

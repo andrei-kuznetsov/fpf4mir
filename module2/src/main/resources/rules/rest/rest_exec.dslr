@@ -63,7 +63,7 @@ rule "prepare rest : Run exec command - rest invocation format"
 		RunFormat_Rest for activity
 		RestPathArgument($order : order, $order > 1, $opt : value) for subrequest 
 	then
-		add subrequest parameter 'new OrdinalArgument( $activity, 1000 + $order, $opt)'
+		add subrequest parameter 'new GenericOrdinalArgument( $activity, 1000 + $order, $opt)'
 end
 
 rule "rest : run exec command - do run"
@@ -85,7 +85,7 @@ rule "rest : run exec command - invocation arguments"
 		active activity 'RestCommandActivity'
 		subrequest 'ReqRun' for activity
 		RLCPrepareMain for subrequest 
-		$arg : OrdinalArgument for activity
+		$arg : GenericOrdinalArgument for activity
 	then
 		add subrequest parameter '$arg'
 end

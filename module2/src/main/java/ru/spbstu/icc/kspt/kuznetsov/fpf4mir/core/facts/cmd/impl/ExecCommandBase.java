@@ -7,7 +7,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.ExecCommand;
 
-public abstract class BaseExecCommand extends ActivityRelatedFactBase implements ExecCommand, Serializable{
+public abstract class ExecCommandBase extends ActivityRelatedFactBase implements ExecCommand, Serializable{
 	/**
 	 * 
 	 */
@@ -15,17 +15,17 @@ public abstract class BaseExecCommand extends ActivityRelatedFactBase implements
 	private String command;
 	private File workingDir;
 
-	public BaseExecCommand(Activity activity, String command, File workingDir) {
+	public ExecCommandBase(Activity activity, String command, File workingDir) {
 		super(activity);
 		this.command = command;
 		this.workingDir = workingDir;
 	}
 
-	public BaseExecCommand(Activity activity, String command) {
+	public ExecCommandBase(Activity activity, String command) {
 		this(activity, command, null);
 	}
 	
-	public BaseExecCommand() {
+	public ExecCommandBase() {
 		this(null, null, null);
 	}
 

@@ -1,8 +1,8 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.impl;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FPFCloneable;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityRelatedFact;
 
-public final class GenericAlias extends AliasBase<FPFCloneable>{
+public final class GenericAlias extends AliasBase<ActivityRelatedFact>{
 
 	/**
 	 * 

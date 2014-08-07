@@ -11,7 +11,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.Materializa
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.CmdLineArgument;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FPFCloneable;
 
-public class OrdinalArgument extends ActivityRelatedFactBase implements CmdLineArgument, Comparable<OrdinalArgument>, Serializable, FPFCloneable {
+public final class GenericOrdinalArgument extends ActivityRelatedFactBase implements CmdLineArgument, Comparable<GenericOrdinalArgument>, Serializable, FPFCloneable {
 	/**
 	 * 
 	 */
@@ -19,25 +19,25 @@ public class OrdinalArgument extends ActivityRelatedFactBase implements CmdLineA
 	private int order;
 	private String value;
 	
-	public OrdinalArgument(Activity activity) {
+	public GenericOrdinalArgument(Activity activity) {
 		this(activity, "");
 	}
 
-	public OrdinalArgument(Activity activity, int order, String value) {
+	public GenericOrdinalArgument(Activity activity, int order, String value) {
 		super(activity);
 		this.order = order;
 		this.value = value;
 	}
 
-	public OrdinalArgument(Activity activity, int order, Artifact artifact) {
+	public GenericOrdinalArgument(Activity activity, int order, Artifact artifact) {
 		this(activity, order, artifact._getFile().getAbsolutePath());
 	}
 
-	public OrdinalArgument(Activity activity, int order, MaterializableFileArtifactListBase flist) {
+	public GenericOrdinalArgument(Activity activity, int order, MaterializableFileArtifactListBase flist) {
 		this(activity, order, flist.getAbsolutePath());
 	}
 	
-	public OrdinalArgument(Activity activity, String value) {
+	public GenericOrdinalArgument(Activity activity, String value) {
 		this(activity, 0, value);
 	}
 	
@@ -70,7 +70,7 @@ public class OrdinalArgument extends ActivityRelatedFactBase implements CmdLineA
 	}
 
 	@Override
-	public int compareTo(OrdinalArgument o) {
+	public int compareTo(GenericOrdinalArgument o) {
 		return Integer.compare(order, o.order);
 	}
 }

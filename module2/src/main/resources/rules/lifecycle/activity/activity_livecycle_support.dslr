@@ -76,10 +76,10 @@ rule "Activity prepare astatus facts"
 		any activity
 		ActivityLifecycleChangePermitted for activity
 	 	$aa : ALCAnalyze for activity
-	 	not ALCPrepareAStatus for activity
+	 	not ALCPrepareStatus for activity
  	then
 >		retract($aa);
- 		insert ALCPrepareAStatus
+ 		insert ALCPrepareStatus
 end
 
 rule "Activity completed"
@@ -87,7 +87,7 @@ rule "Activity completed"
 	when
 		any activity
 		ActivityLifecycleChangePermitted for activity
-	 	$aa : ALCPrepareAStatus for activity
+	 	$aa : ALCPrepareStatus for activity
 	 	not ALCCompleted for activity
  	then
 >		retract($aa);

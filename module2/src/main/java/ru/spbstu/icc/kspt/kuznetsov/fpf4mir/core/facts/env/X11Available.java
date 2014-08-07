@@ -1,5 +1,7 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env;
 
-public class X11Available {
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.globals.impl.GlobalFactBase;
+
+public final class X11Available extends GlobalFactBase {
 
 }

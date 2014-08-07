@@ -49,17 +49,17 @@ rule "Request prepare rstatus facts"
 		any activity request
 		RequestFinalStatus for request
 	 	$aa : RLCMain for request
-	 	not RLCPrepareRStatus for request
+	 	not RLCPrepareStatus for request
  	then
 >		retract($aa);
- 		insert RLCPrepareRStatus for request;
+ 		insert RLCPrepareStatus for request;
 end
 
 rule "Request completed"
 	salience -20000
 	when
 		any activity request
-	 	$aa : RLCPrepareRStatus for request
+	 	$aa : RLCPrepareStatus for request
 	 	not RLCCompleted for request
  	then
 >		retract($aa);

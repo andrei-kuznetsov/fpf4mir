@@ -29,7 +29,7 @@ rule "activity prepare astatus: activity to activity status (single fact)(Activi
 	when
 		any activity
 		$astatus : ActivityFinalStatus for activity
-		ALCPrepareAStatus for activity
+		ALCPrepareStatus for activity
 		ActivityToActivityStatusCopy($value : value) for activity 
 	then
 		add parameter '$value' to '$astatus';
@@ -40,7 +40,7 @@ rule "activity prepare astatus: activity to request (single fact)(RequestScopedK
 	when
 		any activity request
 		activity for request
-		ALCPrepareAStatus for activity
+		ALCPrepareStatus for activity
 		$rsk : RequestScopedKnowledge for activity
 	then
 		add parameter '$rsk' to '$request';

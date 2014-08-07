@@ -16,10 +16,10 @@ public class MaterializableFileArtifactListBase extends FileArtifactListBase imp
 	private FolderArtifact tmpDir;
 	private File materializedFile;
 
-	public MaterializableFileArtifactListBase() {
+	protected MaterializableFileArtifactListBase() {
 	}
 	
-	public MaterializableFileArtifactListBase(Activity activity, FolderArtifact baseDir, String pattern, FolderArtifact tmpDir) {
+	protected MaterializableFileArtifactListBase(Activity activity, FolderArtifact baseDir, String pattern, FolderArtifact tmpDir) {
 		super(activity, baseDir.getFileArtifactListForPattern(pattern));
 		this.baseDir = baseDir;
 		this.tmpDir = tmpDir;

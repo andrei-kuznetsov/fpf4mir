@@ -29,7 +29,7 @@ rule "req prepare rstatus: activity status to request status (single fact)"
 	 	any activity request
 	 	activity for request
 	 	ALCCompleted for activity
-	 	RLCPrepareRStatus for request
+	 	RLCPrepareStatus for request
 	 	$rstatus : RequestFinalStatus for request
 	 	$astatus : ActivityFinalStatus for activity
 >		$value : Alias( astatus == $astatus )
