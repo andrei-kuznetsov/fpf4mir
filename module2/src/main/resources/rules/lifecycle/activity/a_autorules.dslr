@@ -33,22 +33,22 @@ rule "Assert user action ref (propagation)"
 		insertLogical '$ua' as 'UserActionRef';
 end
 
-rule "ActivityToActivityStatusCopy facts (UserActionRef)"
+rule "ActivityToStatusCopy facts (UserActionRef)"
 		salience 10000
 	when
 		any activity
 		// any phase
 		$value : UserActionRef for activity
 	then
->		insertLogical(new ActivityToActivityStatusCopy($activity, $value));
+>		insertLogical(new ActivityToStatusCopy($activity, $value));
 end
 
-rule "ActivityToActivityStatusCopy facts (UserInfo)"
+rule "ActivityToStatusCopy facts (UserInfo)"
 		salience 10000
 	when
 		any activity
 		// any phase
 		$value : UserInfo for activity
 	then
->		insertLogical(new ActivityToActivityStatusCopy($activity, $value));
+>		insertLogical(new ActivityToStatusCopy($activity, $value));
 end

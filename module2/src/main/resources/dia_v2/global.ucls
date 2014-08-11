@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.6" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <interface id="1" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.globals.GlobalFact" 
+    project="fpf4mir-core" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/globals/GlobalFact.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="213" y="93"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="2" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.X11Available" 
+    project="fpf4mir-core" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/env/X11Available.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="113" y="247"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="3" language="java" name="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.Feature" 
+    project="fpf4mir-core" 
+    file="/fpf4mir-core/src/main/java/ru/spbstu/icc/kspt/kuznetsov/fpf4mir/core/facts/features/Feature.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="248" x="269" y="197"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <realization id="4">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <generalization id="5">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

@@ -21,8 +21,4 @@ public final class GenericActivityFailed extends ActivityFailedBase {
 		super(activity);
 	}
 
-	public GenericActivityFailed(Activity activity, String message, String type) {
-		super(activity, message, type);
-	}
-
 }

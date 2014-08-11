@@ -118,11 +118,6 @@ declare MvnWarn_NoFileEncoding extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core
 
 declare BuildErr_NoBuildOrExecFilesFound extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityErrorBase end
 
-declare ActivityToActivityStatusCopy
-	activity : ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity
-	value : ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityRelatedFact
-end
-
 declare ReqUT extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.RequestBase end
 declare ReqUTMirexAudChEst extends ReqUT end
 declare UTMirexAudChEstActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityBase end

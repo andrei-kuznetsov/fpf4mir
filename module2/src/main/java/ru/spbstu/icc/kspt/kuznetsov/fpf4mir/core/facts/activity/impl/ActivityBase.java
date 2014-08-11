@@ -16,19 +16,19 @@ public class ActivityBase extends RequestRelatedFactBase implements Activity{
 	public static final Activity USER = new GenericActivity().reset(R.id.UserActivity, new Date(), null);
 	
 	private static volatile long refIdCounter = 1;
-	private String id;
+	private String name;
 	private Date date;
 	private long refId = refIdCounter++;
 	
-	public Activity reset(String id, Date date, Request request) {
+	public Activity reset(String name, Date date, Request request) {
 		super.reset(request);
-		this.id = id;
+		this.name = name;
 		this.date = date;
 		return this;
 	}
 
 	public Activity reset(Activity activity) {
-		return this.reset(activity.getId(), activity.getDate(), activity.getRequest());
+		return this.reset(activity.getName(), activity.getDate(), activity.getRequest());
 	}
 
 	public Date getDate() {
@@ -37,16 +37,16 @@ public class ActivityBase extends RequestRelatedFactBase implements Activity{
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() +  " [id=" + id + ", date=" + date
+		return getClass().getSimpleName() +  " [name=" + name + ", date=" + date
 				+ ", request=" + getRequest() + "]";
 	}
 	
-	public String getId() {
-		return id;
+	public String getName() {
+		return name;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setDate(Date date) {
@@ -62,6 +62,6 @@ public class ActivityBase extends RequestRelatedFactBase implements Activity{
 	}
 
 	public String toShortString() {
-		return getClass().getSimpleName() +  " [id=" + id + "]";
+		return getClass().getSimpleName() +  " [id=" + name + "]";
 	}
 }

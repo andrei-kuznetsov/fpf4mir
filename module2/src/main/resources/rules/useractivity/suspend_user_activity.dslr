@@ -25,7 +25,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
 
 rule "Keep UserActivity in ALCWork forever"
 	when 
->		$activity : Activity(id=="UserActivity")
+>		$activity : Activity(name=="UserActivity")
 		ALCWork for activity
 	then
 		insert GenericUserAction

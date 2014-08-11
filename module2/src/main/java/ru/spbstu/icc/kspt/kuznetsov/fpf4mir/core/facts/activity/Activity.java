@@ -5,9 +5,10 @@ import java.util.Date;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.Request;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestRelatedFact;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithName;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithRefId;
 
-public interface Activity extends Serializable, FactWithRefId, RequestRelatedFact {
+public interface Activity extends Serializable, FactWithRefId, RequestRelatedFact, FactWithName {
 
 	@Override public Request getRequest();
 	@Override public void setRequest(Request request);
@@ -18,8 +19,8 @@ public interface Activity extends Serializable, FactWithRefId, RequestRelatedFac
 	public Date getDate();
 	public void setDate(Date date);
 	
-	public String getId();
-	public void setId(String id);
+	public String getName();
+	public void setName(String name);
 	
 	public String toShortString();
 }

@@ -24,13 +24,13 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
 ///////////////////////////////////////////////////////////////////////////////
 
 
-rule "activity prepare astatus: activity to activity status (single fact)(ActivityToActivityStatusCopy)"
+rule "activity prepare astatus: activity to activity status (single fact)(ActivityToStatusCopy)"
 		salience -10000
 	when
 		any activity
 		$astatus : ActivityFinalStatus for activity
 		ALCPrepareStatus for activity
-		ActivityToActivityStatusCopy($value : value) for activity 
+		ActivityToStatusCopy($value : refObject) for activity 
 	then
 		add parameter '$value' to '$astatus';
 end
