@@ -19,6 +19,7 @@ public class AliasBase <U extends ActivityRelatedFact> implements Alias<U>, FPFC
 	
 	private U refObject;
 	private Request request;
+	private Activity activity;
 	private RequestStatus rstatus;
 	private ActivityStatus astatus;
 	
@@ -48,6 +49,14 @@ public class AliasBase <U extends ActivityRelatedFact> implements Alias<U>, FPFC
 		this.rstatus = rstatus;
 	}
 	
+	public Activity getActivity() {
+		return activity;
+	}
+
+	public void setActivity(Activity activity) {
+		this.activity = activity;
+	}
+
 	public ActivityStatus getAstatus() {
 		return astatus;
 	}
@@ -110,50 +119,65 @@ public class AliasBase <U extends ActivityRelatedFact> implements Alias<U>, FPFC
 	}
 
 	public AliasBase<U> reset(RequestStatus rstatus, U object) {
-		this.reset(rstatus, ((FactWithName)object).getName(), object);
+		this.reset(rstatus, extractFileName(object), object);
 		return this;
 	}
 
 	public AliasBase<U> reset(RequestStatus rstatus, String name, U object) {
-		this.reset(null, rstatus, null, name, object);
+		this.reset(null, null, rstatus, null, name, object);
 		return this;
 	}
 
 	public AliasBase<U> reset(ActivityStatus astatus, U object) {
-		if (object instanceof FactWithName){
-			this.reset(astatus, ((FactWithName)object).getName(), object);
-		} else {
-			this.reset(astatus, "<no name>", object);
-		}
+		this.reset(astatus, extractFileName(object), object);
 		return this;
 	}
 
 	public AliasBase<U> reset(ActivityStatus astatus, String name, U object) {
-		this.reset(null, null, astatus, name, object);
+		this.reset(null, null, null, astatus, name, object);
 		return this;
 	}
 	
 	public AliasBase<U> reset(Request request, String name, U object) {
-		this.reset(request, null, null, name, object);
+		this.reset(request, null, null, null, name, object);
 		return this;
 	}
 
 	public AliasBase<U> reset(Request request, U object) {
+		return this.reset(request, null, null, null, extractFileName(object), object);
+	}
+	
+	public AliasBase<U> reset(Activity activity, String name, U object) {
+		return this.reset(null, activity, null, null, name, object);
+	}
+
+	public AliasBase<U> reset(Activity activity, U object) {
+		return this.reset(activity, extractFileName(object), object);
+	}
+	
+	private String extractFileName(U object) {
 		final String name;
 		if (object instanceof FactWithName){
 			name = ((FactWithName)object).getName();
 		} else {
 			name = "<no name>";
 		}
-
-		return this.reset(request, null, null, name, object);
+		return name;
 	}
 	
-	public AliasBase<U> reset(Request request, RequestStatus rstatus, ActivityStatus astatus,
-			String name, U object) {
-		this.refObject = object;
+	public AliasBase<U> reset(Request request, Activity activity, RequestStatus rstatus,
+			ActivityStatus astatus, String name, U object) {
+
+		if (object instanceof Alias){
+			Alias<U> a = (Alias<U>)object;
+			this.refObject = a.getRefObject();
+		} else {
+			this.refObject = object;
+		}
+		
 		this.rstatus = rstatus;
 		this.request = request;
+		this.activity = activity;
 		this.astatus = astatus;
 		this.name = name;
 		return this;

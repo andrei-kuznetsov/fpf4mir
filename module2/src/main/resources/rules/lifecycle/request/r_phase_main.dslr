@@ -50,3 +50,16 @@ rule "req phase main: fail request if activity cant be fixed (default)"
 	then
 		insertLogical '$failure.getMessage()' as 'GenericRequestFailed' for request;
 end
+
+rule "request main phase (auto): read from subactivity (single fact)"
+		salience 10000
+	when 
+	 	any activity request
+	 	RLCMain for request
+		activity for request
+		ALCPrepareStatus for activity
+	 	$activityStatus : ActivityFinalStatus for activity
+>		$value : UpstreamAlias(astatus == $activityStatus)
+	then
+>		insert( new GenericUpstreamAlias().reset($request, $value) );
+end

@@ -36,7 +36,7 @@ public class GlobalFactInUseBase<U extends GlobalFact> extends ActivityRelatedFa
 		this.fact = fact;
 		return this;
 	}
-
+	
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + " [global=" + fact + "]";

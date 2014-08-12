@@ -30,7 +30,7 @@ rule "activity prepare active: request to activity (single fact)"
 		any activity request
 		activity for request
 		ALCPrepareWork for activity
-		$input : Alias for request
+		$input : DownstreamAlias for request
 	then
 		add activity fact from alias '$input';
 end

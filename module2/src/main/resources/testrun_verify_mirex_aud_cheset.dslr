@@ -48,7 +48,7 @@ rule "Eval OVMirexAudChEstActivity succeeded"
 		$good_files : Verified_FileArtifactList for activity
 	then
 		activity succeeded
-		add activity status parameter $good_files as GenericAlias
+		add activity status parameter '$good_files';
 end
 
 // #############################################################################################

@@ -76,6 +76,11 @@ public class DrlParserTest extends TestCase {
 		printExpandedRule(dslr);
     }
     
+    public void testExpandDRL_r_phase_prepare_rstatus() throws Exception {
+    	String dslr = "/rules/lifecycle/request/r_phase_prepare_rstatus.dslr";
+		printExpandedRule(dslr);
+    }
+    
     public void testExpandDRL_basic_rest_processor() throws Exception {
     	String dslr = "/basic_rest_processor.dslr";
 		printExpandedRule(dslr);

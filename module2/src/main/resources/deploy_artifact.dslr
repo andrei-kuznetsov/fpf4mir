@@ -31,7 +31,7 @@ rule "Assert DeployFolder"
 		$folder : FolderArtifact for activity
 	then
 		activity succeeded
-		add activity status parameter $folder as DeployFolder
+		add activity status parameter '$folder';
 end
 
 // #############################################################################################
@@ -78,19 +78,7 @@ rule "ExtractArtifact"
 		add subrequest 'ReqExtract'
 		add subrequest parameter '$artifact'
 end
-/* TODO: done by default?
-rule "Process exctracted artifact"
-	when 
-	 	active activity 'DeployFolderActivity'
-		subrequest 'ReqExtract' for activity
-		subrequest succeeded
-		subrequest outputs (
-			subrequest output 'FolderArtifactAlias'
->		)
-	then
-		add activity fact from request output
-end
-*/
+
 rule "Process exctracted artifact failed"
 	when
 		active activity 'DeployFolderActivity'

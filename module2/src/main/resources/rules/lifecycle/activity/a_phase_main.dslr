@@ -32,7 +32,7 @@ rule "activity main phase (auto): read from subrequest (single fact)"
 	 	subrequest 'Request' for activity
 		RLCPrepareStatus for subrequest
 	 	$subrequestStatus : RequestFinalStatus for subrequest
->		$value : Alias(rstatus == $subrequestStatus)
+>		$value : UpstreamAlias(rstatus == $subrequestStatus)
 	then
 		add activity fact from alias '$value'
 end

@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -51,10 +52,13 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.UserAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.GenericAddFeatureAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.GenericExecAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityStatus;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityStatusRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityBase;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.DataDirRoot;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.Request;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatusRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.UserInfo;
@@ -242,7 +246,7 @@ public class DeploymentSession {
 		// ksession.addEventListener(new DebugAgendaEventListener());
 		// ksession.addEventListener(new DebugWorkingMemoryEventListener());
 		ksession.addEventListener(new AgendaDebugListener());
-		logger = KnowledgeRuntimeLoggerFactory.newFileLogger(ksession, "test");
+//		logger = KnowledgeRuntimeLoggerFactory.newFileLogger(ksession, "test");
 //		logger = KnowledgeRuntimeLoggerFactory.newConsoleLogger(ksession);
 		initGlobals(kbase, ksession);
 	}
@@ -539,8 +543,20 @@ public class DeploymentSession {
 		ksession.retract(h);
 	}
 
-	public List<Object> getActivityRelatedFacts(Activity key) {
-		return simpleListRequest(key, "Get activity related facts");
+	public List<Object> getActivityRelatedFacts(final Activity key) {
+		Collection<Object> hf = ksession.getObjects(new ObjectFilter() {
+			@Override
+			public boolean accept(Object arg0) {
+				if (arg0 instanceof ActivityRelatedFact){
+					ActivityRelatedFact arf = (ActivityRelatedFact) arg0;
+					return key.equals(arf.getActivity());
+				}
+				return false;
+			}
+		});
+		
+		return new ArrayList<Object>(hf);
+		//return simpleListRequest(key, "Get activity related facts");
 	}
 
 	private <U> List<U> simpleListRequest(Object key, String qname) {
@@ -553,8 +569,21 @@ public class DeploymentSession {
 		return ret;
 	}
 
-	public List<Object> getRequestRelatedFacts(Request key) {
-		List<Object> lst = simpleListRequest(key, "Get request related facts");
+	public List<Object> getRequestRelatedFacts(final Request key) {
+		Collection<Object> hf = ksession.getObjects(new ObjectFilter() {
+			@Override
+			public boolean accept(Object arg0) {
+				if (arg0 instanceof RequestRelatedFact){
+					RequestRelatedFact rrf = (RequestRelatedFact) arg0;
+					return key.equals(rrf.getRequest());
+				}
+				return false;
+			}
+		});
+		
+		return new ArrayList<Object>(hf);
+
+//		List<Object> lst = simpleListRequest(key, "Get request related facts");
 		// Collections.sort(lst, new Comparator<Object>() {
 		// @Override
 		// public int compare(Object o1, Object o2) {
@@ -563,15 +592,39 @@ public class DeploymentSession {
 		// return r1.get;
 		// }
 		// });
-		return lst;
+//		return lst;
 	}
 
-	public List<Object> getRequestStatusRelatedFacts(RequestStatus key) {
-		return simpleListRequest(key, "Get request status related facts");
+	public List<Object> getRequestStatusRelatedFacts(final RequestStatus key) {
+		Collection<Object> hf = ksession.getObjects(new ObjectFilter() {
+			@Override
+			public boolean accept(Object arg0) {
+				if (arg0 instanceof RequestStatusRelatedFact){
+					RequestStatusRelatedFact rrf = (RequestStatusRelatedFact) arg0;
+					return key.equals(rrf.getRstatus());
+				}
+				return false;
+			}
+		});
+		
+		return new ArrayList<Object>(hf);
+		//return simpleListRequest(key, "Get request status related facts");
 	}
 
-	public List<Object> getActivityStatusRelatedFacts(ActivityStatus key) {
-		return simpleListRequest(key, "Get activity status related facts");
+	public List<Object> getActivityStatusRelatedFacts(final ActivityStatus key) {
+		Collection<Object> hf = ksession.getObjects(new ObjectFilter() {
+			@Override
+			public boolean accept(Object arg0) {
+				if (arg0 instanceof ActivityStatusRelatedFact){
+					ActivityStatusRelatedFact rrf = (ActivityStatusRelatedFact) arg0;
+					return key.equals(rrf.getAstatus());
+				}
+				return false;
+			}
+		});
+		
+		return new ArrayList<Object>(hf);
+//		return simpleListRequest(key, "Get activity status related facts");
 	}
 	
 	public List<UserInfo> getUserInfoFacts(ActivityStatus key) {

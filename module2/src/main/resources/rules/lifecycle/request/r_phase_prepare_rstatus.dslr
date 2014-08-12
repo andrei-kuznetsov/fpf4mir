@@ -23,17 +23,14 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.impl.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
 ///////////////////////////////////////////////////////////////////////////////
 
-rule "req prepare rstatus: activity status to request status (single fact)"
-		salience -10000
-	when 
-	 	any activity request
-	 	activity for request
-	 	ALCCompleted for activity
-	 	RLCPrepareStatus for request
+
+rule "request prepare rstatus: request to request status (single fact)(RequestToStatusCopy)"
+		salience 10000
+	when
+		any activity request
 	 	$rstatus : RequestFinalStatus for request
-	 	$astatus : ActivityFinalStatus for activity
->		$value : Alias( astatus == $astatus )
+		RLCPrepareStatus for request
+		UpstreamAlias($value : refObject) for request 
 	then
 		add parameter '$value' to '$rstatus';
 end
-

@@ -65,8 +65,16 @@ end
 rule "Deploy input data from file artifact"
 	when
 		active activity 'RunActivity'
-		$a : (FileArtifact(name=="dataset") for activity or 
-			ArtifactRef(name=="dataset") for activity)
+		$a : FileArtifact(name=="dataset") for activity
+	then
+		add subrequest 'ReqDeployFolder'
+		add subrequest parameter '$a'
+end
+
+rule "Deploy input data from artifact ref"
+	when
+		active activity 'RunActivity'
+		$a : ArtifactRef(name=="dataset") for activity
 	then
 		add subrequest 'ReqDeployFolder'
 		add subrequest parameter '$a'

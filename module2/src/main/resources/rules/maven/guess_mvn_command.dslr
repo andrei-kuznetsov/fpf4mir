@@ -32,7 +32,7 @@ rule "Maven execution status succeeded"
 		$target : MavenTargetDir for activity
 	then
 		activity succeeded
-		add activity status parameter $target as GenericAlias
+		add activity status parameter '$target';
 end
 
 // #############################################################################################
@@ -97,7 +97,7 @@ rule "Select maven version"
 		$mvn : any 'MavenFeature'
 		not IncompatibleFact(fact==$mvn) for activity
 	then
->		insert( new MavenFeatureInUse($activity, $mvn) );
+>		insert( new MavenFeatureInUse().reset($activity, $mvn) );
 end
 
 rule "Request for maven"

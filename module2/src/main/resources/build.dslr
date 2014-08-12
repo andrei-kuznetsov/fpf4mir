@@ -31,7 +31,7 @@ rule "Build activity status"
 		$exec : ExecutableFileArtifact for activity
 	then
 		activity succeeded
-		add activity status parameter $exec as GenericAlias
+		add activity status parameter '$exec';
 end
 
 // #############################################################################################

@@ -91,15 +91,15 @@ rule "START"
 		Alias als;
 		insert(r = new R_M1());
 		insert(a = new A());
-		insert(new GenericAlias().reset(r, a));
+		insert(new GenericDownstreamAlias().reset(r, a));
 
 		insert(r = new R_M1());
 		insert(a = new B());
-		insert(new GenericAlias().reset(r, a));
+		insert(new GenericDownstreamAlias().reset(r, a));
 		
 		insert(r = new R_M1());
 		insert(a = new C());
-		insert(new GenericAlias().reset(r, a));
+		insert(new GenericDownstreamAlias().reset(r, a));
 
 		insert(new ExistsK(new K0()));
 		insert(new ExistsK(new K1()));

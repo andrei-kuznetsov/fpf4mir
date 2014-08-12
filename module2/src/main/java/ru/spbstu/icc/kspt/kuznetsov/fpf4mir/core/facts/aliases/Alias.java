@@ -9,7 +9,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestRelatedFac
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatusRelatedFact;
 
-public interface Alias<U extends ActivityRelatedFact> extends RequestRelatedFact, RequestStatusRelatedFact, ActivityStatusRelatedFact {
+public interface Alias<U extends ActivityRelatedFact> extends RequestRelatedFact, ActivityRelatedFact, RequestStatusRelatedFact, ActivityStatusRelatedFact {
 
 	@Override public Request getRequest();
 	@Override public void setRequest(Request request);
@@ -19,6 +19,9 @@ public interface Alias<U extends ActivityRelatedFact> extends RequestRelatedFact
 
 	@Override public ActivityStatus getAstatus();
 	@Override public void setAstatus(ActivityStatus astatus);
+
+	@Override public Activity getActivity();
+	@Override public void setActivity(Activity astatus);
 	
 	public String getName();
 	public void setName(String name);

@@ -3,9 +3,9 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.impl;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.AReference;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.Reference;
 
-public class AReferenceBase<U extends ActivityRelatedFact> extends ActivityRelatedFactBase implements AReference<U> {
+public class ReferenceBase<U extends ActivityRelatedFact> extends ActivityRelatedFactBase implements Reference<U> {
 	/**
 	 * 
 	 */
@@ -14,21 +14,21 @@ public class AReferenceBase<U extends ActivityRelatedFact> extends ActivityRelat
 	private U refObject;
 	private String name = getClass().getSimpleName();
 	
-	protected AReferenceBase() {
+	protected ReferenceBase() {
 		super();
 	}
 
-	protected AReferenceBase(U ua) {
+	protected ReferenceBase(U ua) {
 		this(ua.getActivity(), ua);
 	}
 	
 	
-	protected AReferenceBase(Activity activity, U ua) {
+	protected ReferenceBase(Activity activity, U ua) {
 		super(activity);
 		refObject = ua;
 	}
 
-	protected AReferenceBase(Activity activity, AReference<U> ua) {
+	protected ReferenceBase(Activity activity, Reference<U> ua) {
 		this(activity, ua.getRefObject());
 	}
 
@@ -53,7 +53,7 @@ public class AReferenceBase<U extends ActivityRelatedFact> extends ActivityRelat
 		this.name = name;
 	}
 	
-	public AReference<U> reset(Activity activity, U refObject){
+	public Reference<U> reset(Activity activity, U refObject){
 		super.reset(activity);
 		this.refObject = refObject;
 		return this;

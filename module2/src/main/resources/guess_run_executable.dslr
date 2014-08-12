@@ -31,7 +31,7 @@ rule "GuessRunExecutable Request Status - FileArtifactList"
 		$list : ExecFileArtifactList for activity
 	then
 		activity succeeded
-		add activity status parameter $list as GenericAlias
+		add activity status parameter '$list';
 end
 
 // #############################################################################################

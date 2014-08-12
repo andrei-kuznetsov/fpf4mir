@@ -39,8 +39,8 @@ rule "Eval DeployExecutableActivity succeeded"
 		exists ExecutableUnitTestsPassed for activity
 	then
 		activity succeeded
-		add activity status parameter $exec as GenericAlias
-		add activity status parameter $rf as GenericAlias
+		add activity status parameter '$exec';
+		add activity status parameter '$rf';
 		
 		insert artifact '"Successfully deployed executable artifact"' as 'GenericUserInfoMessage'
 end

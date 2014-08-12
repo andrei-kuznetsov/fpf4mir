@@ -34,6 +34,7 @@
 [when]{type:\w+} for activity={type}(activity == $activity)
 [when]{type:\w+}\({whatever}\) for activity={type}(activity == $activity, {whatever})
 [when]{type:\w+} for request={type}(request == $request)
+[when]{type:\w+}\({whatever}\) for request={type}(request == $request, {whatever})
 [when]{type:\w+}\({whatever}\) for subrequest={type}(request == $subrequest, {whatever})
 [when]{type:\w+} for subrequest='{type}' for subrequest
 [when]'{type}' for subrequest={type}(request == $subrequest)
@@ -50,10 +51,10 @@
 [then]add subrequest '{type}'={type} $subrequest = new {type}(); $subrequest.setActivity($activity); insert($subrequest);
 
 [then]add subrequest parameter '{param}' with name "{name}";=add subrequest parameter '{param}' with name '"{name}"';
-[then]add subrequest parameter '{param}' with name '{name}';=\{GenericAlias o = new GenericAlias(); o.reset($subrequest, {name}, {param}); insert(o);\}
+[then]add subrequest parameter '{param}' with name '{name}';=\{GenericDownstreamAlias o = new GenericDownstreamAlias(); o.reset($subrequest, {name}, {param}); insert(o);\}
 
 [then]add subrequest parameter '{param}' as '{type}'=\{{type} o = new {type}(); o.reset($subrequest, {param}); insert(o);\}
-[then]add subrequest parameter '{param}'=\{GenericAlias o = new GenericAlias(); o.reset($subrequest, {param}); insert(o);\}
+[then]add subrequest parameter '{param}'=\{GenericDownstreamAlias o = new GenericDownstreamAlias(); o.reset($subrequest, {param}); insert(o);\}
 
 
 [then]add activity fact from alias '{alias}'=insert( {alias}.cloneRefObject($activity) );
@@ -77,11 +78,12 @@
 [then]add activity status parameter '{param}' with name "{name}";=add alias 'activityStatus' '{param}'  '"{name}"';
 [then]add activity status parameter '{param}' with name '{name}';=add alias 'activityStatus' '{param}'  '{name}';
 
-[then]add alias '{subj}' '{obj}' '{name}';=\{GenericAlias o = new GenericAlias(); o.reset({subj}, {name}, {obj}); insert(o);\}
+#TODO remove this:
+[then]add alias '{subj}' '{obj}' '{name}';=\{GenericUpstreamAlias o = new GenericUpstreamAlias(); o.reset({subj}, {name}, {obj}); insert(o);\}
 
 
 [then]add request status parameter {param} as {type}=add parameter '{param}' to 'requestStatus' as {type};
-[then]add activity status parameter '{param}';=add activity status parameter {param} as GenericAlias
+[then]add activity status parameter '{param}';=add activity status parameter {param} as GenericUpstreamAlias
 [then]add activity status parameter {param} as {type}=add parameter '{param}' to 'activityStatus' as {type};
 
 [then]insert artifact '{value}' as '{type}'=\{{type} o = new {type}(); o.reset($activity, {value}); insert(o);\};
@@ -105,8 +107,8 @@
 [then]insert {type:\w+}=\{{type} o = new {type}(); o.setActivity($activity); insert(o);\};
 [then]insertLogical {type:\w+}=\{{type} o = new {type}(); o.setActivity($activity); insertLogical(o);\};
 
-[then]add parameter '{param}' to '{status}';=add parameter '{param}' to '{status}' as GenericAlias;
-[then]add logical parameter '{param}' to '{status}';=add logical parameter '{param}' to '{status}' as GenericAlias;
+[then]add parameter '{param}' to '{status}';=add parameter '{param}' to '{status}' as GenericUpstreamAlias;
+[then]add logical parameter '{param}' to '{status}';=add logical parameter '{param}' to '{status}' as GenericUpstreamAlias;
 
 [then]add parameter '{param}' to '{status}' as {type};=\{{type} o = new {type}(); o.reset({status}, {param}); insert(o);\};
 [then]add logical parameter '{param}' to '{status}' as {type};=\{{type} o = new {type}(); o.reset({status}, {param}); insertLogical(o);\};

@@ -40,7 +40,7 @@ rule "ActivityToStatusCopy facts (UserActionRef)"
 		// any phase
 		$value : UserActionRef for activity
 	then
->		insertLogical(new ActivityToStatusCopy($activity, $value));
+>		insertLogical(new GenericRuntimeUpstreamAlias().reset($activity, $value));
 end
 
 rule "ActivityToStatusCopy facts (UserInfo)"
@@ -50,5 +50,6 @@ rule "ActivityToStatusCopy facts (UserInfo)"
 		// any phase
 		$value : UserInfo for activity
 	then
->		insertLogical(new ActivityToStatusCopy($activity, $value));
+>		insertLogical(new GenericRuntimeUpstreamAlias().reset($activity, $value));
+>		insertLogical(new GenericUpstreamAlias().reset($activity, $value));
 end

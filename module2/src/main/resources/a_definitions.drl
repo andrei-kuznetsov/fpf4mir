@@ -37,8 +37,6 @@ declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.impl.Incompat
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.impl.FeatureBase /* java */ end
 ///////////////////////////// non-java /////////////////////////////////////
 
-declare DeployFolder extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.impl.AliasBase end
-
 declare DeployExecutableActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityBase end
 declare DeployFolderActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityBase end
 declare BuildActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityBase end

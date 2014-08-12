@@ -66,9 +66,9 @@ rule "Running activity: activity to activity status (single fact)(ActivityToStat
 	when
 		any activity
 		$astatus : ActivityRuntimeStatus for activity
-		ActivityToStatusCopy($value : refObject) for activity 
+		RuntimeUpstreamAlias($value : refObject) for activity 
 	then
-		add logical parameter '$value' to '$astatus';
+		add logical parameter '$value' to '$astatus' as GenericRuntimeUpstreamAlias;
 end
 
 rule "Running activity: activity to parent request (single fact)"
@@ -79,19 +79,19 @@ rule "Running activity: activity to parent request (single fact)"
 		// any phase
 	 	$astatus : ActivityRuntimeStatus for activity
 	 	$rstatus : RequestRuntimeStatus for request
->		$value : Alias(astatus == $astatus)
+>		$value : RuntimeUpstreamAlias(astatus == $astatus)
 	then
-		add logical parameter '$value' to '$rstatus';
+		add logical parameter '$value' to '$rstatus' as GenericRuntimeUpstreamAlias;
 end
 
-rule "suspended activity: request to parent activity (single fact)"
+rule "Running activity: request to parent activity (single fact)"
 		salience 10000
 	when 
 	 	any activity
 		// any phase
 	 	subrequest 'Request' for activity
 	 	$subrequestStatus : RequestRuntimeStatus for subrequest
->		$value : Alias(rstatus == $subrequestStatus)
+>		$value : RuntimeUpstreamAlias(rstatus == $subrequestStatus)
 	then
 		add logical activity fact from alias '$value';
 end
