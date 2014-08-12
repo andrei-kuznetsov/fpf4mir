@@ -23,6 +23,20 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.impl.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
 ///////////////////////////////////////////////////////////////////////////////
 
+declare RequestLifecycleChangePermitted extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.RequestRelatedFactBase end
+
+rule "Request lifecycle change permitted"
+		salience -20000
+	when 
+		any activity request
+		not RLCCompleted for request
+>		forall ($af : Activity(request == $request)
+>               ALCCompleted(activity == $af))
+	then
+		insertLogical RequestLifecycleChangePermitted for request;
+end
+
+
 rule "Request first lifecycle phase"
 		salience -20000
 	when 
@@ -36,6 +50,7 @@ rule "Request prepare->main phase transition"
 		salience -20000
 	when 
 		any activity request
+		RequestLifecycleChangePermitted for request
 		$aa : RLCPrepareMain for request
 		not RLCMain for request
 	then
@@ -47,7 +62,7 @@ rule "Request prepare rstatus facts"
 	salience -20000
 	when
 		any activity request
-		RequestFinalStatus for request
+		RequestLifecycleChangePermitted for request
 	 	$aa : RLCMain for request
 	 	not RLCPrepareStatus for request
  	then
@@ -59,6 +74,7 @@ rule "Request completed"
 	salience -20000
 	when
 		any activity request
+		RequestLifecycleChangePermitted for request
 	 	$aa : RLCPrepareStatus for request
 	 	not RLCCompleted for request
  	then

@@ -101,6 +101,7 @@
 [then]insertLogical '{value}' as '{type}' for request;=\{{type} o = new {type}(); o.reset($request, {value}); insertLogical(o);\};
 
 [then]insert {type:\w+} for request;=\{{type} o = new {type}(); o.setRequest($request); insert(o);\};
+[then]insertLogical {type:\w+} for request;=\{{type} o = new {type}(); o.setRequest($request); insertLogical(o);\};
 [then]insert {type:\w+}=\{{type} o = new {type}(); o.setActivity($activity); insert(o);\};
 [then]insertLogical {type:\w+}=\{{type} o = new {type}(); o.setActivity($activity); insertLogical(o);\};
 
