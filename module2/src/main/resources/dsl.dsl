@@ -20,7 +20,7 @@
 [when]subrequest for activity=subrequest 'Request' for activity
 [when]subrequest '{subrequest}' for activity=$subrequest : {subrequest}(activity == $activity)
 [when]subrequest {subrequest:\w+} for activity=$subrequest : {subrequest}(activity == $activity)
-#[when]- has name=name != null
+
 [when]subrequest completed=RLCCompleted( request == $subrequest )
 [when]subrequest succeeded=$subrequestStatus : GenericRequestSucceeded( request == $subrequest ) and RLCCompleted( request == $subrequest )
 [when]subrequest failed=$subrequestStatus : GenericRequestFailed( request == $subrequest ) and RLCCompleted( request == $subrequest )
@@ -55,7 +55,6 @@
 
 [then]add subrequest parameter '{param}' as '{type}'=\{{type} o = new {type}(); o.reset($subrequest, {param}); insert(o);\}
 [then]add subrequest parameter '{param}'=\{GenericDownstreamAlias o = new GenericDownstreamAlias(); o.reset($subrequest, {param}); insert(o);\}
-
 
 [then]add activity fact from alias '{alias}'=insert( {alias}.cloneRefObject($activity) );
 [then]add activity fact from request input=insert( $input.cloneRefObject($activity) );
@@ -98,6 +97,10 @@
 [then]!!!appender!!!;=insert(o);\};
 
 [then]insert '{value}' as new '{type:\w+}';=insert( new {type}($activity, {value}) );
+
+[then]insert '{param}' as RSK fact {type:\w+};=\{{type} o = new {type}(); o.reset($activity, {param}); insert(o); insert(new GenericUpstreamAliasRSK().reset($activity, o)); \};
+[then]insert '{param}' as new RSK fact {type:\w+};=\{{type} o = new {type}($activity, {param}); insert(o); insert(new GenericUpstreamAliasRSK().reset($activity, o)); \};
+
 [then]insertLogical '{value}' as '{type}';=\{{type} o = new {type}(); o.reset($activity, {value}); insertLogical(o);\};
 
 [then]insertLogical '{value}' as '{type}' for request;=\{{type} o = new {type}(); o.reset($request, {value}); insertLogical(o);\};
