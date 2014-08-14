@@ -90,8 +90,6 @@ declare BuildOutputDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.a
 declare ExecWorkingDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.FolderArtifactBase end
 declare ExecWorkingDirCandidate extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.impl.FactCandidateBase end
 
-declare MavenProjectDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.FolderArtifactBase end
-declare MavenTargetDir extends BuildOutputDir end
 
 declare RunFormat extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase end
 declare RunFormat_Mirex_Aud_ChEst extends RunFormat end

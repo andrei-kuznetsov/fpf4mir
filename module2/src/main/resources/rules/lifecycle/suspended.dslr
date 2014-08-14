@@ -60,38 +60,3 @@ rule "Suspend activity for user action"
 		insertLogical '"Activity suspended due to user action(s) "' as 'GenericActivitySuspended';
 //>		insertLogical(new GenericActivitySuspended($activity, "Activity suspended due to user action(s) "));
 end
-
-rule "Running activity: activity to activity status (single fact)(ActivityToStatusCopy)"
-		salience 10000
-	when
-		any activity
-		$astatus : ActivityRuntimeStatus for activity
-		RuntimeUpstreamAlias($value : refObject) for activity 
-	then
-		add logical parameter '$value' to '$astatus' as GenericRuntimeUpstreamAlias;
-end
-
-rule "Running activity: activity to parent request (single fact)"
-		salience 10000
-	when 
-	 	any activity request
-	 	activity for request
-		// any phase
-	 	$astatus : ActivityRuntimeStatus for activity
-	 	$rstatus : RequestRuntimeStatus for request
->		$value : RuntimeUpstreamAlias(astatus == $astatus)
-	then
-		add logical parameter '$value' to '$rstatus' as GenericRuntimeUpstreamAlias;
-end
-
-rule "Running activity: request to parent activity (single fact)"
-		salience 10000
-	when 
-	 	any activity
-		// any phase
-	 	subrequest 'Request' for activity
-	 	$subrequestStatus : RequestRuntimeStatus for subrequest
->		$value : RuntimeUpstreamAlias(rstatus == $subrequestStatus)
-	then
-		add logical activity fact from alias '$value';
-end

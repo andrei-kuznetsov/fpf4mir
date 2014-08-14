@@ -23,25 +23,48 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.impl.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
 ///////////////////////////////////////////////////////////////////////////////
 
-
-rule "activity prepare astatus: activity to activity status (single fact)(ActivityToStatusCopy)"
+rule "runtime_upstream_propagation: activity to activity status (single fact)"
 		salience 10000
 	when
 		any activity
-		$astatus : ActivityFinalStatus for activity
-		ALCPrepareStatus for activity
-		UpstreamAlias($value : refObject) for activity 
+		$astatus : ActivityRuntimeStatus for activity
+		$value : RuntimeUpstreamAlias for activity 
 	then
-		add parameter '$value' to '$astatus';
+		add logical parameter '$value' to '$astatus' as GenericRuntimeUpstreamAlias;
 end
 
-rule "activity prepare astatus: RequestScopedKnowledge"
-		salience -10000
-	when
-		any activity request
-		activity for request
-		ALCPrepareStatus for activity
-		$rsk : RequestScopedKnowledge for activity
+rule "runtime_upstream_propagation: activity status to parent request (single fact)"
+		salience 10000
+	when 
+	 	any activity request
+	 	activity for request
+		// any phase
+	 	$astatus : ActivityRuntimeStatus for activity
+	 	$rstatus : RequestRuntimeStatus for request
+>		$value : RuntimeUpstreamAlias(astatus == $astatus)
 	then
-		add parameter '$rsk' to '$request' as GenericDownstreamAlias;
+		add logical parameter '$value' to '$rstatus' as GenericRuntimeUpstreamAlias;
+end
+
+rule "runtime_upstream_propagation: request to request status (single fact)"
+		salience 10000
+	when 
+	 	any activity request
+		// any phase
+		$value : RuntimeUpstreamAlias for request
+	 	$rstatus : RequestRuntimeStatus for request
+	then
+		add logical parameter '$value' to '$rstatus' as GenericRuntimeUpstreamAlias;
+end
+
+rule "runtime_upstream_propagation: request status to parent activity (single fact)"
+		salience 10000
+	when 
+	 	any activity
+		// any phase
+	 	subrequest 'Request' for activity
+	 	$subrequestStatus : RequestRuntimeStatus for subrequest
+>		$value : RuntimeUpstreamAlias(rstatus == $subrequestStatus)
+	then
+		add logical parameter '$value' to '$activity' as GenericRuntimeUpstreamAlias;
 end

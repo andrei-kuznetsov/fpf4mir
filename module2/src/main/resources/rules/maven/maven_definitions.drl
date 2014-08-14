@@ -5,3 +5,6 @@ end
 declare MavenFeature extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.impl.FeatureBase
 	cmdName : String
 end
+
+declare MavenProjectDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.FolderArtifactBase end
+declare MavenTargetDir extends BuildOutputDir end
