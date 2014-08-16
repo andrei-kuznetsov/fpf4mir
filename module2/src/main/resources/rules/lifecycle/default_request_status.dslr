@@ -24,25 +24,32 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
 ///////////////////////////////////////////////////////////////////////////////
 
 
-rule "activity prepare astatus: activity to activity status (single fact)(ActivityToStatusCopy)"
-		salience 10000
-	when
-		any activity
-		$astatus : ActivityFinalStatus for activity
-		ALCPrepareStatus for activity
-		UpstreamAlias($value : refObject) for activity 
-	then
-		add parameter '$value' to '$astatus';
-end
-
-rule "activity prepare astatus: RequestScopedKnowledge"
+rule "req phase main: fail request if activity cant be fixed"
 		salience 10000
 	when
 		any activity request
+	 	RLCPrepareStatus for request
+	 	not RequestFinalStatus for request
+	 	
 		activity for request
-		ALCPrepareStatus for activity
-		$rsk : UpstreamAliasRSK for activity
+		ALCCompleted for activity
+		$failure : ActivityFailed for activity
+		not ActivityErrorFixed for activity
 	then
-		add parameter '$rsk' to '$request' as GenericDownstreamAlias;
+		// logical because of DSL only
+		insertLogical '$failure.getMessage()' as 'GenericRequestFailed' for request;
 end
 
+rule "Success request if activity succeeded"
+		salience 10000
+	when 
+	 	any activity request
+	 	RLCPrepareStatus for request
+	 	not RequestFinalStatus for request
+	 	
+	 	activity for request
+		ActivitySucceeded for activity
+		ALCCompleted for activity
+	then
+		request succeeded
+end

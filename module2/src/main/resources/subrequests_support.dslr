@@ -33,13 +33,3 @@ rule "Propagate subrequest failure"
 		activity failed with status "Subrequest failed: " + $subrequestStatus.getMessage()
 end
 
-rule "Propagate subactivity success"
-		salience -10000
-	when 
-	 	any activity request
-	 	activity for request
-		ActivitySucceeded for activity
-		ALCCompleted for activity
-	then
-		request succeeded
-end

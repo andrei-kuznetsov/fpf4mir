@@ -23,26 +23,12 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.impl.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
 ///////////////////////////////////////////////////////////////////////////////
 
-
-rule "activity prepare astatus: activity to activity status (single fact)(ActivityToStatusCopy)"
+rule "activity prepare astatus: Fail activity if no final status provided"
 		salience 10000
 	when
 		any activity
-		$astatus : ActivityFinalStatus for activity
 		ALCPrepareStatus for activity
-		UpstreamAlias($value : refObject) for activity 
+		not ActivityFinalStatus for activity
 	then
-		add parameter '$value' to '$astatus';
+		activity failed with message "Activity failed to report it's status. Assume 'ActivityFailed' by default. Activity instance:" + $activity
 end
-
-rule "activity prepare astatus: RequestScopedKnowledge"
-		salience 10000
-	when
-		any activity request
-		activity for request
-		ALCPrepareStatus for activity
-		$rsk : UpstreamAliasRSK for activity
-	then
-		add parameter '$rsk' to '$request' as GenericDownstreamAlias;
-end
-

@@ -26,6 +26,11 @@ public class DrlParserTest extends TestCase {
 		printExpandedRule(dslr);
     }
     
+    public void testExpandDRL_default_request_status() throws Exception {
+    	String dslr = "/rules/lifecycle/default_request_status.dslr";
+		printExpandedRule(dslr);
+    }
+
     public void testExpandDRL_guess_run_executable() throws Exception {
     	String dslr = "/guess_run_executable.dslr";
 		printExpandedRule(dslr);

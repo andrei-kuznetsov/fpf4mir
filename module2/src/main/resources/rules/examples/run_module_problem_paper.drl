@@ -21,6 +21,9 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.rest.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.impl.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
+
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.lifecycle.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.lifecycle.*;
 ///////////////////////////////////////////////////////////////////////////////
 
 ///////////// java /////////////////
@@ -39,19 +42,16 @@ end
 declare Ak extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase
 end
 
-declare A extends Ak
+declare A1 extends Ak
 end
 
-declare B extends Ak
+declare A2 extends Ak
 end
 
-declare C extends Ak
+declare A3 extends Ak
 end
 
 declare Kk
-end
-
-declare K0 extends Kk
 end
 
 declare K1 extends Kk
@@ -60,19 +60,7 @@ end
 declare K2 extends Kk
 end
 
-declare ErrInvalidK extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityErrorBase
-end
-
-declare IncompatibleK extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.RequestScopedKnowledgeBase
-	activity : Activity; // add the field to constructor 
-	k : Kk;
-end
-
-declare ExistsK
-	k : Kk;
-end
-
-declare UseK extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase
+declare NeedK extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.RequestScopedKnowledgeBase
 	activity : Activity; // add the field to constructor 
 	k : Kk;
 end
@@ -80,6 +68,9 @@ end
 declare Log extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase
 	activity : Activity; // add the field to constructor 
 	msg : java.lang.String;
+end
+
+declare ErrInvalidK extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityErrorBase
 end
 
 rule "START"
@@ -90,44 +81,84 @@ rule "START"
 		Ak a;
 		Alias als;
 		insert(r = new R_M1());
-		insert(a = new A());
+		insert(a = new A1());
 		insert(new GenericDownstreamAlias().reset(r, a));
 
 		insert(r = new R_M1());
-		insert(a = new B());
+		insert(a = new A2());
 		insert(new GenericDownstreamAlias().reset(r, a));
 		
 		insert(r = new R_M1());
-		insert(a = new C());
+		insert(a = new A3());
 		insert(new GenericDownstreamAlias().reset(r, a));
-
-		insert(new ExistsK(new K0()));
-		insert(new ExistsK(new K1()));
-		insert(new ExistsK(new K2()));
 end
 
-rule "ПД - устранение ошибки"
-	when 
-		$activity : R_M1Activity()
-	 	ALCAnalyze(activity == $activity)
-		UseK(activity == $activity, $k : k)
-		$err : ErrInvalidK(activity == $activity)
-	then 
-		insert( new GenericUpstreamAliasRSK().reset($activity, new IncompatibleK($activity, $k)) );
-		insert( new GenericActivityErrorFixed($err) );
-		System.out.println("Problem fixed - decided not to use K: " + $k);
+rule "Request status"
+	when
+		$r : R_M1()
+		$rstatus : RequestFinalStatus(request == $r);
+	then
+		System.err.println($rstatus);
 end
 
-rule "ПД - идентификация ошибки"
+rule "Activity status"
+	when
+		$a : R_M1Activity()
+		$astatus : ActivityFinalStatus(activity == $a);
+	then
+		System.err.println($astatus);
+end
+
+rule "Activity log"
+	when
+		$a : R_M1Activity()
+		$lc : ActivityLifeCycleState(activity == $a);
+	then
+		System.err.println($lc);
+end
+
+rule "Request log"
+	when
+		$r : R_M1()
+		$lc : RequestLifeCycleState(request == $r);
+	then
+		System.err.println($lc);
+end
+
+rule "RD: error identification"
 	when 
 		$activity : R_M1Activity()
 	 	ALCWork(activity == $activity)
-		Log(activity == $activity, msg == "invalid")
+		Log(activity == $activity, msg != "ok")
 	then 
 		insert(new ErrInvalidK().reset($activity));
 		insert(new GenericActivityFailed().reset($activity));
 		System.out.println("Activity failed: " + $activity);
 		System.out.println("Invalid component K detected");
+end
+
+rule "R1: need K1"
+	when 
+		$activity : R_M1Activity()
+		$err : ErrInvalidK(activity == $activity)
+	 	ALCAnalyze(activity == $activity)
+		Log(activity == $activity, msg == "Need K1")
+	then 
+		insert( new GenericUpstreamAliasRSK().reset($activity, new NeedK($activity, new K1())) );
+		insert( new GenericActivityErrorFixed($err) );
+		System.out.println("Problem fixed - using K1 next time");
+end
+
+rule "R1: need K2"
+	when 
+		$activity : R_M1Activity()
+		$err : ErrInvalidK(activity == $activity)
+	 	ALCAnalyze(activity == $activity)
+		Log(activity == $activity, msg == "Need K2")
+	then 
+		insert( new GenericUpstreamAliasRSK().reset($activity, new NeedK($activity, new K2())) );
+		insert( new GenericActivityErrorFixed($err) );
+		System.out.println("Problem fixed - using K2 next time");
 end
 
 rule "ПД - успех"
@@ -140,16 +171,24 @@ rule "ПД - успех"
 		System.out.println("Success: " + $activity);
 end
 
-rule "ПВ"
+rule "R'"
 	when 
 		$activity : R_M1Activity()
 	 	ALCWork(activity == $activity)
-		ExistsK($k: k)
-		not IncompatibleK(activity == $activity, k == $k)
-		not UseK(activity == $activity)
-	then 
-		insert(new UseK($activity, $k));
-		System.out.println("Selected param (UseK): " + $k);
+		$a : Ak(activity == $activity)
+		not NeedK(activity == $activity)
+	then
+		System.out.println("run with no K: " + $a);
+		if ($a instanceof A1){
+			insert( new Log($activity, "Need K1") );
+			System.out.println("run: Need K1");
+		} else if ($a instanceof A2){
+			insert( new Log($activity, "Need K2") );
+			System.out.println("run: Need K2");
+		} else if ($a instanceof A3){
+			insert( new Log($activity, "ok") );
+			System.out.println("run: OK");
+		}
 end
 
 rule "ПИ"
@@ -157,32 +196,27 @@ rule "ПИ"
 		$activity : R_M1Activity()
 	 	ALCWork(activity == $activity)
 		$a : Ak(activity == $activity)
-		UseK(activity == $activity, $k: k)
+		NeedK(activity == $activity, $k: k)
 	then
 		System.out.println("run: " + $a + ", " + $k);
-		if ($a instanceof A){
+		if ($a instanceof A1){
 			if ($k instanceof K1){
 				insert( new Log($activity, "ok") );
 				System.out.println("run: OK");
 			} else {
-				insert( new Log($activity, "invalid") );
-				System.out.println("run: Invalid");
+				insert( new Log($activity, "Need K1") );
+				System.out.println("run: Need K1");
 			}
-		} else if ($a instanceof B){
+		} else if ($a instanceof A2){
 			if ($k instanceof K2){
 				insert( new Log($activity, "ok") );
 				System.out.println("run: OK");
 			} else {
-				insert( new Log($activity, "invalid") );
-				System.out.println("run: Invalid");
+				insert( new Log($activity, "Need K2") );
+				System.out.println("run: Need K2");
 			}
-		} else if ($a instanceof C){
-			if ($k instanceof K0){
-				insert( new Log($activity, "ok") );
-				System.out.println("run: OK");
-			} else {
-				insert( new Log($activity, "invalid") );
-				System.out.println("run: Invalid");
-			}
+		} else if ($a instanceof A3){
+			insert( new Log($activity, "Need no K") );
+			System.out.println("run: Need no K");
 		}
 end

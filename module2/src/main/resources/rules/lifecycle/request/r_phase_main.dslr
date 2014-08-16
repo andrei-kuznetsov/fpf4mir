@@ -39,18 +39,6 @@ rule "Activity_New"
 >		insert ( createActivityForRequest($request, drools) );
 end
 
-rule "req phase main: fail request if activity cant be fixed (default)"
-		salience -10000
-	when
-		any activity request
-		activity for request
-		ALCCompleted for activity
-		$failure : ActivityFailed for activity
-		not ActivityErrorFixed for activity
-	then
-		insertLogical '$failure.getMessage()' as 'GenericRequestFailed' for request;
-end
-
 rule "request main phase (auto): read from subactivity (single fact)"
 		salience 10000
 	when 
