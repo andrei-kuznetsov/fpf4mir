@@ -1,3 +1,8 @@
+<%@page import="java.util.LinkedList"%>
+<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.DeploymentSession.QResult"%>
+<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatus"%>
+<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFinalStatus"%>
+<%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestRuntimeStatus"%>
 <%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FileArtifactList"%>
 <%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.impl.UserActionRef"%>
 <%@page import="ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.Alias"%>
@@ -15,123 +20,129 @@
 <title>Request status</title>
 </head>
 
+<%!
+public String getStatusKind(Object s){
+    if (s instanceof RequestRuntimeStatus) return "Runtime status";
+    else if (s instanceof RequestFinalStatus) return "Completion status";
+    else return s.getClass().getCanonicalName();
+}
+
+public String getActionDescription(Object ua){
+    switch (ua.getClass().getCanonicalName()){
+    case "defaultpkg.UserActionSelectBuildOrRun":
+        return "Select build script or executable file";
+    case "defaultpkg.UserActionSelectRunFormat":
+        return "Select run command format";
+    case "defaultpkg.UserActionSelectEncoding":
+        return "Select sources encoding";
+    default:
+        return "Unknown action";
+    }
+}
+%>
 <body bgcolor=white>
 
-	<c:forEach items="${status}" var="s">
-		<h1>${s.mainStatus.getMessage()}</h1>
-	</c:forEach>
+    <h1>Request status:</h1>
+    
+    <table border ="1" width="100%">
+        <tr>
+            <th>status type</th>
+            <th>status value</th>
+        </tr>
 
-	<br />
-	
-	<h1>Available actions:</h1>
-	<table border ="1">
-	
-	<%
-		List<RequestStatusRelatedFact> extras = (List<RequestStatusRelatedFact>)request.getAttribute("extras");
-		for (RequestStatusRelatedFact i : extras) {
-			if (i instanceof Alias && ((Alias)i).getRefObject() instanceof UserActionRef){
-				UserAction ua = ((UserActionRef)((Alias)i).getRefObject()).getRefObject();
-				String url = null;
-				String description = null;
+<%
+        List<QResult> status = (List<QResult>)request.getAttribute("status");
+        for (QResult s : status) {
+%> 
+            <tr>
+                <td> <% out.print(getStatusKind(s.mainStatus)); %> </td>
+                <td> <% out.print(s.mainStatus.getMessage()); %> </td>
+            </tr>
+<%
+        }
+%>
+    </table>
+    
+    <br>
+    
+    <h1>Available actions:</h1>
+    <ul>
+    
+    <%
+        List<RequestStatusRelatedFact> extras = (List<RequestStatusRelatedFact>)request.getAttribute("extras");
+        for (RequestStatusRelatedFact i : extras) {
+            if (i instanceof Alias && ((Alias)i).getRefObject() instanceof UserActionRef){
+                UserAction ua = ((UserActionRef)((Alias)i).getRefObject()).getRefObject();
 
-				url = "/rest/useraction/" + ua.getClass().getSimpleName() + "/" + 
-					ua.getRefId() + "?r=" + i.getRstatus().getRequest().getRefId();
-				
-				switch (ua.getClass().getCanonicalName()){
-				case "defaultpkg.UserActionSelectBuildOrRun":
-					description = "Select build script or executable file";
-					break;
-				case "defaultpkg.UserActionSelectRunFormat":
-					description = "Select run command format";
-					break;
-				case "defaultpkg.UserActionSelectEncoding":
-					description = "Select sources encoding";
-					break;
-				default:
-					url = null;
-				}
-				
-				if (url != null){
-					%>
-					<tr>
-						<td><%=ua.getClass().getCanonicalName()%></td>
-						<td><a href="<%=url%>"><%=description%></a></td>
-					</tr>
-					<%
-				} else {
-					%>
-					<tr>
-						<td><%=ua.getClass().getCanonicalName()%></td>
-						<td><%=ua.toString()%></td>
-					</tr>
-					<%
-				}
-			}
-		}
-	%>
-	
-	</table>
-	
-	
-	<h1>Additional information:</h1>
-	<table border ="1">
-	
-	<%
-		for (RequestStatusRelatedFact i : extras) {
-			if (i instanceof Alias && ((Alias)i).getRefObject() instanceof UserInfo){
-				UserInfo usrInfo = (UserInfo)((Alias)i).getRefObject();
-				String url = null;
-				String description = usrInfo.getMessage().toString();
-				String title = usrInfo.getName();
-				
-				if (usrInfo.getMessage() instanceof FileArtifact){
-					FileArtifact file = (FileArtifact)usrInfo.getMessage();
-					
-					// TODO: /rest/userinfo/refId
-					url = "/rest/files?file=" + URLEncoder.encode(file.getAbsolutePath());
-					description = file.getFileName();
+                String description = getActionDescription(ua);
 
-					%>
-					<tr>
-						<td><%=usrInfo.getDate()%></td>
-						<td><%=title%></td>
-						<td><a href="<%=url%>"><%=description%></a></td>
-					</tr>
-					<%
-				} else if (usrInfo.getMessage() instanceof FileArtifactList){
-					FileArtifactList flist = (FileArtifactList)usrInfo.getMessage();
-
-					%>
-					<tr>
-						<td><%=usrInfo.getDate()%></td>
-						<td><%=title%></td>
-						<td>
-					<%
-					
-					for (FileArtifact f : flist.list()){
-						String _url = "/rest/files?file=" + URLEncoder.encode(f.getAbsolutePath());
-						String _description = f.getFileName();
-						%>
-							<a href="<%=_url%>"><%=_description%></a><br>
-						<%
-					}
-
-					%>
-						</td></tr>
-					<%
-				} else {
-					%>
-					<tr>
-						<td><%=usrInfo.getDate()%></td>
-						<td><%=title%></td>
-						<td><%=description%></td>
-					</tr>
-					<%
-				}
-			}
-		}
-	%>
-	
-	</table>
+                String url = "/rest/useraction/" + ua.getClass().getSimpleName() + "/" + 
+                    ua.getRefId() + "?r=" + i.getRstatus().getRequest().getRefId();
+                
+                %>
+                    <li><a href="<%=url%>"><%=description%></a> - (dbg: <%=ua.getClass().getCanonicalName()%>)
+                <%
+                
+            }
+        }
+    %>
+    
+    </ul>
+    
+    <br>
+    
+    <h1>Additional information:</h1>
+    <table border ="1" width="100%">
+        <tr>
+            <th>Timestamp</th>
+            <th>Title</th>
+            <th>Description</th>
+        </tr>
+    
+<%
+        for (RequestStatusRelatedFact i : extras) {
+            if (i instanceof Alias && ((Alias)i).getRefObject() instanceof UserInfo){
+                UserInfo usrInfo = (UserInfo)((Alias)i).getRefObject();
+                String description = usrInfo.getMessage().toString();
+                String title = usrInfo.getName();
+                List<FileArtifact> flist = null;
+                Object msg = usrInfo.getMessage();
+                
+                if (msg instanceof FileArtifact){
+                    FileArtifact file = (FileArtifact)usrInfo.getMessage();
+                    flist = new LinkedList<FileArtifact>();
+                    flist.add(file);
+                }
+                
+                if (msg instanceof FileArtifactList){
+                    FileArtifactList fl = (FileArtifactList)usrInfo.getMessage();
+                    flist = fl.list();
+                }
+%>
+                <tr>
+                    <td><%=usrInfo.getDate()%></td>
+                    <td><%=title%></td>
+<% 
+                if (flist == null) {
+%>
+                    <td><%=description%></td>
+<%
+                } else {
+                    for (FileArtifact f : flist){
+                        String _url = "/rest/files?file=" + URLEncoder.encode(f.getAbsolutePath());
+                        String _description = f.getFileName();
+%>
+                        <td><a href="<%=_url%>"><%=_description%></a><br></td>
+<%
+                    }
+                }
+%>
+                </tr>
+<%
+            }
+        }
+%>
+    
+    </table>
 </body>
 </html>
