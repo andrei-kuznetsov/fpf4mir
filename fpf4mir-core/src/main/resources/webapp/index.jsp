@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Automatic Deployment Service for CLI Apps</title>
 </head>
 <body>
 	<h1>Hello World!</h1>

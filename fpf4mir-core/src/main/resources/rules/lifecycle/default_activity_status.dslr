@@ -32,3 +32,13 @@ rule "activity prepare astatus: Fail activity if no final status provided"
 	then
 		activity failed with message "Activity failed to report it's status. Assume 'ActivityFailed' by default. Activity instance:" + $activity
 end
+
+rule "Fail activity if subrequest failed"
+		salience -10000
+	when 
+	 	any activity
+		subrequest 'Request' for activity
+		subrequest failed
+	then
+		activity failed with status "Subrequest failed: " + $subrequestStatus.getMessage()
+end

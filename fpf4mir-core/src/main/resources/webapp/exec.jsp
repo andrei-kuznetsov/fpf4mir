@@ -2,22 +2,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Automatic Deployment Service for CLI Apps</title>
 </head>
 <body>
-	<h1>Execution</h1>
-	<h1>Hello World!</h1>
+	<h1>Automatic Deployment Service for CLI Apps</h1>
+	Please provide your application as a URL to any repository or as a single file and we'll do
+	our best to deploy it to the cloud.<br><hr> 
 
 	<form id="file-form" action="" method="POST" enctype="multipart/form-data">
 		<input type="file" id="file-select" name="originalArtifact" />
-		<button type="submit" id="upload-button">Upload</button>
+		<button type="submit" id="upload-button">Upload file</button>
 	</form>
 
 	<hr>
 	
 	<form id="file-form" action="" method="POST" enctype="multipart/form-data">
 		<input type="text" id="file-select" name="magic" />
-		<button type="submit" id="dir-button">Submit local</button>
+		<button type="submit" id="dir-button">Submit URI</button>
 	</form>
 	
 </body>
