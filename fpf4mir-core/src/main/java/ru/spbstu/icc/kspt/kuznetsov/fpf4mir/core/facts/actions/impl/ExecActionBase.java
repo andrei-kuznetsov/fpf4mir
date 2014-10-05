@@ -6,41 +6,40 @@ import java.util.List;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.ExecAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.ExecCommand;
 
-public class ExecActionBase extends ActionFactBase implements ExecAction  {
+public class ExecActionBase extends ActionFactBase<ExecCommand> implements ExecAction  {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3625795389816472639L;
-	private ExecCommand execCommand;
 
 	protected ExecActionBase(ExecCommand command) {
 		super(command.getActivity());
-		this.execCommand = command;
+		this.parameter = command;
 	}
 	
 	public String getCommand() {
-		return execCommand.getCommand();
+		return parameter.getCommand();
 	}
 
 	public File getWorkingDir() {
-		return execCommand.getWorkingDir();
+		return parameter.getWorkingDir();
 	}
 
 	public List<String> getArguments() {
-		return execCommand.getArgsList();
+		return parameter.getArgsList();
 	}
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [execCommand=" + execCommand
+		return getClass().getSimpleName() + " [execCommand=" + parameter
 				+ ", activity=" + getActivity() + "]";
 	}
 
 	public ExecCommand getExecCommand() {
-		return execCommand;
+		return parameter;
 	}
 
 	public void setExecCommand(ExecCommand execCommand) {
-		this.execCommand = execCommand;
+		this.parameter = execCommand;
 	}
 }

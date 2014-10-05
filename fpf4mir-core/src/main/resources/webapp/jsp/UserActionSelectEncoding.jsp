@@ -27,6 +27,7 @@ function assertFact(encoding) {
 	}
 
 	req.open('POST', '/rest/useraction/${uaction.getClass().getSimpleName()}/${uaction.getRefId()}/handled?r=${r}', true);
+	//req.overrideMimeType("application/x-www-form-urlencoded");
 	req.send('{"class":"defaultpkg.UsrUseEncoding", "encoding":"' + encoding + '"}');
 }
 

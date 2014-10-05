@@ -2,10 +2,11 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.Action;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithRefId;
 
-public class ActionFactBase extends ActivityRelatedFactBase implements Action, FactWithRefId{
+public class ActionFactBase<U extends ActivityRelatedFact> extends ActivityRelatedFactBase implements Action, FactWithRefId{
 	/**
 	 * 
 	 */
@@ -15,6 +16,8 @@ public class ActionFactBase extends ActivityRelatedFactBase implements Action, F
 	
 	private long refId = refIdCounter++;
 
+	protected U parameter;
+	
 	public ActionFactBase() {
 		super();
 	}
@@ -31,5 +34,15 @@ public class ActionFactBase extends ActivityRelatedFactBase implements Action, F
 	@Override
 	public void setRefId(long refId) {
 		this.refId = refId;
+	}
+
+	@Override
+	public void setParameter(ActivityRelatedFact param) {
+		parameter = (U)param;
+	}
+
+	@Override
+	public U getParameter() {
+		return parameter;
 	}
 }
