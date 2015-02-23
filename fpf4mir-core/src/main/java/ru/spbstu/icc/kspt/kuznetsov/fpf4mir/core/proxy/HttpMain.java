@@ -1,5 +1,6 @@
 package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.proxy;
 
+import java.net.InetSocketAddress;
 import java.net.URL;
 
 import javax.ws.rs.core.Application;
@@ -20,7 +21,11 @@ public class HttpMain {
 		
 		final URL warUrl = HttpMain.class.getClassLoader().getResource("webapp/");
 
-		Server server = new Server(8080);
+		String host = System.getenv("OPENSHIFT_DIY_IP");
+		String port = System.getenv("OPENSHIFT_DIY_PORT");
+		InetSocketAddress bindAddress = InetSocketAddress.createUnresolved(host==null?"0.0.0.0":host, port==null?8080:Integer.parseInt(port));
+		Server server = new Server(bindAddress);
+		
 		ServletContextHandler context = new WebAppContext(warUrl.toString(), "/");
 		context.setInitParameter("cacheControl","max-age=0,public");
 		

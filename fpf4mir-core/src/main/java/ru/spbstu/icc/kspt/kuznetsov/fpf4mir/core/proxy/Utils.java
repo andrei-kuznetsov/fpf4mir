@@ -19,7 +19,12 @@ public class Utils {
 	private static final int maxFileSize = 500 * 1024 * 1024;
 	private static final int maxMemSize = 4 * 1024 * 1024;
 	
-	public static final String filePathRoot = "/home/andrei/OpenShift/datadir/jetty/";
+	public static final String filePathRoot;
+	
+	static {
+		String datadir = System.getenv("OPENSHIFT_DATA_DIR");
+		filePathRoot = (datadir!=null?datadir:"/home/andrei/OpenShift/datadir/jetty/");
+	}
 	
 	public static class UploadedFileDetails{
 		public String baseDir = "";
@@ -29,8 +34,8 @@ public class Utils {
 	
 	static UploadedFileDetails doUploadOriginalArtifact(HttpServletRequest request) throws Exception {
 		boolean isMultipart;
-		String filePath = "/home/andrei/OpenShift/datadir/jetty/";
-		String tmpPath = "/home/andrei/OpenShift/datadir/jetty/";
+		String filePath = filePathRoot;
+		String tmpPath = filePathRoot;
 		File base = null;
 		UploadedFileDetails uploadedFiles = new UploadedFileDetails();
 

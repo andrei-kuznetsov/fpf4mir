@@ -18,6 +18,6 @@
 		<input type="text" id="file-select" name="magic" />
 		<button type="submit" id="dir-button">Submit local</button>
 	</form>
-	
+	<a href="rest/dbg/reset">GO!</a>
 </body>
 </html>

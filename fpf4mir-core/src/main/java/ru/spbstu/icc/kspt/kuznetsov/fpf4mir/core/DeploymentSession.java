@@ -114,6 +114,14 @@ public class DeploymentSession {
 		marshaller.marshall(os, ksession);
 	}
 	
+	protected KnowledgeBase getKbase(){
+		return kbase;
+	}
+	
+	protected StatefulKnowledgeSession getKsession() {
+		return ksession;
+	}
+	
 	private void unmarshallKSession(InputStream is) throws ClassNotFoundException, IOException {
 		ksession = marshaller.unmarshall(is);
 		ksession.addEventListener(new AgendaDebugListener());
@@ -204,6 +212,11 @@ public class DeploymentSession {
 		// : testRunVerification));
 	}
 
+	
+	public ActionHandler setActionHandler(Class<? extends Action> action, ActionHandler handler){
+		return actionsMap.put(action, handler);
+	}
+	
 	private EXECUTION_STATE executeActions(
 			Collection<? extends Action> actions) throws Exception {
 

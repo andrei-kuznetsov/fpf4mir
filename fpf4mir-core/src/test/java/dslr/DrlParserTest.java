@@ -52,7 +52,7 @@ public class DrlParserTest extends TestCase {
     }
 
     public void testExpandDRL_fix_maven_goldin_copy_plugin() throws Exception {
-    	String dslr = "/fix_maven_goldin_copy_plugin.dslr";
+    	String dslr = "/rules/maven/errors/fix_maven_goldin_copy_plugin.dslr";
 		printExpandedRule(dslr);
     }
 
@@ -98,6 +98,11 @@ public class DrlParserTest extends TestCase {
 
     public void testExpandDRL_fixmavenbuild_unmappablecharacter() throws Exception {
     	String dslr = "/fixmavenbuild_unmappablecharacter.dslr";
+		printExpandedRule(dslr);
+    }
+
+    public void testExpandDRL_mvn_couldnot_create_local_repository() throws Exception {
+    	String dslr = "/rules/maven/errors/fix_maven_couldnot_create_local_repository.dslr";
 		printExpandedRule(dslr);
     }
 

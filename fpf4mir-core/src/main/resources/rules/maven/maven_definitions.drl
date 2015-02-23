@@ -8,3 +8,5 @@ end
 
 declare MavenProjectDir extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.FolderArtifactBase end
 declare MavenTargetDir extends BuildOutputDir end
+
+declare MavenRepoLocation extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.impl.FolderArtifactBase end

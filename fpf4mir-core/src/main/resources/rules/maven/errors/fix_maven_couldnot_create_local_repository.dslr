@@ -14,6 +14,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.cmd.impl.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.env.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.*;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.globals.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.lifecycle.*;
@@ -23,33 +24,39 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.userinfo.impl.*;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
 ///////////////////////////////////////////////////////////////////////////////
 
+declare MvnErr_GenericConfig_Repository extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityErrorBase end
 
-rule "req phase main: fail request if activity cant be fixed"
-		salience 10000
+declare RSKUseCustomRepoLocation extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.impl.IncompatibleFactBase end
+
+declare MvnRepoRelocated extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase end
+
+rule "Generic mvn error: Could not create local repository"
 	when
-		any activity request
-	 	RLCPrepareStatus for request
-	 	not RequestFinalStatus for request
-	 	
-		activity for request
-		ALCCompleted for activity
-		$failure : ActivityFailed for activity
-		not ActivityErrorFixed for activity
+		analyze activity 'MvnBuildActivity'
+>		ExecStatus( activity == $activity,
+>					succeeded == false,
+>					containsString("[ERROR] Could not create local repository at ") )
 	then
-		// not logical because GenericRequestFailed is instance of RequestFinalStatus
-		request failed with message $failure.getMessage();
+		add parameter '"Maven - Could not create local repository"' to '$activity' as MvnErr_GenericConfig_Repository;
 end
 
-rule "Success request if activity succeeded"
-		salience 10000
-	when 
-	 	any activity request
-	 	RLCPrepareStatus for request
-	 	not RequestFinalStatus for request
-	 	
-	 	activity for request
-		ActivitySucceeded for activity
-		ALCCompleted for activity
+rule "Relocate mvn repository"
+	when
+		analyze activity 'MvnBuildActivity'
+		MvnErr_GenericConfig_Repository for activity
+>		$data_dir : DataDirRoot()
+		not MavenRepoLocation for activity
 	then
-		request succeeded
+		insert '$data_dir' as RSK fact MavenRepoLocation;
+		insert MvnRepoRelocated;
+end
+
+rule "Maven repository fixed"
+	when
+		analyze activity 'MvnBuildActivity'
+		MavenRepoLocation for activity
+		MvnRepoRelocated for activity
+		$err : MvnErr_GenericConfig_Repository for  activity
+	then
+		error '$err' fixed
 end

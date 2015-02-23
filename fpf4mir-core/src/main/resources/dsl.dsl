@@ -66,9 +66,14 @@
 [then]execute command {cmd} in working dir {wd}=insertLogical( new GenericExecCommand($activity, {cmd}, {wd}, $options) );
 
 [then]activity succeeded=GenericActivitySucceeded activityStatus=new GenericActivitySucceeded($activity); insert(activityStatus);
+
+#TODO: the same
 [then]activity failed with status {status}=insert( new GenericActivityFailed($activity, {status}) );
 [then]activity failed with message {status}=insert( new GenericActivityFailed($activity, {status}) );
+##
+
 [then]request succeeded=RequestFinalStatus requestStatus = new GenericRequestSucceeded($request, "ok"); insert(requestStatus);
+[then]request failed with message {message};=RequestFinalStatus requestStatus = new GenericRequestFailed($request, {message}); insert(requestStatus);
 [then]subrequest succeeded=RequestFinalStatus subrequestStatus = new GenericRequestSucceeded($subrequest, "ok"); insert(subrequestStatus);
 
 [then]add {type:\w+} as request status=add request status parameter $artifact as Generic{type}Alias
@@ -98,6 +103,7 @@
 
 [then]insert '{value}' as new '{type:\w+}';=insert( new {type}($activity, {value}) );
 
+[then]insert '{type:\w+}' as RSK fact;=\{{type} o = new {type}(); o.reset($activity); insert(o); insert(new GenericUpstreamAliasRSK().reset($activity, o)); \};
 [then]insert '{param}' as RSK fact {type:\w+};=\{{type} o = new {type}(); o.reset($activity, {param}); insert(o); insert(new GenericUpstreamAliasRSK().reset($activity, o)); \};
 [then]insert '{param}' as new RSK fact {type:\w+};=\{{type} o = new {type}($activity, {param}); insert(o); insert(new GenericUpstreamAliasRSK().reset($activity, o)); \};
 
@@ -107,8 +113,14 @@
 
 [then]insert {type:\w+} for request;=\{{type} o = new {type}(); o.setRequest($request); insert(o);\};
 [then]insertLogical {type:\w+} for request;=\{{type} o = new {type}(); o.setRequest($request); insertLogical(o);\};
+
+## deprecated
 [then]insert {type:\w+}=\{{type} o = new {type}(); o.setActivity($activity); insert(o);\};
 [then]insertLogical {type:\w+}=\{{type} o = new {type}(); o.setActivity($activity); insertLogical(o);\};
+##
+
+[then]insert {type:\w+};=\{{type} o = new {type}(); o.setActivity($activity); insert(o);\};
+[then]insertLogical {type:\w+};=\{{type} o = new {type}(); o.setActivity($activity); insertLogical(o);\};
 
 [then]add parameter '{param}' to '{status}';=add parameter '{param}' to '{status}' as GenericUpstreamAlias;
 [then]add logical parameter '{param}' to '{status}';=add logical parameter '{param}' to '{status}' as GenericUpstreamAlias;

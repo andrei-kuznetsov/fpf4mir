@@ -38,9 +38,11 @@ public class AddFeatureHandler_Local_Linux implements ActionHandler {
 
 	private Feature installMaven(String featureVersion, StatefulKnowledgeSession ks) throws InstantiationException, IllegalAccessException {
 		if ("3".equals(featureVersion) || "3.1".equals(featureVersion) || "3.1.1".equals(featureVersion)){
-			return createMavenFeature("3.1.1", "/home/andrei/OpenShift/apache-maven-3.1.1/bin/mvn", ks);
-		} else if (featureVersion == null || "3.0".equals(featureVersion) || "3.0.5".equals(featureVersion)){
-			return createMavenFeature("3.0.5", "/home/andrei/OpenShift/apache-maven-3.0.5/bin/mvn", ks);
+			return createMavenFeature("3.1.1", "/home/andrei2/OpenShift/apache-maven-3.1.1/bin/mvn", ks);
+		} else if ("3.0".equals(featureVersion) || "3.0.5".equals(featureVersion)){
+			return createMavenFeature("3.0.5", "/home/andrei2/OpenShift/apache-maven-3.0.5/bin/mvn", ks);
+		} else if (featureVersion == null){
+			return createMavenFeature("default", "mvn", ks);
 		} else {
 			throw new IllegalStateException("Maven feature version '" + featureVersion + "' is not supported");
 		}
