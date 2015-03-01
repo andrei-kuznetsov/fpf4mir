@@ -39,11 +39,12 @@ end
 rule "Javac Err UnmappableCharacter Detected"
 	when
 		analyze activity 'MvnBuildActivity'
+		
 >		ExecStatus( activity == $activity,
->					$errLine : getSingleLine("error: unmappable character for encoding"), 
->                   $errLine != null )
+>					succeeded == false,
+>					containsString("error: unmappable character for encoding") )
 	then
-		insert '$errLine' as 'JavacErr_UnmappableCharacter';
+		insert '"Unmappable character for encoding"' as 'JavacErr_UnmappableCharacter';
 end
 
 rule "Javac Err Incompatible Encoding Detected"
