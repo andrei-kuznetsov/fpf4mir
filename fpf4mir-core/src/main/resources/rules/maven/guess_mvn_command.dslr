@@ -80,6 +80,14 @@ rule "Maven option: sources encoding"
 		add ordinal 60 "-Dproject.build.sourceEncoding=" + $enc.getEncoding()
 end
 
+rule "Maven option: repo location"
+	when
+		active activity 'MvnBuildActivity'
+		$repo : MavenRepoLocation for activity
+	then
+		add ordinal 70 "-Dmaven.repo.local=" + $repo.getAbsolutePath()
+end
+
 rule "Select source encoding"
 	when
 		active activity 'MvnBuildActivity'

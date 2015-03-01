@@ -25,6 +25,9 @@ public class ExecStatusBase extends ActionStatusBase implements ExecStatus {
 	private File fileOut;
 	private File fileErr;
 	
+	private interface _StringFilter {
+		boolean accepted(String line);
+	}
 
 	protected ExecStatusBase(Activity activity, ExecCommand execCommand, int status, File fileOut, File fileErr) {
 		super(activity);
@@ -59,25 +62,50 @@ public class ExecStatusBase extends ActionStatusBase implements ExecStatus {
 		if (res == null){
 			res = getSingleLineFromErr(pattern);
 		}
-		
+
 		return res;
 	}
 	
-	public boolean containsString(String pattern){
-		return getSingleLine(pattern) != null;
+	public String getSingleLine(_StringFilter filter){
+		String res = getSingleLineFromFile(filter, fileOut);
+		if (res == null){
+			res = getSingleLineFromFile(filter, fileErr);
+		}
+
+		return res;
+	}
+	
+	public boolean containsString(final String substr){
+		return getSingleLine(new _StringFilter() {
+			@Override
+			public boolean accepted(String line) {
+				return line.contains(substr);
+			}
+		}) != null;
 	}
 	
 	private String getSingleLineFromFile(String pattern, File f) {
-		Pattern regexp = Pattern.compile(pattern);
-		Matcher matcher = regexp.matcher("");
-		BufferedReader reader = null;
 
+		Pattern regexp = Pattern.compile(pattern);
+		final Matcher matcher = regexp.matcher("");
+		
+		return getSingleLineFromFile(new _StringFilter() {
+			@Override
+			public boolean accepted(String line) {
+				matcher.reset(line); // reset the input
+				return matcher.find();
+			}
+		}, f);
+	}
+	
+	private String getSingleLineFromFile(_StringFilter filter, File f) {
+		BufferedReader reader = null;
+		
 		try {
 			reader = new BufferedReader(new FileReader(f));
 			String line = null;
 			while ((line = reader.readLine()) != null) {
-				matcher.reset(line); // reset the input
-				if (matcher.find()) {
+				if (filter.accepted(line)) {
 					return line;
 				}
 			}
