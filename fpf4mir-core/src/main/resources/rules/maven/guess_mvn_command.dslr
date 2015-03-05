@@ -91,7 +91,7 @@ end
 rule "Select source encoding"
 	when
 		active activity 'MvnBuildActivity'
-		$upe : UsrUseEncoding for activity
+		$upe : RSK_UseEncoding for activity
 		not RSK_JavacIncompatibleEncodings(encoding == $upe.encoding) for activity
 		not SrcEncoding for activity
 	then

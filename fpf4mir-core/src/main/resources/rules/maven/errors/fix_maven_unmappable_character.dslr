@@ -77,5 +77,6 @@ rule "Javac encoding error fixed"
 		not RSK_JavacIncompatibleEncodings(encoding == $upe.encoding) for activity
 	then
 		error '$err' fixed
+		insert '$upe.getEncoding()' as new RSK fact RSK_UseEncoding;
 end
 

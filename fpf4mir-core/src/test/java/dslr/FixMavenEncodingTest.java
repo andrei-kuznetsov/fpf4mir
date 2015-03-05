@@ -120,7 +120,7 @@ public class FixMavenEncodingTest {
 		ds.setFactHandled(ua);
 		ds.assertFactAndRun(fact);
 		
-		ds.getRequestStatus(rId); //FIXME: getRequestStatus(r) doesn't work?!
+		rstatus = ds.getRequestStatus(rId); //FIXME: getRequestStatus(r) doesn't work?!
 		Assert.assertEquals(1, rstatus.size());
 		
 		rs = rstatus.get(0).mainStatus;

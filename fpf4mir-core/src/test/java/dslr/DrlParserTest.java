@@ -22,7 +22,7 @@ public class DrlParserTest extends TestCase {
     }
     
     public void testExpandDRL_extract_unzip() throws Exception {
-    	String dslr = "/extract_unzip.dslr";
+    	String dslr = "/rules/tasks/extract/extract_unzip.dslr";
 		printExpandedRule(dslr);
     }
     
@@ -41,13 +41,8 @@ public class DrlParserTest extends TestCase {
 		printExpandedRule(dslr);
     }
     
-    public void testExpandDRL_subrequests_support() throws Exception {
-    	String dslr = "/subrequests_support.dslr";
-		printExpandedRule(dslr);
-    }
-
-    public void testExpandDRL_guessmvncommand() throws Exception {
-    	String dslr = "/guessmvncommand.dslr";
+    public void testExpandDRL_guess_mvn_command() throws Exception {
+    	String dslr = "/rules/maven/guess_mvn_command.dslr";
 		printExpandedRule(dslr);
     }
 
@@ -85,19 +80,14 @@ public class DrlParserTest extends TestCase {
     	String dslr = "/rules/lifecycle/request/r_phase_prepare_rstatus.dslr";
 		printExpandedRule(dslr);
     }
-    
-    public void testExpandDRL_basic_rest_processor() throws Exception {
-    	String dslr = "/basic_rest_processor.dslr";
-		printExpandedRule(dslr);
-    }
 
     public void testExpandDRL_run_java() throws Exception {
-    	String dslr = "/run_java.dslr";
+    	String dslr = "/rules/tasks/run/java/run_java.dslr";
 		printExpandedRule(dslr);
     }
 
     public void testExpandDRL_fixmavenbuild_unmappablecharacter() throws Exception {
-    	String dslr = "/fixmavenbuild_unmappablecharacter.dslr";
+    	String dslr = "/rules/maven/errors/fix_maven_unmappable_character.dslr";
 		printExpandedRule(dslr);
     }
 
@@ -106,11 +96,6 @@ public class DrlParserTest extends TestCase {
 		printExpandedRule(dslr);
     }
 
-    public void testExpandDRL_guess_mvn_command() throws Exception {
-    	String dslr = "/guess_mvn_command.dslr";
-		printExpandedRule(dslr);
-    }
-    
     public void testExpandDRL_request_livecycle_support() throws Exception {
     	String dslr = "/rules/lifecycle/request/request_livecycle_support.dslr";
 		printExpandedRule(dslr);

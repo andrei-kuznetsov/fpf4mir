@@ -35,6 +35,8 @@ declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.impl.FactCand
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.globals.impl.GlobalFactInUseBase /* java */ end
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.candidates.impl.IncompatibleFactBase /* jvava */ end
 declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.features.impl.FeatureBase /* java */ end
+
+declare ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.UserActionStatusBase /* java */ end
 ///////////////////////////// non-java /////////////////////////////////////
 
 declare DeployExecutableActivity extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityBase end
@@ -102,7 +104,11 @@ declare Run_JavaOptionsReady extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.f
 declare Run_AppOptionsReady extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase end
 
 
-declare UsrUseEncoding extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.RequestScopedKnowledgeBase
+declare UsrUseEncoding extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.UserActionStatusBase
+	encoding: String
+end
+
+declare RSK_UseEncoding extends ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.impl.RequestScopedKnowledgeBase
 	encoding: String
 end
 
