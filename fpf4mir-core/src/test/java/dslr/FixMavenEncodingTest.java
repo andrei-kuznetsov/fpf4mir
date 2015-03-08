@@ -1,31 +1,25 @@
 package dslr;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.junit.Assert;
 import org.junit.Test;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.DeploymentSession.QResult;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.Action;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.ExecAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.UserAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.GenericExecAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.GenericExecStatus;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityRelatedFact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityBase;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.Alias;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.aliases.impl.UserActionRef;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.FileArtifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.Request;
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestFailed;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestSucceeded;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.request.RequestSuspended;
@@ -34,20 +28,16 @@ public class FixMavenEncodingTest {
 	
 	@Test
 	public void testMavenEncFixRules() throws Exception{
-		final long rId = 1l;
 		final DbgDeploymentSession ds = new DbgDeploymentSession();
 		ds.init();
 		
-		
-		Request r = (Request) ds.createNewFact("defaultpkg", "ReqMvnBuild");
-		r.setRefId(rId);
-		r.setActivity(ActivityBase.USER);
+		Request r = (Request) ds.createNewRequest("defaultpkg", "ReqMvnBuild");
 		
 		FileArtifact pom = (FileArtifact) ds.createNewFact("defaultpkg", "BuildFile");
 		pom.setActivity(ActivityBase.USER);
 		pom.setFileName("src/test/resources/mvn/pom.xml");
 		
-		ds.attach(r, pom);
+		ds.attachDn(r, pom);
 		
 		ds.setActionHandler(GenericExecAction.class, new ActionHandler() {
 			
@@ -89,13 +79,8 @@ public class FixMavenEncodingTest {
 		
 		ds.assertFactAndRun(r, pom);
 		
-		List<QResult> rstatus = ds.getRequestStatus(rId); //FIXME: getRequestStatus(r) doesn't work?!
-		Assert.assertEquals(1, rstatus.size());
-		
-		RequestStatus rs = rstatus.get(0).mainStatus;
+		RequestStatus rs = ds.getRequestMainStatus(r);
 		Assert.assertTrue(rs.toString(), rs instanceof RequestSuspended);
-		
-		// TODO: check user actions here
 		
 		List<Object> rsrfs = ds.getRequestStatusRelatedFacts(rs);
 		Assert.assertTrue(rsrfs.size() > 0);
@@ -120,10 +105,8 @@ public class FixMavenEncodingTest {
 		ds.setFactHandled(ua);
 		ds.assertFactAndRun(fact);
 		
-		rstatus = ds.getRequestStatus(rId); //FIXME: getRequestStatus(r) doesn't work?!
-		Assert.assertEquals(1, rstatus.size());
-		
-		rs = rstatus.get(0).mainStatus;
+		ds.getRequestMainStatus(r);
+		rs = ds.getRequestMainStatus(r);
 		Assert.assertTrue(rs.toString(), rs instanceof RequestSucceeded);
 	}
 

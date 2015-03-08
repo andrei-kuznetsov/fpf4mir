@@ -5,21 +5,18 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.Artifact;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.artifact.ArtifactRef;
 
-public class DownloadStatusBase extends ActionStatusBase implements DownloadStatus {
+public class DownloadStatusBase extends ActionStatusBase<ArtifactRef> implements DownloadStatus {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6609622512123609004L;
-	private ArtifactRef artifactRef;
 	private Artifact downloadedArtifact;
 	private int status;
 	
-	protected DownloadStatusBase(Activity activity, ArtifactRef artifactRef, int status) {
-		super(activity);
+	protected DownloadStatusBase(Activity activity, ArtifactRef artifactRef, int status, Artifact downloadedArtifact) {
+		super(activity, artifactRef);
 		this.status = status;
-		this.artifactRef = artifactRef;
-		
-		this.status = status;
+		this.downloadedArtifact = downloadedArtifact;
 	}
 	
 	public Artifact getDownloadedArtifact() {
@@ -31,11 +28,11 @@ public class DownloadStatusBase extends ActionStatusBase implements DownloadStat
 	}
 
 	public ArtifactRef getArtifactRef() {
-		return artifactRef;
+		return getParameter();
 	}
 	
 	public void setArtifactRef(ArtifactRef artifactRef) {
-		this.artifactRef = artifactRef;
+		setParameter(artifactRef);
 	}
 	
 	public int getStatus() {

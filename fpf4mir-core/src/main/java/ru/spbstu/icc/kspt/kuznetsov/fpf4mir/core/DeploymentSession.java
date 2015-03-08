@@ -46,10 +46,12 @@ import org.drools.runtime.rule.QueryResultsRow;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.AddFeatureHandler_Local_Linux;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.AddFeatureHandler_Local_Windows;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.DownloadActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ExecActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.Action;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.UserAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.GenericAddFeatureAction;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.GenericDownloadAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl.GenericExecAction;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityRelatedFact;
@@ -82,7 +84,7 @@ public class DeploymentSession {
 	private KnowledgeRuntimeLogger logger = null;
 	private Marshaller marshaller;
 	private static final Logger log = Logger.getLogger(DeploymentSession.class);
-	private static final Map<Class<? extends Action>, ActionHandler> actionsMap = new HashMap<Class<? extends Action>, ActionHandler>();
+	private final Map<Class<? extends Action>, ActionHandler> actionsMap = new HashMap<Class<? extends Action>, ActionHandler>();
 
 	private EXECUTION_STATE state = EXECUTION_STATE.DONE;
 
@@ -139,7 +141,7 @@ public class DeploymentSession {
 		ksession.insert(new DataDirRoot(ActivityBase.USER, f.getAbsolutePath(), ""));
 	}
 
-	private static void initActions() {
+	protected void initActions() {
 		actionsMap.put(GenericExecAction.class, new ExecActionHandler());
 		
 		if (OS.isWindows()){
@@ -148,6 +150,7 @@ public class DeploymentSession {
 			actionsMap.put(GenericAddFeatureAction.class, new AddFeatureHandler_Local_Linux());
 		}
 
+		actionsMap.put(GenericDownloadAction.class, new DownloadActionHandler());
 	}
 
 	public void run() throws Exception {
@@ -183,24 +186,6 @@ public class DeploymentSession {
 			}
 		} while (doContinue);
 
-		// Analyze results
-		// Collection<Object> objs = ksession.getObjects();
-
-		// String buildStatus = "";
-		// String testRunExecution = "";
-		// String testRunVerification = "";
-		// for (Object i : objs) {
-		// if (i instanceof BuildSucceeded) {
-		// buildStatus += " SUCCESS ";
-		// } else if (i instanceof RunSucceeded) {
-		// RunSucceeded r = (RunSucceeded) i;
-		// if (r.getRun().getId().equals(R.id.TestActivity)) {
-		// testRunExecution += " SUCCESS ";
-		// }
-		// } else if (i instanceof TestRunVerificationSucceeded) {
-		// testRunVerification += " SUCCESS ";
-		// }
-		// }
 
 		log.info("Execution completed with status: " + state);
 		// log.info("     build status: "

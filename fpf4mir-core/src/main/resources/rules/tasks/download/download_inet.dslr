@@ -24,13 +24,24 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.*;
 ///////////////////////////////////////////////////////////////////////////////
 
 
-rule "request prepare rstatus: request to request status (single fact)(RequestToStatusCopy)"
-		salience 10000
-	when
-		any activity request
-	 	$rstatus : RequestFinalStatus for request
-		RLCPrepareStatus for request
-		$value : UpstreamAlias for request 
+// ----------------------------------- Output parameters ---------------------------------------
+
+rule "Evaluate DownloadActivity result"
+	when 
+	    active activity 'DownloadHttpActivity'
+	    $aref : ArtifactRef for activity
+	    $dstatus : DownloadStatus(parameter == $aref, succeeded == true) for activity
+	then 
+		activity succeeded
+		add activity status parameter '$dstatus.getDownloadedArtifact()' with name '$aref.getName()';
+end
+
+// #############################################################################################
+
+rule "Download artifact"
+	when 
+	    active activity 'DownloadHttpActivity'
+	    $aref : ArtifactRef for activity
 	then
->		insert( new GenericUpstreamAlias().reset($rstatus, $value) );
+>		insert( new GenericDownloadAction($activity, $aref) );
 end

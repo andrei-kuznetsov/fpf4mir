@@ -35,6 +35,21 @@ rule "Eval UTMirexAudChEstActivity succeeded"
 		insert artifact '"Unit tests succeeded"' as 'GenericUserInfoMessage'
 end
 
+rule "UTMirexAudChEstActivity: fail if no ExecutableFileArtifact provided"
+	when
+		active activity 'UTMirexAudChEstActivity'
+		not ExecutableFileArtifact for activity
+	then
+		activity failed with message "No ExecutableFileArtifact provided"
+end
+
+rule "UTMirexAudChEstActivity: fail if no RunFormat provided"
+	when
+		active activity 'UTMirexAudChEstActivity'
+		not RunFormat for activity
+	then
+		activity failed with message "No RunFormat provided"
+end
 // #############################################################################################
 
 rule "ut mirex audchest: assert ut dataset"
@@ -43,7 +58,8 @@ rule "ut mirex audchest: assert ut dataset"
 		not FolderArtifact(name=="dataset_ut_mirex_audio_ch_est") for activity
 	then
 //		insert '"dataset_ut_mirex_audio_ch_est", "/home/andrei/OpenShift/datadir/cea1c11a-ff7b-4f6f-8974-d327f3ec544b/dataset_ut_mirex_audio_ch_est", ""' as 'FolderArtifact';
-		insert '"dataset_ut_mirex_audio_ch_est", "D:\\SPBSTU\\git\\dataset_ut_mirex_audio_ch_est", ""' as 'GenericFolderArtifact';
+//		insert '"dataset_ut_mirex_audio_ch_est", "D:\\SPBSTU\\git\\dataset_ut_mirex_audio_ch_est", ""' as 'GenericFolderArtifact';
+		insert '"dataset_ut_mirex_audio_ch_est", "http://192.168.1.2/oma.zip"' as 'GenericArtifactRef';
 end
 
 rule "ut mirex audchest: download ut dataset"
@@ -59,7 +75,8 @@ rule "ut mirex audchest: run on test dataset"
 	when
 		active activity 'UTMirexAudChEstActivity'
 		$exec : ExecutableFileArtifact for activity
-		$dataset : any 'FolderArtifact(name=="dataset_ut_mirex_audio_ch_est")'
+//		$dataset : any 'FolderArtifact(name=="dataset_ut_mirex_audio_ch_est")'
+		$dataset : FolderArtifact(name=="dataset_ut_mirex_audio_ch_est") for activity
 		$req : RunFormat for activity
 	then
 		add subrequest 'ReqRun'; 

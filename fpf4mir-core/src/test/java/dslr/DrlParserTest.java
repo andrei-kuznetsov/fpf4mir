@@ -8,6 +8,7 @@ import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
 import org.drools.compiler.DrlParser;
 import org.drools.compiler.DroolsParserException;
+import org.junit.Test;
 
 public class DrlParserTest extends TestCase {
 
@@ -51,6 +52,11 @@ public class DrlParserTest extends TestCase {
 		printExpandedRule(dslr);
     }
 
+    public void testExpandDRL_download_inet() throws Exception {
+    	String dslr = "/rules/tasks/download/download_inet.dslr";
+		printExpandedRule(dslr);
+    }
+
     public void testExpandDRL_guess_run_command() throws Exception {
     	String dslr = "/guess_run_command.dslr";
 		printExpandedRule(dslr);
@@ -76,6 +82,7 @@ public class DrlParserTest extends TestCase {
 		printExpandedRule(dslr);
     }
     
+    @Test
     public void testExpandDRL_r_phase_prepare_rstatus() throws Exception {
     	String dslr = "/rules/lifecycle/request/r_phase_prepare_rstatus.dslr";
 		printExpandedRule(dslr);

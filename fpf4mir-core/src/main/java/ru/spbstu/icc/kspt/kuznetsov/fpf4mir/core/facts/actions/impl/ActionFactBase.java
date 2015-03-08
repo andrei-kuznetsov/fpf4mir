@@ -6,7 +6,7 @@ import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityRelatedF
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.impl.ActivityRelatedFactBase;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.utils.FactWithRefId;
 
-public class ActionFactBase<U extends ActivityRelatedFact> extends ActivityRelatedFactBase implements Action, FactWithRefId{
+public class ActionFactBase<U extends ActivityRelatedFact> extends ActivityRelatedFactBase implements Action<U>, FactWithRefId{
 	/**
 	 * 
 	 */

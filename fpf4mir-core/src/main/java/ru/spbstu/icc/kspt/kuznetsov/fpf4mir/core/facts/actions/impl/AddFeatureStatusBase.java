@@ -2,6 +2,7 @@ package ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.impl;
 
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.AddFeatureStatus;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.Activity;
+import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.activity.ActivityRelatedFact;
 
 public class AddFeatureStatusBase extends ActionStatusBase implements AddFeatureStatus{
 	/**

@@ -48,5 +48,12 @@ public class ArtifactRefBase extends ActivityRelatedFactBase implements Artifact
 		return getClass().getSimpleName() + "[ref=" + ref + "]";
 	}
 	
+	public ArtifactRefBase reset(Activity activity, String name, String uri) {
+		super.reset(activity);
+		this.setName(name);
+		this.setRef(URI.create(uri));
+		
+		return this;
+	}
 	
 }

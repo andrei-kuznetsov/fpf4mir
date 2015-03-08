@@ -37,6 +37,22 @@ rule "Evaluate ExtractActivity result"
 		add activity status parameter '$extracted' with name '$file.getName()';
 end
 
+rule "ExtractActivity : fail if no TmpDir provided"
+	when 
+	    active activity 'ExtractActivity'
+>	    not TmpDirRoot( )
+	then
+		activity failed with message "No TmpDir provided"
+end
+
+rule "ExtractActivity : fail if no FileArtifact to be extracted was provided"
+	when 
+	    active activity 'ExtractActivity'
+	    not FileArtifact for activity
+	then
+		activity failed with message "No FileArtifact to be extracted was provided"
+end
+
 // #############################################################################################
 
 rule "Prepare output dir"
@@ -46,16 +62,8 @@ rule "Prepare output dir"
 	then
 >		insert( $tmp.newTempFolder( $activity ) );
 end
-/*
-rule "Need TmpDir"
-	when 
-	    active activity 'ExtractActivity'
->	    not TmpDirRoot( )
-	then
-		activity failed with status "No TmpDir provided"
-end
-*/
-rule "Unzip with jar"
+
+rule "Unzip with jar: arguments"
 	when 
 	    active activity 'ExtractActivity'
 		$file : FileArtifact for activity

@@ -1,16 +1,11 @@
 package dslr;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
 
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.junit.Assert;
 import org.junit.Test;
 
-import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.DeploymentSession.QResult;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.actionhandlers.ActionHandler;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.Action;
 import ru.spbstu.icc.kspt.kuznetsov.fpf4mir.core.facts.actions.ExecAction;
@@ -27,20 +22,16 @@ public class FixMavenRepoTest {
 	
 	@Test
 	public void testMavenRepoFixRules() throws Exception{
-		final long rId = 1l;
 		final DbgDeploymentSession ds = new DbgDeploymentSession();
 		ds.init();
 		
-		
-		Request r = (Request) ds.createNewFact("defaultpkg", "ReqMvnBuild");
-		r.setRefId(rId);
-		r.setActivity(ActivityBase.USER);
+		Request r = (Request) ds.createNewRequest("defaultpkg", "ReqMvnBuild");
 		
 		FileArtifact pom = (FileArtifact) ds.createNewFact("defaultpkg", "BuildFile");
 		pom.setActivity(ActivityBase.USER);
 		pom.setFileName("src/test/resources/mvn/pom.xml");
 		
-		ds.attach(r, pom);
+		ds.attachDn(r, pom);
 		
 		ds.setActionHandler(GenericExecAction.class, new ActionHandler() {
 			
@@ -81,30 +72,23 @@ public class FixMavenRepoTest {
 		});
 		
 		ds.assertFactAndRun(r, pom);
-		
-		List<QResult> rstatus = ds.getRequestStatus(rId); //FIXME: getRequestStatus(r) doesn't work?!
-		Assert.assertEquals(1, rstatus.size());
-		
-		final RequestStatus rs = rstatus.get(0).mainStatus;
+
+		final RequestStatus rs = ds.getRequestMainStatus(r);
 		Assert.assertTrue(rs.toString(), rs instanceof RequestSucceeded);
 	}
 
 	@Test
 	public void testMavenRepoFixRules_Unrecoverable() throws Exception{
-		final long rId = 1l;
 		final DbgDeploymentSession ds = new DbgDeploymentSession();
 		ds.init();
 		
-		
-		Request r = (Request) ds.createNewFact("defaultpkg", "ReqMvnBuild");
-		r.setRefId(rId);
-		r.setActivity(ActivityBase.USER);
+		Request r = ds.createNewRequest("defaultpkg", "ReqMvnBuild");
 		
 		FileArtifact pom = (FileArtifact) ds.createNewFact("defaultpkg", "BuildFile");
 		pom.setActivity(ActivityBase.USER);
 		pom.setFileName("src/test/resources/mvn/pom.xml");
 		
-		ds.attach(r, pom);
+		ds.attachDn(r, pom);
 		
 		ds.setActionHandler(GenericExecAction.class, new ActionHandler() {
 			
@@ -130,10 +114,7 @@ public class FixMavenRepoTest {
 		
 		ds.assertFactAndRun(r, pom);
 		
-		List<QResult> rstatus = ds.getRequestStatus(rId); //FIXME: getRequestStatus(r) doesn't work?!
-		Assert.assertEquals(1, rstatus.size());
-		
-		final RequestStatus rs = rstatus.get(0).mainStatus;
+		final RequestStatus rs = ds.getRequestMainStatus(r);
 		Assert.assertTrue(rs.toString(), rs instanceof RequestFailed);
 	}
 }
